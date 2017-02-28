@@ -1,0 +1,383 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		06B239AD1E66127B0071E17F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239AC1E66127B0071E17F /* AppDelegate.swift */; };
+		06B239AF1E66127B0071E17F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239AE1E66127B0071E17F /* ViewController.swift */; };
+		06B239B21E66127B0071E17F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B01E66127B0071E17F /* Main.storyboard */; };
+		06B239B41E66127B0071E17F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B31E66127B0071E17F /* Assets.xcassets */; };
+		06B239B71E66127B0071E17F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B51E66127B0071E17F /* LaunchScreen.storyboard */; };
+		BC5BDFD4B4D428ADBA93BB52 /* Pods_SplashDash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA16C7EB475F455AAFFA273 /* Pods_SplashDash.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		06B239A91E66127B0071E17F /* SplashDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SplashDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		06B239AC1E66127B0071E17F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		06B239AE1E66127B0071E17F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		06B239B11E66127B0071E17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		06B239B31E66127B0071E17F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		06B239B61E66127B0071E17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		06B239B81E66127B0071E17F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0C80B4BD563B9DC1864891EC /* Pods-SplashDash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplashDash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash.debug.xcconfig"; sourceTree = "<group>"; };
+		3F78CA657B60F10014BFB3DE /* Pods-SplashDash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplashDash.release.xcconfig"; path = "Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash.release.xcconfig"; sourceTree = "<group>"; };
+		BDA16C7EB475F455AAFFA273 /* Pods_SplashDash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SplashDash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		06B239A61E66127B0071E17F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC5BDFD4B4D428ADBA93BB52 /* Pods_SplashDash.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		06B239A01E66127B0071E17F = {
+			isa = PBXGroup;
+			children = (
+				06B239AB1E66127B0071E17F /* SplashDash */,
+				06B239AA1E66127B0071E17F /* Products */,
+				7F9CBCA9DC6CBCF5C08E9CA4 /* Pods */,
+				93C1EA9F662A8EC801A0C954 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		06B239AA1E66127B0071E17F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				06B239A91E66127B0071E17F /* SplashDash.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		06B239AB1E66127B0071E17F /* SplashDash */ = {
+			isa = PBXGroup;
+			children = (
+				06B239AC1E66127B0071E17F /* AppDelegate.swift */,
+				06B239AE1E66127B0071E17F /* ViewController.swift */,
+				06B239B01E66127B0071E17F /* Main.storyboard */,
+				06B239B31E66127B0071E17F /* Assets.xcassets */,
+				06B239B51E66127B0071E17F /* LaunchScreen.storyboard */,
+				06B239B81E66127B0071E17F /* Info.plist */,
+			);
+			path = SplashDash;
+			sourceTree = "<group>";
+		};
+		7F9CBCA9DC6CBCF5C08E9CA4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0C80B4BD563B9DC1864891EC /* Pods-SplashDash.debug.xcconfig */,
+				3F78CA657B60F10014BFB3DE /* Pods-SplashDash.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		93C1EA9F662A8EC801A0C954 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BDA16C7EB475F455AAFFA273 /* Pods_SplashDash.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		06B239A81E66127B0071E17F /* SplashDash */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06B239BB1E66127B0071E17F /* Build configuration list for PBXNativeTarget "SplashDash" */;
+			buildPhases = (
+				5292933B803C69629E4526E5 /* [CP] Check Pods Manifest.lock */,
+				06B239A51E66127B0071E17F /* Sources */,
+				06B239A61E66127B0071E17F /* Frameworks */,
+				06B239A71E66127B0071E17F /* Resources */,
+				0AC300639B3055411580E723 /* [CP] Embed Pods Frameworks */,
+				D988BB5D23DC1674BF80B384 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SplashDash;
+			productName = SplashDash;
+			productReference = 06B239A91E66127B0071E17F /* SplashDash.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		06B239A11E66127B0071E17F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = SHT;
+				TargetAttributes = {
+					06B239A81E66127B0071E17F = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 06B239A41E66127B0071E17F /* Build configuration list for PBXProject "SplashDash" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 06B239A01E66127B0071E17F;
+			productRefGroup = 06B239AA1E66127B0071E17F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				06B239A81E66127B0071E17F /* SplashDash */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		06B239A71E66127B0071E17F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06B239B71E66127B0071E17F /* LaunchScreen.storyboard in Resources */,
+				06B239B41E66127B0071E17F /* Assets.xcassets in Resources */,
+				06B239B21E66127B0071E17F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0AC300639B3055411580E723 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5292933B803C69629E4526E5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D988BB5D23DC1674BF80B384 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		06B239A51E66127B0071E17F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06B239AF1E66127B0071E17F /* ViewController.swift in Sources */,
+				06B239AD1E66127B0071E17F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		06B239B01E66127B0071E17F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				06B239B11E66127B0071E17F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		06B239B51E66127B0071E17F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				06B239B61E66127B0071E17F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		06B239B91E66127B0071E17F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		06B239BA1E66127B0071E17F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		06B239BC1E66127B0071E17F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C80B4BD563B9DC1864891EC /* Pods-SplashDash.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SplashDash/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "tonglin.t91-gmail.com.SplashDash";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		06B239BD1E66127B0071E17F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F78CA657B60F10014BFB3DE /* Pods-SplashDash.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SplashDash/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "tonglin.t91-gmail.com.SplashDash";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		06B239A41E66127B0071E17F /* Build configuration list for PBXProject "SplashDash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06B239B91E66127B0071E17F /* Debug */,
+				06B239BA1E66127B0071E17F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		06B239BB1E66127B0071E17F /* Build configuration list for PBXNativeTarget "SplashDash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06B239BC1E66127B0071E17F /* Debug */,
+				06B239BD1E66127B0071E17F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 06B239A11E66127B0071E17F /* Project object */;
+}
