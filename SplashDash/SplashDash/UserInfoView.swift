@@ -8,6 +8,9 @@
 
 import UIKit
 import SnapKit
+import Firebase
+import AVFoundation
+import AVKit
 
 /*
  //For testing purposes - use this code to instantiate
@@ -20,7 +23,7 @@ import SnapKit
         uiv.backgroundColor = SplashColor.primaryColor()
 */
  
-class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource {
+class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     private var profileImage: UIImage = UIImage()
 
@@ -70,6 +73,28 @@ class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource {
         print("logout button tapped")
     }
     
+    func imageTapped(){
+        print("image tapped")
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self
+        
+        //TO DO: FIGURE OUT HOW TO PRESENT FROM VIEW
+//        self.present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    //MARK: - UIImagePickerControllerDelegate
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.profileImageView.image = image
+        }
+
+//        dismiss(animated: true)
+    }
+
+    
     // MARK: - TableView Methods
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -93,6 +118,13 @@ class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource {
         let imageView = UIImageView()
 //        imageView.image = self.profileImage
         imageView.backgroundColor = .lightGray
+        imageView.contentMode = .scaleAspectFill
+        let tapImageGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        imageView.addGestureRecognizer(tapImageGesture)
+        imageView.isUserInteractionEnabled = true
+        imageView.frame.size = CGSize(width: 200.0, height: 200.0)
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = imageView.frame.height * 0.05
         return imageView
     }()
     
