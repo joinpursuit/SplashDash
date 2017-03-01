@@ -54,6 +54,7 @@ class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource {
         logoutButton.snp.makeConstraints { (view) in
             view.centerX.equalToSuperview()
             view.bottom.equalToSuperview().inset(20.0)
+            view.width.equalTo(200.0)
         }
         
         userHistoryTableView.snp.makeConstraints { (view) in
