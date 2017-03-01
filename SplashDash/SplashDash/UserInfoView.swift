@@ -10,14 +10,14 @@ import UIKit
 import SnapKit
 
 /*
- For testing purposes - use this code to instantiate
+ //For testing purposes - use this code to instantiate
         let uiv = UserInfoView()
         view.addSubview(uiv)
         
         uiv.snp.makeConstraints { (view) in
             view.leading.trailing.top.bottom.equalToSuperview()
         }
-        // uiv.backgroundColor = .red
+        uiv.backgroundColor = SplashColor.primaryColor()
 */
  
 class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource {
@@ -26,7 +26,7 @@ class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource {
 
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-//        self.backgroundColor =  // background color is not changing
+//        self.backgroundColor = SplashColor.primaryColor() // background color is not changing
         setupViewHierarchy()
         configureConstraints()
     }
@@ -98,7 +98,7 @@ class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource {
     private lazy var historyLabel: UILabel = {
         let label = UILabel()
         label.text = "HISTORY"
-//        label.textColor =
+        label.textColor = SplashColor.lightPrimaryColor()
         return label
     }()
     
@@ -115,7 +115,7 @@ class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource {
     private lazy var logoutButton: UIButton = {
         let button = UIButton()
         button.setTitle("LOG OUT", for: .normal)
-//        button.backgroundColor =
+        button.backgroundColor = SplashColor.darkPrimaryColor()
         button.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
         return button
     }()
