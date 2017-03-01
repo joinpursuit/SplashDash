@@ -17,6 +17,7 @@
 		06B239CB1E675BC20071E17F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06B239CA1E675BC20071E17F /* GoogleService-Info.plist */; };
 		4B9BF6C11E6763D700EA0410 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C01E6763D700EA0410 /* UserInfoView.swift */; };
 		4B9BF6C41E6765E700EA0410 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C31E6765E700EA0410 /* HistoryTableViewCell.swift */; };
+		4B9BF6C71E67758900EA0410 /* SplashColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C61E67758900EA0410 /* SplashColor.swift */; };
 		BC5BDFD4B4D428ADBA93BB52 /* Pods_SplashDash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA16C7EB475F455AAFFA273 /* Pods_SplashDash.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		3F78CA657B60F10014BFB3DE /* Pods-SplashDash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplashDash.release.xcconfig"; path = "Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash.release.xcconfig"; sourceTree = "<group>"; };
 		4B9BF6C01E6763D700EA0410 /* UserInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		4B9BF6C31E6765E700EA0410 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		4B9BF6C61E67758900EA0410 /* SplashColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashColor.swift; sourceTree = "<group>"; };
 		BDA16C7EB475F455AAFFA273 /* Pods_SplashDash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SplashDash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -103,6 +105,7 @@
 		06B239C11E6759FB0071E17F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				4B9BF6C61E67758900EA0410 /* SplashColor.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				4B9BF6C41E6765E700EA0410 /* HistoryTableViewCell.swift in Sources */,
 				06B239C51E675A490071E17F /* LoginViewController.swift in Sources */,
 				06B239C91E675AB90071E17F /* RegisterViewController.swift in Sources */,
+				4B9BF6C71E67758900EA0410 /* SplashColor.swift in Sources */,
 				06B239AD1E66127B0071E17F /* AppDelegate.swift in Sources */,
 				06B239C71E675A640071E17F /* MapViewController.swift in Sources */,
 				4B9BF6C11E6763D700EA0410 /* UserInfoView.swift in Sources */,
