@@ -2,7 +2,7 @@
 //  RegisterViewController.swift
 //  SplashDash
 //
-//  Created by Tong Lin on 3/1/17.
+//  Created by Harichandan Singh on 3/1/17.
 //  Copyright © 2017 SHT. All rights reserved.
 //
 
@@ -12,12 +12,29 @@ class RegisterViewController: UIViewController {
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpViewHierarchy()
         
+        
+        //Use color manager to change the backgroundColor to the color determined by Sabrina and design mentor.
         self.view.backgroundColor = .white
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func setUpViewHierarchy() {
+        self.view.addSubview(containerView)
+        self.view.addSubview(avatarImageView)
+        self.view.addSubview(addProfilePicButton)
+        self.view.addSubview(usernameTextField)
+        self.view.addSubview(passwordTextField)
+        self.view.addSubview(detailLabel)
+        self.view.addSubview(teamColorView1)
+        self.view.addSubview(teamColorView2)
+        self.view.addSubview(teamColorView3)
+        self.view.addSubview(teamColorView4)
+        self.view.addSubview(registerButton)
     }
     
     //MARK: - Lazy Instantiation
@@ -65,7 +82,7 @@ class RegisterViewController: UIViewController {
         return imageView
     }()
     
-    lazy var label: UILabel = {
+    lazy var detailLabel: UILabel = {
         let label = UILabel()
         label.text = "Select a team:"
         
