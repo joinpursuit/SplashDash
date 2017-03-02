@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Firebase
 
 class LoginViewController: UIViewController {
     //MARK: - Methods
@@ -79,7 +80,6 @@ class LoginViewController: UIViewController {
             view.height.equalTo(30.0)
             view.width.equalTo(containerView.snp.width)
             view.centerX.equalToSuperview()
-            //view.bottom.equalTo(self.view.snp.bottom).inset(16.0)
         }
     }
     
@@ -108,6 +108,78 @@ class LoginViewController: UIViewController {
                         self.present(GameViewController(), animated: true, completion: nil)
         })
     }
+    
+//    internal func didTapRegister(sender: UIButton) {
+//        print("-----did tap register------")
+//        let registerNewUserViewController = RegisterNewUserViewController()
+//        registerNewUserViewController.userEmailTextField.text = self.usernameTextField.text
+//        registerNewUserViewController.passwordTextField.text = self.passwordTextField.text
+//        self.navigationController?.pushViewController(registerNewUserViewController, animated: true)
+//        
+//        //clear password text field but keep username
+//        self.usernameTextField.text = nil
+//        self.usernameTextField.underLine(placeHolder: "Username")
+//        self.passwordTextField.text = nil
+//        self.passwordTextField.underLine(placeHolder: "Password")
+//    }
+    
+    
+//    func registerButtonDidTapped(_ sender: UIButton) {
+//        guard let userName = userEmailTextField.text,
+//            let password = passwordTextField.text,
+//            let firstName = userFirstNameTextField.text,
+//            firstName != "",
+//            let lastName = userLastNameTextField.text,
+//            lastName != "" else {
+//                let errorAlertController = UIAlertController(title: " Registration Error", message: "Missing information in First Name/ Last Name/ Username/ Password", preferredStyle: UIAlertControllerStyle.alert)
+//                let okay = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+//                errorAlertController.addAction(okay)
+//                self.present(errorAlertController, animated: true, completion: nil)
+//                return
+//        }
+//        self.registerButton.isEnabled = false
+//        FIRAuth.auth()?.createUser(withEmail: userName, password: password, completion: { (user: FIRUser?, error: Error?) in
+//            self.registerButton.isEnabled = true
+//            if error != nil {
+//                let errorAlertController = UIAlertController(title: "Registration Error", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+//                let okay = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+//                errorAlertController.addAction(okay)
+//                self.present(errorAlertController, animated: true, completion: nil)
+//            }
+//            guard let validUser = user else { return }
+//            guard let newUser = FIRAuth.auth()?.currentUser else { return }
+//            
+//            //creating users for db
+//            let uid = newUser.uid
+//            let databaseReference = FIRDatabase.database().reference().child("USERS/\(uid)")
+//            let info: [String: AnyObject] = [
+//                "name" : "\(firstName) \(lastName)" as AnyObject,
+//                "email" : userName as AnyObject
+//            ]
+//            databaseReference.setValue(info)
+//            
+//            // UPLOAD PROFILE PICTURE
+//            if let image = self.profilePictureImageView.image,
+//                image != #imageLiteral(resourceName: "default-placeholder"),
+//                let imageData = UIImageJPEGRepresentation(image, 0.8) {
+//                
+//                let storageReference = FIRStorage.storage().reference().child("ProfilePictures").child("\(uid)")
+//                let uploadMetadata = FIRStorageMetadata()
+//                uploadMetadata.contentType = "image/jpeg"
+//                
+//                //upload image data to Storage reference
+//                let uploadTask = storageReference.put(imageData, metadata: uploadMetadata) { (metadata: FIRStorageMetadata?, error: Error?) in
+//                    if let error = error {
+//                        print("Encountered an error: \(error.localizedDescription)")
+//                    }
+//                }
+//            }
+//            self.signInUser = validUser
+//            let userHomeVC = UserHomeViewController()
+//            userHomeVC.photoImageView.image = self.profilePictureImageView.image
+//            self.navigationController?.pushViewController(userHomeVC, animated: true)
+//        })
+//    }
     
     //MARK: - Lazy instantiation
     lazy var containerView: UIView = {
