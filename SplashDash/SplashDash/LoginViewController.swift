@@ -92,6 +92,7 @@ class LoginViewController: UIViewController {
                         UIView.animate(withDuration: 0.1) {
                             sender.transform = CGAffineTransform.identity
                         }
+                        
                         //pass username and password to RegisterViewController if creating a new user
                         let registerVC = RegisterViewController()
                         registerVC.usernameTextField.text = self.usernameTextField.text
@@ -113,21 +114,6 @@ class LoginViewController: UIViewController {
                         self.present(GameViewController(), animated: true, completion: nil)
         })
     }
-    
-//    internal func didTapRegister(sender: UIButton) {
-//        print("-----did tap register------")
-//        let registerNewUserViewController = RegisterNewUserViewController()
-//        registerNewUserViewController.userEmailTextField.text = self.usernameTextField.text
-//        registerNewUserViewController.passwordTextField.text = self.passwordTextField.text
-//        self.navigationController?.pushViewController(registerNewUserViewController, animated: true)
-//        
-//        //clear password text field but keep username
-//        self.usernameTextField.text = nil
-//        self.usernameTextField.underLine(placeHolder: "Username")
-//        self.passwordTextField.text = nil
-//        self.passwordTextField.underLine(placeHolder: "Password")
-//    }
-    
     
 //    func registerButtonDidTapped(_ sender: UIButton) {
 //        guard let userName = userEmailTextField.text,

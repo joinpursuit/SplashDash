@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import Firebase
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, UITextFieldDelegate {
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViewHierarchy()
         configureConstraints()
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
         
         //Use color manager to change the backgroundColor to the color determined by Sabrina and design mentor.
         self.view.backgroundColor = SplashColor.primaryColor()
@@ -30,6 +33,7 @@ class RegisterViewController: UIViewController {
         self.view.addSubview(usernameTextField)
         self.view.addSubview(passwordTextField)
         self.view.addSubview(detailLabel)
+        self.view.addSubview(hiddenLabel)
         self.view.addSubview(stackview)
         self.view.addSubview(registerButton)
     }
@@ -95,6 +99,45 @@ class RegisterViewController: UIViewController {
             view.top.equalTo(containerView.snp.bottom).offset(16.0)
             view.width.equalTo(containerView.snp.width)
         }
+        
+        //hiddenLabel
+        hiddenLabel.snp.makeConstraints { (view) in
+            view.centerX.equalToSuperview()
+            view.top.equalTo(registerButton.snp.bottom).offset(8.0)
+            view.width.equalTo(registerButton.snp.width)
+        }
+    }
+    
+    func registerButtonTapped(sender: UIButton) {
+        UIView.animate(withDuration: 0.1,
+                       animations: {
+                        sender.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        },
+                       completion: { _ in
+                        UIView.animate(withDuration: 0.1) {
+                            sender.transform = CGAffineTransform.identity
+                        }
+        })
+        guard let username = self.usernameTextField.text,
+            let password = self.passwordTextField.text,
+            username != "",
+            password != "" else {
+                self.hiddenLabel.text = "Please verify a valid username and password have been entered."
+                self.hiddenLabel.isHidden = false
+                return
+        }
+        FIRAuth.auth()?.createUser(withEmail: username, password: password, completion: { (user: FIRUser?, error: Error?) in
+            if error != nil {
+                self.hiddenLabel.text = error?.localizedDescription
+                self.hiddenLabel.isHidden = false
+            }
+            //create User object
+            //upload profile pic to Storage
+            print("\(user?.uid)")
+            
+            //all view controllers are still in the background. need to re-arrange navigation stack
+            self.present(GameViewController(), animated: true, completion: nil)
+        })
     }
     
     //MARK: - Lazy Instantiation
@@ -154,6 +197,16 @@ class RegisterViewController: UIViewController {
         return label
     }()
     
+    lazy var hiddenLabel: UILabel = {
+       let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 14.0)
+        label.text = ""
+        label.isHidden = true
+        
+        return label
+    }()
+    
     lazy var addProfilePicButton: UIButton = {
         let button = UIButton()
         
@@ -168,7 +221,6 @@ class RegisterViewController: UIViewController {
         //button.addTarget(self, action: #selector(), for: .touchUpInside)
         
         return button
-        
     }()
     
     lazy var registerButton: UIButton = {
@@ -181,7 +233,7 @@ class RegisterViewController: UIViewController {
         button.setTitle("Register", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.addShadows()
-        //button.addTarget(self, action: #selector(), for: .touchUpInside)
+        button.addTarget(self, action: #selector(registerButtonTapped(sender:)), for: .touchUpInside)
         
         return button
     }()
