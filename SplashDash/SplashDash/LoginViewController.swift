@@ -10,8 +10,6 @@ import UIKit
 import SnapKit
 
 class LoginViewController: UIViewController {
-    //MARK: - Properties
-    
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +18,7 @@ class LoginViewController: UIViewController {
         configureConstraints()
         
         //Use color manager to change the backgroundColor to the color determined by Sabrina and design mentor.
-        view.backgroundColor = .red
+        view.backgroundColor = SplashColor.primaryColor()
     }
     
     override func didReceiveMemoryWarning() {
@@ -90,7 +88,8 @@ class LoginViewController: UIViewController {
         let view = UIView()
         
         //Use color manager to change the backgroundColor to the color determined by Sabrina and design mentor.
-        view.backgroundColor = UIColor.yellow
+        view.backgroundColor = SplashColor.lightPrimaryColor()
+        view.layer.cornerRadius = 20
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.8
         view.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -104,7 +103,7 @@ class LoginViewController: UIViewController {
         textField.font = UIFont.systemFont(ofSize: 12.0)
         textField.autocorrectionType = .no
         textField.backgroundColor = UIColor.white
-        textField.borderStyle = .bezel
+        textField.borderStyle = .roundedRect
         textField.layer.shadowColor = UIColor.black.cgColor
         textField.layer.shadowOpacity = 0.8
         textField.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -119,7 +118,7 @@ class LoginViewController: UIViewController {
         textField.font = UIFont.systemFont(ofSize: 12.0)
         textField.autocorrectionType = .no
         textField.backgroundColor = UIColor.white
-        textField.borderStyle = .bezel
+        textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
         textField.layer.shadowColor = UIColor.black.cgColor
         textField.layer.shadowOpacity = 0.8
@@ -130,17 +129,20 @@ class LoginViewController: UIViewController {
     }()
     
     lazy var splashDashLogoImageView: UIImageView = {
-        
-        //image needs to be replaced with the digital version of our logo
         let image = UIImage(named: "splashDash-icon")
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFill
+        
         return imageView
     }()
     
     lazy var loginButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = UIColor.blue
+        
+        //Use color manager to change the backgroundColor to the color determined by Sabrina and design mentor.
+        button.backgroundColor = SplashColor.darkPrimaryColor()
+        
+        button.layer.cornerRadius = 10
         button.setTitle("Log In", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.shadowColor = UIColor.black.cgColor
@@ -153,7 +155,11 @@ class LoginViewController: UIViewController {
     
     lazy var registerButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = UIColor.blue
+        
+        //Use color manager to change the backgroundColor to the color determined by Sabrina and design mentor.
+        button.backgroundColor = SplashColor.darkPrimaryColor()
+        
+        button.layer.cornerRadius = 10
         button.setTitle("Register", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.shadowColor = UIColor.black.cgColor
