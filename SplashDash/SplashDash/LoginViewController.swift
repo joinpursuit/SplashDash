@@ -83,6 +83,19 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func registerButtonPressed(sender: UIButton) {
+        UIView.animate(withDuration: 0.1,
+                       animations: {
+                        sender.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        },
+                       completion: { _ in
+                        UIView.animate(withDuration: 0.1) {
+                            sender.transform = CGAffineTransform.identity
+                        }
+                        self.present(RegisterViewController(), animated: true, completion: nil)
+        })
+    }
+    
     //MARK: - Lazy instantiation
     lazy var containerView: UIView = {
         let view = UIView()
@@ -152,6 +165,7 @@ class LoginViewController: UIViewController {
         button.setTitle("Register", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.addShadows()
+        button.addTarget(self, action: #selector(registerButtonPressed), for: .touchUpInside)
         
         return button
     }()
