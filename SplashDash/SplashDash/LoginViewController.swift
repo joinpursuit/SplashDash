@@ -92,7 +92,12 @@ class LoginViewController: UIViewController {
                         UIView.animate(withDuration: 0.1) {
                             sender.transform = CGAffineTransform.identity
                         }
-                        self.present(RegisterViewController(), animated: true, completion: nil)
+                        //pass username and password to RegisterViewController if creating a new user
+                        let registerVC = RegisterViewController()
+                        registerVC.usernameTextField.text = self.usernameTextField.text
+                        registerVC.passwordTextField.text = self.passwordTextField.text
+                        
+                        self.present(registerVC, animated: true, completion: nil)
         })
     }
     
