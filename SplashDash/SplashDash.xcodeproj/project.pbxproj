@@ -20,6 +20,8 @@
 		06B239D11E6767B70071E17F /* GE+MKMapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239D01E6767B70071E17F /* GE+MKMapDelegate.swift */; };
 		06B239D31E67685E0071E17F /* GE+CoreLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239D21E67685E0071E17F /* GE+CoreLocationDelegate.swift */; };
 		06B239D51E679CA30071E17F /* GE+HelpingFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239D41E679CA30071E17F /* GE+HelpingFunc.swift */; };
+		06B239D71E6888840071E17F /* SplashCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239D61E6888840071E17F /* SplashCoordinate.swift */; };
+		06B239D91E68AEA90071E17F /* SplashOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239D81E68AEA90071E17F /* SplashOverlayView.swift */; };
 		47F56CF21E68857E007375BB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F56CF11E68857E007375BB /* UIView+Extension.swift */; };
 		4B9BF6C11E6763D700EA0410 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C01E6763D700EA0410 /* UserInfoView.swift */; };
 		4B9BF6C41E6765E700EA0410 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C31E6765E700EA0410 /* HistoryTableViewCell.swift */; };
@@ -43,6 +45,8 @@
 		06B239D01E6767B70071E17F /* GE+MKMapDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GE+MKMapDelegate.swift"; sourceTree = "<group>"; };
 		06B239D21E67685E0071E17F /* GE+CoreLocationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GE+CoreLocationDelegate.swift"; sourceTree = "<group>"; };
 		06B239D41E679CA30071E17F /* GE+HelpingFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GE+HelpingFunc.swift"; sourceTree = "<group>"; };
+		06B239D61E6888840071E17F /* SplashCoordinate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashCoordinate.swift; sourceTree = "<group>"; };
+		06B239D81E68AEA90071E17F /* SplashOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashOverlayView.swift; sourceTree = "<group>"; };
 		0C80B4BD563B9DC1864891EC /* Pods-SplashDash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplashDash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash.debug.xcconfig"; sourceTree = "<group>"; };
 		3F78CA657B60F10014BFB3DE /* Pods-SplashDash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplashDash.release.xcconfig"; path = "Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash.release.xcconfig"; sourceTree = "<group>"; };
 		47F56CF11E68857E007375BB /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 		06B239C01E6759F30071E17F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				06B239D61E6888840071E17F /* SplashCoordinate.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -151,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				4B9BF6C01E6763D700EA0410 /* UserInfoView.swift */,
+				06B239D81E68AEA90071E17F /* SplashOverlayView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -313,7 +319,9 @@
 				06B239C91E675AB90071E17F /* RegisterViewController.swift in Sources */,
 				06B239D31E67685E0071E17F /* GE+CoreLocationDelegate.swift in Sources */,
 				06B239D51E679CA30071E17F /* GE+HelpingFunc.swift in Sources */,
+				06B239D71E6888840071E17F /* SplashCoordinate.swift in Sources */,
 				06B239AD1E66127B0071E17F /* AppDelegate.swift in Sources */,
+				06B239D91E68AEA90071E17F /* SplashOverlayView.swift in Sources */,
 				06B239C71E675A640071E17F /* GameViewController.swift in Sources */,
 				4B9BF6C71E67758900EA0410 /* SplashColor.swift in Sources */,
 				4B9BF6C11E6763D700EA0410 /* UserInfoView.swift in Sources */,
