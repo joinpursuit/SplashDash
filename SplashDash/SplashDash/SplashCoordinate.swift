@@ -12,11 +12,12 @@ import MapKit
 class SplashCoordinate {
     
 //    var boundary: [CLLocationCoordinate2D]
-    var userID: String
-    var midCoordinate: CLLocationCoordinate2D
-    var speed: Double
-    var teamColor: UIColor
-    var head: Bool
+    let userID: String
+    let midCoordinate: CLLocationCoordinate2D
+    let speed: Double
+    let teamColor: UIColor
+    let splashImageTag: Int
+    let head: Bool
     
     var overlayTopLeftCoordinate: CLLocationCoordinate2D {
         get{
@@ -52,12 +53,22 @@ class SplashCoordinate {
         }
     }
     
-    init(userID: String, midCoordinate: CLLocationCoordinate2D, speed: Double, teamColor: UIColor, head: Bool) {
+    init(userID: String, midCoordinate: CLLocationCoordinate2D, speed: Double, teamColor: UIColor, head: Bool, splashImageTag: Int) {
         self.userID = userID
         self.midCoordinate = midCoordinate
         self.speed = speed
         self.teamColor = teamColor
         self.head = head
+        self.splashImageTag = splashImageTag
+    }
+    
+    func toData() -> [String: Any]{
+        return ["userID": self.userID,
+            "midCoordinate": self.midCoordinate,
+            "speed": self.speed,
+            "teamColor": self.teamColor,
+            "head": self.head,
+            "splashImageTag": self.splashImageTag] as [String: Any]
     }
     
 }
