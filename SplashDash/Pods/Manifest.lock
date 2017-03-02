@@ -45,12 +45,14 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.8)
+  - ISHPullUp (1.0.4)
   - SnapKit (3.1.2)
 
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Database
   - Firebase/Storage
+  - ISHPullUp
   - SnapKit
 
 SPEC CHECKSUMS:
@@ -65,8 +67,9 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
+  ISHPullUp: b98a286f3e85dc885a3bf20bf75853947984277d
   SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
 
-PODFILE CHECKSUM: 02e936b7609614aac5ea6bd92c24f229f70df5c2
+PODFILE CHECKSUM: d8fdb4f79c9a10315c6c37a4d2b9b3612753c69c
 
 COCOAPODS: 1.1.1
