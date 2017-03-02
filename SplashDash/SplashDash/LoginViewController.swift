@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Firebase
+import ISHPullUp
 
 class LoginViewController: UIViewController {
     //MARK: - Methods
@@ -111,7 +112,14 @@ class LoginViewController: UIViewController {
                         UIView.animate(withDuration: 0.1) {
                             sender.transform = CGAffineTransform.identity
                         }
-                        self.present(GameViewController(), animated: true, completion: nil)
+
+                        let gameVC = GameViewController()
+                        let userInfoVC = UserInfoViewController()
+                        let ishPullUpVC = ISHPullUpViewController()
+                        ishPullUpVC.contentViewController = gameVC
+                        ishPullUpVC.bottomViewController = userInfoVC
+                        
+                        self.present(ishPullUpVC, animated: true, completion: nil)
         })
     }
     

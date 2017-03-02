@@ -6,13 +6,19 @@
 //  Copyright © 2017 SHT. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import MapKit
 
 extension GameViewController: MKMapViewDelegate{
     
+    func setupMapView(){
+        let overlayPath = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
+        let overlay = MKTileOverlay(urlTemplate: overlayPath)
+        overlay.canReplaceMapContent = true
+        self.mapView.add(overlay)
+    }
+    
     func drawPolyLine(with location: CLLocationCoordinate2D) {
-        
         let myPolyline = MKPolyline(coordinates: [lastLocation, location], count: 2)
         lastLocation = location
         mapView.add(myPolyline)

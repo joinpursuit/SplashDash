@@ -35,7 +35,7 @@ class SplashOverlayView: MKOverlayRenderer {
         
         context.scaleBy(x: 1.0, y: -1.0)
         context.translateBy(x: 0.0, y: -theRect.size.height)
-        context.fillPath()
+//        context.rotate(by: CGFloat(arc4random_uniform(181))/360)
         context.draw(imageReference!, in: theRect)
     }
 }

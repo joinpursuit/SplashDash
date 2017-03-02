@@ -8,9 +8,12 @@
 
 import UIKit
 import MapKit
+import Firebase
 
 class GameViewController: UIViewController {
 
+    let databaseReference = FIRDatabase.database().reference()
+    
     var locationManager: CLLocationManager!
     var lastLocation: CLLocationCoordinate2D!
     var gameStatus: Bool = false
@@ -20,27 +23,29 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupViewHierarchy()
         configureConstraints()
-        setupLocationManager()
     }
 
     func setupViewHierarchy(){
         view.addSubview(mapView)
         view.addSubview(gameButton)
         
+//        setupMapView()
+        setupLocationManager()
+        addGestures()
     }
     
     //MARK: - Lazy inits
     lazy var mapView: MKMapView = {
         let view = MKMapView()
         view.mapType = .standard
-        view.alpha = 0.8
         view.showsUserLocation = true
         view.showsScale = true
         view.showsCompass = true
         view.showsBuildings = false
+        view.showsPointsOfInterest = false
         view.delegate = self
         return view
     }()
@@ -48,8 +53,8 @@ class GameViewController: UIViewController {
     lazy var gameButton: UIButton = {
         let button = UIButton()
         button.setTitle("Start", for: .normal)
-        button.backgroundColor = .red
         button.isEnabled = true
+        button.setBackgroundImage(UIImage(named: "splashDash-icon"), for: .normal)
         button.addTarget(self, action: #selector(updateGameStatus), for: .touchUpInside)
         return button
     }()

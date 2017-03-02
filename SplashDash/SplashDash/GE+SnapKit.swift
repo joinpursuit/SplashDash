@@ -6,7 +6,7 @@
 //  Copyright © 2017 SHT. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import SnapKit
 
 extension GameViewController{
