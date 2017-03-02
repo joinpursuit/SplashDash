@@ -30,9 +30,12 @@ extension UIColor {
 
 struct SplashColor {
     static let colorsDict = [
-        "darkPrimaryColor" : "7190d9",
-        "primaryColor" : "d97181",
-        "lightPrimaryColor" : "d9d071",
+//        "darkPrimaryColor" : "7190d9",
+//        "primaryColor" : "d97181",
+//        "lightPrimaryColor" : "d9d071",
+        "darkPrimaryColor" : "cc8975",
+        "primaryColor" : "9d75cc",
+        "lightPrimaryColor" : "a3cc75",
         "primaryTextColor" : "FFFFFF",
         "secondaryTextColor" : "727272",
     ]
