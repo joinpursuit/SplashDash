@@ -20,6 +20,9 @@
 		06B239D11E6767B70071E17F /* GE+MKMapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239D01E6767B70071E17F /* GE+MKMapDelegate.swift */; };
 		06B239D31E67685E0071E17F /* GE+CoreLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239D21E67685E0071E17F /* GE+CoreLocationDelegate.swift */; };
 		06B239D51E679CA30071E17F /* GE+HelpingFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239D41E679CA30071E17F /* GE+HelpingFunc.swift */; };
+		4B9BF6C11E6763D700EA0410 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C01E6763D700EA0410 /* UserInfoView.swift */; };
+		4B9BF6C41E6765E700EA0410 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C31E6765E700EA0410 /* HistoryTableViewCell.swift */; };
+		4B9BF6C71E67758900EA0410 /* SplashColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C61E67758900EA0410 /* SplashColor.swift */; };
 		BC5BDFD4B4D428ADBA93BB52 /* Pods_SplashDash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA16C7EB475F455AAFFA273 /* Pods_SplashDash.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +44,9 @@
 		06B239D41E679CA30071E17F /* GE+HelpingFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GE+HelpingFunc.swift"; sourceTree = "<group>"; };
 		0C80B4BD563B9DC1864891EC /* Pods-SplashDash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplashDash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash.debug.xcconfig"; sourceTree = "<group>"; };
 		3F78CA657B60F10014BFB3DE /* Pods-SplashDash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplashDash.release.xcconfig"; path = "Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash.release.xcconfig"; sourceTree = "<group>"; };
+		4B9BF6C01E6763D700EA0410 /* UserInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
+		4B9BF6C31E6765E700EA0410 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		4B9BF6C61E67758900EA0410 /* SplashColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashColor.swift; sourceTree = "<group>"; };
 		BDA16C7EB475F455AAFFA273 /* Pods_SplashDash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SplashDash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -81,6 +87,8 @@
 				06B239C11E6759FB0071E17F /* Managers */,
 				06B239C01E6759F30071E17F /* Models */,
 				06B239BE1E6759DD0071E17F /* View Controllers */,
+				4B9BF6C21E6763DE00EA0410 /* Views */,
+				4B9BF6C51E67701100EA0410 /* Controller Cells */,
 				06B239C21E675A080071E17F /* Extensions */,
 				06B239C31E675A1C0071E17F /* Supporting Files */,
 			);
@@ -107,6 +115,7 @@
 		06B239C11E6759FB0071E17F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				4B9BF6C61E67758900EA0410 /* SplashColor.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -133,6 +142,22 @@
 				06B239CC1E6762140071E17F /* File.swift */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4B9BF6C21E6763DE00EA0410 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4B9BF6C01E6763D700EA0410 /* UserInfoView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		4B9BF6C51E67701100EA0410 /* Controller Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4B9BF6C31E6765E700EA0410 /* HistoryTableViewCell.swift */,
+			);
+			name = "Controller Cells";
 			sourceTree = "<group>";
 		};
 		7F9CBCA9DC6CBCF5C08E9CA4 /* Pods */ = {
@@ -278,6 +303,7 @@
 			files = (
 				06B239CD1E6762140071E17F /* File.swift in Sources */,
 				06B239CF1E6763DF0071E17F /* GE+SnapKit.swift in Sources */,
+				4B9BF6C41E6765E700EA0410 /* HistoryTableViewCell.swift in Sources */,
 				06B239C51E675A490071E17F /* LoginViewController.swift in Sources */,
 				06B239D11E6767B70071E17F /* GE+MKMapDelegate.swift in Sources */,
 				06B239C91E675AB90071E17F /* RegisterViewController.swift in Sources */,
@@ -285,6 +311,8 @@
 				06B239D51E679CA30071E17F /* GE+HelpingFunc.swift in Sources */,
 				06B239AD1E66127B0071E17F /* AppDelegate.swift in Sources */,
 				06B239C71E675A640071E17F /* GameViewController.swift in Sources */,
+				4B9BF6C71E67758900EA0410 /* SplashColor.swift in Sources */,
+				4B9BF6C11E6763D700EA0410 /* UserInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
