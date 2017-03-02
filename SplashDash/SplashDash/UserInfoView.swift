@@ -79,7 +79,6 @@ class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource, UIImageP
         imagePickerController.sourceType = .photoLibrary
         imagePickerController.delegate = self
         
-        //TO DO: FIGURE OUT HOW TO PRESENT FROM VIEW
 //        self.present(imagePickerController, animated: true, completion: nil)
     }
     
