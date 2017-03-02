@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-//extension LoginViewController{
-//    override func viewDidAppear(_ animated: Bool) {
-//        let main = GameViewController()
-//        self.present(main, animated: true, completion: nil)
-//    }
-//}
+extension LoginViewController{
+    override func viewDidAppear(_ animated: Bool) {
+        let main = GameViewController()
+        self.present(main, animated: true, completion: nil)
+    }
+}

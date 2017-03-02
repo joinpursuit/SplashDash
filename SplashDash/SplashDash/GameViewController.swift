@@ -13,6 +13,11 @@ class GameViewController: UIViewController {
 
     var locationManager: CLLocationManager!
     var lastLocation: CLLocationCoordinate2D!
+    var gameStatus: Bool = false
+    
+    let color = [UIColor.red, UIColor.green, UIColor.blue, UIColor.cyan]
+    var filCol: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,6 +49,17 @@ class GameViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Start", for: .normal)
         button.backgroundColor = .red
+        button.isEnabled = true
+        button.addTarget(self, action: #selector(updateGameStatus), for: .touchUpInside)
         return button
     }()
+    
+    lazy var progressView: UIView = {
+        //or stack view?
+        let view = UIView()
+        return view
+    }()
 }
+
+
+

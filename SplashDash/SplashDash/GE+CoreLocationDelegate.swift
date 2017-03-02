@@ -23,18 +23,22 @@ extension GameViewController: CLLocationManagerDelegate{
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last!
-        print(location)
-        
-        if lastLocation == nil{
-            lastLocation = location.coordinate
-            return
+        print(location.coordinate.latitude)
+        print(location.coordinate.longitude)
+        print(location.speed)
+        print(location.timestamp.timeIntervalSince1970)
+        print("")
+        //the average human can run at the speed of 15 miles per hour for short periods of time.
+        if self.gameStatus{
+            let coordinate = SplashCoordinate(userID: "uid", midCoordinate: location.coordinate, speed: 0.003, teamColor: .yellow, head: false)
+            let splash = SplashOverlay(park: coordinate)
+            mapView.addOverlays([splash])
+            
+//            let circle = MKCircle(center: location.coordinate, radius: location.speed*7)
+//            mapView.addOverlays([circle])
         }
-        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
-        drawPolyLine(with: location.coordinate)
         
-        self.mapView.setRegion(region, animated: true)
     }
     
     

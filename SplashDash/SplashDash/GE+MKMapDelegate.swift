@@ -18,9 +18,16 @@ extension GameViewController: MKMapViewDelegate{
         mapView.add(myPolyline)
     }
     
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if overlay is MKPolygon {
-            
+        if overlay is SplashOverlay{
+            let image = #imageLiteral(resourceName: "inkSample3")
+            let splashOverlay = SplashOverlayView(overlay: overlay, overlayImage: image)
+            return splashOverlay
+        } else if overlay is MKCircle{
+            let circleRenderer = MKCircleRenderer(overlay: overlay)
+            circleRenderer.fillColor = color[filCol]
+            return circleRenderer
         } else if overlay is MKPolyline {
             let lineView = MKPolylineRenderer(overlay: overlay)
             lineView.lineWidth = CGFloat(Int(arc4random_uniform(15) + 5))
