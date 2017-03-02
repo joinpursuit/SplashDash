@@ -6,7 +6,7 @@
 //  Copyright © 2017 SHT. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreLocation
 import MapKit
 
@@ -18,7 +18,7 @@ extension GameViewController{
         }else{
             if let current = self.locationManager.location{
                 let center = CLLocationCoordinate2D(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
-                let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+                let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
                 
                 self.mapView.setRegion(region, animated: true)
             }
