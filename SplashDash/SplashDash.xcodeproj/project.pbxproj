@@ -12,9 +12,14 @@
 		06B239B41E66127B0071E17F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B31E66127B0071E17F /* Assets.xcassets */; };
 		06B239B71E66127B0071E17F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B51E66127B0071E17F /* LaunchScreen.storyboard */; };
 		06B239C51E675A490071E17F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239C41E675A490071E17F /* LoginViewController.swift */; };
-		06B239C71E675A640071E17F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239C61E675A640071E17F /* MapViewController.swift */; };
+		06B239C71E675A640071E17F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239C61E675A640071E17F /* GameViewController.swift */; };
 		06B239C91E675AB90071E17F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239C81E675AB90071E17F /* RegisterViewController.swift */; };
 		06B239CB1E675BC20071E17F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06B239CA1E675BC20071E17F /* GoogleService-Info.plist */; };
+		06B239CD1E6762140071E17F /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239CC1E6762140071E17F /* File.swift */; };
+		06B239CF1E6763DF0071E17F /* GE+SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239CE1E6763DF0071E17F /* GE+SnapKit.swift */; };
+		06B239D11E6767B70071E17F /* GE+MKMapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239D01E6767B70071E17F /* GE+MKMapDelegate.swift */; };
+		06B239D31E67685E0071E17F /* GE+CoreLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239D21E67685E0071E17F /* GE+CoreLocationDelegate.swift */; };
+		06B239D51E679CA30071E17F /* GE+HelpingFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239D41E679CA30071E17F /* GE+HelpingFunc.swift */; };
 		4B9BF6C11E6763D700EA0410 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C01E6763D700EA0410 /* UserInfoView.swift */; };
 		4B9BF6C41E6765E700EA0410 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C31E6765E700EA0410 /* HistoryTableViewCell.swift */; };
 		4B9BF6C71E67758900EA0410 /* SplashColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C61E67758900EA0410 /* SplashColor.swift */; };
@@ -29,9 +34,14 @@
 		06B239B61E66127B0071E17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		06B239B81E66127B0071E17F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06B239C41E675A490071E17F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		06B239C61E675A640071E17F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		06B239C61E675A640071E17F /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		06B239C81E675AB90071E17F /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		06B239CA1E675BC20071E17F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		06B239CC1E6762140071E17F /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		06B239CE1E6763DF0071E17F /* GE+SnapKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GE+SnapKit.swift"; sourceTree = "<group>"; };
+		06B239D01E6767B70071E17F /* GE+MKMapDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GE+MKMapDelegate.swift"; sourceTree = "<group>"; };
+		06B239D21E67685E0071E17F /* GE+CoreLocationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GE+CoreLocationDelegate.swift"; sourceTree = "<group>"; };
+		06B239D41E679CA30071E17F /* GE+HelpingFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GE+HelpingFunc.swift"; sourceTree = "<group>"; };
 		0C80B4BD563B9DC1864891EC /* Pods-SplashDash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplashDash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash.debug.xcconfig"; sourceTree = "<group>"; };
 		3F78CA657B60F10014BFB3DE /* Pods-SplashDash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplashDash.release.xcconfig"; path = "Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash.release.xcconfig"; sourceTree = "<group>"; };
 		4B9BF6C01E6763D700EA0410 /* UserInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
@@ -90,7 +100,7 @@
 			children = (
 				06B239C41E675A490071E17F /* LoginViewController.swift */,
 				06B239C81E675AB90071E17F /* RegisterViewController.swift */,
-				06B239C61E675A640071E17F /* MapViewController.swift */,
+				06B239C61E675A640071E17F /* GameViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -113,6 +123,10 @@
 		06B239C21E675A080071E17F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				06B239CE1E6763DF0071E17F /* GE+SnapKit.swift */,
+				06B239D01E6767B70071E17F /* GE+MKMapDelegate.swift */,
+				06B239D21E67685E0071E17F /* GE+CoreLocationDelegate.swift */,
+				06B239D41E679CA30071E17F /* GE+HelpingFunc.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -125,6 +139,7 @@
 				06B239B51E66127B0071E17F /* LaunchScreen.storyboard */,
 				06B239CA1E675BC20071E17F /* GoogleService-Info.plist */,
 				06B239B81E66127B0071E17F /* Info.plist */,
+				06B239CC1E6762140071E17F /* File.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -286,12 +301,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06B239CD1E6762140071E17F /* File.swift in Sources */,
+				06B239CF1E6763DF0071E17F /* GE+SnapKit.swift in Sources */,
 				4B9BF6C41E6765E700EA0410 /* HistoryTableViewCell.swift in Sources */,
 				06B239C51E675A490071E17F /* LoginViewController.swift in Sources */,
+				06B239D11E6767B70071E17F /* GE+MKMapDelegate.swift in Sources */,
 				06B239C91E675AB90071E17F /* RegisterViewController.swift in Sources */,
-				4B9BF6C71E67758900EA0410 /* SplashColor.swift in Sources */,
+				06B239D31E67685E0071E17F /* GE+CoreLocationDelegate.swift in Sources */,
+				06B239D51E679CA30071E17F /* GE+HelpingFunc.swift in Sources */,
 				06B239AD1E66127B0071E17F /* AppDelegate.swift in Sources */,
-				06B239C71E675A640071E17F /* MapViewController.swift in Sources */,
+				06B239C71E675A640071E17F /* GameViewController.swift in Sources */,
+				4B9BF6C71E67758900EA0410 /* SplashColor.swift in Sources */,
 				4B9BF6C11E6763D700EA0410 /* UserInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,6 +435,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0C80B4BD563B9DC1864891EC /* Pods-SplashDash.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SplashDash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
@@ -429,6 +450,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3F78CA657B60F10014BFB3DE /* Pods-SplashDash.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SplashDash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
