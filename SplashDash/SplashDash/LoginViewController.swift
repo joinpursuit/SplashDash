@@ -90,10 +90,8 @@ class LoginViewController: UIViewController {
         //Use color manager to change the backgroundColor to the color determined by Sabrina and design mentor.
         view.backgroundColor = SplashColor.lightPrimaryColor()
         view.layer.cornerRadius = 20
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.8
-        view.layer.shadowOffset = CGSize(width: 0, height: 2)
-        view.layer.shadowRadius = 5
+        view.addShadows()
+        
         return view
     }()
     
@@ -104,10 +102,7 @@ class LoginViewController: UIViewController {
         textField.autocorrectionType = .no
         textField.backgroundColor = UIColor.white
         textField.borderStyle = .roundedRect
-        textField.layer.shadowColor = UIColor.black.cgColor
-        textField.layer.shadowOpacity = 0.8
-        textField.layer.shadowOffset = CGSize(width: 0, height: 2)
-        textField.layer.shadowRadius = 2
+        textField.addShadows()
         
         return textField
     }()
@@ -120,10 +115,7 @@ class LoginViewController: UIViewController {
         textField.backgroundColor = UIColor.white
         textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
-        textField.layer.shadowColor = UIColor.black.cgColor
-        textField.layer.shadowOpacity = 0.8
-        textField.layer.shadowOffset = CGSize(width: 0, height: 2)
-        textField.layer.shadowRadius = 2
+        textField.addShadows()
         
         return textField
     }()
@@ -145,10 +137,7 @@ class LoginViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.setTitle("Log In", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.8
-        button.layer.shadowOffset = CGSize(width: 0, height: 2)
-        button.layer.shadowRadius = 2
+        button.addShadows()
         
         return button
     }()
@@ -162,13 +151,9 @@ class LoginViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.setTitle("Register", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.8
-        button.layer.shadowOffset = CGSize(width: 0, height: 2)
-        button.layer.shadowRadius = 2
+        button.addShadows()
         
         return button
     }()
     
 }
-
