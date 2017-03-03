@@ -51,7 +51,10 @@ class GameViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Start", for: .normal)
         button.isEnabled = true
-        button.setBackgroundImage(UIImage(named: "splashDash-icon"), for: .normal)
+        let graySplash = UIImage(named: "grayLogoSplash")
+        let colorableSplash = graySplash?.withRenderingMode(.alwaysTemplate)
+        button.setBackgroundImage(colorableSplash, for: .normal)
+        button.tintColor = .blue // placeholder color
         button.addShadows()
         button.addTarget(self, action: #selector(updateGameStatus), for: .touchUpInside)
         return button
