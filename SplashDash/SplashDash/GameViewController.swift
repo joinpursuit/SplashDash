@@ -51,7 +51,7 @@ class GameViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Start", for: .normal)
         button.isEnabled = true
-        let graySplash = UIImage(named: "grayLogoSplash")
+        let graySplash = UIImage(named: "logoSplash")
         let colorableSplash = graySplash?.withRenderingMode(.alwaysTemplate)
         button.setBackgroundImage(colorableSplash, for: .normal)
         button.tintColor = .blue // placeholder color
