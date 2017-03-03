@@ -16,7 +16,7 @@ class SplashCoordinate {
     let speed: Double
     let teamName: String
     let splashImageTag: Int
-    
+    //timestamp
     init(userID: String, midCoordinate: CLLocationCoordinate2D, speed: Double, teamName: String, splashImageTag: Int) {
         self.userID = userID
         self.midCoordinate = midCoordinate

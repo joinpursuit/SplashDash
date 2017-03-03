@@ -15,7 +15,7 @@ class GameViewController: UIViewController {
     let databaseReference = FIRDatabase.database().reference()
     
     var locationManager: CLLocationManager!
-    var historySplash: [SplashColor] = []
+    var currentRun: [SplashCoordinate] = []
     var gameStatus: Bool = false
     var isButtonsOffScreen: Bool = false
     
