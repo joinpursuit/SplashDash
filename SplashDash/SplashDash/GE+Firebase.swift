@@ -10,11 +10,12 @@ import UIKit
 import Firebase
 
 extension GameViewController{
-    func observerToGlobal(){
+    
+    func fetchGlobalSplash(){
         
     }
     
-    func pushCoordinate(){
+    func pushSplashToDatabase(){
         
     }
     

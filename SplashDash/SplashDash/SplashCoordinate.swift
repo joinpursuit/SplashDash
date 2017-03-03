@@ -11,32 +11,64 @@ import MapKit
 
 class SplashCoordinate {
     
-//    var boundary: [CLLocationCoordinate2D]
     let userID: String
     let midCoordinate: CLLocationCoordinate2D
     let speed: Double
-    let teamColor: UIColor
+    let teamName: String
     let splashImageTag: Int
-    let head: Bool
     
+    init(userID: String, midCoordinate: CLLocationCoordinate2D, speed: Double, teamName: String, splashImageTag: Int) {
+        self.userID = userID
+        self.midCoordinate = midCoordinate
+        self.speed = speed
+        self.teamName = teamName
+        self.splashImageTag = splashImageTag
+    }
+    
+    convenience init?(_ validDict: [String: AnyObject], userID: String) {
+        guard let speed = validDict["speed"] as? Double,
+            let teamName = validDict["teamName"] as? String,
+            let splashImageTag = validDict["splashImageTag"] as? Int,
+            let longitude = validDict["longitude"] as? Double,
+            let latitude = validDict["latitude"] as? Double  else {
+                print("!!!!!Error parsing coordinates!!!!!")
+                return nil
+        }
+        
+        let midCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        
+        self.init(userID: userID, midCoordinate: midCoordinate, speed: speed, teamName: teamName, splashImageTag: splashImageTag)
+    }
+    
+    var adjustedRatio: Double {
+        get{
+            return speed/6000
+        }
+    }
+    var teamColor: UIColor {
+        get{
+            //switch on team name and return corresponding color
+            return UIColor.red
+        }
+    }
     var overlayTopLeftCoordinate: CLLocationCoordinate2D {
         get{
-            return CLLocationCoordinate2D(latitude: midCoordinate.latitude+speed, longitude: midCoordinate.longitude-speed)
+            return CLLocationCoordinate2D(latitude: midCoordinate.latitude+adjustedRatio, longitude: midCoordinate.longitude-adjustedRatio)
         }
     }
     var overlayTopRightCoordinate: CLLocationCoordinate2D {
         get{
-            return CLLocationCoordinate2D(latitude: midCoordinate.latitude+speed, longitude: midCoordinate.longitude+speed)
+            return CLLocationCoordinate2D(latitude: midCoordinate.latitude+adjustedRatio, longitude: midCoordinate.longitude+adjustedRatio)
         }
     }
     var overlayBottomLeftCoordinate: CLLocationCoordinate2D {
         get{
-            return CLLocationCoordinate2D(latitude: midCoordinate.latitude-speed, longitude: midCoordinate.longitude-speed)
+            return CLLocationCoordinate2D(latitude: midCoordinate.latitude-adjustedRatio, longitude: midCoordinate.longitude-adjustedRatio)
         }
     }
     var overlayBottomRightCoordinate: CLLocationCoordinate2D {
         get{
-            return CLLocationCoordinate2D(latitude: midCoordinate.latitude-speed, longitude: midCoordinate.longitude+speed)
+            return CLLocationCoordinate2D(latitude: midCoordinate.latitude-adjustedRatio, longitude: midCoordinate.longitude+adjustedRatio)
         }
     }
     
@@ -53,22 +85,13 @@ class SplashCoordinate {
         }
     }
     
-    init(userID: String, midCoordinate: CLLocationCoordinate2D, speed: Double, teamColor: UIColor, head: Bool, splashImageTag: Int) {
-        self.userID = userID
-        self.midCoordinate = midCoordinate
-        self.speed = speed
-        self.teamColor = teamColor
-        self.head = head
-        self.splashImageTag = splashImageTag
-    }
-    
     func toData() -> [String: Any]{
         return ["userID": self.userID,
-            "midCoordinate": self.midCoordinate,
-            "speed": self.speed,
-            "teamColor": self.teamColor,
-            "head": self.head,
-            "splashImageTag": self.splashImageTag] as [String: Any]
+                "latitude": self.midCoordinate.latitude,
+                "longitude": self.midCoordinate.longitude,
+                "speed": self.speed,
+                "teamName": self.teamName,
+                "splashImageTag": self.splashImageTag] as [String: Any]
     }
     
 }

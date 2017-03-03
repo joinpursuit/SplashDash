@@ -15,26 +15,23 @@ class GameViewController: UIViewController {
     let databaseReference = FIRDatabase.database().reference()
     
     var locationManager: CLLocationManager!
-    var lastLocation: CLLocationCoordinate2D!
+    var historySplash: [SplashColor] = []
     var gameStatus: Bool = false
-    
-    let color = [UIColor.red, UIColor.green, UIColor.blue, UIColor.cyan]
-    var filCol: Int = 0
+    var isButtonsOffScreen: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupViewHierarchy()
         configureConstraints()
+        setupLocationManager()
+        addGestures()
     }
 
     func setupViewHierarchy(){
         view.addSubview(mapView)
         view.addSubview(gameButton)
-        
-//        setupMapView()
-        setupLocationManager()
-        addGestures()
+        view.addSubview(findMeButton)
     }
     
     //MARK: - Lazy inits
@@ -55,14 +52,20 @@ class GameViewController: UIViewController {
         button.setTitle("Start", for: .normal)
         button.isEnabled = true
         button.setBackgroundImage(UIImage(named: "splashDash-icon"), for: .normal)
+        button.addShadows()
         button.addTarget(self, action: #selector(updateGameStatus), for: .touchUpInside)
         return button
     }()
     
-    lazy var progressView: UIView = {
-        //or stack view?
-        let view = UIView()
-        return view
+    lazy var findMeButton: UIButton = {
+        let button = UIButton(type: UIButtonType.contactAdd)
+        button.isEnabled = true
+        button.backgroundColor = .white
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 35
+        button.addShadows()
+        button.addTarget(self, action: #selector(toCurrentLocation), for: .touchUpInside)
+        return button
     }()
 }
 
