@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 extension GameViewController{
+    
     func configureConstraints(){
         mapView.snp.makeConstraints { (view) in
             view.top.bottom.leading.trailing.equalToSuperview()

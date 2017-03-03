@@ -11,6 +11,7 @@ import CoreLocation
 import MapKit
 
 extension GameViewController{
+    
     func updateGameStatus(){
         if self.gameStatus{
             gameButton.setTitle("Start", for: .normal)
@@ -24,7 +25,6 @@ extension GameViewController{
     }
     
     func toCurrentLocation(){
-        
         if let current = self.locationManager.location{
             let center = CLLocationCoordinate2D(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
             let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))

@@ -30,16 +30,9 @@ extension GameViewController: CLLocationManagerDelegate{
         print("")
         //the average human can run at the speed of 15 miles per hour for short periods of time.
         if self.gameStatus{
-            let coordinate = SplashCoordinate(userID: "uid", midCoordinate: location.coordinate, speed: location.speed/6000, teamColor: .yellow, head: false, splashImageTag: 1)
+            let coordinate = SplashCoordinate(userID: "uid", midCoordinate: location.coordinate, speed: location.speed, teamName: "Wolfpack", splashImageTag: 1)
             let splash = SplashOverlay(park: coordinate)
             mapView.addOverlays([splash])
-            
-//            let circle = MKCircle(center: location.coordinate, radius: location.speed*7)
-//            mapView.addOverlays([circle])
-        }
-        
-        
+        }   
     }
-    
-    
 }

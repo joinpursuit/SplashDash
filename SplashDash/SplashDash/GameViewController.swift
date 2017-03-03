@@ -24,16 +24,14 @@ class GameViewController: UIViewController {
         
         setupViewHierarchy()
         configureConstraints()
+        setupLocationManager()
+        addGestures()
     }
 
     func setupViewHierarchy(){
         view.addSubview(mapView)
         view.addSubview(gameButton)
         view.addSubview(findMeButton)
-        
-//        setupMapView()
-        setupLocationManager()
-        addGestures()
     }
     
     //MARK: - Lazy inits
@@ -54,6 +52,7 @@ class GameViewController: UIViewController {
         button.setTitle("Start", for: .normal)
         button.isEnabled = true
         button.setBackgroundImage(UIImage(named: "splashDash-icon"), for: .normal)
+        button.addShadows()
         button.addTarget(self, action: #selector(updateGameStatus), for: .touchUpInside)
         return button
     }()
@@ -61,9 +60,10 @@ class GameViewController: UIViewController {
     lazy var findMeButton: UIButton = {
         let button = UIButton(type: UIButtonType.contactAdd)
         button.isEnabled = true
-        button.backgroundColor = .blue
+        button.backgroundColor = .white
         button.clipsToBounds = true
-        button.layer.cornerRadius = button.frame.width/2
+        button.layer.cornerRadius = 35
+        button.addShadows()
         button.addTarget(self, action: #selector(toCurrentLocation), for: .touchUpInside)
         return button
     }()

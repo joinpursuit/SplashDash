@@ -9,6 +9,7 @@
 import UIKit
 
 extension GameViewController{
+
     func addGestures(){
         let tap = UITapGestureRecognizer(target: self, action: #selector(tappedOnMap(sender:)))
         tap.numberOfTapsRequired = 1
@@ -23,7 +24,6 @@ extension GameViewController{
                 self.animateAllButtons()
             default:
                 print("tap type was wrong!")
-                
             }
         }
     }
