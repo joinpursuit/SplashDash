@@ -93,7 +93,13 @@ class LoginViewController: UIViewController {
                         UIView.animate(withDuration: 0.1) {
                             sender.transform = CGAffineTransform.identity
                         }
-                        self.present(RegisterViewController(), animated: true, completion: nil)
+                        
+                        //pass username and password to RegisterViewController if creating a new user
+                        let registerVC = RegisterViewController()
+                        registerVC.usernameTextField.text = self.usernameTextField.text
+                        registerVC.passwordTextField.text = self.passwordTextField.text
+                        
+                        self.present(registerVC, animated: true, completion: nil)
         })
     }
     
@@ -106,7 +112,20 @@ class LoginViewController: UIViewController {
                         UIView.animate(withDuration: 0.1) {
                             sender.transform = CGAffineTransform.identity
                         }
-
+                        
+                        //Login via Firebase
+                        guard let username = self.usernameTextField.text,
+                            let password = self.passwordTextField.text else {
+                                //setup hidden label
+                                return
+                        }
+                        FIRAuth.auth()?.signIn(withEmail: username, password: password, completion: { (user: FIRUser?, error: Error?) in
+                            if error != nil {
+                                //setup hidden label
+                            }
+                            print("\(user?.uid)")
+                        })
+                        
                         let gameVC = GameViewController()
                         let userInfoVC = UserInfoViewController()
                         let ishPullUpVC = ISHPullUpViewController()
@@ -116,78 +135,6 @@ class LoginViewController: UIViewController {
                         self.present(ishPullUpVC, animated: true, completion: nil)
         })
     }
-    
-//    internal func didTapRegister(sender: UIButton) {
-//        print("-----did tap register------")
-//        let registerNewUserViewController = RegisterNewUserViewController()
-//        registerNewUserViewController.userEmailTextField.text = self.usernameTextField.text
-//        registerNewUserViewController.passwordTextField.text = self.passwordTextField.text
-//        self.navigationController?.pushViewController(registerNewUserViewController, animated: true)
-//        
-//        //clear password text field but keep username
-//        self.usernameTextField.text = nil
-//        self.usernameTextField.underLine(placeHolder: "Username")
-//        self.passwordTextField.text = nil
-//        self.passwordTextField.underLine(placeHolder: "Password")
-//    }
-    
-    
-//    func registerButtonDidTapped(_ sender: UIButton) {
-//        guard let userName = userEmailTextField.text,
-//            let password = passwordTextField.text,
-//            let firstName = userFirstNameTextField.text,
-//            firstName != "",
-//            let lastName = userLastNameTextField.text,
-//            lastName != "" else {
-//                let errorAlertController = UIAlertController(title: " Registration Error", message: "Missing information in First Name/ Last Name/ Username/ Password", preferredStyle: UIAlertControllerStyle.alert)
-//                let okay = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
-//                errorAlertController.addAction(okay)
-//                self.present(errorAlertController, animated: true, completion: nil)
-//                return
-//        }
-//        self.registerButton.isEnabled = false
-//        FIRAuth.auth()?.createUser(withEmail: userName, password: password, completion: { (user: FIRUser?, error: Error?) in
-//            self.registerButton.isEnabled = true
-//            if error != nil {
-//                let errorAlertController = UIAlertController(title: "Registration Error", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
-//                let okay = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
-//                errorAlertController.addAction(okay)
-//                self.present(errorAlertController, animated: true, completion: nil)
-//            }
-//            guard let validUser = user else { return }
-//            guard let newUser = FIRAuth.auth()?.currentUser else { return }
-//            
-//            //creating users for db
-//            let uid = newUser.uid
-//            let databaseReference = FIRDatabase.database().reference().child("USERS/\(uid)")
-//            let info: [String: AnyObject] = [
-//                "name" : "\(firstName) \(lastName)" as AnyObject,
-//                "email" : userName as AnyObject
-//            ]
-//            databaseReference.setValue(info)
-//            
-//            // UPLOAD PROFILE PICTURE
-//            if let image = self.profilePictureImageView.image,
-//                image != #imageLiteral(resourceName: "default-placeholder"),
-//                let imageData = UIImageJPEGRepresentation(image, 0.8) {
-//                
-//                let storageReference = FIRStorage.storage().reference().child("ProfilePictures").child("\(uid)")
-//                let uploadMetadata = FIRStorageMetadata()
-//                uploadMetadata.contentType = "image/jpeg"
-//                
-//                //upload image data to Storage reference
-//                let uploadTask = storageReference.put(imageData, metadata: uploadMetadata) { (metadata: FIRStorageMetadata?, error: Error?) in
-//                    if let error = error {
-//                        print("Encountered an error: \(error.localizedDescription)")
-//                    }
-//                }
-//            }
-//            self.signInUser = validUser
-//            let userHomeVC = UserHomeViewController()
-//            userHomeVC.photoImageView.image = self.profilePictureImageView.image
-//            self.navigationController?.pushViewController(userHomeVC, animated: true)
-//        })
-//    }
     
     //MARK: - Lazy instantiation
     lazy var containerView: UIView = {
