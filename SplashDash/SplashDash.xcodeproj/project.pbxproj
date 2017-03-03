@@ -111,8 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				06B239C41E675A490071E17F /* LoginViewController.swift */,
-				4BEF7AAD1E68DB2D008A6470 /* UserInfoViewController.swift */,
 				06B239C81E675AB90071E17F /* RegisterViewController.swift */,
+				4BEF7AAD1E68DB2D008A6470 /* UserInfoViewController.swift */,
 				06B239C61E675A640071E17F /* GameViewController.swift */,
 			);
 			name = "View Controllers";
@@ -137,8 +137,8 @@
 		06B239C21E675A080071E17F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				06B239CE1E6763DF0071E17F /* GE+SnapKit.swift */,
 				47F56CF11E68857E007375BB /* UIView+Extension.swift */,
+				06B239CE1E6763DF0071E17F /* GE+SnapKit.swift */,
 				06B239D01E6767B70071E17F /* GE+MKMapDelegate.swift */,
 				06B239D21E67685E0071E17F /* GE+CoreLocationDelegate.swift */,
 				06B239DA1E68BFBB0071E17F /* GE+Firebase.swift */,

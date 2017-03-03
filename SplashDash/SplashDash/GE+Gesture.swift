@@ -10,7 +10,8 @@ import UIKit
 
 extension GameViewController{
     func addGestures(){
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedOnMap))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedOnMap(sender:)))
+        tap.numberOfTapsRequired = 1
         mapView.addGestureRecognizer(tap)
     }
     
@@ -19,8 +20,7 @@ extension GameViewController{
             switch (tapGesture.numberOfTapsRequired, tapGesture.numberOfTouchesRequired) {
             case (1, 1):
                 print("Heck yea I was tapped")
-            case (2, 1):
-                print("double tap!")
+                self.animateAllButtons()
             default:
                 print("tap type was wrong!")
                 

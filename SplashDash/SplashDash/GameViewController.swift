@@ -15,11 +15,9 @@ class GameViewController: UIViewController {
     let databaseReference = FIRDatabase.database().reference()
     
     var locationManager: CLLocationManager!
-    var lastLocation: CLLocationCoordinate2D!
+    var historySplash: [SplashColor] = []
     var gameStatus: Bool = false
-    
-    let color = [UIColor.red, UIColor.green, UIColor.blue, UIColor.cyan]
-    var filCol: Int = 0
+    var isButtonsOffScreen: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +29,7 @@ class GameViewController: UIViewController {
     func setupViewHierarchy(){
         view.addSubview(mapView)
         view.addSubview(gameButton)
+        view.addSubview(findMeButton)
         
 //        setupMapView()
         setupLocationManager()
@@ -59,10 +58,14 @@ class GameViewController: UIViewController {
         return button
     }()
     
-    lazy var progressView: UIView = {
-        //or stack view?
-        let view = UIView()
-        return view
+    lazy var findMeButton: UIButton = {
+        let button = UIButton(type: UIButtonType.contactAdd)
+        button.isEnabled = true
+        button.backgroundColor = .blue
+        button.clipsToBounds = true
+        button.layer.cornerRadius = button.frame.width/2
+        button.addTarget(self, action: #selector(toCurrentLocation), for: .touchUpInside)
+        return button
     }()
 }
 

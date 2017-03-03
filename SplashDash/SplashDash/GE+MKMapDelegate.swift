@@ -18,12 +18,11 @@ extension GameViewController: MKMapViewDelegate{
         self.mapView.add(overlay)
     }
     
-    func drawPolyLine(with location: CLLocationCoordinate2D) {
-        let myPolyline = MKPolyline(coordinates: [lastLocation, location], count: 2)
-        lastLocation = location
-        mapView.add(myPolyline)
-    }
-    
+//    func drawPolyLine(with location: CLLocationCoordinate2D) {
+//        let myPolyline = MKPolyline(coordinates: [lastLocation, location], count: 2)
+//        lastLocation = location
+//        mapView.add(myPolyline)
+//    }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is SplashOverlay{
@@ -32,7 +31,7 @@ extension GameViewController: MKMapViewDelegate{
             return splashOverlay
         } else if overlay is MKCircle{
             let circleRenderer = MKCircleRenderer(overlay: overlay)
-            circleRenderer.fillColor = color[filCol]
+            circleRenderer.fillColor = .orange
             return circleRenderer
         } else if overlay is MKPolyline {
             let lineView = MKPolylineRenderer(overlay: overlay)
@@ -45,7 +44,4 @@ extension GameViewController: MKMapViewDelegate{
         
         return MKOverlayRenderer(overlay: overlay)
     }
-    
-    
-    
 }
