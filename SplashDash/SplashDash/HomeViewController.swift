@@ -21,7 +21,10 @@ class HomeViewController: UIViewController {
         
         //set up views
         setUpViewHierarchy()
+        emailTextField.isHidden = true
         configureConstraints()
+        
+        //set up keyboard-resigning tap gesture
         setUpTapGesture()
     }
     
@@ -31,7 +34,10 @@ class HomeViewController: UIViewController {
         self.view.addSubview(splashDashLogoImageView)
         self.view.addSubview(segmentedControl)
         self.view.addSubview(usernameTextField)
+        self.view.addSubview(emailTextField)
         self.view.addSubview(passwordTextField)
+        self.view.addSubview(loginRegisterButton)
+        self.view.addSubview(hiddenLabel)
     }
     
     func configureConstraints() {
@@ -39,7 +45,7 @@ class HomeViewController: UIViewController {
         containerView.snp.makeConstraints { (view) in
             view.centerX.equalToSuperview()
             view.centerY.equalToSuperview().offset(10)
-            view.height.equalToSuperview().multipliedBy(0.55)
+            view.height.equalToSuperview().multipliedBy(0.48)
             view.width.equalToSuperview().multipliedBy(0.8)
         }
         
@@ -72,6 +78,12 @@ class HomeViewController: UIViewController {
             view.centerX.equalToSuperview()
         }
         
+        //emailTextField
+        emailTextField.snp.makeConstraints { (view) in
+            view.center.equalToSuperview()
+            view.size.equalTo(CGSize(width: 1, height: 1))
+        }
+        
         //passwordTextField
         passwordTextField.snp.makeConstraints { (view) in
             view.top.equalTo(usernameTextField.snp.bottom).offset(20)
@@ -79,6 +91,94 @@ class HomeViewController: UIViewController {
             view.centerX.equalToSuperview()
         }
         
+        //loginRegisterButton
+        loginRegisterButton.snp.makeConstraints { (view) in
+            view.top.equalTo(passwordTextField.snp.bottom).offset(25)
+            view.width.equalToSuperview().multipliedBy(0.6)
+            view.centerX.equalToSuperview()
+        }
+        
+        ///hiddenLabel
+        hiddenLabel.snp.makeConstraints { (view) in
+            view.top.equalTo(loginRegisterButton.snp.bottom).offset(8.0)
+            view.width.equalToSuperview().multipliedBy(0.6)
+            view.centerX.equalToSuperview()
+        }
+        
+    }
+    
+    func switchForm(sender: UISegmentedControl){
+        switch sender.selectedSegmentIndex{
+        case 0:
+            registerNewUser(type: "Log in")
+        default:
+            registerNewUser(type: "Register")
+        }
+    }
+    
+    func registerNewUser(type: String){
+        let animator = UIViewPropertyAnimator(duration: 0.5, curve: .easeIn, animations: nil)
+        
+        if segmentedControl.selectedSegmentIndex == 0 {
+            animator.addAnimations {
+                self.containerView.snp.remakeConstraints { (view) in
+                    view.centerX.equalToSuperview()
+                    view.centerY.equalToSuperview().offset(10)
+                    view.height.equalToSuperview().multipliedBy(0.48)
+                    view.width.equalToSuperview().multipliedBy(0.8)
+                }
+                
+                self.emailTextField.isHidden = true
+                self.emailTextField.snp.remakeConstraints({ (view) in
+                    view.center.equalToSuperview()
+                    view.size.equalTo(CGSize(width: 1, height: 1))
+                })
+                
+                self.passwordTextField.snp.remakeConstraints { (view) in
+                    view.top.equalTo(self.usernameTextField.snp.bottom).offset(20)
+                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
+                    view.centerX.equalToSuperview()
+                }
+                
+                self.view.layoutIfNeeded()
+            }
+        }
+        else {
+            animator.addAnimations {
+                self.containerView.snp.remakeConstraints({ (view) in
+                    view.centerX.equalToSuperview()
+                    view.centerY.equalToSuperview().offset(10)
+                    view.height.equalToSuperview().multipliedBy(0.55)
+                    view.width.equalToSuperview().multipliedBy(0.8)
+                })
+                
+                self.emailTextField.isHidden = false
+                self.emailTextField.setNeedsDisplay()
+                self.emailTextField.snp.remakeConstraints({ (view) in
+                    view.top.equalTo(self.usernameTextField.snp.bottom).offset(20)
+                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
+                    view.centerX.equalToSuperview()
+                })
+                
+                self.passwordTextField.snp.remakeConstraints { (view) in
+                    view.top.equalTo(self.emailTextField.snp.bottom).offset(20)
+                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
+                    view.centerX.equalToSuperview()
+                }
+                
+                self.emailTextField.textField.text = ""
+                self.usernameTextField.textField.text = ""
+                self.passwordTextField.textField.text = ""
+                
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        animator.addCompletion { (position) in
+            self.loginRegisterButton.setTitle(type, for: .normal)
+        }
+        
+        animator.startAnimation()
     }
     
     //MARK: - Tap Gesture Methods
@@ -131,9 +231,9 @@ class HomeViewController: UIViewController {
         let view = UISegmentedControl()
         view.insertSegment(withTitle: "Log in", at: 0, animated: true)
         view.insertSegment(withTitle: "Register", at: 1, animated: true)
-        view.tintColor = SplashColor.darkPrimaryColor()
+        view.tintColor = SplashColor.primaryColor()
         view.selectedSegmentIndex = 0
-        //view.addTarget(self, action: #selector(switchForm), for: .valueChanged)
+        view.addTarget(self, action: #selector(switchForm), for: .valueChanged)
         return view
     }()
     
@@ -143,68 +243,41 @@ class HomeViewController: UIViewController {
         return textField
     }()
     
-    lazy var passwordTextField: SplashDashTextField = {
-        let textField = SplashDashTextField(placeHolderText: "Password")
+    lazy var emailTextField: SplashDashTextField = {
+        let textField = SplashDashTextField(placeHolderText: "Email")
         
         return textField
     }()
+    
+    lazy var passwordTextField: SplashDashTextField = {
+        let textField = SplashDashTextField(placeHolderText: "Password")
+        textField.textField.isSecureTextEntry = true
+        
+        return textField
+    }()
+    
+    lazy var loginRegisterButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = SplashColor.primaryColor()
+        button.setTitleColor(SplashColor.lightPrimaryColor(), for: .normal)
+        button.setTitle("Log in", for: .normal)
+        button.layer.borderWidth = 2.0
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.layer.borderColor = SplashColor.primaryColor().cgColor
+        button.layer.cornerRadius = 10
+        button.addShadows()
+        //button.addTarget(self, action: #selector(), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    lazy var hiddenLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 12.0)
+        label.textColor = SplashColor.primaryColor()
+        label.text = "HELLO WORLD"
+        
+        return label
+    }()
 }
-
-
-//func switchForm(sender: UISegmentedControl){
-//    switch sender.selectedSegmentIndex{
-//    case 0:
-//        registerNewUser(type: "Log in")
-//    default:
-//        registerNewUser(type: "Register")
-//    }
-//}
-
-//func registerNewUser(type: String){
-//    let animator = UIViewPropertyAnimator(duration: 0.5, curve: .easeIn, animations: nil)
-//    
-//    if modeSwitch.selectedSegmentIndex == 0{
-//        animator.addAnimations {
-//            self.nameTextField.isHidden = true
-//            self.nameTextField.snp.remakeConstraints({ (view) in
-//                view.center.equalToSuperview()
-//                view.size.equalTo(CGSize(width: 1, height: 1))
-//            })
-//            
-//            self.passwordTextField.snp.remakeConstraints { (view) in
-//                view.top.equalTo(self.emailTextField.snp.bottom).offset(15)
-//                view.width.equalToSuperview().multipliedBy(0.8)
-//                view.centerX.equalToSuperview()
-//            }
-//            
-//            self.containerView.layoutIfNeeded()
-//        }
-//    }else{
-//        animator.addAnimations {
-//            self.nameTextField.isHidden = false
-//            self.nameTextField.snp.remakeConstraints({ (view) in
-//                view.top.equalTo(self.emailTextField.snp.bottom).offset(15)
-//                view.width.equalToSuperview().multipliedBy(0.8)
-//                view.centerX.equalToSuperview()
-//            })
-//            
-//            self.passwordTextField.snp.remakeConstraints { (view) in
-//                view.top.equalTo(self.nameTextField.snp.bottom).offset(15)
-//                view.width.equalToSuperview().multipliedBy(0.8)
-//                view.centerX.equalToSuperview()
-//            }
-//            
-//            self.emailTextField.text = ""
-//            self.nameTextField.text = ""
-//            self.passwordTextField.text = ""
-//            
-//            self.containerView.layoutIfNeeded()
-//        }
-//    }
-//    
-//    animator.addCompletion { (position) in
-//        self.logAndRegButton.setTitle(type, for: .normal)
-//    }
-//    
-//    animator.startAnimation()
-//}
