@@ -28,6 +28,7 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
         setUpViewHierarchy()
         
         usernameTextField.isHidden = true
+        self.usernameTextField.alpha = 0
         configureConstraints()
         
         //set up keyboard-resigning tap gesture
@@ -151,6 +152,7 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
                     view.width.equalToSuperview().multipliedBy(0.8)
                 }
                 
+                self.usernameTextField.alpha = 0
                 self.usernameTextField.isHidden = true
                 self.usernameTextField.snp.remakeConstraints({ (view) in
                     view.center.equalToSuperview()
@@ -182,6 +184,7 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
                     view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
                     view.centerX.equalToSuperview()
                 })
+                self.usernameTextField.alpha = 1.0
                 
                 self.passwordTextField.snp.remakeConstraints { (view) in
                     view.top.equalTo(self.usernameTextField.snp.bottom).offset(20)
