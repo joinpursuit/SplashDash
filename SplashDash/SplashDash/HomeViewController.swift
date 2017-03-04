@@ -25,24 +25,13 @@ class HomeViewController: UIViewController {
         setUpTapGesture()
     }
     
-    func setUpTapGesture() {
-        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGestureDismissKeyboard(_:)))
-        tapGestureRecognizer.cancelsTouchesInView = false
-        tapGestureRecognizer.numberOfTapsRequired = 1
-        tapGestureRecognizer.numberOfTouchesRequired = 1
-        self.view.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    func tapGestureDismissKeyboard(_ sender: UITapGestureRecognizer) {
-        self.view.endEditing(true)
-    }
-    
     func setUpViewHierarchy() {
         self.view.addSubview(containerView)
         self.view.addSubview(logoContainerView)
         self.view.addSubview(splashDashLogoImageView)
         self.view.addSubview(segmentedControl)
         self.view.addSubview(usernameTextField)
+        self.view.addSubview(passwordTextField)
     }
     
     func configureConstraints() {
@@ -83,6 +72,26 @@ class HomeViewController: UIViewController {
             view.centerX.equalToSuperview()
         }
         
+        //passwordTextField
+        passwordTextField.snp.makeConstraints { (view) in
+            view.top.equalTo(usernameTextField.snp.bottom).offset(20)
+            view.width.equalTo(containerView.snp.width).multipliedBy(0.8)
+            view.centerX.equalToSuperview()
+        }
+        
+    }
+    
+    //MARK: - Tap Gesture Methods
+    func setUpTapGesture() {
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGestureDismissKeyboard(_:)))
+        tapGestureRecognizer.cancelsTouchesInView = false
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        tapGestureRecognizer.numberOfTouchesRequired = 1
+        self.view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    func tapGestureDismissKeyboard(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
     //MARK: - Lazy Instantiation
@@ -130,6 +139,12 @@ class HomeViewController: UIViewController {
     
     lazy var usernameTextField: SplashDashTextField = {
         let textField = SplashDashTextField(placeHolderText: "Username")
+        
+        return textField
+    }()
+    
+    lazy var passwordTextField: SplashDashTextField = {
+        let textField = SplashDashTextField(placeHolderText: "Password")
         
         return textField
     }()

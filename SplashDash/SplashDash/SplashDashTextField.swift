@@ -16,19 +16,12 @@ enum Underlined {
     case yes, no
 }
 
-protocol SplashDashTextFieldDelegate: class {
-    func sdTextFieldShouldReturn(_ textField: SplashDashTextField) -> Bool
-    func sdTextFieldDidEndEditing(_ textField: SplashDashTextField)
-}
-
 class SplashDashTextField: UIView, UITextFieldDelegate {
     
     internal final var textField: UITextField!
     internal final var textLabel: UILabel!
     private var textLabelPlaceholder: String!
     internal var identifier: String = ""
-    
-    internal weak var sdTextFieldDelegate: SplashDashTextFieldDelegate?
     
     let largeLabelFont = UIFont.systemFont(ofSize: 18.0)
     let smallLabelFont = UIFont.systemFont(ofSize: 14.0)
@@ -92,7 +85,7 @@ class SplashDashTextField: UIView, UITextFieldDelegate {
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         animatedTextFieldLine.translatesAutoresizingMaskIntoConstraints = false
         
-        self.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
+        self.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
         
         // label left/right
         textLabel.leadingAnchor.constraint(equalTo: self.textField.leadingAnchor, constant: 2.0).isActive = true
