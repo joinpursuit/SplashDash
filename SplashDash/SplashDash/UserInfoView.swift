@@ -9,8 +9,7 @@
 import UIKit
 import SnapKit
 import Firebase
-import AVFoundation
-import AVKit
+import ISHPullUp
 
 /*
  //For testing purposes - use this code to instantiate
@@ -23,34 +22,38 @@ import AVKit
         uiv.backgroundColor = SplashColor.primaryColor()
 */
  
-class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource {
     
-    private var profileImage: UIImage = UIImage()
-
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-//        self.backgroundColor = SplashColor.primaryColor() // background color is not changing
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = SplashColor.primaryColor()
         setupViewHierarchy()
         configureConstraints()
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     func setupViewHierarchy() {
-        self.addSubview(profileImageView)
+        self.addSubview(topView)
+        topView.addSubview(topViewStatsLabel)
         self.addSubview(historyLabel)
         self.addSubview(userHistoryTableView)
         self.addSubview(logoutButton)
     }
     
     func configureConstraints() {
-        profileImageView.snp.makeConstraints { (view) in
-            view.centerX.equalToSuperview()
-            view.top.equalToSuperview().inset(20.0)
-            view.height.equalTo(150.0)
-            view.width.equalTo(profileImageView.snp.height)
+        topViewStatsLabel.snp.makeConstraints { (view) in
+            view.leading.top.bottom.equalToSuperview().inset(8.0)
+        }
+
+        topView.snp.makeConstraints { (view) in
+            view.leading.trailing.top.equalToSuperview()
         }
         
         historyLabel.snp.makeConstraints { (view) in
-            view.top.equalTo(profileImageView.snp.bottom).offset(16.0)
+            view.top.equalTo(topView.snp.bottom).offset(16.0)
             view.leading.equalToSuperview().offset(8.0)
         }
         
@@ -73,27 +76,6 @@ class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource, UIImageP
         print("logout button tapped")
     }
     
-    func imageTapped(){
-        print("image tapped")
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.sourceType = .photoLibrary
-        imagePickerController.delegate = self
-        
-//        self.present(imagePickerController, animated: true, completion: nil)
-    }
-    
-    //MARK: - UIImagePickerControllerDelegate
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.profileImageView.image = image
-        }
-
-//        dismiss(animated: true)
-    }
-
-    
     // MARK: - TableView Methods
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -113,18 +95,18 @@ class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource, UIImageP
     
     // MARK: - Views
     
-    private lazy var profileImageView: UIImageView = {
-        let imageView = UIImageView()
-//        imageView.image = self.profileImage
-        imageView.backgroundColor = .lightGray
-        imageView.contentMode = .scaleAspectFill
-        let tapImageGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
-        imageView.addGestureRecognizer(tapImageGesture)
-        imageView.isUserInteractionEnabled = true
-        imageView.frame.size = CGSize(width: 200.0, height: 200.0)
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = imageView.frame.height * 0.05
-        return imageView
+    lazy var topView: UIView = {
+        let view = UIView()
+        view.backgroundColor = SplashColor.primaryColor()
+        return view
+    }()
+    
+    private lazy var topViewStatsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Duration of run: \("30 mins")\nDistance: \("2.1 miles")"
+        label.textColor = SplashColor.lightPrimaryColor()
+        label.numberOfLines = 0
+        return label
     }()
     
     private lazy var historyLabel: UILabel = {

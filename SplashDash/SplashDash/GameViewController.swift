@@ -9,8 +9,9 @@
 import UIKit
 import MapKit
 import Firebase
+import ISHPullUp
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, ISHPullUpContentDelegate {
 
     let databaseReference = FIRDatabase.database().reference()
     
@@ -26,15 +27,35 @@ class GameViewController: UIViewController {
         configureConstraints()
         setupLocationManager()
         addGestures()
+        mapView.preservesSuperviewLayoutMargins = true
+    }
+    
+    // MARK: ISHPullUpContentDelegate
+    
+    func pullUpViewController(_ vc: ISHPullUpViewController, update edgeInsets: UIEdgeInsets, forContentViewController _: UIViewController) {
+
+        // update edgeInsets
+        self.rootView.layoutMargins = edgeInsets
+        
+        // call layoutIfNeeded right away to participate in animations
+        // this method may be called from within animation blocks
+        self.rootView.layoutIfNeeded()
     }
 
     func setupViewHierarchy(){
-        view.addSubview(mapView)
-        view.addSubview(gameButton)
-        view.addSubview(findMeButton)
+        view.addSubview(rootView)
+        self.rootView.addSubview(mapView)
+        self.rootView.addSubview(gameButton)
+        self.rootView.addSubview(findMeButton)
     }
     
     //MARK: - Lazy inits
+    lazy var rootView: UIView = {
+        let view = UIView()
+        view.isUserInteractionEnabled = true
+        return view
+    }()
+    
     lazy var mapView: MKMapView = {
         let view = MKMapView()
         view.mapType = .standard
@@ -56,6 +77,7 @@ class GameViewController: UIViewController {
         button.setBackgroundImage(colorableSplash, for: .normal)
         button.tintColor = .blue // placeholder color
         button.addShadows()
+        button.clipsToBounds = true
         button.addTarget(self, action: #selector(updateGameStatus), for: .touchUpInside)
         return button
     }()

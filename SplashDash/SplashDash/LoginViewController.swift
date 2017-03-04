@@ -125,13 +125,18 @@ class LoginViewController: UIViewController {
                             }
                             print("\(user?.uid)")
                         })
-                        
+
+                        let ishPullUpVC = ISHPullUpViewController()
                         let gameVC = GameViewController()
                         let userInfoVC = UserInfoViewController()
-                        let ishPullUpVC = ISHPullUpViewController()
+
                         ishPullUpVC.contentViewController = gameVC
                         ishPullUpVC.bottomViewController = userInfoVC
-                        
+                        userInfoVC.pullUpController = ishPullUpVC
+                        ishPullUpVC.contentDelegate = gameVC
+                        ishPullUpVC.sizingDelegate = userInfoVC
+                        ishPullUpVC.stateDelegate = userInfoVC
+
                         self.present(ishPullUpVC, animated: true, completion: nil)
         })
     }
