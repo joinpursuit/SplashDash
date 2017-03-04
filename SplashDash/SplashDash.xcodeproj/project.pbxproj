@@ -11,9 +11,7 @@
 		06B239B21E66127B0071E17F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B01E66127B0071E17F /* Main.storyboard */; };
 		06B239B41E66127B0071E17F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B31E66127B0071E17F /* Assets.xcassets */; };
 		06B239B71E66127B0071E17F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B51E66127B0071E17F /* LaunchScreen.storyboard */; };
-		06B239C51E675A490071E17F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239C41E675A490071E17F /* LoginViewController.swift */; };
 		06B239C71E675A640071E17F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239C61E675A640071E17F /* GameViewController.swift */; };
-		06B239C91E675AB90071E17F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239C81E675AB90071E17F /* RegisterViewController.swift */; };
 		06B239CB1E675BC20071E17F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06B239CA1E675BC20071E17F /* GoogleService-Info.plist */; };
 		06B239CD1E6762140071E17F /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239CC1E6762140071E17F /* File.swift */; };
 		06B239CF1E6763DF0071E17F /* GE+SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239CE1E6763DF0071E17F /* GE+SnapKit.swift */; };
@@ -41,9 +39,7 @@
 		06B239B31E66127B0071E17F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		06B239B61E66127B0071E17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		06B239B81E66127B0071E17F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		06B239C41E675A490071E17F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		06B239C61E675A640071E17F /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		06B239C81E675AB90071E17F /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		06B239CA1E675BC20071E17F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		06B239CC1E6762140071E17F /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		06B239CE1E6763DF0071E17F /* GE+SnapKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GE+SnapKit.swift"; sourceTree = "<group>"; };
@@ -115,8 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				47F56CF31E69FB70007375BB /* HomeViewController.swift */,
-				06B239C41E675A490071E17F /* LoginViewController.swift */,
-				06B239C81E675AB90071E17F /* RegisterViewController.swift */,
 				4BEF7AAD1E68DB2D008A6470 /* UserInfoViewController.swift */,
 				06B239C61E675A640071E17F /* GameViewController.swift */,
 			);
@@ -333,9 +327,7 @@
 				06B239CF1E6763DF0071E17F /* GE+SnapKit.swift in Sources */,
 				4B9BF6C41E6765E700EA0410 /* HistoryTableViewCell.swift in Sources */,
 				06B239DB1E68BFBB0071E17F /* GE+Firebase.swift in Sources */,
-				06B239C51E675A490071E17F /* LoginViewController.swift in Sources */,
 				06B239D11E6767B70071E17F /* GE+MKMapDelegate.swift in Sources */,
-				06B239C91E675AB90071E17F /* RegisterViewController.swift in Sources */,
 				06B239D31E67685E0071E17F /* GE+CoreLocationDelegate.swift in Sources */,
 				06B239D51E679CA30071E17F /* GE+HelpingFunc.swift in Sources */,
 				06B239D71E6888840071E17F /* SplashCoordinate.swift in Sources */,
