@@ -8,6 +8,8 @@
 
 import UIKit
 import SnapKit
+import Firebase
+import ISHPullUp
 
 class HomeViewController: UIViewController {
     //MARK: - Properties
@@ -21,20 +23,21 @@ class HomeViewController: UIViewController {
         
         //set up views
         setUpViewHierarchy()
-        emailTextField.isHidden = true
+        usernameTextField.isHidden = true
         configureConstraints()
         
         //set up keyboard-resigning tap gesture
         setUpTapGesture()
     }
     
+    //MARK: - Set Up Views and Constraints
     func setUpViewHierarchy() {
         self.view.addSubview(containerView)
         self.view.addSubview(logoContainerView)
         self.view.addSubview(splashDashLogoImageView)
         self.view.addSubview(segmentedControl)
-        self.view.addSubview(usernameTextField)
         self.view.addSubview(emailTextField)
+        self.view.addSubview(usernameTextField)
         self.view.addSubview(passwordTextField)
         self.view.addSubview(loginRegisterButton)
         self.view.addSubview(hiddenLabel)
@@ -71,22 +74,22 @@ class HomeViewController: UIViewController {
             view.centerX.equalToSuperview()
         }
         
-        //usernameTextField
-        usernameTextField.snp.makeConstraints { (view) in
+        //emailTextField
+        emailTextField.snp.makeConstraints { (view) in
             view.top.equalTo(segmentedControl.snp.bottom).offset(20)
             view.width.equalTo(containerView.snp.width).multipliedBy(0.8)
             view.centerX.equalToSuperview()
         }
         
-        //emailTextField
-        emailTextField.snp.makeConstraints { (view) in
+        //usernameTextField
+        usernameTextField.snp.makeConstraints { (view) in
             view.center.equalToSuperview()
             view.size.equalTo(CGSize(width: 1, height: 1))
         }
         
         //passwordTextField
         passwordTextField.snp.makeConstraints { (view) in
-            view.top.equalTo(usernameTextField.snp.bottom).offset(20)
+            view.top.equalTo(emailTextField.snp.bottom).offset(20)
             view.width.equalTo(containerView.snp.width).multipliedBy(0.8)
             view.centerX.equalToSuperview()
         }
@@ -107,16 +110,19 @@ class HomeViewController: UIViewController {
         
     }
     
-    func switchForm(sender: UISegmentedControl){
+    //MARK: - Segmented Control Helper Functions
+    func switchForm(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex{
         case 0:
-            registerNewUser(type: "Log in")
+            segmentedControlWasSwitched(title: "Log in")
+            self.hiddenLabel.text = ""
         default:
-            registerNewUser(type: "Register")
+            segmentedControlWasSwitched(title: "Register")
+            self.hiddenLabel.text = ""
         }
     }
     
-    func registerNewUser(type: String){
+    func segmentedControlWasSwitched(title: String){
         let animator = UIViewPropertyAnimator(duration: 0.5, curve: .easeIn, animations: nil)
         
         if segmentedControl.selectedSegmentIndex == 0 {
@@ -128,14 +134,14 @@ class HomeViewController: UIViewController {
                     view.width.equalToSuperview().multipliedBy(0.8)
                 }
                 
-                self.emailTextField.isHidden = true
-                self.emailTextField.snp.remakeConstraints({ (view) in
+                self.usernameTextField.isHidden = true
+                self.usernameTextField.snp.remakeConstraints({ (view) in
                     view.center.equalToSuperview()
                     view.size.equalTo(CGSize(width: 1, height: 1))
                 })
                 
                 self.passwordTextField.snp.remakeConstraints { (view) in
-                    view.top.equalTo(self.usernameTextField.snp.bottom).offset(20)
+                    view.top.equalTo(self.emailTextField.snp.bottom).offset(20)
                     view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
                     view.centerX.equalToSuperview()
                 }
@@ -152,16 +158,16 @@ class HomeViewController: UIViewController {
                     view.width.equalToSuperview().multipliedBy(0.8)
                 })
                 
-                self.emailTextField.isHidden = false
-                self.emailTextField.setNeedsDisplay()
-                self.emailTextField.snp.remakeConstraints({ (view) in
-                    view.top.equalTo(self.usernameTextField.snp.bottom).offset(20)
+                self.usernameTextField.isHidden = false
+                self.usernameTextField.setNeedsDisplay()
+                self.usernameTextField.snp.remakeConstraints({ (view) in
+                    view.top.equalTo(self.emailTextField.snp.bottom).offset(20)
                     view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
                     view.centerX.equalToSuperview()
                 })
                 
                 self.passwordTextField.snp.remakeConstraints { (view) in
-                    view.top.equalTo(self.emailTextField.snp.bottom).offset(20)
+                    view.top.equalTo(self.usernameTextField.snp.bottom).offset(20)
                     view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
                     view.centerX.equalToSuperview()
                 }
@@ -175,13 +181,13 @@ class HomeViewController: UIViewController {
         }
         
         animator.addCompletion { (position) in
-            self.loginRegisterButton.setTitle(type, for: .normal)
+            self.loginRegisterButton.setTitle(title, for: .normal)
         }
         
         animator.startAnimation()
     }
     
-    //MARK: - Tap Gesture Methods
+    //MARK: - Tap Gesture Method
     func setUpTapGesture() {
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGestureDismissKeyboard(_:)))
         tapGestureRecognizer.cancelsTouchesInView = false
@@ -192,6 +198,92 @@ class HomeViewController: UIViewController {
     
     func tapGestureDismissKeyboard(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
+    }
+    
+    //MARK: - Firebase Authentication
+    func loginRegisterButtonPressed() {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            loginButtonPressed()
+            self.hiddenLabel.text = ""
+        default:
+            registerButtonPressed()
+            self.hiddenLabel.text = ""
+        }
+    }
+    
+    func registerButtonPressed() {
+        UIView.animate(withDuration: 0.1,
+                       animations: {
+                        self.loginRegisterButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        },
+                       completion: { _ in
+                        UIView.animate(withDuration: 0.1) {
+                            self.loginRegisterButton.transform = CGAffineTransform.identity
+                        }
+                        
+                        //WE ARE CURRENTLY NOT USING THE USERNAME FOR ANYTHING
+                        
+                        guard let email = self.emailTextField.textField.text,
+                            let password = self.passwordTextField.textField.text,
+                            email != "",
+                            password != "" else {
+                                self.hiddenLabel.text = "Please verify all fields have been entered."
+                                self.hiddenLabel.isHidden = false
+                                return
+                        }
+                        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user: FIRUser?, error: Error?) in
+                            if error != nil {
+                                self.hiddenLabel.text = error?.localizedDescription
+                                self.hiddenLabel.isHidden = false
+                                return
+                            }
+                            
+                            //create User object
+                            print("User ID: \(user?.uid)")
+                            print("Registered and logged in new user.")
+                            
+                            self.present(GameViewController(), animated: true, completion: nil)
+                        })
+        })
+    }
+    
+    func loginButtonPressed() {
+        UIView.animate(withDuration: 0.1,
+                       animations: {
+                        self.loginRegisterButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        },
+                       completion: { _ in
+                        UIView.animate(withDuration: 0.1) {
+                            self.loginRegisterButton.transform = CGAffineTransform.identity
+                        }
+                        
+                        //Login via Firebase
+                        guard let email = self.emailTextField.textField.text,
+                            let password = self.passwordTextField.textField.text,
+                            email != "",
+                            password != "" else {
+                                self.hiddenLabel.text = "Please verify the format of your email and password."
+                                self.hiddenLabel.isHidden = false
+                                return
+                        }
+                        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user: FIRUser?, error: Error?) in
+                            if error != nil {
+                                self.hiddenLabel.text = error?.localizedDescription
+                                self.hiddenLabel.isHidden = false
+                                return
+                            }
+                            print("User ID: \(user?.uid)")
+                            
+                            let gameVC = GameViewController()
+                            let userInfoVC = UserInfoViewController()
+                            let ishPullUpVC = ISHPullUpViewController()
+                            ishPullUpVC.contentViewController = gameVC
+                            ishPullUpVC.bottomViewController = userInfoVC
+                            
+                            self.present(ishPullUpVC, animated: true, completion: nil)
+                        })
+        })
     }
     
     //MARK: - Lazy Instantiation
@@ -266,7 +358,7 @@ class HomeViewController: UIViewController {
         button.layer.borderColor = SplashColor.primaryColor().cgColor
         button.layer.cornerRadius = 10
         button.addShadows()
-        //button.addTarget(self, action: #selector(), for: .touchUpInside)
+        button.addTarget(self, action: #selector(loginRegisterButtonPressed), for: .touchUpInside)
         
         return button
     }()
@@ -276,7 +368,6 @@ class HomeViewController: UIViewController {
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 12.0)
         label.textColor = SplashColor.primaryColor()
-        label.text = "HELLO WORLD"
         
         return label
     }()
