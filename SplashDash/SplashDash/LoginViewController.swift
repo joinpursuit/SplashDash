@@ -122,17 +122,19 @@ class LoginViewController: UIViewController {
                         FIRAuth.auth()?.signIn(withEmail: username, password: password, completion: { (user: FIRUser?, error: Error?) in
                             if error != nil {
                                 //setup hidden label
+                                print(error?.localizedDescription)
+                                return
                             }
                             print("\(user?.uid)")
+                            
+                            let gameVC = GameViewController()
+                            let userInfoVC = UserInfoViewController()
+                            let ishPullUpVC = ISHPullUpViewController()
+                            ishPullUpVC.contentViewController = gameVC
+                            ishPullUpVC.bottomViewController = userInfoVC
+                            
+                            self.present(ishPullUpVC, animated: true, completion: nil)
                         })
-                        
-                        let gameVC = GameViewController()
-                        let userInfoVC = UserInfoViewController()
-                        let ishPullUpVC = ISHPullUpViewController()
-                        ishPullUpVC.contentViewController = gameVC
-                        ishPullUpVC.bottomViewController = userInfoVC
-                        
-                        self.present(ishPullUpVC, animated: true, completion: nil)
         })
     }
     
