@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = LoginViewController()
+        self.window?.rootViewController = HomeViewController()
         self.window?.makeKeyAndVisible()
         
         return true

@@ -13,9 +13,6 @@ class UserInfoViewController: UIViewController, ISHPullUpSizingDelegate, ISHPull
     
     weak var pullUpController: ISHPullUpViewController!
     var uiv: UserInfoView!
-    
-    // we allow the pullUp to snap to the half way point
-    //private var halfWayPoint = CGFloat(0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +29,6 @@ class UserInfoViewController: UIViewController, ISHPullUpSizingDelegate, ISHPull
     func pullUpViewController(_ pullUpViewController: ISHPullUpViewController, maximumHeightForBottomViewController bottomVC: UIViewController, maximumAvailableHeight: CGFloat) -> CGFloat {
 //        let totalHeight = self.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
         let totalHeight = self.view.systemLayoutSizeFitting(UILayoutFittingExpandedSize).height
-
-        // halfWayPoint = totalHeight / 2.0
         return totalHeight
     }
     
@@ -44,12 +39,12 @@ class UserInfoViewController: UIViewController, ISHPullUpSizingDelegate, ISHPull
     
     func pullUpViewController(_ pullUpViewController: ISHPullUpViewController, targetHeightForBottomViewController bottomVC: UIViewController, fromCurrentHeight height: CGFloat) -> CGFloat {
         
-        let totalHeight = self.view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
-        let halfWayPoint = totalHeight / 2.0
-        print("the halfwaypoint is \(halfWayPoint)")
-        if abs(height - halfWayPoint) < 30 {
-            print("halfwaypoint : \(halfWayPoint)")
-            return halfWayPoint
+        // SNAPS To HALFWAYPOINT
+        let halfwayPoint = self.view.frame.height/2
+        print("the halfwaypoint is \(halfwayPoint)")
+        if abs(height - halfwayPoint) < 150 {
+            print("halfwaypoint : \(halfwayPoint)")
+            return halfwayPoint
         }
         print("height: \(height)")
         return height
