@@ -10,10 +10,12 @@ import UIKit
 import SnapKit
 import Firebase
 import ISHPullUp
+import TwicketSegmentedControl
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
     //MARK: - Properties
     var tapGestureRecognizer: UITapGestureRecognizer!
+    var segmentedControl: TwicketSegmentedControl!
     
     //MARK: - Methods
     override func viewDidLoad() {
@@ -22,8 +24,11 @@ class HomeViewController: UIViewController {
         self.view.backgroundColor = SplashColor.primaryColor()
         
         //set up views
+        setUpTwicketSegmentedControl()
         setUpViewHierarchy()
+        
         usernameTextField.isHidden = true
+        self.usernameTextField.alpha = 0
         configureConstraints()
         
         //set up keyboard-resigning tap gesture
@@ -70,6 +75,7 @@ class HomeViewController: UIViewController {
         //segmentedControl
         segmentedControl.snp.makeConstraints { (view) in
             view.top.equalTo(logoContainerView.snp.bottom).offset(15)
+            view.height.equalTo(emailTextField.snp.height)
             view.width.equalTo(containerView.snp.width).multipliedBy(0.8)
             view.centerX.equalToSuperview()
         }
@@ -110,9 +116,21 @@ class HomeViewController: UIViewController {
         
     }
     
+    func setUpTwicketSegmentedControl() {
+        segmentedControl = TwicketSegmentedControl()
+        segmentedControl.setSegmentItems(["Log in", "Register"])
+        
+        //Use color manager to determine color scheme here
+        segmentedControl.layer.backgroundColor = SplashColor.lightPrimaryColor().cgColor
+        segmentedControl.sliderBackgroundColor = SplashColor.primaryColor()
+        segmentedControl.highlightTextColor = SplashColor.lightPrimaryColor()
+        segmentedControl.defaultTextColor = SplashColor.darkPrimaryColor()
+        segmentedControl.delegate = self
+    }
+    
     //MARK: - Segmented Control Helper Functions
-    func switchForm(sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex{
+    func didSelect(_ segmentIndex: Int) {
+        switch segmentIndex {
         case 0:
             segmentedControlWasSwitched(title: "Log in")
             self.hiddenLabel.text = ""
@@ -134,6 +152,7 @@ class HomeViewController: UIViewController {
                     view.width.equalToSuperview().multipliedBy(0.8)
                 }
                 
+                self.usernameTextField.alpha = 0
                 self.usernameTextField.isHidden = true
                 self.usernameTextField.snp.remakeConstraints({ (view) in
                     view.center.equalToSuperview()
@@ -165,6 +184,7 @@ class HomeViewController: UIViewController {
                     view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
                     view.centerX.equalToSuperview()
                 })
+                self.usernameTextField.alpha = 1.0
                 
                 self.passwordTextField.snp.remakeConstraints { (view) in
                     view.top.equalTo(self.usernameTextField.snp.bottom).offset(20)
@@ -317,16 +337,6 @@ class HomeViewController: UIViewController {
         imageView.contentMode = .scaleAspectFill
         
         return imageView
-    }()
-    
-    lazy var segmentedControl: UISegmentedControl = {
-        let view = UISegmentedControl()
-        view.insertSegment(withTitle: "Log in", at: 0, animated: true)
-        view.insertSegment(withTitle: "Register", at: 1, animated: true)
-        view.tintColor = SplashColor.primaryColor()
-        view.selectedSegmentIndex = 0
-        view.addTarget(self, action: #selector(switchForm), for: .valueChanged)
-        return view
     }()
     
     lazy var usernameTextField: SplashDashTextField = {

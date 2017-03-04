@@ -40,6 +40,7 @@ PODS:
   - GTMSessionFetcher/Core (1.1.8)
   - ISHPullUp (1.0.4)
   - SnapKit (3.2.0)
+  - TwicketSegmentedControl (0.1.2)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -47,6 +48,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - ISHPullUp
   - SnapKit
+  - TwicketSegmentedControl
 
 SPEC CHECKSUMS:
   Firebase: 85a581fb04e44f63ae9f4fbc8d6dabf4a4c18653
@@ -60,7 +62,8 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
   ISHPullUp: b98a286f3e85dc885a3bf20bf75853947984277d
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  TwicketSegmentedControl: 6d7a4cf243657e0ac3f00d06d873a25334c04042
 
-PODFILE CHECKSUM: d8fdb4f79c9a10315c6c37a4d2b9b3612753c69c
+PODFILE CHECKSUM: 824a7363b5ac594b4e6eb3d3d98806478b9af0d0
 
 COCOAPODS: 1.1.1
