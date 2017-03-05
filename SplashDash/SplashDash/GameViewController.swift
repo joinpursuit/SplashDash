@@ -26,6 +26,7 @@ class GameViewController: UIViewController {
         configureConstraints()
         setupLocationManager()
         addGestures()
+        fetchGlobalSplash()
     }
 
     func setupViewHierarchy(){

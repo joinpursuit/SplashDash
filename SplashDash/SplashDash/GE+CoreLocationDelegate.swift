@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import MapKit
+import Firebase
 
 extension GameViewController: CLLocationManagerDelegate{
     
@@ -30,9 +31,14 @@ extension GameViewController: CLLocationManagerDelegate{
         print("")
         //the average human can run at the speed of 15 miles per hour for short periods of time.
         if self.gameStatus{
-            let coordinate = SplashCoordinate(userID: "uid", midCoordinate: location.coordinate, speed: location.speed, teamName: "Wolfpack", splashImageTag: 1)
-            let splash = SplashOverlay(park: coordinate)
-            mapView.addOverlays([splash])
-        }   
+            let currentUser = FIRAuth.auth()?.currentUser?.uid
+            let coordinate = SplashCoordinate(userID: currentUser!, midCoordinate: location.coordinate, speed: location.speed, teamName: "Wolfpack", splashImageTag: 1)
+            
+            //push coordinate to firebase
+            self.currentRun.append(coordinate)
+            pushSplashToDatabase(coor: coordinate)
+//            let splash = SplashOverlay(park: coordinate)
+//            mapView.addOverlays([splash])
+        }
     }
 }
