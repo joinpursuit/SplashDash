@@ -296,10 +296,15 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
                             print("User ID: \(user?.uid)")
                             
                             let gameVC = GameViewController()
-                            let userInfoVC = UserInfoViewController()
+                            let bottomVC = BottomViewController()
                             let ishPullUpVC = ISHPullUpViewController()
-                            ishPullUpVC.contentViewController = gameVC
-                            ishPullUpVC.bottomViewController = userInfoVC
+                            ishPullUpVC.contentViewController = gameVC //content
+                            ishPullUpVC.bottomViewController = bottomVC // bottom
+                            
+                            bottomVC.pullUpController = ishPullUpVC
+                            ishPullUpVC.contentDelegate = gameVC
+                            ishPullUpVC.sizingDelegate = bottomVC
+                            ishPullUpVC.stateDelegate = bottomVC
                             
                             self.present(ishPullUpVC, animated: true, completion: nil)
                         })
