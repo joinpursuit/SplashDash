@@ -422,33 +422,38 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
     }()
     
     //need to replace this with a collectionview
-    lazy var stackview: UIStackView = {
-        let image1 = UIImage(named: "redLogo")
-        let imageView1 = UIImageView(image: image1)
-        imageView1.contentMode = .scaleAspectFill
-        imageView1.addShadows()
+//    lazy var stackview: UIStackView = {
+//        let image1 = UIImage(named: "redLogo")
+//        let imageView1 = UIImageView(image: image1)
+//        imageView1.contentMode = .scaleAspectFill
+//        imageView1.addShadows()
+//        
+//        let image2 = UIImage(named: "orangeLogo")
+//        let imageView2 = UIImageView(image: image2)
+//        imageView2.contentMode = .scaleAspectFill
+//        imageView2.addShadows()
+//        
+//        let image3 = UIImage(named: "greenLogo")
+//        let imageView3 = UIImageView(image: image3)
+//        imageView3.contentMode = .scaleAspectFill
+//        imageView3.addShadows()
+//        
+//        let image4 = UIImage(named: "purpleLogo")
+//        let imageView4 = UIImageView(image: image4)
+//        imageView4.contentMode = .scaleAspectFill
+//        imageView4.addShadows()
+//        
+//        let stackview = UIStackView(arrangedSubviews: [imageView1, imageView2, imageView3, imageView4])
+//        stackview.isUserInteractionEnabled = true
+//        stackview.axis = .horizontal
+//        stackview.spacing = 10.0
+//        stackview.distribution = .fillEqually
+//        
+//        return stackview
+//    }()
+    lazy var stackview: TeamStackView = {
+        let view = TeamStackView()
         
-        let image2 = UIImage(named: "orangeLogo")
-        let imageView2 = UIImageView(image: image2)
-        imageView2.contentMode = .scaleAspectFill
-        imageView2.addShadows()
-        
-        let image3 = UIImage(named: "greenLogo")
-        let imageView3 = UIImageView(image: image3)
-        imageView3.contentMode = .scaleAspectFill
-        imageView3.addShadows()
-        
-        let image4 = UIImage(named: "purpleLogo")
-        let imageView4 = UIImageView(image: image4)
-        imageView4.contentMode = .scaleAspectFill
-        imageView4.addShadows()
-        
-        let stackview = UIStackView(arrangedSubviews: [imageView1, imageView2, imageView3, imageView4])
-        stackview.isUserInteractionEnabled = true
-        stackview.axis = .horizontal
-        stackview.spacing = 10.0
-        stackview.distribution = .fillEqually
-        
-        return stackview
+        return view
     }()
 }
