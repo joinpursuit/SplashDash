@@ -16,7 +16,7 @@ class SplashCoordinate {
     let speed: Double
     let teamName: String
     let splashImageTag: Int
-    
+    //timestamp
     init(userID: String, midCoordinate: CLLocationCoordinate2D, speed: Double, teamName: String, splashImageTag: Int) {
         self.userID = userID
         self.midCoordinate = midCoordinate
@@ -25,8 +25,9 @@ class SplashCoordinate {
         self.splashImageTag = splashImageTag
     }
     
-    convenience init?(_ validDict: [String: AnyObject], userID: String) {
-        guard let speed = validDict["speed"] as? Double,
+    convenience init?(_ validDict: NSDictionary) {
+        guard let userID = validDict["userID"] as? String,
+            let speed = validDict["speed"] as? Double,
             let teamName = validDict["teamName"] as? String,
             let splashImageTag = validDict["splashImageTag"] as? Int,
             let longitude = validDict["longitude"] as? Double,

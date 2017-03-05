@@ -16,7 +16,7 @@ class GameViewController: UIViewController, ISHPullUpContentDelegate {
     let databaseReference = FIRDatabase.database().reference()
     
     var locationManager: CLLocationManager!
-    var historySplash: [SplashColor] = []
+    var currentRun: [SplashCoordinate] = []
     var gameStatus: Bool = false
     var isButtonsOffScreen: Bool = false
     
@@ -27,6 +27,7 @@ class GameViewController: UIViewController, ISHPullUpContentDelegate {
         configureConstraints()
         setupLocationManager()
         addGestures()
+        fetchGlobalSplash()
         mapView.preservesSuperviewLayoutMargins = true
     }
     
