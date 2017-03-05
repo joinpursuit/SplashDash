@@ -1,5 +1,5 @@
 //
-//  UserInfoViewController.swift
+//  BottomViewController.swift
 //  SplashDash
 //
 //  Created by Sabrina Ip on 3/2/17.
@@ -9,7 +9,7 @@
 import UIKit
 import ISHPullUp
 
-class UserInfoViewController: UIViewController, ISHPullUpSizingDelegate, ISHPullUpStateDelegate  {
+class BottomViewController: UIViewController, ISHPullUpSizingDelegate, ISHPullUpStateDelegate  {
     
     weak var pullUpController: ISHPullUpViewController!
     var uiv: UserInfoView!

@@ -38,6 +38,7 @@ class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource {
     func setupViewHierarchy() {
         self.addSubview(topView)
         topView.addSubview(topViewStatsLabel)
+        topView.addSubview(seperationLine)
         self.addSubview(historyLabel)
         self.addSubview(userHistoryTableView)
         self.addSubview(logoutButton)
@@ -48,6 +49,12 @@ class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource {
             view.leading.top.bottom.equalToSuperview().inset(8.0)
         }
 
+        seperationLine.snp.makeConstraints { (view) in
+            view.leading.trailing.equalToSuperview().inset(8.0)
+            view.height.equalTo(1.0)
+            view.top.equalTo(topView.snp.bottom)
+        }
+        
         topView.snp.makeConstraints { (view) in
             view.leading.trailing.top.equalToSuperview()
         }
@@ -107,6 +114,12 @@ class UserInfoView: UIView, UITableViewDelegate, UITableViewDataSource {
         label.textColor = SplashColor.lightPrimaryColor()
         label.numberOfLines = 0
         return label
+    }()
+    
+    private lazy var seperationLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = SplashColor.darkPrimaryColor()
+        return view
     }()
     
     private lazy var historyLabel: UILabel = {
