@@ -97,7 +97,6 @@ class BottomViewController: UIViewController, ISHPullUpSizingDelegate, ISHPullUp
         topView.snp.makeConstraints { (view) in
             view.leading.top.trailing.equalToSuperview()
         }
-
         
         contentCollectionView.snp.makeConstraints { (view) in
             view.leading.top.trailing.bottom.equalToSuperview().inset(8.0)
