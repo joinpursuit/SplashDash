@@ -19,13 +19,13 @@ class ContentCollectionView: UIView, UICollectionViewDelegate, UICollectionViewD
         self.configureConstraints()
         
         let tempView1 = UserRunHistoryView()
-        tempView1.backgroundColor = .green
-        let tempView2 = UIView()
+        tempView1.backgroundColor = .purple
+        let tempView2 = MapHistoryView()
         tempView2.backgroundColor = .red
         let tempView3 = UIView()
         tempView3.backgroundColor = .blue
         let tempView4 = UIView()
-        tempView4.backgroundColor = .purple
+        tempView4.backgroundColor = .green
         contentViews = [tempView1, tempView2, tempView3, tempView4]
     }
     
