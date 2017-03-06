@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 import Firebase
-import ISHPullUp
+//import ISHPullUp
 import TwicketSegmentedControl
 
 class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
@@ -329,18 +329,21 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
                             }
                             print("User ID: \(user?.uid)")
                             
+//                            let gameVC = GameViewController()
+//                            let bottomVC = BottomViewController()
+//                            let ishPullUpVC = ISHPullUpViewController()
+//                            ishPullUpVC.contentViewController = gameVC //content
+//                            ishPullUpVC.bottomViewController = bottomVC // bottom
+//                            
+//                            bottomVC.pullUpController = ishPullUpVC
+//                            ishPullUpVC.contentDelegate = gameVC
+//                            ishPullUpVC.sizingDelegate = bottomVC
+//                            ishPullUpVC.stateDelegate = bottomVC
+//                            
+//                            self.present(ishPullUpVC, animated: true, completion: nil)
+                            
                             let gameVC = GameViewController()
-                            let bottomVC = BottomViewController()
-                            let ishPullUpVC = ISHPullUpViewController()
-                            ishPullUpVC.contentViewController = gameVC //content
-                            ishPullUpVC.bottomViewController = bottomVC // bottom
-                            
-                            bottomVC.pullUpController = ishPullUpVC
-                            ishPullUpVC.contentDelegate = gameVC
-                            ishPullUpVC.sizingDelegate = bottomVC
-                            ishPullUpVC.stateDelegate = bottomVC
-                            
-                            self.present(ishPullUpVC, animated: true, completion: nil)
+                            self.present(gameVC, animated: true, completion: nil)
                         })
         })
     }

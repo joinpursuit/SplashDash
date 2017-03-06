@@ -12,7 +12,8 @@ import MapKit
 
 extension GameViewController{
     
-    func updateGameStatus(){
+//    func updateGameStatus(){
+    func startButtonTapped() {
         if self.gameStatus{
             gameButton.setTitle("Start", for: .normal)
         }else{

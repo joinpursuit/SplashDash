@@ -12,16 +12,22 @@ import SnapKit
 extension GameViewController{
     
     func configureConstraints(){
-        rootView.snp.remakeConstraints { (view) in
-            view.top.bottom.leading.trailing.equalToSuperview()
-        }
-        
         mapView.snp.remakeConstraints { (view) in
             view.top.bottom.leading.trailing.equalToSuperview()
         }
         
+        bottomRootView.snp.remakeConstraints { (view) in
+            view.leading.trailing.equalToSuperview()
+            view.height.equalToSuperview()
+            view.top.equalTo(self.view.snp.bottom).inset(100.0)
+        }
+        
+        bottomView.snp.remakeConstraints { (view) in
+            view.leading.top.trailing.bottom.equalToSuperview()
+        }
+        
         gameButton.snp.remakeConstraints { (view) in
-            view.bottom.equalToSuperview().offset(-80)
+            view.bottom.equalTo(bottomRootView.snp.top).offset(-30)
             view.trailing.equalToSuperview().offset(-30)
             view.size.equalTo(CGSize(width: 70, height: 70))
         }
