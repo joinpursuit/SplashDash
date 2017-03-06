@@ -28,6 +28,7 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
         setUpViewHierarchy()
         
         usernameTextField.isHidden = true
+        stackview.isHidden = true
         self.usernameTextField.alpha = 0
         configureConstraints()
         
@@ -46,6 +47,7 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
         self.view.addSubview(passwordTextField)
         self.view.addSubview(loginRegisterButton)
         self.view.addSubview(hiddenLabel)
+        self.view.addSubview(stackview)
     }
     
     func configureConstraints() {
@@ -114,6 +116,12 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
             view.centerX.equalToSuperview()
         }
         
+        //stackview
+        stackview.snp.makeConstraints { (view) in
+            view.center.equalToSuperview()
+            view.size.equalTo(CGSize(width: 1, height: 1))
+        }
+        
     }
     
     func setUpTwicketSegmentedControl() {
@@ -165,6 +173,18 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
                     view.centerX.equalToSuperview()
                 }
                 
+                self.stackview.isHidden = true
+                self.stackview.snp.remakeConstraints { (view) in
+                    view.center.equalToSuperview()
+                    view.size.equalTo(CGSize(width: 1, height: 1))
+                }
+                
+                self.loginRegisterButton.snp.remakeConstraints { (view) in
+                    view.top.equalTo(self.passwordTextField.snp.bottom).offset(25)
+                    view.width.equalToSuperview().multipliedBy(0.6)
+                    view.centerX.equalToSuperview()
+                }
+                
                 self.view.layoutIfNeeded()
             }
         }
@@ -173,7 +193,7 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
                 self.containerView.snp.remakeConstraints({ (view) in
                     view.centerX.equalToSuperview()
                     view.centerY.equalToSuperview().offset(10)
-                    view.height.equalToSuperview().multipliedBy(0.55)
+                    view.height.equalToSuperview().multipliedBy(0.65)
                     view.width.equalToSuperview().multipliedBy(0.8)
                 })
                 
@@ -191,6 +211,20 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
                     view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
                     view.centerX.equalToSuperview()
                 }
+                
+                self.stackview.isHidden = false
+                self.stackview.snp.remakeConstraints({ (view) in
+                    view.top.equalTo(self.passwordTextField.snp.bottom).offset(20)
+                    view.height.equalTo(30)
+                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
+                    view.centerX.equalToSuperview()
+                })
+                
+                self.loginRegisterButton.snp.remakeConstraints({ (view) in
+                    view.top.equalTo(self.stackview.snp.bottom).offset(20)
+                    view.width.equalToSuperview().multipliedBy(0.6)
+                    view.centerX.equalToSuperview()
+                })
                 
                 self.emailTextField.textField.text = ""
                 self.usernameTextField.textField.text = ""
@@ -385,5 +419,41 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
         label.textColor = SplashColor.primaryColor()
         
         return label
+    }()
+    
+    //need to replace this with a collectionview
+//    lazy var stackview: UIStackView = {
+//        let image1 = UIImage(named: "redLogo")
+//        let imageView1 = UIImageView(image: image1)
+//        imageView1.contentMode = .scaleAspectFill
+//        imageView1.addShadows()
+//        
+//        let image2 = UIImage(named: "orangeLogo")
+//        let imageView2 = UIImageView(image: image2)
+//        imageView2.contentMode = .scaleAspectFill
+//        imageView2.addShadows()
+//        
+//        let image3 = UIImage(named: "greenLogo")
+//        let imageView3 = UIImageView(image: image3)
+//        imageView3.contentMode = .scaleAspectFill
+//        imageView3.addShadows()
+//        
+//        let image4 = UIImage(named: "purpleLogo")
+//        let imageView4 = UIImageView(image: image4)
+//        imageView4.contentMode = .scaleAspectFill
+//        imageView4.addShadows()
+//        
+//        let stackview = UIStackView(arrangedSubviews: [imageView1, imageView2, imageView3, imageView4])
+//        stackview.isUserInteractionEnabled = true
+//        stackview.axis = .horizontal
+//        stackview.spacing = 10.0
+//        stackview.distribution = .fillEqually
+//        
+//        return stackview
+//    }()
+    lazy var stackview: TeamStackView = {
+        let view = TeamStackView()
+        
+        return view
     }()
 }
