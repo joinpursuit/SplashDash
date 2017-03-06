@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 extension GameViewController{
 
@@ -21,6 +22,8 @@ extension GameViewController{
             switch (tapGesture.numberOfTapsRequired, tapGesture.numberOfTouchesRequired) {
             case (1, 1):
                 print("Heck yea I was tapped")
+                
+                takeScreenshot()
                 self.animateAllButtons()
             default:
                 print("tap type was wrong!")
