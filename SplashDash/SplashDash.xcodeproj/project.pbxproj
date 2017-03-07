@@ -22,6 +22,8 @@
 		06B239D91E68AEA90071E17F /* SplashOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239D81E68AEA90071E17F /* SplashOverlayView.swift */; };
 		06B239DB1E68BFBB0071E17F /* GE+Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239DA1E68BFBB0071E17F /* GE+Firebase.swift */; };
 		06B239DD1E68CD670071E17F /* GE+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239DC1E68CD670071E17F /* GE+Gesture.swift */; };
+		4714581E1E6DF74F00467881 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4714581D1E6DF74F00467881 /* User.swift */; };
+		471458201E6DF98A00467881 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4714581F1E6DF98A00467881 /* Run.swift */; };
 		474371781E6A29CE00391AF2 /* SplashDashTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474371771E6A29CE00391AF2 /* SplashDashTextField.swift */; };
 		4743717A1E6CD47000391AF2 /* TeamStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474371791E6CD47000391AF2 /* TeamStackView.swift */; };
 		47F56CF21E68857E007375BB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F56CF11E68857E007375BB /* UIView+Extension.swift */; };
@@ -58,6 +60,8 @@
 		06B239DC1E68CD670071E17F /* GE+Gesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GE+Gesture.swift"; sourceTree = "<group>"; };
 		0C80B4BD563B9DC1864891EC /* Pods-SplashDash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplashDash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash.debug.xcconfig"; sourceTree = "<group>"; };
 		3F78CA657B60F10014BFB3DE /* Pods-SplashDash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplashDash.release.xcconfig"; path = "Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash.release.xcconfig"; sourceTree = "<group>"; };
+		4714581D1E6DF74F00467881 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4714581F1E6DF98A00467881 /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		474371771E6A29CE00391AF2 /* SplashDashTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashDashTextField.swift; sourceTree = "<group>"; };
 		474371791E6CD47000391AF2 /* TeamStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamStackView.swift; sourceTree = "<group>"; };
 		47F56CF11E68857E007375BB /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -133,6 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				06B239D61E6888840071E17F /* SplashCoordinate.swift */,
+				4714581D1E6DF74F00467881 /* User.swift */,
+				4714581F1E6DF98A00467881 /* Run.swift */,
 				4B235F031E6DE6900079D2A0 /* CustomDelegates.swift */,
 			);
 			name = Models;
@@ -338,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06B239DD1E68CD670071E17F /* GE+Gesture.swift in Sources */,
+				471458201E6DF98A00467881 /* Run.swift in Sources */,
 				06B239CD1E6762140071E17F /* File.swift in Sources */,
 				47F56CF41E69FB70007375BB /* HomeViewController.swift in Sources */,
 				4B235F0A1E6E16E30079D2A0 /* BottomView.swift in Sources */,
@@ -361,6 +368,7 @@
 				06B239C71E675A640071E17F /* GameViewController.swift in Sources */,
 				4B9BF6C71E67758900EA0410 /* SplashColor.swift in Sources */,
 				4B9BF6C11E6763D700EA0410 /* UserRunHistoryView.swift in Sources */,
+				4714581E1E6DF74F00467881 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

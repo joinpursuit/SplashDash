@@ -27,7 +27,7 @@ extension GameViewController: CLLocationManagerDelegate{
         print(location.coordinate.latitude)
         print(location.coordinate.longitude)
         print(location.speed)
-        print(location.timestamp.timeIntervalSince1970)
+        print(location.timestamp)
         print("")
         //the average human can run at the speed of 15 miles per hour for short periods of time.
         if self.gameStatus{
