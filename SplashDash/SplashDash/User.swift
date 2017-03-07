@@ -14,7 +14,7 @@ class User {
     let username: String
     let uid: String
     let teamName: String
-    let runs: [Run]
+    var runs: [Run]
     
     //MARK: - Initializer
     init(email: String, username: String, uid: String, teamName: String, runs: [Run]) {
@@ -23,5 +23,14 @@ class User {
         self.uid = uid
         self.teamName = teamName
         self.runs = runs
+    }
+    
+    //MARK: - Methods
+    func toData() -> [String: Any]{
+        return ["email": self.email,
+                "username": self.username,
+                "uid": self.uid,
+                "teamName": self.teamName,
+                "runs": []] as [String: Any]
     }
 }
