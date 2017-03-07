@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 extension HomeViewController{
-    override func viewDidAppear(_ animated: Bool) {
-        emailTextField.textField.text = "h@h.com"
-        passwordTextField.textField.text = "000000"
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        emailTextField.textField.text = "h@h.com"
+//        passwordTextField.textField.text = "000000"
+//    }
 }
