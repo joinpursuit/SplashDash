@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		061074E41E6E5E5B00F665A0 /* CentralParkRun.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074DD1E6E5E5B00F665A0 /* CentralParkRun.gpx */; };
+		061074E51E6E5E5B00F665A0 /* EastRiverRun.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074DE1E6E5E5B00F665A0 /* EastRiverRun.gpx */; };
+		061074E61E6E5E5B00F665A0 /* HudsonRiverRun.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074DF1E6E5E5B00F665A0 /* HudsonRiverRun.gpx */; };
+		061074E71E6E5E5B00F665A0 /* SquarespaceRun_1.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074E01E6E5E5B00F665A0 /* SquarespaceRun_1.gpx */; };
+		061074E81E6E5E5B00F665A0 /* SquarespaceRun_2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074E11E6E5E5B00F665A0 /* SquarespaceRun_2.gpx */; };
+		061074E91E6E5E5B00F665A0 /* SquarespaceRun_3.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074E21E6E5E5B00F665A0 /* SquarespaceRun_3.gpx */; };
+		061074EA1E6E5E5B00F665A0 /* SquarespaceRun_4.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074E31E6E5E5B00F665A0 /* SquarespaceRun_4.gpx */; };
 		06B239AD1E66127B0071E17F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239AC1E66127B0071E17F /* AppDelegate.swift */; };
 		06B239B21E66127B0071E17F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B01E66127B0071E17F /* Main.storyboard */; };
 		06B239B41E66127B0071E17F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B31E66127B0071E17F /* Assets.xcassets */; };
@@ -41,6 +48,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		061074DD1E6E5E5B00F665A0 /* CentralParkRun.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = CentralParkRun.gpx; sourceTree = "<group>"; };
+		061074DE1E6E5E5B00F665A0 /* EastRiverRun.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = EastRiverRun.gpx; sourceTree = "<group>"; };
+		061074DF1E6E5E5B00F665A0 /* HudsonRiverRun.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = HudsonRiverRun.gpx; sourceTree = "<group>"; };
+		061074E01E6E5E5B00F665A0 /* SquarespaceRun_1.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_1.gpx; sourceTree = "<group>"; };
+		061074E11E6E5E5B00F665A0 /* SquarespaceRun_2.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_2.gpx; sourceTree = "<group>"; };
+		061074E21E6E5E5B00F665A0 /* SquarespaceRun_3.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_3.gpx; sourceTree = "<group>"; };
+		061074E31E6E5E5B00F665A0 /* SquarespaceRun_4.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_4.gpx; sourceTree = "<group>"; };
 		06B239A91E66127B0071E17F /* SplashDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SplashDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06B239AC1E66127B0071E17F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06B239B11E66127B0071E17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -90,6 +104,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		061074DC1E6E5E3D00F665A0 /* GPX files */ = {
+			isa = PBXGroup;
+			children = (
+				061074DD1E6E5E5B00F665A0 /* CentralParkRun.gpx */,
+				061074DE1E6E5E5B00F665A0 /* EastRiverRun.gpx */,
+				061074DF1E6E5E5B00F665A0 /* HudsonRiverRun.gpx */,
+				061074E01E6E5E5B00F665A0 /* SquarespaceRun_1.gpx */,
+				061074E11E6E5E5B00F665A0 /* SquarespaceRun_2.gpx */,
+				061074E21E6E5E5B00F665A0 /* SquarespaceRun_3.gpx */,
+				061074E31E6E5E5B00F665A0 /* SquarespaceRun_4.gpx */,
+			);
+			name = "GPX files";
+			sourceTree = "<group>";
+		};
 		06B239A01E66127B0071E17F = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				06B239AC1E66127B0071E17F /* AppDelegate.swift */,
+				061074DC1E6E5E3D00F665A0 /* GPX files */,
 				06B239C11E6759FB0071E17F /* Managers */,
 				06B239C01E6759F30071E17F /* Models */,
 				06B239BE1E6759DD0071E17F /* View Controllers */,
@@ -281,10 +310,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				061074E41E6E5E5B00F665A0 /* CentralParkRun.gpx in Resources */,
+				061074E91E6E5E5B00F665A0 /* SquarespaceRun_3.gpx in Resources */,
+				061074EA1E6E5E5B00F665A0 /* SquarespaceRun_4.gpx in Resources */,
+				061074E81E6E5E5B00F665A0 /* SquarespaceRun_2.gpx in Resources */,
 				06B239B71E66127B0071E17F /* LaunchScreen.storyboard in Resources */,
 				06B239CB1E675BC20071E17F /* GoogleService-Info.plist in Resources */,
+				061074E71E6E5E5B00F665A0 /* SquarespaceRun_1.gpx in Resources */,
 				06B239B41E66127B0071E17F /* Assets.xcassets in Resources */,
+				061074E61E6E5E5B00F665A0 /* HudsonRiverRun.gpx in Resources */,
 				06B239B21E66127B0071E17F /* Main.storyboard in Resources */,
+				061074E51E6E5E5B00F665A0 /* EastRiverRun.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
