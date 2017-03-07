@@ -29,6 +29,8 @@ class GameViewController: UIViewController {
         addGestures()
         fetchGlobalSplash()
         mapView.preservesSuperviewLayoutMargins = true
+        
+//        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateLabel), userInfo: nil, repeats:true);
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,11 +70,13 @@ class GameViewController: UIViewController {
     // MARK: - Setup
     
     func setupViewHierarchy(){
+
         self.view.addSubview(mapView)
         self.view.addSubview(bottomRootView)
         self.bottomRootView.addSubview(bottomView)
         self.view.addSubview(gameButton)
         self.view.addSubview(findMeButton)
+        self.view.addSubview(countDownLabel)
     }
     
     func configureConstraints(){
@@ -106,6 +110,12 @@ class GameViewController: UIViewController {
             view.trailing.equalTo(gameButton)
             view.bottom.equalTo(gameButton.snp.top).offset(-40)
             view.size.equalTo(CGSize(width: 70, height: 70))
+        }
+        
+        countDownLabel.snp.remakeConstraints { (view) in
+            view.top.equalToSuperview().offset(40)
+            view.trailing.equalToSuperview().offset(-30)
+            
         }
     }
     
@@ -146,6 +156,12 @@ class GameViewController: UIViewController {
         button.addShadows()
         button.addTarget(self, action: #selector(toCurrentLocation), for: .touchUpInside)
         return button
+    }()
+    
+    lazy var countDownLabel: UILabel = {
+        let view = UILabel()
+        view.font = UIFont.boldSystemFont(ofSize: 20)
+        return view
     }()
     
     lazy var bottomRootView: UIView = {
