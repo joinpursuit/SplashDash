@@ -17,6 +17,8 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
     var tapGestureRecognizer: UITapGestureRecognizer!
     var segmentedControl: TwicketSegmentedControl!
     
+    var databaseReference = FIRDatabase.database().reference()
+    
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -276,9 +278,8 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
                             self.loginRegisterButton.transform = CGAffineTransform.identity
                         }
                         
-                        //WE ARE CURRENTLY NOT USING THE USERNAME FOR ANYTHING
-                        
                         guard let email = self.emailTextField.textField.text,
+                            let username = self.usernameTextField.textField.text,
                             let password = self.passwordTextField.textField.text,
                             email != "",
                             password != "" else {
@@ -293,9 +294,10 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
                                 return
                             }
                             
-                            //create User object
-                            print("User ID: \(user?.uid)")
-                            print("Registered and logged in new user.")
+                            //Still need to determine teamName logic and create each of these objects with an empty runs array
+                            let uid = user?.uid
+                            let newUser = User(email: email, username: username, uid: uid!, teamName: "PLACEHOLDER", runs: [])
+                            self.addUserToDatabase(newUser: newUser)
                             
                             self.present(GameViewController(), animated: true, completion: nil)
                         })
@@ -348,13 +350,19 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
         })
     }
     
+    func addUserToDatabase(newUser: User){
+        self.databaseReference = databaseReference.child("Users").childByAutoId()
+        let data = newUser.toData()
+        databaseReference.setValue(data)
+    }
+    
     //MARK: - Lazy Instantiation
     lazy var containerView: UIView = {
         let view = UIView()
         
         //Use color manager to change the backgroundColor to the color determined by Sabrina and design mentor.
         view.backgroundColor = SplashColor.lightPrimaryColor()
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = 12
         view.addShadows()
         
         return view
@@ -408,7 +416,7 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
         button.layer.borderWidth = 2.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.layer.borderColor = SplashColor.primaryColor().cgColor
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 5
         button.addShadows()
         button.addTarget(self, action: #selector(loginRegisterButtonPressed), for: .touchUpInside)
         
