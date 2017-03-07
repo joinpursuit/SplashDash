@@ -47,4 +47,33 @@ extension GameViewController{
         }, completion: nil)
     }
     
+    // MARK: - Pan Gesture Recognizer
+    
+    // 105 is an arbitrary number
+    func handlePan(_ gestureRecognizer: UIPanGestureRecognizer, spacing: CGFloat = 105) {
+        let spacing = bottomView.topView.frame.height
+        
+        guard let movingView = gestureRecognizer.view else { return }
+        
+        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+            let translation = gestureRecognizer.translation(in: self.view)
+            if movingView.center.y - movingView.frame.height/2 < spacing {
+                
+                movingView.center = CGPoint(x: movingView.center.x, y: spacing + movingView.frame.height/2)
+                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+                
+                return }
+            
+            if movingView.center.y - movingView.frame.height/2 > self.view.frame.height - spacing {
+                
+                movingView.center = CGPoint(x: movingView.center.x, y: self.view.frame.height + movingView.frame.height/2 - spacing)
+                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+                
+                return
+            }
+            
+            movingView.center = CGPoint(x: movingView.center.x, y: movingView.center.y + translation.y)
+            gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+        }
+    }
 }

@@ -33,46 +33,22 @@ class GameViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.bottomRootView.clipsToBounds = true
+        self.bottomCorneredContainerView.clipsToBounds = true
     }
     
-    // MARK: - Actions
-    
-    // 105 is an arbitrary number
-    func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
-        let topViewHeight = bottomView.topView.frame.height
-        
-        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
-            let translation = gestureRecognizer.translation(in: self.view)
-            // note: 'view' is optional and need to be unwrapped
-            if gestureRecognizer.view!.center.y - gestureRecognizer.view!.frame.height/2 < topViewHeight {
-                
-                gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: topViewHeight + gestureRecognizer.view!.frame.height/2)
-                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
-                
-                return }
-            
-            if gestureRecognizer.view!.center.y - gestureRecognizer.view!.frame.height/2 > self.view.frame.height - topViewHeight {
-                
-                gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: self.view.frame.height + gestureRecognizer.view!.frame.height/2 - topViewHeight)
-                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
-                
-                return
-            }
-            
-            gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: gestureRecognizer.view!.center.y + translation.y)
-            gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
-        }
-    }
+
 
     // MARK: - Setup
     
     func setupViewHierarchy(){
         self.view.addSubview(mapView)
         self.view.addSubview(bottomRootView)
-        self.bottomRootView.addSubview(bottomView)
-        self.view.addSubview(gameButton)
-        self.view.addSubview(findMeButton)
+        self.bottomRootView.addSubview(bottomCorneredContainerView)
+        self.bottomCorneredContainerView.addSubview(bottomView)
+        self.bottomRootView.addSubview(gameButton)
+        self.bottomRootView.addSubview(findMeButton)
+        //        self.view.addSubview(gameButton)
+        //        self.view.addSubview(findMeButton)
     }
     
     func configureConstraints(){
@@ -80,15 +56,17 @@ class GameViewController: UIViewController {
             view.top.bottom.leading.trailing.equalToSuperview()
         }
         
-        
         bottomRootView.snp.remakeConstraints { (view) in
             view.leading.trailing.equalToSuperview()
-            
             // TO DO: calculate offsets to topView.height
             view.height.equalToSuperview().offset(-30)
             view.top.equalTo(self.view.snp.bottom).inset(100.0)
 //            print("bottomView.topView.frame.height \(bottomView.topView.frame.height)")
 //            view.top.equalTo(self.view.snp.bottom).inset(bottomView.topView.frame.height)
+        }
+        
+        bottomCorneredContainerView.snp.remakeConstraints { (view) in
+            view.leading.top.trailing.bottom.equalToSuperview()
         }
         
         bottomView.snp.remakeConstraints { (view) in
@@ -97,11 +75,11 @@ class GameViewController: UIViewController {
         
         gameButton.snp.remakeConstraints { (view) in
             // view.bottom.equalTo(bottomRootView.snp.top).offset(-30)
-            view.centerY.equalTo(bottomRootView.snp.top)
+            view.centerY.equalTo(bottomCorneredContainerView.snp.top)
             view.trailing.equalToSuperview().offset(-30)
             view.size.equalTo(CGSize(width: 70, height: 70))
         }
-        
+
         findMeButton.snp.remakeConstraints { (view) in
             view.trailing.equalTo(gameButton)
             view.bottom.equalTo(gameButton.snp.top).offset(-40)
@@ -150,11 +128,19 @@ class GameViewController: UIViewController {
     
     lazy var bottomRootView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
-        view.alpha = 0.95
-        view.layer.cornerRadius = 10.0
+        view.backgroundColor = .clear
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         view.addGestureRecognizer(gestureRecognizer)
+        return view
+    }()
+    
+    lazy var bottomCorneredContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+//        view.alpha = 0.95
+        view.layer.cornerRadius = 10.0
+//        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+//        view.addGestureRecognizer(gestureRecognizer)
         return view
     }()
     
