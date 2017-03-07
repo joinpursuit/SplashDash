@@ -13,7 +13,7 @@ import Firebase
 
 class GameViewController: UIViewController {
     
-    let databaseReference = FIRDatabase.database().reference()
+    let databaseReference = FIRDatabase.database().reference().child("Public")
     
     var locationManager: CLLocationManager!
     var currentRun: [SplashCoordinate] = []
@@ -30,7 +30,7 @@ class GameViewController: UIViewController {
         fetchGlobalSplash()
         mapView.preservesSuperviewLayoutMargins = true
         
-//        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateLabel), userInfo: nil, repeats:true);
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateLabel), userInfo: nil, repeats:true);
     }
     
     override func viewWillAppear(_ animated: Bool) {

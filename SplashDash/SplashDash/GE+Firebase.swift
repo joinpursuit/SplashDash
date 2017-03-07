@@ -11,8 +11,17 @@ import Firebase
 
 extension GameViewController{
     
+    func getRootName() -> String{
+        let format = DateFormatter()
+        format.dateFormat = "yyyyMMdd"
+        return format.string(from: Date())
+    }
+    
     func fetchGlobalSplash(){
-        let linkRef = databaseReference.child("Public")
+        let format = DateFormatter()
+        format.dateFormat = "yyyyMMdd"
+        
+        let linkRef = databaseReference.child(getRootName())
         
         linkRef.observe(FIRDataEventType.childAdded, with: { (snapshot) in
             if let value = snapshot.value as? NSDictionary{
@@ -23,22 +32,11 @@ extension GameViewController{
                     self.mapView.addOverlays([splash])
                 }
             }
-            
-            //            for child in snapshot.children{
-//                if let snap = child as? FIRDataSnapshot, let valueDict = snap.value as? [String:AnyObject]{
-//                    
-//                    if let coor = SplashCoordinate(valueDict){
-//                        //draw all splashes parsed from database
-//                        let splash = SplashOverlay(park: coor)
-//                        self.mapView.addOverlays([splash])
-//                    }
-//                }
-//            }
         })
     }
     
     func pushSplashToDatabase(coor: SplashCoordinate){
-        let linkRef = databaseReference.child("Public").childByAutoId()
+        let linkRef = databaseReference.child(getRootName()).childByAutoId()
         let data = coor.toData()
         
         linkRef.setValue(data) { (error, _) in
