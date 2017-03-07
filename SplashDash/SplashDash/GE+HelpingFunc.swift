@@ -61,7 +61,7 @@ extension GameViewController{
     }
     
     func colorArray(image: UIImage) {
-        var result: [UIColor: Int] = [:]
+//        var result: [UIColor: Int] = [:]
         
         let img = image.cgImage!
         let width = img.width
@@ -83,14 +83,26 @@ extension GameViewController{
                 let red   = CGFloat(rawData[byteIndex]    ) / 255.0
                 let green = CGFloat(rawData[byteIndex + 1]) / 255.0
                 let blue  = CGFloat(rawData[byteIndex + 2]) / 255.0
-                let alpha = CGFloat(rawData[byteIndex + 3]) / 255.0
+//                let alpha = CGFloat(rawData[byteIndex + 3]) / 255.0
                 
-                print("\(red), \(green), \(blue), \(alpha)")
+                print("\(red), \(green), \(blue)")
 //                let color = UIColor(red: red, green: green, blue: blue, alpha: alpha)
 //                result[color] = (result[color] ?? 0) + 1
             }
         }
 //        print(result)
         
+    }
+    
+    func updateLabel() {
+        
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        let end = Calendar.current.date(byAdding: components, to: Calendar.current.startOfDay(for: Date()))
+
+        let diff = Calendar.current.dateComponents([Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: Date(), to: end!)
+        
+        countDownLabel.text = "\(diff.hour!):\(diff.minute!):\(diff.second!)"
     }
 }

@@ -31,5 +31,11 @@ extension GameViewController{
             view.bottom.equalTo(gameButton.snp.top).offset(-40)
             view.size.equalTo(CGSize(width: 70, height: 70))
         }
+        
+        countDownLabel.snp.remakeConstraints { (view) in
+            view.top.equalToSuperview().offset(40)
+            view.trailing.equalToSuperview().offset(-30)
+            
+        }
     }
 }

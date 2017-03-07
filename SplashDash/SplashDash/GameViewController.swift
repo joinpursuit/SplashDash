@@ -15,6 +15,8 @@ class GameViewController: UIViewController, ISHPullUpContentDelegate {
 
     let databaseReference = FIRDatabase.database().reference()
     
+    let dateFormatter = DateFormatter()
+    
     var locationManager: CLLocationManager!
     var currentRun: [SplashCoordinate] = []
     var gameStatus: Bool = false
@@ -29,6 +31,9 @@ class GameViewController: UIViewController, ISHPullUpContentDelegate {
         addGestures()
         fetchGlobalSplash()
         mapView.preservesSuperviewLayoutMargins = true
+        
+        dateFormatter.dateFormat = "HH:mm:ss"
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateLabel), userInfo: nil, repeats:true);
     }
     
     // MARK: ISHPullUpContentDelegate
@@ -48,6 +53,7 @@ class GameViewController: UIViewController, ISHPullUpContentDelegate {
         self.rootView.addSubview(mapView)
         self.rootView.addSubview(gameButton)
         self.rootView.addSubview(findMeButton)
+        self.rootView.addSubview(countDownLabel)
     }
     
     //MARK: - Lazy inits
@@ -92,6 +98,12 @@ class GameViewController: UIViewController, ISHPullUpContentDelegate {
         button.addShadows()
         button.addTarget(self, action: #selector(toCurrentLocation), for: .touchUpInside)
         return button
+    }()
+    
+    lazy var countDownLabel: UILabel = {
+        let view = UILabel()
+        view.font = UIFont.boldSystemFont(ofSize: 20)
+        return view
     }()
 }
 
