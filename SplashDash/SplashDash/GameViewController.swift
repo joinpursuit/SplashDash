@@ -13,7 +13,7 @@ import Firebase
 
 class GameViewController: UIViewController {
     
-    let databaseReference = FIRDatabase.database().reference()
+    let databaseReference = FIRDatabase.database().reference().child("Public")
     
     var locationManager: CLLocationManager!
     var currentRun: [SplashCoordinate] = []
