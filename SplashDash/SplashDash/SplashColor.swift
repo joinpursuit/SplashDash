@@ -33,11 +33,16 @@ struct SplashColor {
 //        "darkPrimaryColor" : "7190d9",
 //        "primaryColor" : "d97181",
 //        "lightPrimaryColor" : "d9d071",
-        "darkPrimaryColor" : "cc8975",
-        "primaryColor" : "9d75cc",
-        "lightPrimaryColor" : "a3cc75",
+        "darkPrimaryColor" : "F45D4C",
+        "primaryColor" : "A1DBB2",
+        "lightPrimaryColor" : "FEE5AD",
         "primaryTextColor" : "FFFFFF",
         "secondaryTextColor" : "727272",
+        
+        "purpleTeamColor" : "673AB7",
+        "tealTeamColor" : "00BCD4",
+        "greenTeamColor" : "4CAF50",
+        "orangeTeamColor" : "FF5722"
     ]
     
     static func darkPrimaryColor(alpha: CGFloat = 1.0) -> UIColor {
