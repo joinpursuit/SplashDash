@@ -170,7 +170,7 @@ open class TwicketSegmentedControl: UIControl {
         selectedContainerView.frame = frame
         sliderView.frame = CGRect(x: 0, y: 0, width: segmentWidth, height: backgroundView.frame.height)
 
-        let cornerRadius = backgroundView.frame.height / 2
+        let cornerRadius = backgroundView.frame.height / 4
         [backgroundView, selectedContainerView].forEach { $0.layer.cornerRadius = cornerRadius }
         sliderView.cornerRadius = cornerRadius
 

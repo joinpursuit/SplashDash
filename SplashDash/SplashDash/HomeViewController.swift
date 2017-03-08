@@ -41,7 +41,6 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
     //MARK: - Set Up Views and Constraints
     func setUpViewHierarchy() {
         self.view.addSubview(containerView)
-        self.view.addSubview(logoContainerView)
         self.view.addSubview(splashDashLogoImageView)
         self.view.addSubview(segmentedControl)
         self.view.addSubview(emailTextField)
@@ -56,68 +55,62 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
         //containerView
         containerView.snp.makeConstraints { (view) in
             view.centerX.equalToSuperview()
-            view.centerY.equalToSuperview().offset(10)
-            view.height.equalToSuperview().multipliedBy(0.48)
-            view.width.equalToSuperview().multipliedBy(0.8)
-        }
-        
-        //logoContainerview
-        logoContainerView.snp.makeConstraints { (view) in
-            view.size.equalTo(CGSize(width: 150, height: 150))
-            view.centerX.equalToSuperview()
-            view.centerY.equalTo(containerView.snp.top)
-            
+            view.centerY.equalToSuperview()
+            view.height.equalToSuperview().multipliedBy(0.73)
+            view.width.equalToSuperview().multipliedBy(0.85)
         }
         
         //splashDashLogoImageView
         splashDashLogoImageView.snp.makeConstraints { (view) in
-            view.size.equalTo(CGSize(width: 110, height: 110))
-            view.centerX.equalTo(logoContainerView.snp.centerX)
-            view.centerY.equalTo(logoContainerView.snp.centerY)
+            view.width.equalTo(self.view.snp.width).multipliedBy(0.40)
+            view.height.equalTo(self.view.snp.height).multipliedBy(0.22)
+            view.centerX.equalTo(self.view.snp.centerX)
+            view.top.equalTo(self.containerView.snp.top).offset(50)
+            
         }
         
         //segmentedControl
         segmentedControl.snp.makeConstraints { (view) in
-            view.top.equalTo(logoContainerView.snp.bottom).offset(15)
+            view.top.equalTo(self.splashDashLogoImageView.snp.bottom).offset(30)
             view.height.equalTo(emailTextField.snp.height)
-            view.width.equalTo(containerView.snp.width).multipliedBy(0.8)
+            view.width.equalTo(containerView.snp.width).multipliedBy(0.85)
             view.centerX.equalToSuperview()
         }
-        
+
         //emailTextField
         emailTextField.snp.makeConstraints { (view) in
-            view.top.equalTo(segmentedControl.snp.bottom).offset(20)
-            view.width.equalTo(containerView.snp.width).multipliedBy(0.8)
+            view.top.equalTo(segmentedControl.snp.bottom).offset(30)
+            view.width.equalTo(containerView.snp.width).multipliedBy(0.9)
             view.centerX.equalToSuperview()
         }
-        
+
         //usernameTextField
         usernameTextField.snp.makeConstraints { (view) in
             view.center.equalToSuperview()
             view.size.equalTo(CGSize(width: 1, height: 1))
         }
-        
+
         //passwordTextField
         passwordTextField.snp.makeConstraints { (view) in
-            view.top.equalTo(emailTextField.snp.bottom).offset(20)
-            view.width.equalTo(containerView.snp.width).multipliedBy(0.8)
+            view.top.equalTo(emailTextField.snp.bottom).offset(30)
+            view.width.equalTo(containerView.snp.width).multipliedBy(0.9)
             view.centerX.equalToSuperview()
         }
-        
+
         //loginRegisterButton
         loginRegisterButton.snp.makeConstraints { (view) in
-            view.top.equalTo(passwordTextField.snp.bottom).offset(25)
+            view.top.equalTo(passwordTextField.snp.bottom).offset(30)
             view.width.equalToSuperview().multipliedBy(0.6)
             view.centerX.equalToSuperview()
         }
-        
+
         ///hiddenLabel
         hiddenLabel.snp.makeConstraints { (view) in
             view.top.equalTo(loginRegisterButton.snp.bottom).offset(8.0)
             view.width.equalToSuperview().multipliedBy(0.6)
             view.centerX.equalToSuperview()
         }
-        
+
         //stackview
         stackview.snp.makeConstraints { (view) in
             view.center.equalToSuperview()
@@ -157,9 +150,15 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
             animator.addAnimations {
                 self.containerView.snp.remakeConstraints { (view) in
                     view.centerX.equalToSuperview()
-                    view.centerY.equalToSuperview().offset(10)
-                    view.height.equalToSuperview().multipliedBy(0.48)
-                    view.width.equalToSuperview().multipliedBy(0.8)
+                    view.centerY.equalToSuperview()
+                    view.height.equalToSuperview().multipliedBy(0.73)
+                    view.width.equalToSuperview().multipliedBy(0.85)
+                }
+                
+                self.emailTextField.snp.remakeConstraints { (view) in
+                    view.top.equalTo(self.segmentedControl.snp.bottom).offset(30)
+                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.9)
+                    view.centerX.equalToSuperview()
                 }
                 
                 self.usernameTextField.alpha = 0
@@ -170,8 +169,8 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
                 })
                 
                 self.passwordTextField.snp.remakeConstraints { (view) in
-                    view.top.equalTo(self.emailTextField.snp.bottom).offset(20)
-                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
+                    view.top.equalTo(self.emailTextField.snp.bottom).offset(30)
+                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.9)
                     view.centerX.equalToSuperview()
                 }
                 
@@ -182,7 +181,7 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
                 }
                 
                 self.loginRegisterButton.snp.remakeConstraints { (view) in
-                    view.top.equalTo(self.passwordTextField.snp.bottom).offset(25)
+                    view.top.equalTo(self.passwordTextField.snp.bottom).offset(30)
                     view.width.equalToSuperview().multipliedBy(0.6)
                     view.centerX.equalToSuperview()
                 }
@@ -192,38 +191,44 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
         }
         else {
             animator.addAnimations {
-                self.containerView.snp.remakeConstraints({ (view) in
+                self.containerView.snp.remakeConstraints { (view) in
                     view.centerX.equalToSuperview()
-                    view.centerY.equalToSuperview().offset(10)
-                    view.height.equalToSuperview().multipliedBy(0.65)
-                    view.width.equalToSuperview().multipliedBy(0.8)
-                })
+                    view.centerY.equalToSuperview()
+                    view.height.equalToSuperview().multipliedBy(0.87)
+                    view.width.equalToSuperview().multipliedBy(0.85)
+                }
+                
+                self.emailTextField.snp.remakeConstraints { (view) in
+                    view.top.equalTo(self.segmentedControl.snp.bottom).offset(25)
+                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.9)
+                    view.centerX.equalToSuperview()
+                }
                 
                 self.usernameTextField.isHidden = false
                 self.usernameTextField.setNeedsDisplay()
                 self.usernameTextField.snp.remakeConstraints({ (view) in
-                    view.top.equalTo(self.emailTextField.snp.bottom).offset(20)
-                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
+                    view.top.equalTo(self.emailTextField.snp.bottom).offset(25)
+                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.9)
                     view.centerX.equalToSuperview()
                 })
                 self.usernameTextField.alpha = 1.0
                 
                 self.passwordTextField.snp.remakeConstraints { (view) in
-                    view.top.equalTo(self.usernameTextField.snp.bottom).offset(20)
-                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
+                    view.top.equalTo(self.usernameTextField.snp.bottom).offset(25)
+                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.9)
                     view.centerX.equalToSuperview()
                 }
                 
                 self.stackview.isHidden = false
                 self.stackview.snp.remakeConstraints({ (view) in
-                    view.top.equalTo(self.passwordTextField.snp.bottom).offset(20)
+                    view.top.equalTo(self.passwordTextField.snp.bottom).offset(25)
                     view.height.equalTo(30)
                     view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
                     view.centerX.equalToSuperview()
                 })
                 
                 self.loginRegisterButton.snp.remakeConstraints({ (view) in
-                    view.top.equalTo(self.stackview.snp.bottom).offset(20)
+                    view.top.equalTo(self.stackview.snp.bottom).offset(25)
                     view.width.equalToSuperview().multipliedBy(0.6)
                     view.centerX.equalToSuperview()
                 })
@@ -351,7 +356,7 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
     }
     
     func addUserToDatabase(newUser: User){
-        self.databaseReference = databaseReference.child("Users").childByAutoId()
+        self.databaseReference = databaseReference.child("Users").child(newUser.uid)
         let data = newUser.toData()
         databaseReference.setValue(data)
     }
@@ -363,19 +368,6 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
         //Use color manager to change the backgroundColor to the color determined by Sabrina and design mentor.
         view.backgroundColor = SplashColor.lightPrimaryColor()
         view.layer.cornerRadius = 12
-        view.addShadows()
-        
-        return view
-    }()
-    
-    lazy var logoContainerView: UIView = {
-        let view = UIView()
-        
-        //Use color manager to change the backgroundColor to the color determined by Sabrina and design mentor.
-        view.backgroundColor = SplashColor.darkPrimaryColor()
-        
-        //size of logoContainerView is 150x150
-        view.layer.cornerRadius = 75
         view.addShadows()
         
         return view
@@ -432,36 +424,6 @@ class HomeViewController: UIViewController, TwicketSegmentedControlDelegate {
         return label
     }()
     
-    //need to replace this with a collectionview
-//    lazy var stackview: UIStackView = {
-//        let image1 = UIImage(named: "redLogo")
-//        let imageView1 = UIImageView(image: image1)
-//        imageView1.contentMode = .scaleAspectFill
-//        imageView1.addShadows()
-//        
-//        let image2 = UIImage(named: "orangeLogo")
-//        let imageView2 = UIImageView(image: image2)
-//        imageView2.contentMode = .scaleAspectFill
-//        imageView2.addShadows()
-//        
-//        let image3 = UIImage(named: "greenLogo")
-//        let imageView3 = UIImageView(image: image3)
-//        imageView3.contentMode = .scaleAspectFill
-//        imageView3.addShadows()
-//        
-//        let image4 = UIImage(named: "purpleLogo")
-//        let imageView4 = UIImageView(image: image4)
-//        imageView4.contentMode = .scaleAspectFill
-//        imageView4.addShadows()
-//        
-//        let stackview = UIStackView(arrangedSubviews: [imageView1, imageView2, imageView3, imageView4])
-//        stackview.isUserInteractionEnabled = true
-//        stackview.axis = .horizontal
-//        stackview.spacing = 10.0
-//        stackview.distribution = .fillEqually
-//        
-//        return stackview
-//    }()
     lazy var stackview: TeamStackView = {
         let view = TeamStackView()
         
