@@ -22,7 +22,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = SplashColor.primaryColor()
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "homeViewControllerBackground")!)
         
         //set up views
         setUpSegmentedControl()
@@ -368,7 +368,7 @@ class HomeViewController: UIViewController {
         let view = UIView()
         
         //Use color manager to change the backgroundColor to the color determined by Sabrina and design mentor.
-        view.backgroundColor = SplashColor.lightPrimaryColor()
+        view.backgroundColor = UIColor.white
         view.layer.cornerRadius = 12
         view.addShadows()
         
@@ -404,12 +404,12 @@ class HomeViewController: UIViewController {
     
     lazy var loginRegisterButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = SplashColor.primaryColor()
-        button.setTitleColor(SplashColor.lightPrimaryColor(), for: .normal)
+        button.backgroundColor = UIColor.black
+        button.setTitleColor(UIColor.white, for: .normal)
         button.setTitle("Log in", for: .normal)
         button.layer.borderWidth = 2.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.layer.borderColor = SplashColor.primaryColor().cgColor
+        button.layer.borderColor = UIColor.black.cgColor
         button.layer.cornerRadius = 5
         button.addShadows()
         button.addTarget(self, action: #selector(loginRegisterButtonPressed), for: .touchUpInside)
