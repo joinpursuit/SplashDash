@@ -16,6 +16,7 @@ extension GameViewController{
     func startButtonTapped() {
         if self.gameStatus{
             gameButton.setTitle("Start", for: .normal)
+            endRunUpdate()
         }else{
             toCurrentLocation()
             gameButton.setTitle("Stop", for: .normal)
@@ -27,6 +28,7 @@ extension GameViewController{
     
     func toCurrentLocation(){
         if let current = self.locationManager.location{
+            print(current)
             let center = CLLocationCoordinate2D(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
             let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
             
