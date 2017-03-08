@@ -13,7 +13,7 @@ import Firebase
 
 class GameViewController: UIViewController {
     
-    let databaseReference = FIRDatabase.database().reference()
+    let databaseReference = FIRDatabase.database().reference().child("Public")
     
     var locationManager: CLLocationManager!
     var currentRun: [SplashCoordinate] = []
@@ -28,7 +28,12 @@ class GameViewController: UIViewController {
         setupLocationManager()
         addGestures()
         fetchGlobalSplash()
+        updateLabel()
         mapView.preservesSuperviewLayoutMargins = true
+        
+//        let displaylink = CADisplayLink(target: self, selector: #selector(updateLabel))
+//        displaylink.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
+//        Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(updateLabel), userInfo: nil, repeats:true);
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,12 +46,15 @@ class GameViewController: UIViewController {
     // MARK: - Setup
     
     func setupViewHierarchy(){
+
         self.view.addSubview(mapView)
         self.view.addSubview(bottomRootView)
+
         self.bottomRootView.addSubview(bottomCorneredContainerView)
         self.bottomCorneredContainerView.addSubview(bottomView)
         self.bottomRootView.addSubview(gameButton)
         self.bottomRootView.addSubview(findMeButton)
+        self.bottomRootView.addSubview(countDownLabel)
         //        self.view.addSubview(gameButton)
         //        self.view.addSubview(findMeButton)
     }
@@ -84,6 +92,12 @@ class GameViewController: UIViewController {
             view.trailing.equalTo(gameButton)
             view.bottom.equalTo(gameButton.snp.top).offset(-40)
             view.size.equalTo(CGSize(width: 70, height: 70))
+        }
+        
+        countDownLabel.snp.remakeConstraints { (view) in
+            view.top.leading.equalToSuperview().offset(40)
+            view.trailing.equalToSuperview().offset(-30)
+            
         }
     }
     
@@ -124,6 +138,13 @@ class GameViewController: UIViewController {
         button.addShadows()
         button.addTarget(self, action: #selector(toCurrentLocation), for: .touchUpInside)
         return button
+    }()
+    
+    lazy var countDownLabel: UILabel = {
+        let view = UILabel()
+        view.font = UIFont.boldSystemFont(ofSize: 20)
+        view.textAlignment = .right
+        return view
     }()
     
     lazy var bottomRootView: UIView = {

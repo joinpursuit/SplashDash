@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-//extension LoginViewController{
+extension HomeViewController{
 //    override func viewDidAppear(_ animated: Bool) {
-//        let main = GameViewController()
-//        self.present(main, animated: true, completion: nil)
+//        emailTextField.textField.text = "h@h.com"
+//        passwordTextField.textField.text = "000000"
 //    }
-//}
+}
