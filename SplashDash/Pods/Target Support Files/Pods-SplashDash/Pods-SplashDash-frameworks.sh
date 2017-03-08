@@ -87,13 +87,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ISHPullUp/ISHPullUp.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ScrollableSegmentedControl/ScrollableSegmentedControl.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SnapKit/SnapKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/TwicketSegmentedControl/TwicketSegmentedControl.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ISHPullUp/ISHPullUp.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ScrollableSegmentedControl/ScrollableSegmentedControl.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SnapKit/SnapKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/TwicketSegmentedControl/TwicketSegmentedControl.framework"
 fi
