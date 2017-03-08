@@ -67,18 +67,10 @@ class GameViewController: UIViewController {
         
         bottomRootView.snp.remakeConstraints { (view) in
             view.leading.trailing.equalToSuperview()
-            view.top.equalTo(self.view.snp.centerY)
+//          This extension of bottomRootView allows all buttons to be selectable
+            view.top.equalTo(self.findMeButton.snp.top)
             view.height.equalTo(self.view.snp.height).multipliedBy(1.0)
         }
-        
-//        bottomRootView.snp.remakeConstraints { (view) in
-//            view.leading.trailing.equalToSuperview()
-//            // TO DO: calculate offsets to topView.height
-//            view.height.equalToSuperview().offset(-30)
-//            view.top.equalTo(self.view.snp.bottom).inset(100.0)
-////            print("bottomView.topView.frame.height \(bottomView.topView.frame.height)")
-////            view.top.equalTo(self.view.snp.bottom).inset(bottomView.topView.frame.height)
-//        }
         
         bottomCorneredContainerView.snp.remakeConstraints { (view) in
             view.leading.trailing.bottom.equalToSuperview()
