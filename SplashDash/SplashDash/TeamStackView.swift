@@ -15,13 +15,13 @@ protocol TeamStackViewDelegate {
 
 class TeamStackView: UIView {
     //MARK: - Properties
-    var redImageView: UIImageView!
+    var cyanImageView: UIImageView!
     var orangeImageView: UIImageView!
     var greenImageView: UIImageView!
     var purpleImageView: UIImageView!
     var stackview: UIStackView!
     
-    var redTapGestureRecognizer: UITapGestureRecognizer!
+    var cyanTapGestureRecognizer: UITapGestureRecognizer!
     var orangeTapGestureRecognizer: UITapGestureRecognizer!
     var greenTapGestureRecognizer: UITapGestureRecognizer!
     var purpleTapGestureRecognizer: UITapGestureRecognizer!
@@ -45,31 +45,34 @@ class TeamStackView: UIView {
     //MARK: - Methods
     func setUpViewHierarchy() {
         //red team
-        let redTeamLogo = UIImage(named: "redLogo")
-        redImageView = UIImageView(image: redTeamLogo)
-        redImageView.contentMode = .scaleAspectFill
-        redImageView.isUserInteractionEnabled = true
-        redImageView.addShadows()
+        let logo = UIImage(named: "logoSplash")
+        let colorableLogo = logo?.withRenderingMode(.alwaysTemplate)
         
-        let orangeTeamLogo = UIImage(named: "orangeLogo")
-        orangeImageView = UIImageView(image: orangeTeamLogo)
+        cyanImageView = UIImageView(image: colorableLogo)
+        cyanImageView.contentMode = .scaleAspectFill
+        cyanImageView.isUserInteractionEnabled = true
+        cyanImageView.addShadows()
+        cyanImageView.tintColor = UIColor(hex: SplashColor.colorsDict["tealTeamColor"]!, alpha: alpha)
+        
+        orangeImageView = UIImageView(image: colorableLogo)
         orangeImageView.contentMode = .scaleAspectFill
         orangeImageView.isUserInteractionEnabled = true
         orangeImageView.addShadows()
+        orangeImageView.tintColor = UIColor(hex: SplashColor.colorsDict["orangeTeamColor"]!, alpha: alpha)
         
-        let greenTeamLogo = UIImage(named: "greenLogo")
-        greenImageView = UIImageView(image: greenTeamLogo)
+        greenImageView = UIImageView(image: colorableLogo)
         greenImageView.contentMode = .scaleAspectFill
         greenImageView.isUserInteractionEnabled = true
         greenImageView.addShadows()
+        greenImageView.tintColor = UIColor(hex: SplashColor.colorsDict["greenTeamColor"]!, alpha: alpha)
         
-        let purpleTeamLogo = UIImage(named: "purpleLogo")
-        purpleImageView = UIImageView(image: purpleTeamLogo)
+        purpleImageView = UIImageView(image: colorableLogo)
         purpleImageView.contentMode = .scaleAspectFill
         purpleImageView.isUserInteractionEnabled = true
         purpleImageView.addShadows()
+        purpleImageView.tintColor = UIColor(hex: SplashColor.colorsDict["purpleTeamColor"]!, alpha: alpha)
         
-        stackview = UIStackView(arrangedSubviews: [redImageView, orangeImageView, greenImageView, purpleImageView])
+        stackview = UIStackView(arrangedSubviews: [cyanImageView, orangeImageView, greenImageView, purpleImageView])
         stackview.isUserInteractionEnabled = true
         stackview.axis = .horizontal
         stackview.spacing = 10.0
@@ -86,11 +89,11 @@ class TeamStackView: UIView {
     
     //MARK: - Tap Gesture Methods
     func addTapGestures() {
-        redTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(redImageViewTapped(_:)))
-        redTapGestureRecognizer.cancelsTouchesInView = false
-        redTapGestureRecognizer.numberOfTapsRequired = 1
-        redTapGestureRecognizer.numberOfTouchesRequired = 1
-        self.redImageView.addGestureRecognizer(redTapGestureRecognizer)
+        cyanTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(cyanImageViewTapped(_:)))
+        cyanTapGestureRecognizer.cancelsTouchesInView = false
+        cyanTapGestureRecognizer.numberOfTapsRequired = 1
+        cyanTapGestureRecognizer.numberOfTouchesRequired = 1
+        self.cyanImageView.addGestureRecognizer(cyanTapGestureRecognizer)
         
         orangeTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(orangeImageViewTapped(_:)))
         orangeTapGestureRecognizer.cancelsTouchesInView = false
@@ -112,8 +115,8 @@ class TeamStackView: UIView {
         
     }
     
-    func redImageViewTapped(_ sender: UITapGestureRecognizer) {
-        print("RED IMAGE VIEW TAPPED")
+    func cyanImageViewTapped(_ sender: UITapGestureRecognizer) {
+        print("CYAN IMAGE VIEW TAPPED")
     }
     
     func orangeImageViewTapped(_ sender: UITapGestureRecognizer) {
