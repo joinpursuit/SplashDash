@@ -10,22 +10,47 @@ import Foundation
 
 class Run {
     //MARK: - Properties
-    let allCoordinates: [SplashCoordinate]
-    let totalDistance: Double
-    let timeStamp: Date
-    let runDuration: Double
-    let averageSpeed: Double
+    var allCoordinates: [SplashCoordinate]
+    var totalDistance: Double {
+        get{
+            return Double(allCoordinates.count) * 50
+        }
+    }
+    var timeStamp: Double {
+        get{
+            return (allCoordinates.first?.timestamp)!
+        }
+    }
+    var runDuration: Double {
+        get{
+            guard let end = allCoordinates.last?.timestamp, let start = allCoordinates.first?.timestamp else { return 0.0 }
+            return end - start
+        }
+    }
+    var averageSpeed: Double {
+        get{
+            let total = allCoordinates.reduce(0.0) { (result, coor) in
+                result + coor.speed
+            }
+            
+            return total / Double(allCoordinates.count)
+        }
+    }
     
     //MARK: - Initializer
-    init(allCoordinates: [SplashCoordinate], totalDistance: Double, dateTimeStamp: Date, runDuration: Double, averageSpeed: Double) {
+    init(allCoordinates: [SplashCoordinate]) {
         self.allCoordinates = allCoordinates
-        self.totalDistance = totalDistance
-        self.timeStamp = dateTimeStamp
-        self.runDuration = runDuration
-        self.averageSpeed = averageSpeed
     }
     
     //MARK: - Methods
+    func addCoordinate(coor: SplashCoordinate){
+        self.allCoordinates.append(coor)
+    }
+    
+    func reset(){
+        self.allCoordinates = []
+    }
+    
     func toData() -> [String: Any] {
         let allCoordinatesArray = self.allCoordinates.map { $0.toData() }
         
