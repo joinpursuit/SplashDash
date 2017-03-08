@@ -9,7 +9,6 @@
 import UIKit
 import MapKit
 import Firebase
-//import ISHPullUp
 
 class GameViewController: UIViewController {
     
@@ -26,7 +25,6 @@ class GameViewController: UIViewController {
         setupViewHierarchy()
         configureConstraints()
         setupLocationManager()
-//        addGestures()
         fetchGlobalSplash()
         updateLabel()
         mapView.preservesSuperviewLayoutMargins = true
@@ -34,15 +32,23 @@ class GameViewController: UIViewController {
 //        let displaylink = CADisplayLink(target: self, selector: #selector(updateLabel))
 //        displaylink.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
 //        Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(updateLabel), userInfo: nil, repeats:true);
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.bottomCorneredContainerView.clipsToBounds = true
     }
+
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        print("self.view.frame.height is \(self.view.frame.height)")
+//        print("self.bottomCorneredContainerView.frame.height is \(self.bottomCorneredContainerView.frame.height)")
+//        print("---The difference is \(self.view.frame.height - self.bottomCorneredContainerView.frame.height)---")
+//        print("self.bottomRootView.frame.height is \(self.bottomRootView.frame.height)")
+//        print()
+//    }
     
-
-
     // MARK: - Setup
     
     func setupViewHierarchy(){
@@ -56,8 +62,6 @@ class GameViewController: UIViewController {
         self.bottomRootView.addSubview(gameButton)
         self.bottomRootView.addSubview(findMeButton)
         self.bottomRootView.addSubview(countDownLabel)
-        //        self.view.addSubview(gameButton)
-        //        self.view.addSubview(findMeButton)
     }
     
     func configureConstraints(){
@@ -69,12 +73,13 @@ class GameViewController: UIViewController {
             view.leading.trailing.equalToSuperview()
 //          This extension of bottomRootView allows all buttons to be selectable
             view.top.equalTo(self.findMeButton.snp.top)
-            view.height.equalTo(self.view.snp.height).multipliedBy(1.0)
+            view.bottom.equalTo(bottomCorneredContainerView.snp.bottom)
         }
         
         bottomCorneredContainerView.snp.remakeConstraints { (view) in
-            view.leading.trailing.bottom.equalToSuperview()
-            view.top.equalTo(self.view.snp.bottom).inset(100.0)
+            view.leading.trailing.equalToSuperview()
+            view.top.equalTo(self.view.snp.bottom).inset(bottomView.topViewSpacing)
+            view.height.equalTo(self.view.snp.height).offset(-bottomView.topViewSpacing)
         }
         
         bottomView.snp.remakeConstraints { (view) in
@@ -96,9 +101,7 @@ class GameViewController: UIViewController {
         countDownLabel.snp.remakeConstraints { (view) in
             view.top.leading.equalToSuperview().offset(40)
             view.trailing.equalToSuperview().offset(-30)
-            
         }
-
     }
     
     //MARK: - Lazy inits
@@ -162,7 +165,6 @@ class GameViewController: UIViewController {
     lazy var bottomCorneredContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
-//        view.alpha = 0.95
         view.layer.cornerRadius = 7.0
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         view.addGestureRecognizer(gestureRecognizer)
