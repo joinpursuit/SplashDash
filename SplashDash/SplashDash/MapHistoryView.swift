@@ -71,4 +71,10 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         return dp
     }()
     
+//    lazy var amLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "12 AM"
+//        
+//    }()
+    
 }
