@@ -10,6 +10,8 @@ import UIKit
 
 class BottomView: UIView {
 
+    let topViewSpacing: CGFloat = 64.0
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViewHierarchy()
@@ -37,6 +39,7 @@ class BottomView: UIView {
         
         topView.snp.makeConstraints { (view) in
             view.leading.top.trailing.equalToSuperview()
+            view.height.equalTo(self.topViewSpacing)
         }
         
         seperatorLine.snp.makeConstraints { (view) in
