@@ -16,13 +16,15 @@ class SplashCoordinate {
     let speed: Double
     let teamName: String
     let splashImageTag: Int
-    //timestamp
-    init(userID: String, midCoordinate: CLLocationCoordinate2D, speed: Double, teamName: String, splashImageTag: Int) {
+    let timestamp: Double
+    
+    init(userID: String, midCoordinate: CLLocationCoordinate2D, speed: Double, teamName: String, splashImageTag: Int, timestamp: Double) {
         self.userID = userID
         self.midCoordinate = midCoordinate
         self.speed = speed
         self.teamName = teamName
         self.splashImageTag = splashImageTag
+        self.timestamp = timestamp
     }
     
     convenience init?(_ validDict: NSDictionary) {
@@ -30,6 +32,7 @@ class SplashCoordinate {
             let speed = validDict["speed"] as? Double,
             let teamName = validDict["teamName"] as? String,
             let splashImageTag = validDict["splashImageTag"] as? Int,
+            let timestamp = validDict["timestamp"] as? Double,
             let longitude = validDict["longitude"] as? Double,
             let latitude = validDict["latitude"] as? Double  else {
                 print("!!!!!Error parsing coordinates!!!!!")
@@ -38,7 +41,7 @@ class SplashCoordinate {
         
         let midCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
-        self.init(userID: userID, midCoordinate: midCoordinate, speed: speed, teamName: teamName, splashImageTag: splashImageTag)
+        self.init(userID: userID, midCoordinate: midCoordinate, speed: speed, teamName: teamName, splashImageTag: splashImageTag, timestamp: timestamp)
     }
     
     var adjustedRatio: Double {
@@ -92,7 +95,8 @@ class SplashCoordinate {
                 "longitude": self.midCoordinate.longitude,
                 "speed": self.speed,
                 "teamName": self.teamName,
-                "splashImageTag": self.splashImageTag] as [String: Any]
+                "splashImageTag": self.splashImageTag,
+                "timestamp": self.timestamp] as [String: Any]
     }
     
 }

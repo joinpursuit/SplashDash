@@ -104,6 +104,6 @@ extension GameViewController{
 
         let diff = Calendar.current.dateComponents([Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: Date(), to: end!)
         
-        countDownLabel.text = "\(diff.hour!):\(diff.minute!):\(diff.second!)"
+        countDownLabel.text = "Hours left: \(diff.hour!)"
     }
 }

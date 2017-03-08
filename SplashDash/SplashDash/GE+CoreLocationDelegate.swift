@@ -37,7 +37,7 @@ extension GameViewController: CLLocationManagerDelegate{
             print(location.timestamp.timeIntervalSince1970)
             print("")
             let currentUser = FIRAuth.auth()?.currentUser?.uid
-            let coordinate = SplashCoordinate(userID: currentUser!, midCoordinate: location.coordinate, speed: currentSpeed, teamName: "Wolfpack", splashImageTag: 1)
+            let coordinate = SplashCoordinate(userID: currentUser!, midCoordinate: location.coordinate, speed: currentSpeed, teamName: "Wolfpack", splashImageTag: 1, timestamp: location.timestamp.timeIntervalSince1970)
             
             //push coordinate to firebase
             self.currentRun.append(coordinate)

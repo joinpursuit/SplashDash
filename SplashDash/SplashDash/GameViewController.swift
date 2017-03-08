@@ -28,9 +28,12 @@ class GameViewController: UIViewController {
         setupLocationManager()
         addGestures()
         fetchGlobalSplash()
+        updateLabel()
         mapView.preservesSuperviewLayoutMargins = true
         
-//        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateLabel), userInfo: nil, repeats:true);
+//        let displaylink = CADisplayLink(target: self, selector: #selector(updateLabel))
+//        displaylink.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
+//        Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(updateLabel), userInfo: nil, repeats:true);
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -113,7 +116,7 @@ class GameViewController: UIViewController {
         }
         
         countDownLabel.snp.remakeConstraints { (view) in
-            view.top.equalToSuperview().offset(40)
+            view.top.leading.equalToSuperview().offset(40)
             view.trailing.equalToSuperview().offset(-30)
             
         }
@@ -161,6 +164,7 @@ class GameViewController: UIViewController {
     lazy var countDownLabel: UILabel = {
         let view = UILabel()
         view.font = UIFont.boldSystemFont(ofSize: 20)
+        view.textAlignment = .right
         return view
     }()
     
