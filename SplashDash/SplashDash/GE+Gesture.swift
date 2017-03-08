@@ -44,22 +44,27 @@ extension GameViewController{
             
             let translation = gestureRecognizer.translation(in: self.view)
             
-            print("allMovingViews.center.y: \(allMovingViews.center.y)")
-            print("allMovingViews.frame.height/2 \(allMovingViews.frame.height/2)")
-            print("movingView.center.y \(movingView.center.y)")
-            print("movingView.frame.height/2 \(movingView.frame.height/2)")
+//            print("allMovingViews.center.y: \(allMovingViews.center.y)")
+//            print("half allMovingViews.frame.height \(allMovingViews.frame.height/2)")
+//            print("allMovingViews.center.y - allMovingViews.frame.height/2 \(allMovingViews.center.y - allMovingViews.frame.height/2)")
+//            
+//            print("movingView.center.y \(movingView.center.y)")
+//            print("half movingView.frame.height \(movingView.frame.height/2)")
+//                
+//                       print("movingView.center.y - movingView.frame.height/2 \(movingView.center.y - movingView.frame.height/2)")
+//            print("---------------")
             
             
-            if allMovingViews.center.y - allMovingViews.frame.height/2 < spacing {
+            if allMovingViews.center.y - allMovingViews.frame.height/2 < spacing - heightDiff {
                 
-                allMovingViews.center = CGPoint(x: allMovingViews.center.x, y: spacing + allMovingViews.frame.height/2)
+                allMovingViews.center = CGPoint(x: allMovingViews.center.x, y: spacing - heightDiff + allMovingViews.frame.height/2)
                 gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
                 
                 return }
             
-            if allMovingViews.center.y - allMovingViews.frame.height/2 > self.view.frame.height - spacing {
+            if allMovingViews.center.y - allMovingViews.frame.height/2 > self.view.frame.height - spacing - heightDiff {
                 
-                allMovingViews.center = CGPoint(x: allMovingViews.center.x, y: self.view.frame.height + allMovingViews.frame.height/2 - spacing)
+                allMovingViews.center = CGPoint(x: allMovingViews.center.x, y: self.view.frame.height + allMovingViews.frame.height/2 - spacing - heightDiff)
                 gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
                 
                 return
