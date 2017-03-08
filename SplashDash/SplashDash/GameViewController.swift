@@ -68,7 +68,7 @@ class GameViewController: UIViewController {
         bottomRootView.snp.remakeConstraints { (view) in
             view.leading.trailing.equalToSuperview()
             view.top.equalTo(self.view.snp.centerY)
-            view.height.equalTo(self.view.snp.height).multipliedBy(2.0)
+            view.height.equalTo(self.view.snp.height).multipliedBy(1.0)
         }
         
 //        bottomRootView.snp.remakeConstraints { (view) in

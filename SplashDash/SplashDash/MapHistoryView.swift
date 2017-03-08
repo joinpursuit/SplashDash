@@ -37,14 +37,16 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     }
     
     func configureConstraints() {
-        mapView.snp.remakeConstraints { (view) in
-            view.leading.trailing.bottom.equalToSuperview()
-            view.height.equalTo(mapView.snp.width)
-        }
         
         datePicker.snp.remakeConstraints { (view) in
             view.leading.trailing.top.equalToSuperview()
-            view.bottom.equalTo(mapView.snp.top)
+            view.height.equalTo(50.0)
+//            view.bottom.equalTo(mapView.snp.top)
+        }
+        mapView.snp.remakeConstraints { (view) in
+            view.leading.trailing.bottom.equalToSuperview()
+            //view.height.equalTo(mapView.snp.width)
+            view.top.equalTo(datePicker.snp.bottom)
         }
     }
     
