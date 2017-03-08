@@ -12,7 +12,7 @@ import MapKit
 
 extension GameViewController{
     
-//    func updateGameStatus(){
+    //    func updateGameStatus(){
     func startButtonTapped() {
         if self.gameStatus{
             gameButton.setTitle("Start", for: .normal)
@@ -47,9 +47,41 @@ extension GameViewController{
         }, completion: nil)
     }
     
+    
+    // MARK: - Pan Gesture Recognizer
+    
+    // 105 is an arbitrary number
+    func handlePan(_ gestureRecognizer: UIPanGestureRecognizer, spacing: CGFloat = 105) {
+        let spacing = bottomView.topView.frame.height
+        
+        guard let movingView = gestureRecognizer.view else { return }
+        
+        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+            let translation = gestureRecognizer.translation(in: self.view)
+            if movingView.center.y - movingView.frame.height/2 < spacing {
+                
+                movingView.center = CGPoint(x: movingView.center.x, y: spacing + movingView.frame.height/2)
+                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+                
+                return }
+            
+            if movingView.center.y - movingView.frame.height/2 > self.view.frame.height - spacing {
+                
+                movingView.center = CGPoint(x: movingView.center.x, y: self.view.frame.height + movingView.frame.height/2 - spacing)
+                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+                
+                return
+            }
+            
+            movingView.center = CGPoint(x: movingView.center.x, y: movingView.center.y + translation.y)
+            gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+        }
+    }
+    
+    
     func takeScreenshot() {
         guard let contentScrollView = mapView.subviews.first?.subviews.first else { return }
-
+        
         UIGraphicsBeginImageContextWithOptions(contentScrollView.bounds.size, false, UIScreen.main.scale)
         
         contentScrollView.drawHierarchy(in: contentScrollView.bounds, afterScreenUpdates: true)
@@ -58,11 +90,11 @@ extension GameViewController{
         UIGraphicsEndImageContext()
         
         colorArray(image: screenShot!)
-//        UIImageWriteToSavedPhotosAlbum(screenShot!, nil, nil, nil)
+        //        UIImageWriteToSavedPhotosAlbum(screenShot!, nil, nil, nil)
     }
     
     func colorArray(image: UIImage) {
-//        var result: [UIColor: Int] = [:]
+        //        var result: [UIColor: Int] = [:]
         
         let img = image.cgImage!
         let width = img.width
@@ -84,14 +116,14 @@ extension GameViewController{
                 let red   = CGFloat(rawData[byteIndex]    ) / 255.0
                 let green = CGFloat(rawData[byteIndex + 1]) / 255.0
                 let blue  = CGFloat(rawData[byteIndex + 2]) / 255.0
-//                let alpha = CGFloat(rawData[byteIndex + 3]) / 255.0
+                //                let alpha = CGFloat(rawData[byteIndex + 3]) / 255.0
                 
                 print("\(red), \(green), \(blue)")
-//                let color = UIColor(red: red, green: green, blue: blue, alpha: alpha)
-//                result[color] = (result[color] ?? 0) + 1
+                //                let color = UIColor(red: red, green: green, blue: blue, alpha: alpha)
+                //                result[color] = (result[color] ?? 0) + 1
             }
         }
-//        print(result)
+        //        print(result)
         
     }
     
@@ -101,9 +133,10 @@ extension GameViewController{
         components.day = 1
         components.second = -1
         let end = Calendar.current.date(byAdding: components, to: Calendar.current.startOfDay(for: Date()))
-
+        
         let diff = Calendar.current.dateComponents([Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: Date(), to: end!)
         
         countDownLabel.text = "Hours left: \(diff.hour!)"
+        
     }
 }
