@@ -26,7 +26,7 @@ class GameViewController: UIViewController {
         setupViewHierarchy()
         configureConstraints()
         setupLocationManager()
-        addGestures()
+//        addGestures()
         fetchGlobalSplash()
         updateLabel()
         mapView.preservesSuperviewLayoutMargins = true
@@ -48,7 +48,8 @@ class GameViewController: UIViewController {
     func setupViewHierarchy(){
 
         self.view.addSubview(mapView)
-        self.view.addSubview(bottomRootView)
+        self.mapView.addSubview(bottomRootView)
+//        self.view.addSubview(bottomRootView)
 
         self.bottomRootView.addSubview(bottomCorneredContainerView)
         self.bottomCorneredContainerView.addSubview(bottomView)
@@ -66,15 +67,22 @@ class GameViewController: UIViewController {
         
         bottomRootView.snp.remakeConstraints { (view) in
             view.leading.trailing.equalToSuperview()
-            // TO DO: calculate offsets to topView.height
-            view.height.equalToSuperview().offset(-30)
-            view.top.equalTo(self.view.snp.bottom).inset(100.0)
-//            print("bottomView.topView.frame.height \(bottomView.topView.frame.height)")
-//            view.top.equalTo(self.view.snp.bottom).inset(bottomView.topView.frame.height)
+            view.top.equalTo(self.view.snp.centerY)
+            view.height.equalTo(self.view.snp.height).multipliedBy(2.0)
         }
         
+//        bottomRootView.snp.remakeConstraints { (view) in
+//            view.leading.trailing.equalToSuperview()
+//            // TO DO: calculate offsets to topView.height
+//            view.height.equalToSuperview().offset(-30)
+//            view.top.equalTo(self.view.snp.bottom).inset(100.0)
+////            print("bottomView.topView.frame.height \(bottomView.topView.frame.height)")
+////            view.top.equalTo(self.view.snp.bottom).inset(bottomView.topView.frame.height)
+//        }
+        
         bottomCorneredContainerView.snp.remakeConstraints { (view) in
-            view.leading.top.trailing.bottom.equalToSuperview()
+            view.leading.trailing.bottom.equalToSuperview()
+            view.top.equalTo(self.view.snp.bottom).inset(100.0)
         }
         
         bottomView.snp.remakeConstraints { (view) in
@@ -82,12 +90,11 @@ class GameViewController: UIViewController {
         }
         
         gameButton.snp.remakeConstraints { (view) in
-            // view.bottom.equalTo(bottomRootView.snp.top).offset(-30)
             view.centerY.equalTo(bottomCorneredContainerView.snp.top)
             view.trailing.equalToSuperview().offset(-30)
             view.size.equalTo(CGSize(width: 70, height: 70))
         }
-
+        
         findMeButton.snp.remakeConstraints { (view) in
             view.trailing.equalTo(gameButton)
             view.bottom.equalTo(gameButton.snp.top).offset(-40)
@@ -99,6 +106,7 @@ class GameViewController: UIViewController {
             view.trailing.equalToSuperview().offset(-30)
             
         }
+
     }
     
     //MARK: - Lazy inits
@@ -112,6 +120,9 @@ class GameViewController: UIViewController {
         view.showsBuildings = false
         view.showsPointsOfInterest = false
         view.delegate = self
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedOnMap(sender:)))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        view.addGestureRecognizer(tapGestureRecognizer)
         return view
     }()
 
@@ -150,8 +161,9 @@ class GameViewController: UIViewController {
     lazy var bottomRootView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
-        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        view.addGestureRecognizer(gestureRecognizer)
+//        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+//        view.addGestureRecognizer(gestureRecognizer)
+//        view.isUserInteractionEnabled = false
         return view
     }()
     
@@ -159,9 +171,9 @@ class GameViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = .white
 //        view.alpha = 0.95
-        view.layer.cornerRadius = 10.0
-//        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-//        view.addGestureRecognizer(gestureRecognizer)
+        view.layer.cornerRadius = 7.0
+        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        view.addGestureRecognizer(gestureRecognizer)
         return view
     }()
     
