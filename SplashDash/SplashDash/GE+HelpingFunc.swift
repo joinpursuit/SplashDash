@@ -14,6 +14,7 @@ extension GameViewController{
     
     //    func updateGameStatus(){
     func startButtonTapped() {
+        print("-----------start button tapped-----------")
         if self.gameStatus{
             gameButton.setTitle("Start", for: .normal)
         }else{
@@ -26,6 +27,8 @@ extension GameViewController{
     }
     
     func toCurrentLocation(){
+        print("-----------current location button tapped------------")
+        
         if let current = self.locationManager.location{
             let center = CLLocationCoordinate2D(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
             let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
@@ -54,9 +57,14 @@ extension GameViewController{
     func handlePan(_ gestureRecognizer: UIPanGestureRecognizer, spacing: CGFloat = 105) {
         let spacing = bottomView.topView.frame.height
         
-        guard let movingView = gestureRecognizer.view else { return }
+        guard let movingView = gestureRecognizer.view?.superview else { return }
+        
+        
         
         if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+            
+            
+            
             let translation = gestureRecognizer.translation(in: self.view)
             if movingView.center.y - movingView.frame.height/2 < spacing {
                 

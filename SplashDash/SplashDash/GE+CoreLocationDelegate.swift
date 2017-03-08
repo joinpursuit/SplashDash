@@ -31,11 +31,11 @@ extension GameViewController: CLLocationManagerDelegate{
             if currentSpeed < 0 {
                 currentSpeed = Double(arc4random_uniform(500) + 500)/100
             }
-            print(location.coordinate.latitude)
-            print(location.coordinate.longitude)
-            print(currentSpeed)
-            print(location.timestamp.timeIntervalSince1970)
-            print("")
+//            print(location.coordinate.latitude)
+//            print(location.coordinate.longitude)
+//            print(currentSpeed)
+//            print(location.timestamp.timeIntervalSince1970)
+//            print("")
             let currentUser = FIRAuth.auth()?.currentUser?.uid
             let coordinate = SplashCoordinate(userID: currentUser!, midCoordinate: location.coordinate, speed: currentSpeed, teamName: "Wolfpack", splashImageTag: 1, timestamp: location.timestamp.timeIntervalSince1970)
             

@@ -44,7 +44,7 @@ extension GameViewController{
                 print(error!.localizedDescription)
                 return
             }
-            print("Splash coordinate successfully stored.")
+            // print("Splash coordinate successfully stored.")
         }
     }
     

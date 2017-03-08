@@ -11,21 +11,21 @@ import MapKit
 
 extension GameViewController{
 
-    func addGestures(){
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedOnMap(sender:)))
-        tap.numberOfTapsRequired = 1
-        mapView.addGestureRecognizer(tap)
-    }
+//    func addGestures(){
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedOnMap(sender:)))
+//        tap.numberOfTapsRequired = 1
+//        mapView.addGestureRecognizer(tap)
+//    }
     
     func tappedOnMap(sender: UIGestureRecognizer) {
-        if let tapGesture: UITapGestureRecognizer = sender as? UITapGestureRecognizer {
-            switch (tapGesture.numberOfTapsRequired, tapGesture.numberOfTouchesRequired) {
-            case (1, 1):
-                print("Heck yea I was tapped")
-                self.animateAllButtons()
-            default:
-                print("tap type was wrong!")
-            }
+        guard let tapGesture: UITapGestureRecognizer = sender as? UITapGestureRecognizer else { return }
+        switch (tapGesture.numberOfTapsRequired, tapGesture.numberOfTouchesRequired) {
+        case (1, 1):
+            print("Map was tapped once, with one finger")
+            self.animateAllButtons()
+        default:
+            print("Map was tapped, but not with one finger!")
         }
+        
     }
 }
