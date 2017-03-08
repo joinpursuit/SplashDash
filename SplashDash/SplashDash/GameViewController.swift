@@ -16,7 +16,7 @@ class GameViewController: UIViewController {
     let databaseReference = FIRDatabase.database().reference().child("Public")
     
     var locationManager: CLLocationManager!
-    var currentRun: [SplashCoordinate] = []
+    var currentRun: Run = Run(allCoordinates: [])
     var gameStatus: Bool = false
     var isButtonsOffScreen: Bool = false
     

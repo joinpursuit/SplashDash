@@ -18,9 +18,6 @@ extension GameViewController{
     }
     
     func fetchGlobalSplash(){
-        let format = DateFormatter()
-        format.dateFormat = "yyyyMMdd"
-        
         let linkRef = databaseReference.child(getRootName())
         
         linkRef.observe(FIRDataEventType.childAdded, with: { (snapshot) in
@@ -48,5 +45,19 @@ extension GameViewController{
         }
     }
     
+    func endRunUpdate(){
+        guard let currentUser = FIRAuth.auth()?.currentUser?.uid else { return }
+        let linkRef = FIRDatabase.database().reference().child("Users").child(currentUser).child("runs")
+        let data = currentRun.toData()
+        linkRef.childByAutoId().setValue(data) { (error, _) in
+            if let bad = error{
+                print(bad.localizedDescription)
+            }else{
+                print("Current run updated")
+                self.currentRun.reset()
+            }
+        }
+        
+    }
     
 }

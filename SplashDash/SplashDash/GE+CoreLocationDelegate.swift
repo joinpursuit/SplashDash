@@ -40,10 +40,8 @@ extension GameViewController: CLLocationManagerDelegate{
             let coordinate = SplashCoordinate(userID: currentUser!, midCoordinate: location.coordinate, speed: currentSpeed, teamName: "Wolfpack", splashImageTag: 1, timestamp: location.timestamp.timeIntervalSince1970)
             
             //push coordinate to firebase
-            self.currentRun.append(coordinate)
+            self.currentRun.addCoordinate(coor: coordinate)
             pushSplashToDatabase(coor: coordinate)
-//            let splash = SplashOverlay(park: coordinate)
-//            mapView.addOverlays([splash])
         }
     }
 }
