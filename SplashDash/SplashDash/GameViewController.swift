@@ -17,6 +17,7 @@ class GameViewController: UIViewController {
     
     var locationManager: CLLocationManager!
     var currentRun: Run = Run(allCoordinates: [])
+    var endGame: Bool = false
     var gameStatus: Bool = false
     var isButtonsOffScreen: Bool = false
     

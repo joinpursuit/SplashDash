@@ -27,9 +27,17 @@ extension GameViewController{
         gameStatus = !gameStatus
     }
     
+    func readyToScreenshot(){
+        endGame = true
+        let center = CLLocationCoordinate2D(latitude: 40.750101, longitude: -73.988439)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+        
+        self.mapView.setRegion(region, animated: true)
+        
+    }
+    
     func toCurrentLocation(){
         print("-----------current location button tapped------------")
-        
         if let current = self.locationManager.location{
             print(current)
             let center = CLLocationCoordinate2D(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
@@ -90,7 +98,8 @@ extension GameViewController{
     
     
     func takeScreenshot() {
-        guard let contentScrollView = mapView.subviews.first?.subviews.first else { return }
+        
+        guard let contentScrollView = self.mapView.subviews.first?.subviews.first else { return }
         
         UIGraphicsBeginImageContextWithOptions(contentScrollView.bounds.size, false, UIScreen.main.scale)
         
@@ -99,12 +108,12 @@ extension GameViewController{
         let screenShot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
+//        UIImageWriteToSavedPhotosAlbum(screenShot!, nil, nil, 
         colorArray(image: screenShot!)
-        //        UIImageWriteToSavedPhotosAlbum(screenShot!, nil, nil, nil)
     }
     
     func colorArray(image: UIImage) {
-        //        var result: [UIColor: Int] = [:]
+        var result = 0
         
         let img = image.cgImage!
         let width = img.width
@@ -128,12 +137,13 @@ extension GameViewController{
                 let blue  = CGFloat(rawData[byteIndex + 2]) / 255.0
                 //                let alpha = CGFloat(rawData[byteIndex + 3]) / 255.0
                 
-                print("\(red), \(green), \(blue)")
+//                print("\(red), \(green), \(blue)")
+                result += 1
                 //                let color = UIColor(red: red, green: green, blue: blue, alpha: alpha)
                 //                result[color] = (result[color] ?? 0) + 1
             }
         }
-        //        print(result)
+        print(result)
         
     }
     

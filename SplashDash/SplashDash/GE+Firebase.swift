@@ -25,7 +25,7 @@ extension GameViewController{
                 if let coor = SplashCoordinate(value){
                     
                     //draw all splashes parsed from database
-                    let splash = SplashOverlay(park: coor)
+                    let splash = SplashOverlay(coor: coor)
                     self.mapView.addOverlays([splash])
                 }
             }
@@ -47,6 +47,7 @@ extension GameViewController{
     
     func endRunUpdate(){
         guard let currentUser = FIRAuth.auth()?.currentUser?.uid else { return }
+        guard currentRun.allCoordinates.count > 0 else { return }
         let linkRef = FIRDatabase.database().reference().child("Users").child(currentUser).child("runs")
         let data = currentRun.toData()
         linkRef.childByAutoId().setValue(data) { (error, _) in
