@@ -26,9 +26,8 @@ class BottomView: UIView {
     
     func setupViewHierarchy() {
         self.addSubview(topView)
-        self.addSubview(contentView)
+        self.addSubview(contentCollectionView)
         self.addSubview(seperatorLine)
-        contentView.addSubview(contentCollectionView)
         topView.addSubview(currentRunLabel)
     }
     
@@ -49,12 +48,8 @@ class BottomView: UIView {
         }
         
         contentCollectionView.snp.makeConstraints { (view) in
-            view.leading.top.trailing.bottom.equalToSuperview().inset(8.0)
-        }
-        
-        contentView.snp.makeConstraints { (view) in
-            view.leading.trailing.bottom.equalToSuperview()
-            view.top.equalTo(topView.snp.bottom)
+                        view.leading.trailing.bottom.equalToSuperview()
+                        view.top.equalTo(topView.snp.bottom)
         }
     }
     
@@ -79,12 +74,6 @@ class BottomView: UIView {
         label.textColor = SplashColor.lightPrimaryColor()
         label.numberOfLines = 0
         return label
-    }()
-    
-    private lazy var contentView: UIView = {
-        let view = UIView()
-        view.backgroundColor = SplashColor.primaryColor()
-        return view
     }()
     
     private lazy var contentCollectionView: ContentCollectionView = {
