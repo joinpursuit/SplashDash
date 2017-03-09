@@ -12,18 +12,24 @@ import MapKit
 class SplashOverlay: NSObject, MKOverlay {
     var coordinate: CLLocationCoordinate2D
     var boundingMapRect: MKMapRect
+    var teamName: String
+    var splashImageTag: Int
     
     init(coor: SplashCoordinate) {
         boundingMapRect = coor.overlayBoundingMapRect
         coordinate = coor.midCoordinate
+        teamName = coor.teamName
+        splashImageTag = coor.splashImageTag
     }
 }
 
 class SplashOverlayView: MKOverlayRenderer {
     var overlayImage: UIImage
     
-    init(overlay:MKOverlay, overlayImage:UIImage) {
-        self.overlayImage = overlayImage
+    init(overlay: MKOverlay, teamName: String, splashImageTag: Int) {
+        //switch to choose color and shape
+        
+        self.overlayImage = UIImage(named: "inkSample3")!
         super.init(overlay: overlay)
     }
     

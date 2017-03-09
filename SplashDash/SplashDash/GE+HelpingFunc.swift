@@ -55,13 +55,14 @@ extension GameViewController{
     
     func toCurrentLocation(){
         print("-----------current location button tapped------------")
-        if let current = self.locationManager.location{
-            print(current)
-            let center = CLLocationCoordinate2D(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
-            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-            
-            self.mapView.setRegion(region, animated: true)
-        }
+        readyToScreenshot()
+//        if let current = self.locationManager.location{
+//            print(current)
+//            let center = CLLocationCoordinate2D(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
+//            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+//            
+//            self.mapView.setRegion(region, animated: true)
+//        }
     }
     
     func animateAllButtons(){
@@ -76,11 +77,7 @@ extension GameViewController{
             self.isButtonsOffScreen = !self.isButtonsOffScreen
         }, completion: nil)
     }
-    
-    
 
-    
-    
     func takeScreenshot() {
         
         guard let contentScrollView = self.mapView.subviews.first?.subviews.first else { return }
@@ -97,7 +94,6 @@ extension GameViewController{
     }
     
     func colorArray(image: UIImage) {
-        var result = 0
         
         let img = image.cgImage!
         let width = img.width
@@ -114,21 +110,27 @@ extension GameViewController{
         context?.draw(img, in: CGRect(x: 0, y: 0, width: CGFloat(width), height: CGFloat(height)))
         for x in 0..<width {
             for y in 0..<height {
-//                let byteIndex = (bytesPerRow * x) + y * bytesPerPixel
+                let byteIndex = (bytesPerRow * x) + y * bytesPerPixel
                 
-//                let red   = CGFloat(rawData[byteIndex]    ) / 255.0
-//                let green = CGFloat(rawData[byteIndex + 1]) / 255.0
-//                let blue  = CGFloat(rawData[byteIndex + 2]) /
-//                let alpha = CGFloat(rawData[byteIndex + 3]) / 255.0
+                let red   = rawData[byteIndex]
+                let green = rawData[byteIndex + 1]
+                let blue  = rawData[byteIndex + 2]
                 
-//                print("\(red), \(green), \(blue)")
-                result += 1
-                //                let color = UIColor(red: red, green: green, blue: blue, alpha: alpha)
-                //                result[color] = (result[color] ?? 0) + 1
+                switch (red, green, blue) {
+                case (103, 58, 183):
+                    print("purpleTeamColor")
+                case (0, 188, 212):
+                    print("tealTeamColor")
+                case (76, 175, 80):
+                    print("greenTeamColor")
+                case (255, 87, 34):
+                    print("orangeTeamColor")
+                default:
+                    continue
+                }
             }
         }
-        print(result)
-        
+        //return winer
     }
     
     func updateLabel() {

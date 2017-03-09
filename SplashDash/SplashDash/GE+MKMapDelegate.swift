@@ -25,9 +25,8 @@ extension GameViewController: MKMapViewDelegate{
 //    }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if overlay is SplashOverlay{
-            let image = #imageLiteral(resourceName: "inkSample3")
-            let splashOverlay = SplashOverlayView(overlay: overlay, overlayImage: image)
+        if let myOverlay = overlay as? SplashOverlay{
+            let splashOverlay = SplashOverlayView(overlay: myOverlay, teamName: myOverlay.teamName, splashImageTag: myOverlay.splashImageTag)
             return splashOverlay
         } else if overlay is MKCircle{
             let circleRenderer = MKCircleRenderer(overlay: overlay)
