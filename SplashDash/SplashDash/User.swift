@@ -38,7 +38,7 @@ class User {
                 return nil
         }
         
-        self.init(email: email, username: username, uid: uid, teamName: teamName, runs: [])
+        self.init(email: email, username: username, uid: uid, teamName: UserTeam(rawValue: teamName)!, runs: [])
     }
     
     //MARK: - Methods
