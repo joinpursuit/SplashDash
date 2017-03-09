@@ -10,7 +10,7 @@ import UIKit
 
 extension HomeViewController: TeamStackViewDelegate {
     //MARK: - Methods
-    func cyanImageViewTapped(_ sender: UITapGestureRecognizer) {
+    func tealImageViewTapped(_ sender: UITapGestureRecognizer) {
         print("CYAN")
         
         self.view.backgroundColor = UIColor(hex: SplashColor.colorsDict["tealTeamColor"]!, alpha: 1.0)

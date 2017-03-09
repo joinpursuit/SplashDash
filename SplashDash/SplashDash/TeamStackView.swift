@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 @objc protocol TeamStackViewDelegate {
-    func cyanImageViewTapped(_ sender: UITapGestureRecognizer)
+    func tealImageViewTapped(_ sender: UITapGestureRecognizer)
     func orangeImageViewTapped(_ sender: UITapGestureRecognizer)
     func greenImageViewTapped(_ sender: UITapGestureRecognizer)
     func purpleImageViewTapped(_ sender: UITapGestureRecognizer)
@@ -18,13 +18,13 @@ import SnapKit
 
 class TeamStackView: UIView {
     //MARK: - Properties
-    var cyanImageView: UIImageView!
+    var tealImageView: UIImageView!
     var orangeImageView: UIImageView!
     var greenImageView: UIImageView!
     var purpleImageView: UIImageView!
     var stackview: UIStackView!
     
-    var cyanTapGestureRecognizer: UITapGestureRecognizer!
+    var tealTapGestureRecognizer: UITapGestureRecognizer!
     var orangeTapGestureRecognizer: UITapGestureRecognizer!
     var greenTapGestureRecognizer: UITapGestureRecognizer!
     var purpleTapGestureRecognizer: UITapGestureRecognizer!
@@ -53,11 +53,11 @@ class TeamStackView: UIView {
         let logo = UIImage(named: "logoSplash")
         let colorableLogo = logo?.withRenderingMode(.alwaysTemplate)
         
-        cyanImageView = UIImageView(image: colorableLogo)
-        cyanImageView.contentMode = .scaleAspectFill
-        cyanImageView.isUserInteractionEnabled = true
-        cyanImageView.addShadows()
-        cyanImageView.tintColor = UIColor(hex: SplashColor.colorsDict["tealTeamColor"]!, alpha: alpha)
+        tealImageView = UIImageView(image: colorableLogo)
+        tealImageView.contentMode = .scaleAspectFill
+        tealImageView.isUserInteractionEnabled = true
+        tealImageView.addShadows()
+        tealImageView.tintColor = UIColor(hex: SplashColor.colorsDict["tealTeamColor"]!, alpha: alpha)
         
         orangeImageView = UIImageView(image: colorableLogo)
         orangeImageView.contentMode = .scaleAspectFill
@@ -77,7 +77,7 @@ class TeamStackView: UIView {
         purpleImageView.addShadows()
         purpleImageView.tintColor = UIColor(hex: SplashColor.colorsDict["purpleTeamColor"]!, alpha: alpha)
         
-        stackview = UIStackView(arrangedSubviews: [cyanImageView, orangeImageView, greenImageView, purpleImageView])
+        stackview = UIStackView(arrangedSubviews: [tealImageView, orangeImageView, greenImageView, purpleImageView])
         stackview.isUserInteractionEnabled = true
         stackview.axis = .horizontal
         stackview.spacing = 10.0
@@ -94,11 +94,11 @@ class TeamStackView: UIView {
     
     //MARK: - Tap Gesture Methods
     func addTapGestures() {
-        cyanTapGestureRecognizer = UITapGestureRecognizer(target: self.delegate, action: #selector(self.delegate?.cyanImageViewTapped(_:)))
-        cyanTapGestureRecognizer.cancelsTouchesInView = false
-        cyanTapGestureRecognizer.numberOfTapsRequired = 1
-        cyanTapGestureRecognizer.numberOfTouchesRequired = 1
-        self.cyanImageView.addGestureRecognizer(cyanTapGestureRecognizer)
+        tealTapGestureRecognizer = UITapGestureRecognizer(target: self.delegate, action: #selector(self.delegate?.tealImageViewTapped(_:)))
+        tealTapGestureRecognizer.cancelsTouchesInView = false
+        tealTapGestureRecognizer.numberOfTapsRequired = 1
+        tealTapGestureRecognizer.numberOfTouchesRequired = 1
+        self.tealImageView.addGestureRecognizer(tealTapGestureRecognizer)
         
         orangeTapGestureRecognizer = UITapGestureRecognizer(target: self.delegate, action: #selector(self.delegate?.orangeImageViewTapped(_:)))
         orangeTapGestureRecognizer.cancelsTouchesInView = false
