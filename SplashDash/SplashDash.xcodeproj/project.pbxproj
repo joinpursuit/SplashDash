@@ -14,6 +14,7 @@
 		061074E81E6E5E5B00F665A0 /* SquarespaceRun_2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074E11E6E5E5B00F665A0 /* SquarespaceRun_2.gpx */; };
 		061074E91E6E5E5B00F665A0 /* SquarespaceRun_3.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074E21E6E5E5B00F665A0 /* SquarespaceRun_3.gpx */; };
 		061074EA1E6E5E5B00F665A0 /* SquarespaceRun_4.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074E31E6E5E5B00F665A0 /* SquarespaceRun_4.gpx */; };
+		061074EC1E71C54000F665A0 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061074EB1E71C54000F665A0 /* UIImage+Extension.swift */; };
 		06B239AD1E66127B0071E17F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239AC1E66127B0071E17F /* AppDelegate.swift */; };
 		06B239B21E66127B0071E17F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B01E66127B0071E17F /* Main.storyboard */; };
 		06B239B41E66127B0071E17F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B31E66127B0071E17F /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		061074E11E6E5E5B00F665A0 /* SquarespaceRun_2.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_2.gpx; sourceTree = "<group>"; };
 		061074E21E6E5E5B00F665A0 /* SquarespaceRun_3.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_3.gpx; sourceTree = "<group>"; };
 		061074E31E6E5E5B00F665A0 /* SquarespaceRun_4.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_4.gpx; sourceTree = "<group>"; };
+		061074EB1E71C54000F665A0 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		06B239A91E66127B0071E17F /* SplashDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SplashDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06B239AC1E66127B0071E17F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06B239B11E66127B0071E17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				06B239DC1E68CD670071E17F /* GE+Gesture.swift */,
 				06B239D41E679CA30071E17F /* GE+HelpingFunc.swift */,
 				471458231E712B2100467881 /* HVC+TeamStackViewDelegate.swift */,
+				061074EB1E71C54000F665A0 /* UIImage+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				06B239DB1E68BFBB0071E17F /* GE+Firebase.swift in Sources */,
 				06B239D11E6767B70071E17F /* GE+MKMapDelegate.swift in Sources */,
 				4B235F041E6DE6900079D2A0 /* CustomDelegates.swift in Sources */,
+				061074EC1E71C54000F665A0 /* UIImage+Extension.swift in Sources */,
 				06B239D31E67685E0071E17F /* GE+CoreLocationDelegate.swift in Sources */,
 				06B239D51E679CA30071E17F /* GE+HelpingFunc.swift in Sources */,
 				06B239D71E6888840071E17F /* SplashCoordinate.swift in Sources */,
