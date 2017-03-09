@@ -11,7 +11,14 @@ import SnapKit
 
 class ContentCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    var selectedViewIndex = 0
+    var selectedSegmentIndex = 0 {
+        didSet {
+            let indexPath = IndexPath(item: selectedSegmentIndex, section: 0)
+            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        }
+    }
+    // didSet
+    //  collectionView.scrollToItem(at: nextIndexPath, at: .centeredHorizontally, animated: true)
     var contentViews = [UIView]()
     let sideMargin: CGFloat = 8.0
     
@@ -50,6 +57,9 @@ class ContentCollectionView: UIView, UICollectionViewDelegate, UICollectionViewD
         
         contentView.snp.remakeConstraints{ (view) in
             view.leading.top.trailing.bottom.equalToSuperview()
+        }
+        if let bottomView = self.superview as? BottomView {
+            bottomView.contentSegmentedControl.selectedSegmentIndex = indexPath.item
         }
         
         return cell

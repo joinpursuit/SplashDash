@@ -27,7 +27,7 @@ class BottomView: UIView {
     
     func segmentSelected(sender:ScrollableSegmentedControl) {
         print("Segment at index \(sender.selectedSegmentIndex)  selected")
-        contentCollectionView.selectedViewIndex = sender.selectedSegmentIndex
+        contentCollectionView.selectedSegmentIndex = sender.selectedSegmentIndex
     }
     
     // MARK: - Setup
@@ -90,7 +90,7 @@ class BottomView: UIView {
         return view
     }()
     
-    private lazy var contentSegmentedControl: ScrollableSegmentedControl = {
+    lazy var contentSegmentedControl: ScrollableSegmentedControl = {
         let control = ScrollableSegmentedControl()
         control.segmentStyle = .textOnly
         control.insertSegment(withTitle: "My Runs", at: 0)
