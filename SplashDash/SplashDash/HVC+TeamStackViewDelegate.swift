@@ -11,7 +11,7 @@ import UIKit
 extension HomeViewController: TeamStackViewDelegate {
     //MARK: - Methods
     func tealImageViewTapped(_ sender: UITapGestureRecognizer) {
-        print("CYAN")
+        print("TEAL")
         
         self.view.backgroundColor = UIColor(hex: SplashColor.colorsDict["tealTeamColor"]!, alpha: 1.0)
         self.emailTextField.textLabel.textColor = UIColor(hex: SplashColor.colorsDict["tealTeamColor"]!, alpha: 1.0)

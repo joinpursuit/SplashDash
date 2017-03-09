@@ -303,9 +303,9 @@ class HomeViewController: UIViewController {
                                 return
                             }
                             
-                            //Still need to determine teamName logic and create each of these objects with an empty runs array
+                            //Still need to determine teamName assignment logic
                             let uid = user?.uid
-                            let newUser = User(email: email, username: username, uid: uid!, teamName: "PLACEHOLDER", runs: [])
+                            let newUser = User(email: email, username: username, uid: uid!, teamName: UserTeam(rawValue: UserTeam.teal.rawValue)!, runs: [])
                             self.addUserToDatabase(newUser: newUser)
                             
                             self.present(GameViewController(), animated: true, completion: nil)
