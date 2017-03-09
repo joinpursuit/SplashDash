@@ -44,7 +44,7 @@ extension GameViewController{
         gameStatus = !gameStatus
     }
     
-    func readyToScreenshot(){
+    func endGameScreenshot(){
         endGame = true
         let center = CLLocationCoordinate2D(latitude: 40.750101, longitude: -73.988439)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
@@ -55,14 +55,13 @@ extension GameViewController{
     
     func toCurrentLocation(){
         print("-----------current location button tapped------------")
-        readyToScreenshot()
-//        if let current = self.locationManager.location{
-//            print(current)
-//            let center = CLLocationCoordinate2D(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
-//            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-//            
-//            self.mapView.setRegion(region, animated: true)
-//        }
+        if let current = self.locationManager.location{
+            print(current)
+            let center = CLLocationCoordinate2D(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            
+            self.mapView.setRegion(region, animated: true)
+        }
     }
     
     func animateAllButtons(){
