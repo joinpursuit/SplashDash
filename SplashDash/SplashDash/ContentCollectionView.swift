@@ -11,6 +11,7 @@ import SnapKit
 
 class ContentCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    var selectedViewIndex = 0
     var contentViews = [UIView]()
     let sideMargin: CGFloat = 8.0
     
