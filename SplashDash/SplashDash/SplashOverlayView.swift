@@ -12,7 +12,7 @@ import MapKit
 class SplashOverlay: NSObject, MKOverlay {
     var coordinate: CLLocationCoordinate2D
     var boundingMapRect: MKMapRect
-    var teamName: String
+    var teamName: UserTeam
     var splashImageTag: Int
     
     init(coor: SplashCoordinate) {
@@ -20,16 +20,29 @@ class SplashOverlay: NSObject, MKOverlay {
         coordinate = coor.midCoordinate
         teamName = coor.teamName
         splashImageTag = coor.splashImageTag
+        
+        
     }
 }
 
 class SplashOverlayView: MKOverlayRenderer {
     var overlayImage: UIImage
     
-    init(overlay: MKOverlay, teamName: String, splashImageTag: Int) {
+    init(overlay: MKOverlay, teamName: UserTeam, splashImageTag: Int) {
         //switch to choose color and shape
+        let splash = UIImage(named: "inkSample3")!
         
-        self.overlayImage = UIImage(named: "inkSample3")!
+        switch teamName {
+        case .purple:
+            self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: "purpleTeamColor"))
+        case .teal:
+            self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: "tealTeamColor"))
+        case .green:
+            self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: "greenTeamColor"))
+        case .orange:
+            self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: "orangeTeamColor"))
+        }
+        
         super.init(overlay: overlay)
     }
     
@@ -41,7 +54,27 @@ class SplashOverlayView: MKOverlayRenderer {
         
         context.scaleBy(x: 1.0, y: -1.0)
         context.translateBy(x: 0.0, y: -theRect.size.height)
-//        context.rotate(by: CGFloat(arc4random_uniform(181))/360)
         context.draw(imageReference!, in: theRect)
+    }
+}
+
+extension UIImage {
+    func imageWithColor(color1: UIColor) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        color1.setFill()
+        
+        let context = UIGraphicsGetCurrentContext()!
+        context.translateBy(x: 0, y: self.size.height)
+        context.scaleBy(x: 1.0, y: -1.0);
+        context.setBlendMode(CGBlendMode.normal)
+        
+        let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
+        context.clip(to: rect, mask: self.cgImage!)
+        context.fill(rect)
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
 }
