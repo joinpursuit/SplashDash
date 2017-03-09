@@ -117,8 +117,8 @@ extension GameViewController{
         let bitmapInfo = CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue
         let context = CGContext(data: &rawData, width: width, height: height, bitsPerComponent: bytesPerComponent, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo)
         context?.draw(img, in: CGRect(x: 0, y: 0, width: CGFloat(width), height: CGFloat(height)))
-        for x in 0..<width {
-            for y in 0..<height {
+        for x in 0..<height {
+            for y in 0..<width {
                 let byteIndex = (bytesPerRow * x) + y * bytesPerPixel
                 
                 let red   = rawData[byteIndex]
