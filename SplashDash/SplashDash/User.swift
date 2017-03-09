@@ -8,16 +8,20 @@
 
 import Foundation
 
+enum UserTeam: String {
+    case teal, purple, orange, green
+}
+
 class User {
     //MARK: - Properties
     let email: String
     let username: String
     let uid: String
-    let teamName: String
+    let teamName: UserTeam
     var runs: [Run]
     
     //MARK: - Initializer
-    init(email: String, username: String, uid: String, teamName: String, runs: [Run]) {
+    init(email: String, username: String, uid: String, teamName: UserTeam, runs: [Run]) {
         self.email = email
         self.username = username
         self.uid = uid
@@ -34,7 +38,7 @@ class User {
                 return nil
         }
         
-        self.init(email: email, username: username, uid: uid, teamName: teamName, runs: [])
+        self.init(email: email, username: username, uid: uid, teamName: UserTeam(rawValue: teamName)!, runs: [])
     }
     
     //MARK: - Methods
@@ -42,7 +46,7 @@ class User {
         return ["email": self.email,
                 "username": self.username,
                 "uid": self.uid,
-                "teamName": self.teamName,
+                "teamName": self.teamName.rawValue,
                 "runs": []] as [String: Any]
     }
 }

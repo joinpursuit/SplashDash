@@ -33,7 +33,7 @@ class SplashDashTextField: UIView, UITextFieldDelegate {
         let view = UIView()
         
         //Change with color manager after determining color scheme
-        view.backgroundColor = SplashColor.primaryColor()
+        view.backgroundColor = UIColor.black
         
         return view
     }()
@@ -49,7 +49,7 @@ class SplashDashTextField: UIView, UITextFieldDelegate {
         context?.setLineWidth(2.0)
         
         //Change with color manager after determining color scheme
-        context?.setStrokeColor(UIColor.white.cgColor)
+        context?.setStrokeColor(UIColor.lightGray.cgColor)
         
         context?.move(to: startPoint)
         context?.addLine(to: endPoint)
@@ -116,7 +116,7 @@ class SplashDashTextField: UIView, UITextFieldDelegate {
         textLabel.text = textLabelPlaceholder
         
         //Use color manager to adjust this when scheme is determined
-        textLabel.textColor = SplashColor.darkPrimaryColor()
+        textLabel.textColor = UIColor.black
         
         textLabel.font = largeLabelFont
         textLabel.textAlignment = .left
@@ -129,7 +129,7 @@ class SplashDashTextField: UIView, UITextFieldDelegate {
         textField.autocapitalizationType = .none
         
         //Use color manager to determine color scheme
-        textField.textColor = SplashColor.primaryColor()
+        textField.textColor = UIColor.black
         
         textField.font = UIFont.systemFont(ofSize: 18.0)
         
