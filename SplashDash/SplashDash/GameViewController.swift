@@ -15,7 +15,9 @@ class GameViewController: UIViewController {
     let databaseReference = FIRDatabase.database().reference().child("Public")
     
     var locationManager: CLLocationManager!
+    var currentUser: User!
     var currentRun: Run = Run(allCoordinates: [])
+    var endGame: Bool = false
     var gameStatus: Bool = false
     var isButtonsOffScreen: Bool = false
     
@@ -26,6 +28,7 @@ class GameViewController: UIViewController {
         configureConstraints()
         setupLocationManager()
         fetchGlobalSplash()
+        fetchCurrentUserData()
         updateLabel()
         mapView.preservesSuperviewLayoutMargins = true
         

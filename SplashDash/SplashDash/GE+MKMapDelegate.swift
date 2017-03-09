@@ -44,4 +44,11 @@ extension GameViewController: MKMapViewDelegate{
         
         return MKOverlayRenderer(overlay: overlay)
     }
+    
+    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
+        if endGame{
+            takeScreenshot()
+        }
+        self.endGame = false
+    }
 }

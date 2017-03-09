@@ -13,9 +13,9 @@ class SplashOverlay: NSObject, MKOverlay {
     var coordinate: CLLocationCoordinate2D
     var boundingMapRect: MKMapRect
     
-    init(park: SplashCoordinate) {
-        boundingMapRect = park.overlayBoundingMapRect
-        coordinate = park.midCoordinate
+    init(coor: SplashCoordinate) {
+        boundingMapRect = coor.overlayBoundingMapRect
+        coordinate = coor.midCoordinate
     }
 }
 

@@ -25,6 +25,18 @@ class User {
         self.runs = runs
     }
     
+    convenience init?(_ validDict: NSDictionary) {
+        guard let email = validDict["email"] as? String,
+            let username = validDict["username"] as? String,
+            let uid = validDict["uid"] as? String,
+            let teamName = validDict["teamName"] as? String else {
+                print("!!!!!Error parsing current user!!!!!")
+                return nil
+        }
+        
+        self.init(email: email, username: username, uid: uid, teamName: teamName, runs: [])
+    }
+    
     //MARK: - Methods
     func toData() -> [String: Any]{
         return ["email": self.email,
