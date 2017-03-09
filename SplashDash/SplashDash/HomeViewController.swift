@@ -292,6 +292,7 @@ class HomeViewController: UIViewController {
                         guard let email = self.emailTextField.textField.text,
                             let username = self.usernameTextField.textField.text,
                             let password = self.passwordTextField.textField.text,
+                            let _ = self.teamName,
                             email != "",
                             password != "" else {
                                 self.hiddenLabel.text = "Please verify all fields have been entered."
