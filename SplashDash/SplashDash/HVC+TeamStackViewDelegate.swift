@@ -27,6 +27,8 @@ extension HomeViewController: TeamStackViewDelegate {
         self.loginRegisterButton.layer.borderColor = UIColor(hex: SplashColor.colorsDict["tealTeamColor"]!, alpha: 1.0).cgColor
         
         self.hiddenLabel.textColor = UIColor(hex: SplashColor.colorsDict["tealTeamColor"]!, alpha: 1.0)
+        
+        self.teamName = UserTeam.teal
     }
     
     func orangeImageViewTapped(_ sender: UITapGestureRecognizer) {
@@ -46,6 +48,8 @@ extension HomeViewController: TeamStackViewDelegate {
         self.loginRegisterButton.layer.borderColor = UIColor(hex: SplashColor.colorsDict["orangeTeamColor"]!, alpha: 1.0).cgColor
         
         self.hiddenLabel.textColor = UIColor(hex: SplashColor.colorsDict["orangeTeamColor"]!, alpha: 1.0)
+        
+        self.teamName = UserTeam.orange
     }
     
     func greenImageViewTapped(_ sender: UITapGestureRecognizer) {
@@ -65,6 +69,8 @@ extension HomeViewController: TeamStackViewDelegate {
         self.loginRegisterButton.layer.borderColor = UIColor(hex: SplashColor.colorsDict["greenTeamColor"]!, alpha: 1.0).cgColor
         
         self.hiddenLabel.textColor = UIColor(hex: SplashColor.colorsDict["greenTeamColor"]!, alpha: 1.0)
+        
+        self.teamName = UserTeam.green
     }
     
     func purpleImageViewTapped(_ sender: UITapGestureRecognizer) {
@@ -84,5 +90,7 @@ extension HomeViewController: TeamStackViewDelegate {
         self.loginRegisterButton.layer.borderColor = UIColor(hex: SplashColor.colorsDict["purpleTeamColor"]!, alpha: 1.0).cgColor
         
         self.hiddenLabel.textColor = UIColor(hex: SplashColor.colorsDict["purpleTeamColor"]!, alpha: 1.0)
+        
+        self.teamName = UserTeam.purple
     }
 }

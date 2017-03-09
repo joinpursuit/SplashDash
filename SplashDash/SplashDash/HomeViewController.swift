@@ -18,6 +18,8 @@ class HomeViewController: UIViewController {
     
     var databaseReference = FIRDatabase.database().reference()
     
+    var teamName: UserTeam!
+    
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -305,7 +307,7 @@ class HomeViewController: UIViewController {
                             
                             //Still need to determine teamName assignment logic
                             let uid = user?.uid
-                            let newUser = User(email: email, username: username, uid: uid!, teamName: UserTeam(rawValue: UserTeam.teal.rawValue)!, runs: [])
+                            let newUser = User(email: email, username: username, uid: uid!, teamName: self.teamName, runs: [])
                             self.addUserToDatabase(newUser: newUser)
                             
                             self.present(GameViewController(), animated: true, completion: nil)
