@@ -30,7 +30,7 @@ class GameViewController: UIViewController {
         fetchGlobalSplash()
         fetchCurrentUserData()
         updateLabel()
-        mapView.preservesSuperviewLayoutMargins = true
+//        mapView.preservesSuperviewLayoutMargins = true
         
 //        let displaylink = CADisplayLink(target: self, selector: #selector(updateLabel))
 //        displaylink.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
@@ -59,8 +59,9 @@ class GameViewController: UIViewController {
         self.view.addSubview(mapView)
         self.mapView.addSubview(findMeButton)
         self.mapView.addSubview(endGameButton)
-        self.mapView.addSubview(bottomRootView)
-//        self.view.addSubview(bottomRootView)
+
+//        self.mapView.addSubview(bottomRootView)
+        self.view.addSubview(bottomRootView)
 
         self.bottomRootView.addSubview(bottomCorneredContainerView)
         self.bottomCorneredContainerView.addSubview(bottomView)
@@ -166,7 +167,8 @@ class GameViewController: UIViewController {
         view.backgroundColor = .clear
 //        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
 //        view.addGestureRecognizer(gestureRecognizer)
-//        view.isUserInteractionEnabled = false
+
+
         return view
     }()
     
@@ -176,11 +178,13 @@ class GameViewController: UIViewController {
         view.layer.cornerRadius = 7.0
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         view.addGestureRecognizer(gestureRecognizer)
+        
         return view
     }()
     
     lazy var bottomView: BottomView = {
         let view = BottomView()
+                view.isUserInteractionEnabled = true
         return view
     }()
 }

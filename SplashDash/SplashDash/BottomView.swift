@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ScrollableSegmentedControl
 
 class BottomView: UIView {
 
@@ -22,13 +23,22 @@ class BottomView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Actions
+    
+    func segmentSelected(sender:ScrollableSegmentedControl) {
+        print("Segment at index \(sender.selectedSegmentIndex)  selected")
+        contentCollectionView.selectedSegmentIndex = sender.selectedSegmentIndex
+    }
+    
     // MARK: - Setup
     
     func setupViewHierarchy() {
         self.addSubview(topView)
-        self.addSubview(contentView)
-        self.addSubview(seperatorLine)
-        contentView.addSubview(contentCollectionView)
+        self.addSubview(contentSegmentedControl)
+        self.addSubview(contentCollectionView)
+        self.addSubview(seperatorLine1)
+//        self.addSubview(seperatorLine2)
+        
         topView.addSubview(currentRunLabel)
     }
     
@@ -42,19 +52,27 @@ class BottomView: UIView {
             view.height.equalTo(self.topViewSpacing)
         }
         
-        seperatorLine.snp.makeConstraints { (view) in
+        seperatorLine1.snp.makeConstraints { (view) in
             view.leading.trailing.equalToSuperview()
             view.top.equalTo(topView.snp.bottom)
             view.height.equalTo(1.0)
         }
         
-        contentCollectionView.snp.makeConstraints { (view) in
-            view.leading.top.trailing.bottom.equalToSuperview().inset(8.0)
+        contentSegmentedControl.snp.makeConstraints { (view) in
+            view.leading.trailing.equalToSuperview()
+            view.top.equalTo(topView.snp.bottom)
+            view.height.equalTo(25.0)
         }
         
-        contentView.snp.makeConstraints { (view) in
-            view.leading.trailing.bottom.equalToSuperview()
-            view.top.equalTo(topView.snp.bottom)
+//        seperatorLine2.snp.makeConstraints { (view) in
+//            view.leading.trailing.equalToSuperview()
+//            view.top.equalTo(contentSegmentedControl.snp.bottom)
+//            view.height.equalTo(1.0)
+//        }
+        
+        contentCollectionView.snp.makeConstraints { (view) in
+                        view.leading.trailing.bottom.equalToSuperview()
+                        view.top.equalTo(contentSegmentedControl.snp.bottom)
         }
     }
     
@@ -66,7 +84,27 @@ class BottomView: UIView {
         return view
     }()
     
-    private lazy var seperatorLine: UIView = {
+    private lazy var seperatorLine1: UIView = {
+        let view = UIView()
+        view.backgroundColor = SplashColor.lightPrimaryColor()
+        return view
+    }()
+    
+    lazy var contentSegmentedControl: ScrollableSegmentedControl = {
+        let control = ScrollableSegmentedControl()
+        control.segmentStyle = .textOnly
+        control.insertSegment(withTitle: "My Runs", at: 0)
+        control.insertSegment(withTitle: "Team Run History", at: 1)
+        control.underlineSelected = true
+        control.addTarget(self, action: #selector(self.segmentSelected(sender:)), for: .valueChanged)
+        //Use color manager to determine color scheme here
+        control.tintColor = UIColor.black
+//        control.backgroundColor = SplashColor.primaryColor()
+        control.selectedSegmentIndex = 0
+        return control
+    }()
+    
+    private lazy var seperatorLine2: UIView = {
         let view = UIView()
         view.backgroundColor = SplashColor.lightPrimaryColor()
         return view
@@ -81,16 +119,8 @@ class BottomView: UIView {
         return label
     }()
     
-    private lazy var contentView: UIView = {
-        let view = UIView()
-        view.backgroundColor = SplashColor.primaryColor()
-        return view
-    }()
-    
     private lazy var contentCollectionView: ContentCollectionView = {
         let view = ContentCollectionView()
         return view
     }()
-    
-    
 }

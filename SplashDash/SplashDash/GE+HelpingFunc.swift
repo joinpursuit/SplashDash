@@ -83,7 +83,7 @@ extension GameViewController{
         
         guard let contentScrollView = self.mapView.subviews.first?.subviews.first else { return }
         
-        UIGraphicsBeginImageContextWithOptions(contentScrollView.bounds.size, false, 5.0)
+        UIGraphicsBeginImageContextWithOptions(contentScrollView.bounds.size, false, 0.0)
         
         contentScrollView.drawHierarchy(in: contentScrollView.bounds, afterScreenUpdates: true)
         
@@ -146,10 +146,10 @@ extension GameViewController{
         }
         //return winer
         print("\(height),  \(width)")
-        return ["purple": purpleCoverage,
-                "teal": tealCoverage,
-                "green": greenCoverage,
-                "orange": orangeCoverage]
+        return ["purple": purpleCoverage/total,
+                "teal": tealCoverage/total,
+                "green": greenCoverage/total,
+                "orange": orangeCoverage/total]
     }
     
     func updateLabel() {
