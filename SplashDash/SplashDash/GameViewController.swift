@@ -58,6 +58,7 @@ class GameViewController: UIViewController {
 
         self.view.addSubview(mapView)
         self.mapView.addSubview(findMeButton)
+        self.mapView.addSubview(endGameButton)
         self.mapView.addSubview(bottomRootView)
 //        self.view.addSubview(bottomRootView)
 
@@ -97,6 +98,12 @@ class GameViewController: UIViewController {
         findMeButton.snp.remakeConstraints { (view) in
             view.trailing.equalTo(gameButton)
             view.bottom.equalTo(gameButton.snp.top).offset(-40)
+            view.size.equalTo(CGSize(width: 70, height: 70))
+        }
+        
+        endGameButton.snp.remakeConstraints { (view) in
+            view.centerX.equalTo(findMeButton)
+            view.bottom.equalTo(findMeButton.snp.top).offset(-30)
             view.size.equalTo(CGSize(width: 70, height: 70))
         }
     }
@@ -140,6 +147,17 @@ class GameViewController: UIViewController {
         button.layer.cornerRadius = 35
         button.addShadows()
         button.addTarget(self, action: #selector(toCurrentLocation), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var endGameButton: UIButton = {
+        let button = UIButton(type: UIButtonType.infoLight)
+        button.isEnabled = true
+        button.backgroundColor = .white
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 35
+        button.addShadows()
+        button.addTarget(self, action: #selector(takeScreenshot), for: .touchUpInside)
         return button
     }()
     

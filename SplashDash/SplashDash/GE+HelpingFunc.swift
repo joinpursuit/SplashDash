@@ -46,8 +46,8 @@ extension GameViewController{
     
     func endGameScreenshot(){
         endGame = true
-        let center = CLLocationCoordinate2D(latitude: 40.750101, longitude: -73.988439)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+        let center = CLLocationCoordinate2D(latitude: 40.728233, longitude: -73.992033)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08))
         
         self.mapView.setRegion(region, animated: true)
         
@@ -69,9 +69,11 @@ extension GameViewController{
             if self.isButtonsOffScreen{
                 self.gameButton.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.findMeButton.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.endGameButton.transform = CGAffineTransform(translationX: 0, y: 0)
             }else{
                 self.gameButton.transform = CGAffineTransform(translationX: 150, y: 0)
                 self.findMeButton.transform = CGAffineTransform(translationX: 150, y: 0)
+                self.endGameButton.transform = CGAffineTransform(translationX: 150, y: 0)
             }
             self.isButtonsOffScreen = !self.isButtonsOffScreen
         }, completion: nil)
@@ -81,14 +83,14 @@ extension GameViewController{
         
         guard let contentScrollView = self.mapView.subviews.first?.subviews.first else { return }
         
-        UIGraphicsBeginImageContextWithOptions(contentScrollView.bounds.size, false, UIScreen.main.scale)
+        UIGraphicsBeginImageContextWithOptions(contentScrollView.bounds.size, false, 5.0)
         
         contentScrollView.drawHierarchy(in: contentScrollView.bounds, afterScreenUpdates: true)
         
         let screenShot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-//        UIImageWriteToSavedPhotosAlbum(screenShot!, nil, nil, 
+        UIImageWriteToSavedPhotosAlbum(screenShot!, nil, nil, nil)
         let score = colorArray(image: screenShot!)
         print(score)
     }
@@ -99,6 +101,8 @@ extension GameViewController{
         var tealCoverage = 0.0
         var greenCoverage = 0.0
         var orangeCoverage = 0.0
+        
+        var total: Double = 0.0
         
         let img = image.cgImage!
         let width = img.width
@@ -124,23 +128,28 @@ extension GameViewController{
                 switch (red, green, blue) {
                 case (103, 58, 183):
                     purpleCoverage += 1.0
+                    total += 1.0
                 case (0, 188, 212):
                     tealCoverage += 1.0
+                    total += 1.0
                 case (76, 175, 80):
                     greenCoverage += 1.0
+                    total += 1.0
                 case (255, 87, 34):
                     orangeCoverage += 1.0
+                    total += 1.0
                 default:
+                    total += 1.0
                     continue
                 }
             }
         }
         //return winer
-        let total = Double(height*width)
-        return ["purple": (purpleCoverage/total),
-                "teal": (tealCoverage/total),
-                "green": (greenCoverage/total),
-                "orange": (orangeCoverage/total)]
+        print("\(height),  \(width)")
+        return ["purple": purpleCoverage,
+                "teal": tealCoverage,
+                "green": greenCoverage,
+                "orange": orangeCoverage]
     }
     
     func updateLabel() {
