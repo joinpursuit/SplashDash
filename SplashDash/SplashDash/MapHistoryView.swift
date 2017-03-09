@@ -37,14 +37,16 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     }
     
     func configureConstraints() {
-        mapView.snp.remakeConstraints { (view) in
-            view.leading.trailing.bottom.equalToSuperview()
-            view.height.equalTo(mapView.snp.width)
-        }
         
         datePicker.snp.remakeConstraints { (view) in
             view.leading.trailing.top.equalToSuperview()
-            view.bottom.equalTo(mapView.snp.top)
+            view.height.equalTo(50.0)
+//            view.bottom.equalTo(mapView.snp.top)
+        }
+        mapView.snp.remakeConstraints { (view) in
+            view.leading.trailing.bottom.equalToSuperview()
+            //view.height.equalTo(mapView.snp.width)
+            view.top.equalTo(datePicker.snp.bottom)
         }
     }
     
@@ -68,5 +70,11 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         dp.addTarget(self, action: #selector(datePickerChanged(_:)), for: .valueChanged)
         return dp
     }()
+    
+//    lazy var amLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "12 AM"
+//        
+//    }()
     
 }
