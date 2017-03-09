@@ -9,10 +9,27 @@
 import UIKit
 import CoreLocation
 import MapKit
+import Firebase
 
 extension GameViewController{
     
-    //    func updateGameStatus(){
+    func fetchCurrentUserData(){
+        if currentUser == nil{
+            let uid = FIRAuth.auth()?.currentUser?.uid
+            
+            let linkRef = FIRDatabase.database().reference().child("Users").child(uid!)
+            
+            linkRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                if let value = snapshot.value as? NSDictionary{
+                    if let user = User(value){
+                        self.currentUser = user
+                        dump(user)
+                    }
+                }
+            })
+        }
+    }
+    
     func startButtonTapped() {
         print("-----------start button tapped-----------")
         if self.gameStatus{
@@ -130,12 +147,12 @@ extension GameViewController{
         context?.draw(img, in: CGRect(x: 0, y: 0, width: CGFloat(width), height: CGFloat(height)))
         for x in 0..<width {
             for y in 0..<height {
-                let byteIndex = (bytesPerRow * x) + y * bytesPerPixel
+//                let byteIndex = (bytesPerRow * x) + y * bytesPerPixel
                 
-                let red   = CGFloat(rawData[byteIndex]    ) / 255.0
-                let green = CGFloat(rawData[byteIndex + 1]) / 255.0
-                let blue  = CGFloat(rawData[byteIndex + 2]) / 255.0
-                //                let alpha = CGFloat(rawData[byteIndex + 3]) / 255.0
+//                let red   = CGFloat(rawData[byteIndex]    ) / 255.0
+//                let green = CGFloat(rawData[byteIndex + 1]) / 255.0
+//                let blue  = CGFloat(rawData[byteIndex + 2]) /
+//                let alpha = CGFloat(rawData[byteIndex + 3]) / 255.0
                 
 //                print("\(red), \(green), \(blue)")
                 result += 1
