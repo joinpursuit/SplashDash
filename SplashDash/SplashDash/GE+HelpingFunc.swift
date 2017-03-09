@@ -77,7 +77,7 @@ extension GameViewController{
             self.isButtonsOffScreen = !self.isButtonsOffScreen
         }, completion: nil)
     }
-    
+
     func takeScreenshot() {
         
         guard let contentScrollView = self.mapView.subviews.first?.subviews.first else { return }
@@ -142,7 +142,10 @@ extension GameViewController{
         
         let diff = Calendar.current.dateComponents([Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: Date(), to: end!)
         
-        countDownLabel.text = "Hours left: \(diff.hour!)"
+        if let diffHour = diff.hour {
+        bottomView.currentRunLabel.text = (bottomView.currentRunLabel.text ?? "") + "\nHours left: \(diffHour)"
+        }
+//        countDownLabel.text = "Hours left: \(diff.hour!)"
         
     }
 }

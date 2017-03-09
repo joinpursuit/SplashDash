@@ -10,7 +10,7 @@ import UIKit
 
 class BottomView: UIView {
 
-    let topViewSpacing: CGFloat = 64.0
+    let topViewSpacing: CGFloat = 100.0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -72,9 +72,10 @@ class BottomView: UIView {
         return view
     }()
     
-    private lazy var currentRunLabel: UILabel = {
+    lazy var currentRunLabel: UILabel = {
         let label = UILabel()
-        label.text = "Duration of run: \("30 mins")\nDistance: \("2.1 miles")"
+        var labelText = "Duration of run: \("30 mins")\nDistance: \("2.1 miles")"
+        label.text = labelText
         label.textColor = SplashColor.lightPrimaryColor()
         label.numberOfLines = 0
         return label
