@@ -14,11 +14,11 @@ class SplashCoordinate {
     let userID: String
     let midCoordinate: CLLocationCoordinate2D
     let speed: Double
-    let teamName: String
+    let teamName: UserTeam
     let splashImageTag: Int
     let timestamp: Double
     
-    init(userID: String, midCoordinate: CLLocationCoordinate2D, speed: Double, teamName: String, splashImageTag: Int, timestamp: Double) {
+    init(userID: String, midCoordinate: CLLocationCoordinate2D, speed: Double, teamName: UserTeam, splashImageTag: Int, timestamp: Double) {
         self.userID = userID
         self.midCoordinate = midCoordinate
         self.speed = speed
@@ -41,7 +41,7 @@ class SplashCoordinate {
         
         let midCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
-        self.init(userID: userID, midCoordinate: midCoordinate, speed: speed, teamName: teamName, splashImageTag: splashImageTag, timestamp: timestamp)
+        self.init(userID: userID, midCoordinate: midCoordinate, speed: speed, teamName: UserTeam(rawValue: teamName)!, splashImageTag: splashImageTag, timestamp: timestamp)
     }
     
     var adjustedRatio: Double {
@@ -94,7 +94,7 @@ class SplashCoordinate {
                 "latitude": self.midCoordinate.latitude,
                 "longitude": self.midCoordinate.longitude,
                 "speed": self.speed,
-                "teamName": self.teamName,
+                "teamName": self.teamName.rawValue,
                 "splashImageTag": self.splashImageTag,
                 "timestamp": self.timestamp] as [String: Any]
     }

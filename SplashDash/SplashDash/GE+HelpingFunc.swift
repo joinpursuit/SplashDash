@@ -89,10 +89,16 @@ extension GameViewController{
         UIGraphicsEndImageContext()
         
 //        UIImageWriteToSavedPhotosAlbum(screenShot!, nil, nil, 
-        colorArray(image: screenShot!)
+        let score = colorArray(image: screenShot!)
+        print(score)
     }
     
-    func colorArray(image: UIImage) {
+    func colorArray(image: UIImage) -> [String: Double] {
+        
+        var purpleCoverage = 0.0
+        var tealCoverage = 0.0
+        var greenCoverage = 0.0
+        var orangeCoverage = 0.0
         
         let img = image.cgImage!
         let width = img.width
@@ -117,19 +123,24 @@ extension GameViewController{
                 
                 switch (red, green, blue) {
                 case (103, 58, 183):
-                    print("purpleTeamColor")
+                    purpleCoverage += 1.0
                 case (0, 188, 212):
-                    print("tealTeamColor")
+                    tealCoverage += 1.0
                 case (76, 175, 80):
-                    print("greenTeamColor")
+                    greenCoverage += 1.0
                 case (255, 87, 34):
-                    print("orangeTeamColor")
+                    orangeCoverage += 1.0
                 default:
                     continue
                 }
             }
         }
         //return winer
+        let total = Double(height*width)
+        return ["purple": (purpleCoverage/total),
+                "teal": (tealCoverage/total),
+                "green": (greenCoverage/total),
+                "orange": (orangeCoverage/total)]
     }
     
     func updateLabel() {

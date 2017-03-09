@@ -60,16 +60,8 @@ struct SplashColor {
     static func secondaryTextColor(alpha: CGFloat = 1.0) -> UIColor {
         return UIColor(hex: self.colorsDict["secondaryTextColor"]!, alpha: alpha)
     }
-    static func purpleTeamColor(alpha: CGFloat = 1.0) -> UIColor {
-        return UIColor(hex: self.colorsDict["purpleTeamColor"]!, alpha: alpha)
+    static func teamColor(for team: String, alpha: CGFloat = 1.0) -> UIColor {
+        return UIColor(hex: self.colorsDict[team]!, alpha: alpha)
     }
-    static func tealTeamColor(alpha: CGFloat = 1.0) -> UIColor {
-        return UIColor(hex: self.colorsDict["tealTeamColor"]!, alpha: alpha)
-    }
-    static func greenTeamColor(alpha: CGFloat = 1.0) -> UIColor {
-        return UIColor(hex: self.colorsDict["greenTeamColor"]!, alpha: alpha)
-    }
-    static func orangeTeamColor(alpha: CGFloat = 1.0) -> UIColor {
-        return UIColor(hex: self.colorsDict["orangeTeamColor"]!, alpha: alpha)
-    }
+    
 }
