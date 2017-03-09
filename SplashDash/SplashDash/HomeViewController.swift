@@ -18,11 +18,13 @@ class HomeViewController: UIViewController {
     
     var databaseReference = FIRDatabase.database().reference()
     
+    var teamName: UserTeam!
+    
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = SplashColor.primaryColor()
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "homeViewControllerBackground")!)
         
         //set up views
         setUpSegmentedControl()
@@ -30,12 +32,14 @@ class HomeViewController: UIViewController {
         
         usernameTextField.isHidden = true
         stackview.isHidden = true
+        stackview.delegate = self
         self.usernameTextField.alpha = 0
         segmentedControl.selectedSegmentIndex = 0
         configureConstraints()
         
         //set up keyboard-resigning tap gesture
         setUpTapGesture()
+        
     }
     
     //MARK: - Set Up Views and Constraints
@@ -288,6 +292,7 @@ class HomeViewController: UIViewController {
                         guard let email = self.emailTextField.textField.text,
                             let username = self.usernameTextField.textField.text,
                             let password = self.passwordTextField.textField.text,
+                            let _ = self.teamName,
                             email != "",
                             password != "" else {
                                 self.hiddenLabel.text = "Please verify all fields have been entered."
@@ -301,9 +306,9 @@ class HomeViewController: UIViewController {
                                 return
                             }
                             
-                            //Still need to determine teamName logic and create each of these objects with an empty runs array
+                            //Still need to determine teamName assignment logic
                             let uid = user?.uid
-                            let newUser = User(email: email, username: username, uid: uid!, teamName: "PLACEHOLDER", runs: [])
+                            let newUser = User(email: email, username: username, uid: uid!, teamName: self.teamName, runs: [])
                             self.addUserToDatabase(newUser: newUser)
                             
                             self.present(GameViewController(), animated: true, completion: nil)
@@ -368,7 +373,7 @@ class HomeViewController: UIViewController {
         let view = UIView()
         
         //Use color manager to change the backgroundColor to the color determined by Sabrina and design mentor.
-        view.backgroundColor = SplashColor.lightPrimaryColor()
+        view.backgroundColor = UIColor.white
         view.layer.cornerRadius = 12
         view.addShadows()
         
@@ -404,12 +409,12 @@ class HomeViewController: UIViewController {
     
     lazy var loginRegisterButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = SplashColor.primaryColor()
-        button.setTitleColor(SplashColor.lightPrimaryColor(), for: .normal)
+        button.backgroundColor = UIColor.black
+        button.setTitleColor(UIColor.white, for: .normal)
         button.setTitle("Log in", for: .normal)
         button.layer.borderWidth = 2.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.layer.borderColor = SplashColor.primaryColor().cgColor
+        button.layer.borderColor = UIColor.black.cgColor
         button.layer.cornerRadius = 5
         button.addShadows()
         button.addTarget(self, action: #selector(loginRegisterButtonPressed), for: .touchUpInside)
