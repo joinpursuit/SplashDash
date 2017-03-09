@@ -30,12 +30,14 @@ class HomeViewController: UIViewController {
         
         usernameTextField.isHidden = true
         stackview.isHidden = true
+        stackview.delegate = self
         self.usernameTextField.alpha = 0
         segmentedControl.selectedSegmentIndex = 0
         configureConstraints()
         
         //set up keyboard-resigning tap gesture
         setUpTapGesture()
+        
     }
     
     //MARK: - Set Up Views and Constraints

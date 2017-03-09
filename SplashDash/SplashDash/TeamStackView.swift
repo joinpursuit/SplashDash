@@ -9,8 +9,11 @@
 import UIKit
 import SnapKit
 
-protocol TeamStackViewDelegate {
-    
+@objc protocol TeamStackViewDelegate {
+    func cyanImageViewTapped(_ sender: UITapGestureRecognizer)
+    func orangeImageViewTapped(_ sender: UITapGestureRecognizer)
+    func greenImageViewTapped(_ sender: UITapGestureRecognizer)
+    func purpleImageViewTapped(_ sender: UITapGestureRecognizer)
 }
 
 class TeamStackView: UIView {
@@ -25,6 +28,8 @@ class TeamStackView: UIView {
     var orangeTapGestureRecognizer: UITapGestureRecognizer!
     var greenTapGestureRecognizer: UITapGestureRecognizer!
     var purpleTapGestureRecognizer: UITapGestureRecognizer!
+    
+    var delegate: TeamStackViewDelegate?
     
     //MARK: - Initializers
     override init(frame: CGRect) {
@@ -89,46 +94,28 @@ class TeamStackView: UIView {
     
     //MARK: - Tap Gesture Methods
     func addTapGestures() {
-        cyanTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(cyanImageViewTapped(_:)))
+        cyanTapGestureRecognizer = UITapGestureRecognizer(target: self.delegate, action: #selector(self.delegate?.cyanImageViewTapped(_:)))
         cyanTapGestureRecognizer.cancelsTouchesInView = false
         cyanTapGestureRecognizer.numberOfTapsRequired = 1
         cyanTapGestureRecognizer.numberOfTouchesRequired = 1
         self.cyanImageView.addGestureRecognizer(cyanTapGestureRecognizer)
         
-        orangeTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(orangeImageViewTapped(_:)))
+        orangeTapGestureRecognizer = UITapGestureRecognizer(target: self.delegate, action: #selector(self.delegate?.orangeImageViewTapped(_:)))
         orangeTapGestureRecognizer.cancelsTouchesInView = false
         orangeTapGestureRecognizer.numberOfTapsRequired = 1
         orangeTapGestureRecognizer.numberOfTouchesRequired = 1
         self.orangeImageView.addGestureRecognizer(orangeTapGestureRecognizer)
         
-        greenTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(greenImageViewTapped(_:)))
+        greenTapGestureRecognizer = UITapGestureRecognizer(target: self.delegate, action: #selector(self.delegate?.greenImageViewTapped(_:)))
         greenTapGestureRecognizer.cancelsTouchesInView = false
         greenTapGestureRecognizer.numberOfTapsRequired = 1
         greenTapGestureRecognizer.numberOfTouchesRequired = 1
         self.greenImageView.addGestureRecognizer(greenTapGestureRecognizer)
         
-        purpleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(purpleImageViewTapped(_:)))
+        purpleTapGestureRecognizer = UITapGestureRecognizer(target: self.delegate, action: #selector(self.delegate?.purpleImageViewTapped(_:)))
         purpleTapGestureRecognizer.cancelsTouchesInView = false
         purpleTapGestureRecognizer.numberOfTapsRequired = 1
         purpleTapGestureRecognizer.numberOfTouchesRequired = 1
         self.purpleImageView.addGestureRecognizer(purpleTapGestureRecognizer)
-        
     }
-    
-    func cyanImageViewTapped(_ sender: UITapGestureRecognizer) {
-        print("CYAN IMAGE VIEW TAPPED")
-    }
-    
-    func orangeImageViewTapped(_ sender: UITapGestureRecognizer) {
-        print("ORANGE IMAGE VIEW TAPPED")
-    }
-    
-    func greenImageViewTapped(_ sender: UITapGestureRecognizer) {
-        print("GREEN IMAGE VIEW TAPPED")
-    }
-    
-    func purpleImageViewTapped(_ sender: UITapGestureRecognizer) {
-        print("PURPLE IMAGE VIEW TAPPED")
-    }
-
 }
