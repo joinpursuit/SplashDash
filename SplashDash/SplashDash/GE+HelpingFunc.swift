@@ -77,7 +77,7 @@ extension GameViewController{
             self.isButtonsOffScreen = !self.isButtonsOffScreen
         }, completion: nil)
     }
-    
+
     func takeScreenshot() {
         
         guard let contentScrollView = self.mapView.subviews.first?.subviews.first else { return }
