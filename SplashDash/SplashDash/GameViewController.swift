@@ -57,14 +57,13 @@ class GameViewController: UIViewController {
     func setupViewHierarchy(){
 
         self.view.addSubview(mapView)
+        self.mapView.addSubview(findMeButton)
         self.mapView.addSubview(bottomRootView)
 //        self.view.addSubview(bottomRootView)
 
         self.bottomRootView.addSubview(bottomCorneredContainerView)
         self.bottomCorneredContainerView.addSubview(bottomView)
         self.bottomRootView.addSubview(gameButton)
-        self.bottomRootView.addSubview(findMeButton)
-        self.bottomRootView.addSubview(countDownLabel)
     }
     
     func configureConstraints(){
@@ -75,7 +74,7 @@ class GameViewController: UIViewController {
         bottomRootView.snp.remakeConstraints { (view) in
             view.leading.trailing.equalToSuperview()
 //          This extension of bottomRootView allows all buttons to be selectable
-            view.top.equalTo(self.findMeButton.snp.top)
+            view.top.equalTo(self.gameButton.snp.top)
             view.bottom.equalTo(bottomCorneredContainerView.snp.bottom)
         }
         
@@ -99,11 +98,6 @@ class GameViewController: UIViewController {
             view.trailing.equalTo(gameButton)
             view.bottom.equalTo(gameButton.snp.top).offset(-40)
             view.size.equalTo(CGSize(width: 70, height: 70))
-        }
-        
-        countDownLabel.snp.remakeConstraints { (view) in
-            view.top.leading.equalToSuperview().offset(40)
-            view.trailing.equalToSuperview().offset(-30)
         }
     }
     
@@ -147,13 +141,6 @@ class GameViewController: UIViewController {
         button.addShadows()
         button.addTarget(self, action: #selector(toCurrentLocation), for: .touchUpInside)
         return button
-    }()
-    
-    lazy var countDownLabel: UILabel = {
-        let view = UILabel()
-        view.font = UIFont.boldSystemFont(ofSize: 20)
-        view.textAlignment = .right
-        return view
     }()
     
     lazy var bottomRootView: UIView = {
