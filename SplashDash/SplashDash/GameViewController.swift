@@ -18,6 +18,7 @@ class GameViewController: UIViewController {
     var endGame: Bool = false
     var gameStatus: Bool = false
     var isButtonsOffScreen: Bool = false
+    var bottomViewPreviousPosition: CGFloat = 0.0
     
     var currentUser: User? {
         didSet {

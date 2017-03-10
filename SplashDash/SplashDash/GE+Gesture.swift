@@ -37,23 +37,34 @@ extension GameViewController{
         
         let spacing = bottomView.topViewSpacing
         let heightDiff = allMovingViews.frame.height - movingView.frame.height
-        let snapBuffer: CGFloat = 100.0
+        let snapBuffer: CGFloat = 30.0
         
         switch gestureRecognizer.state {
+        case .began:
+            self.bottomViewPreviousPosition = allMovingViews.center.y
         case .changed:
             let translation = gestureRecognizer.translation(in: self.view)
             allMovingViews.center = CGPoint(x: allMovingViews.center.x, y: allMovingViews.center.y + translation.y)
             gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
-            
         case .ended:
-            // Min Y
+            // don't change position if change is within buffer
+            
             if allMovingViews.center.y - allMovingViews.frame.height/2 < spacing - heightDiff + snapBuffer {
                 allMovingViews.center = CGPoint(x: allMovingViews.center.x, y: spacing - heightDiff + allMovingViews.frame.height/2)
                 gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
                 return }
-            
+            else if allMovingViews.center.y - allMovingViews.frame.height/2 > self.view.frame.height - spacing - heightDiff - snapBuffer {
+                allMovingViews.center = CGPoint(x: allMovingViews.center.x, y: self.view.frame.height + allMovingViews.frame.height/2 - spacing - heightDiff)
+                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+                return
+            }
+            // Min Y
+            else if allMovingViews.center.y < self.bottomViewPreviousPosition {
+                allMovingViews.center = CGPoint(x: allMovingViews.center.x, y: spacing - heightDiff + allMovingViews.frame.height/2)
+                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+                return }
             // Max Y
-            if allMovingViews.center.y - allMovingViews.frame.height/2 > self.view.frame.height - spacing - heightDiff - snapBuffer {
+            else {
                 allMovingViews.center = CGPoint(x: allMovingViews.center.x, y: self.view.frame.height + allMovingViews.frame.height/2 - spacing - heightDiff)
                 gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
                 return
