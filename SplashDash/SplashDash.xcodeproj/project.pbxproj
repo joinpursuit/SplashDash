@@ -33,6 +33,7 @@
 		4714581E1E6DF74F00467881 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4714581D1E6DF74F00467881 /* User.swift */; };
 		471458201E6DF98A00467881 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4714581F1E6DF98A00467881 /* Run.swift */; };
 		471458241E712B2100467881 /* HVC+TeamStackViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471458231E712B2100467881 /* HVC+TeamStackViewDelegate.swift */; };
+		472AC9511E73137800E11851 /* UIImageView+VibrationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472AC9501E73137800E11851 /* UIImageView+VibrationAnimation.swift */; };
 		474371781E6A29CE00391AF2 /* SplashDashTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474371771E6A29CE00391AF2 /* SplashDashTextField.swift */; };
 		4743717A1E6CD47000391AF2 /* TeamStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474371791E6CD47000391AF2 /* TeamStackView.swift */; };
 		47F56CF21E68857E007375BB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F56CF11E68857E007375BB /* UIView+Extension.swift */; };
@@ -80,6 +81,7 @@
 		4714581D1E6DF74F00467881 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4714581F1E6DF98A00467881 /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		471458231E712B2100467881 /* HVC+TeamStackViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HVC+TeamStackViewDelegate.swift"; sourceTree = "<group>"; };
+		472AC9501E73137800E11851 /* UIImageView+VibrationAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+VibrationAnimation.swift"; sourceTree = "<group>"; };
 		474371771E6A29CE00391AF2 /* SplashDashTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashDashTextField.swift; sourceTree = "<group>"; };
 		474371791E6CD47000391AF2 /* TeamStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamStackView.swift; sourceTree = "<group>"; };
 		47F56CF11E68857E007375BB /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				47F56CF11E68857E007375BB /* UIView+Extension.swift */,
+				472AC9501E73137800E11851 /* UIImageView+VibrationAnimation.swift */,
 				06B239CE1E6763DF0071E17F /* GE+SnapKit.swift */,
 				06B239D01E6767B70071E17F /* GE+MKMapDelegate.swift */,
 				06B239D21E67685E0071E17F /* GE+CoreLocationDelegate.swift */,
@@ -413,6 +416,7 @@
 				4B9BF6C71E67758900EA0410 /* SplashColor.swift in Sources */,
 				4B9BF6C11E6763D700EA0410 /* UserRunHistoryView.swift in Sources */,
 				4714581E1E6DF74F00467881 /* User.swift in Sources */,
+				472AC9511E73137800E11851 /* UIImageView+VibrationAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
