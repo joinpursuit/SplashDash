@@ -34,7 +34,7 @@ class GameViewController: UIViewController {
         
 //        let displaylink = CADisplayLink(target: self, selector: #selector(updateLabel))
 //        displaylink.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
-//        Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(updateLabel), userInfo: nil, repeats:true);
+//        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateLabel), userInfo: nil, repeats:true);
         
     }
     

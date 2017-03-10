@@ -164,7 +164,7 @@ extension GameViewController{
         if let diffHour = diff.hour {
         bottomView.currentRunLabel.text = (bottomView.currentRunLabel.text ?? "") + "\nHours left: \(diffHour)"
         }
-//        countDownLabel.text = "Hours left: \(diff.hour!)"
+//        bottomView.currentRunLabel.text = "Hours left: \(diff.hour!):\(diff.minute!):\(diff.second!)"
         
     }
 }
