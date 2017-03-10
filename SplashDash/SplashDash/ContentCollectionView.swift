@@ -96,7 +96,7 @@ class ContentCollectionView: UIView, UICollectionViewDelegate, UICollectionViewD
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = SplashColor.primaryColor()
+//        cv.backgroundColor = SplashColor.primaryColor()
         cv.bounces = false
         cv.isPagingEnabled = true
         cv.delegate = self

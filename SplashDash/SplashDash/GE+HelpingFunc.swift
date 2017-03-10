@@ -32,7 +32,11 @@ extension GameViewController{
     
     func setupGameColors() {
         guard let user = self.currentUser else { return }
-//        self.gameButton.tintColor = SplashColor.teamColor(for: user.teamName.rawValue)
+        let teamColor = SplashColor.teamColor(for: user.teamName.rawValue)
+        
+        self.gameButton.tintColor = teamColor
+        self.bottomView.topView.backgroundColor = teamColor
+        self.bottomView.contentCollectionView.collectionView.backgroundColor = teamColor
     }
     
     func startButtonTapped() {
