@@ -13,22 +13,27 @@ import Firebase
 class GameViewController: UIViewController {
     
     let databaseReference = FIRDatabase.database().reference().child("Public")
-    
     var locationManager: CLLocationManager!
-    var currentUser: User!
     var currentRun: Run = Run(allCoordinates: [])
     var endGame: Bool = false
     var gameStatus: Bool = false
     var isButtonsOffScreen: Bool = false
     
+    var currentUser: User? {
+        didSet {
+            setupGameColors()
+        }
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchGlobalSplash()
+        fetchCurrentUserData()
         setupViewHierarchy()
         configureConstraints()
         setupLocationManager()
-        fetchGlobalSplash()
-        fetchCurrentUserData()
         updateLabel()
 //        mapView.preservesSuperviewLayoutMargins = true
         
@@ -38,9 +43,12 @@ class GameViewController: UIViewController {
         
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.bottomCorneredContainerView.clipsToBounds = true
+
     }
 
 //    override func viewDidLayoutSubviews() {
@@ -133,7 +141,10 @@ class GameViewController: UIViewController {
         let originalSplash = UIImage(named: "logoSplash")
         let colorableSplash = originalSplash?.withRenderingMode(.alwaysTemplate)
         button.setBackgroundImage(colorableSplash, for: .normal)
-        button.tintColor = .blue // placeholder color
+//        
+//
+//        
+//        button.tintColor = .blue // placeholder color
         button.addShadows()
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)

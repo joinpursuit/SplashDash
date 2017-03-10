@@ -30,6 +30,11 @@ extension GameViewController{
         }
     }
     
+    func setupGameColors() {
+        guard let user = self.currentUser else { return }
+//        self.gameButton.tintColor = SplashColor.teamColor(for: user.teamName.rawValue)
+    }
+    
     func startButtonTapped() {
         print("-----------start button tapped-----------")
         if self.gameStatus{
