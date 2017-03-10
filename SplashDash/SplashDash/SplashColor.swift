@@ -49,6 +49,10 @@ struct SplashColor {
         return UIColor(hex: self.colorsDict["darkPrimaryColor"]!, alpha: alpha)
     }
     static func primaryColor(alpha: CGFloat = 1.0) -> UIColor {
+        let defaults = UserDefaults()
+        if let teamColor = defaults.string(forKey: "teamName") {
+            return UIColor(hex: self.colorsDict[teamColor]!, alpha: alpha)
+        }
         return UIColor(hex: self.colorsDict["primaryColor"]!, alpha: alpha)
     }
     static func lightPrimaryColor(alpha: CGFloat = 1.0) -> UIColor {

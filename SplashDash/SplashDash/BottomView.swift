@@ -80,7 +80,7 @@ class BottomView: UIView {
     
     lazy var topView: UIView = {
         let view = UIView()
-//        view.backgroundColor = SplashColor.primaryColor()
+        view.backgroundColor = SplashColor.primaryColor()
         return view
     }()
     
@@ -119,7 +119,7 @@ class BottomView: UIView {
         return label
     }()
     
-    lazy var contentCollectionView: ContentCollectionView = {
+    private lazy var contentCollectionView: ContentCollectionView = {
         let view = ContentCollectionView()
         return view
     }()

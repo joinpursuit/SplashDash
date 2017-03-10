@@ -21,7 +21,11 @@ class GameViewController: UIViewController {
     
     var currentUser: User? {
         didSet {
-            setupGameColors()
+            // This should be refactored into registration/login 
+            let defaults = UserDefaults()
+            if let user = currentUser {
+                defaults.set(user.teamName.rawValue, forKey: "teamName")
+            }
         }
     }
 
@@ -141,10 +145,7 @@ class GameViewController: UIViewController {
         let originalSplash = UIImage(named: "logoSplash")
         let colorableSplash = originalSplash?.withRenderingMode(.alwaysTemplate)
         button.setBackgroundImage(colorableSplash, for: .normal)
-//        
-//
-//        
-//        button.tintColor = .blue // placeholder color
+        button.tintColor = SplashColor.primaryColor()
         button.addShadows()
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
