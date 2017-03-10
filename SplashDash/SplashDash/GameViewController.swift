@@ -111,13 +111,13 @@ class GameViewController: UIViewController {
         findMeButton.snp.remakeConstraints { (view) in
             view.trailing.equalTo(gameButton)
             view.bottom.equalTo(gameButton.snp.top).offset(-40)
-            view.size.equalTo(CGSize(width: 70, height: 70))
+            view.size.equalTo(CGSize(width: 50, height: 50))
         }
         
         endGameButton.snp.remakeConstraints { (view) in
             view.centerX.equalTo(findMeButton)
             view.bottom.equalTo(findMeButton.snp.top).offset(-30)
-            view.size.equalTo(CGSize(width: 70, height: 70))
+            view.size.equalTo(CGSize(width: 50, height: 50))
         }
     }
     
@@ -143,9 +143,8 @@ class GameViewController: UIViewController {
         button.setTitle("Start", for: .normal)
         button.isEnabled = true
         let originalSplash = UIImage(named: "logoSplash")
-        let colorableSplash = originalSplash?.withRenderingMode(.alwaysTemplate)
+        let colorableSplash = originalSplash?.withRenderingMode(.alwaysTemplate).imageWithColor(color1: SplashColor.primaryColor())
         button.setBackgroundImage(colorableSplash, for: .normal)
-        button.tintColor = SplashColor.primaryColor()
         button.addShadows()
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
@@ -155,9 +154,10 @@ class GameViewController: UIViewController {
     lazy var findMeButton: UIButton = {
         let button = UIButton(type: UIButtonType.contactAdd)
         button.isEnabled = true
-        button.backgroundColor = .white
+        button.backgroundColor = SplashColor.primaryColor()
         button.clipsToBounds = true
-        button.layer.cornerRadius = 35
+        button.layer.cornerRadius = 25
+        button.tintColor = .white
         button.addShadows()
         button.addTarget(self, action: #selector(toCurrentLocation), for: .touchUpInside)
         return button
@@ -166,9 +166,10 @@ class GameViewController: UIViewController {
     lazy var endGameButton: UIButton = {
         let button = UIButton(type: UIButtonType.infoLight)
         button.isEnabled = true
-        button.backgroundColor = .white
+        button.backgroundColor = SplashColor.primaryColor()
         button.clipsToBounds = true
-        button.layer.cornerRadius = 35
+        button.layer.cornerRadius = 25
+        button.tintColor = .white
         button.addShadows()
         button.addTarget(self, action: #selector(takeScreenshot), for: .touchUpInside)
         return button
