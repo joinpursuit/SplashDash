@@ -346,23 +346,20 @@ class HomeViewController: UIViewController {
                             }
                             print("User ID: \(user?.uid)")
                             
+                            guard let uid = user?.uid else { return }
+                            let linkRef = FIRDatabase.database().reference().child("Users").child(uid)
                             
-//                            let gameVC = GameViewController()
-//                            let bottomVC = BottomViewController()
-//                            let ishPullUpVC = ISHPullUpViewController()
-//                            ishPullUpVC.contentViewController = gameVC //content
-//                            ishPullUpVC.bottomViewController = bottomVC // bottom
-//                            
-//                            bottomVC.pullUpController = ishPullUpVC
-//                            ishPullUpVC.contentDelegate = gameVC
-//                            ishPullUpVC.sizingDelegate = bottomVC
-//                            ishPullUpVC.stateDelegate = bottomVC
-//                            
-//                            self.present(ishPullUpVC, animated: true, completion: nil)
-                            
-                            let gameVC = GameViewController()
-                            gameVC.fetchCurrentUserData()
-                            self.present(gameVC, animated: true, completion: nil)
+                            linkRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                                if let value = snapshot.value as? NSDictionary{
+                                    if let user = User(value){
+                                        let defaults = UserDefaults()
+                                        defaults.set(user.teamName.rawValue, forKey: "teamName")
+                                        let gameVC = GameViewController()
+                                        self.present(gameVC, animated: true, completion: nil)
+                                    }
+                                }
+                            })
+
                         })
         })
     }
