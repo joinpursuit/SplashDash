@@ -57,25 +57,25 @@ class TeamStackView: UIView {
         tealImageView.contentMode = .scaleAspectFill
         tealImageView.isUserInteractionEnabled = true
         tealImageView.addShadows()
-        tealImageView.tintColor = UIColor(hex: SplashColor.colorsDict["tealTeamColor"]!, alpha: alpha)
+        tealImageView.tintColor = UIColor(hex: SplashColor.colorsDict["teal"]!, alpha: alpha)
         
         orangeImageView = UIImageView(image: colorableLogo)
         orangeImageView.contentMode = .scaleAspectFill
         orangeImageView.isUserInteractionEnabled = true
         orangeImageView.addShadows()
-        orangeImageView.tintColor = UIColor(hex: SplashColor.colorsDict["orangeTeamColor"]!, alpha: alpha)
+        orangeImageView.tintColor = UIColor(hex: SplashColor.colorsDict["orange"]!, alpha: alpha)
         
         greenImageView = UIImageView(image: colorableLogo)
         greenImageView.contentMode = .scaleAspectFill
         greenImageView.isUserInteractionEnabled = true
         greenImageView.addShadows()
-        greenImageView.tintColor = UIColor(hex: SplashColor.colorsDict["greenTeamColor"]!, alpha: alpha)
+        greenImageView.tintColor = UIColor(hex: SplashColor.colorsDict["green"]!, alpha: alpha)
         
         purpleImageView = UIImageView(image: colorableLogo)
         purpleImageView.contentMode = .scaleAspectFill
         purpleImageView.isUserInteractionEnabled = true
         purpleImageView.addShadows()
-        purpleImageView.tintColor = UIColor(hex: SplashColor.colorsDict["purpleTeamColor"]!, alpha: alpha)
+        purpleImageView.tintColor = UIColor(hex: SplashColor.colorsDict["purple"]!, alpha: alpha)
         
         stackview = UIStackView(arrangedSubviews: [tealImageView, orangeImageView, greenImageView, purpleImageView])
         stackview.isUserInteractionEnabled = true

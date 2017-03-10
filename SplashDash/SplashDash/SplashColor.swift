@@ -39,16 +39,20 @@ struct SplashColor {
         "primaryTextColor" : "FFFFFF",
         "secondaryTextColor" : "727272",
         
-        "purpleTeamColor" : "673AB7",
-        "tealTeamColor" : "00BCD4",
-        "greenTeamColor" : "4CAF50",
-        "orangeTeamColor" : "FF5722"
+        "purple" : "673AB7",
+        "teal" : "00BCD4",
+        "green" : "4CAF50",
+        "orange" : "FF5722"
     ]
     
     static func darkPrimaryColor(alpha: CGFloat = 1.0) -> UIColor {
         return UIColor(hex: self.colorsDict["darkPrimaryColor"]!, alpha: alpha)
     }
     static func primaryColor(alpha: CGFloat = 1.0) -> UIColor {
+        let defaults = UserDefaults()
+        if let teamColor = defaults.string(forKey: "teamName") {
+            return UIColor(hex: self.colorsDict[teamColor]!, alpha: alpha)
+        }
         return UIColor(hex: self.colorsDict["primaryColor"]!, alpha: alpha)
     }
     static func lightPrimaryColor(alpha: CGFloat = 1.0) -> UIColor {
