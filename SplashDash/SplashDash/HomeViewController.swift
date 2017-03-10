@@ -311,6 +311,9 @@ class HomeViewController: UIViewController {
                             let newUser = User(email: email, username: username, uid: uid!, teamName: self.teamName, runs: [])
                             self.addUserToDatabase(newUser: newUser)
                             
+                            let defaults = UserDefaults()
+                            defaults.set(newUser.teamName.rawValue, forKey: "teamName")
+                            
                             self.present(GameViewController(), animated: true, completion: nil)
                         })
         })
@@ -343,6 +346,7 @@ class HomeViewController: UIViewController {
                             }
                             print("User ID: \(user?.uid)")
                             
+                            
 //                            let gameVC = GameViewController()
 //                            let bottomVC = BottomViewController()
 //                            let ishPullUpVC = ISHPullUpViewController()
@@ -357,6 +361,7 @@ class HomeViewController: UIViewController {
 //                            self.present(ishPullUpVC, animated: true, completion: nil)
                             
                             let gameVC = GameViewController()
+                            gameVC.fetchCurrentUserData()
                             self.present(gameVC, animated: true, completion: nil)
                         })
         })

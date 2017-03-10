@@ -29,6 +29,9 @@ extension HomeViewController: TeamStackViewDelegate {
         self.hiddenLabel.textColor = UIColor(hex: SplashColor.colorsDict["teal"]!, alpha: 1.0)
         
         self.teamName = UserTeam.teal
+        
+        let defaults = UserDefaults()
+        defaults.set(teamName.rawValue, forKey: "teamName")
     }
     
     func orangeImageViewTapped(_ sender: UITapGestureRecognizer) {
@@ -50,6 +53,9 @@ extension HomeViewController: TeamStackViewDelegate {
         self.hiddenLabel.textColor = UIColor(hex: SplashColor.colorsDict["orange"]!, alpha: 1.0)
         
         self.teamName = UserTeam.orange
+        
+        let defaults = UserDefaults()
+        defaults.set(teamName.rawValue, forKey: "teamName")
     }
     
     func greenImageViewTapped(_ sender: UITapGestureRecognizer) {
@@ -71,6 +77,9 @@ extension HomeViewController: TeamStackViewDelegate {
         self.hiddenLabel.textColor = UIColor(hex: SplashColor.colorsDict["green"]!, alpha: 1.0)
         
         self.teamName = UserTeam.green
+        
+        let defaults = UserDefaults()
+        defaults.set(teamName.rawValue, forKey: "teamName")
     }
     
     func purpleImageViewTapped(_ sender: UITapGestureRecognizer) {
@@ -92,5 +101,8 @@ extension HomeViewController: TeamStackViewDelegate {
         self.hiddenLabel.textColor = UIColor(hex: SplashColor.colorsDict["purple"]!, alpha: 1.0)
         
         self.teamName = UserTeam.purple
+        
+        let defaults = UserDefaults()
+        defaults.set(teamName.rawValue, forKey: "teamName")
     }
 }
