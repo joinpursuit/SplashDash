@@ -30,6 +30,10 @@ extension HomeViewController: TeamStackViewDelegate {
         
         self.teamName = UserTeam.teal
         
+        //animate view with vibration upon selection
+        self.toggleShadows()
+        self.stackview.tealImageView.vibrationAnimation()
+        
         let defaults = UserDefaults()
         defaults.set(teamName.rawValue, forKey: "teamName")
     }
@@ -53,6 +57,10 @@ extension HomeViewController: TeamStackViewDelegate {
         self.hiddenLabel.textColor = UIColor(hex: SplashColor.colorsDict["orange"]!, alpha: 1.0)
         
         self.teamName = UserTeam.orange
+        
+        //animate view with vibration upon selection
+        self.toggleShadows()
+        self.stackview.orangeImageView.vibrationAnimation()
         
         let defaults = UserDefaults()
         defaults.set(teamName.rawValue, forKey: "teamName")
@@ -78,6 +86,10 @@ extension HomeViewController: TeamStackViewDelegate {
         
         self.teamName = UserTeam.green
         
+        //animate view with vibration upon selection
+        self.toggleShadows()
+        self.stackview.greenImageView.vibrationAnimation()
+        
         let defaults = UserDefaults()
         defaults.set(teamName.rawValue, forKey: "teamName")
     }
@@ -101,6 +113,10 @@ extension HomeViewController: TeamStackViewDelegate {
         self.hiddenLabel.textColor = UIColor(hex: SplashColor.colorsDict["purple"]!, alpha: 1.0)
         
         self.teamName = UserTeam.purple
+        
+        //animate view with vibration upon selection
+        self.toggleShadows()
+        self.stackview.purpleImageView.vibrationAnimation()
         
         let defaults = UserDefaults()
         defaults.set(teamName.rawValue, forKey: "teamName")
