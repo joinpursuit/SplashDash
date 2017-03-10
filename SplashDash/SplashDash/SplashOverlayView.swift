@@ -32,16 +32,16 @@ class SplashOverlayView: MKOverlayRenderer {
         //switch to choose color and shape
         let splash = UIImage(named: "inkSample3")!
         
-        switch teamName {
-        case .purple:
-            self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: "purple"))
-        case .teal:
-            self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: "teal"))
-        case .green:
-            self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: "green"))
-        case .orange:
-            self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: "orange"))
-        }
+        self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: teamName.rawValue))
+//        switch teamName {
+//        case .purple:
+//        case .teal:
+//            self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: "teal"))
+//        case .green:
+//            self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: "green"))
+//        case .orange:
+//            self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: "orange"))
+//        }
         
         super.init(overlay: overlay)
     }

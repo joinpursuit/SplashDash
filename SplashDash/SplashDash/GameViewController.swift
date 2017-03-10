@@ -111,13 +111,13 @@ class GameViewController: UIViewController {
         findMeButton.snp.remakeConstraints { (view) in
             view.trailing.equalTo(gameButton)
             view.bottom.equalTo(gameButton.snp.top).offset(-40)
-            view.size.equalTo(CGSize(width: 50, height: 50))
+            view.size.equalTo(CGSize(width: 60, height: 60))
         }
         
         endGameButton.snp.remakeConstraints { (view) in
             view.centerX.equalTo(findMeButton)
             view.bottom.equalTo(findMeButton.snp.top).offset(-30)
-            view.size.equalTo(CGSize(width: 50, height: 50))
+            view.size.equalTo(CGSize(width: 60, height: 60))
         }
     }
     
@@ -141,6 +141,7 @@ class GameViewController: UIViewController {
     lazy var gameButton: UIButton = {
         let button = UIButton()
         button.setTitle("Start", for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.isEnabled = true
         let originalSplash = UIImage(named: "logoSplash")
         let colorableSplash = originalSplash?.withRenderingMode(.alwaysTemplate).imageWithColor(color1: SplashColor.primaryColor())
@@ -156,7 +157,7 @@ class GameViewController: UIViewController {
         button.isEnabled = true
         button.backgroundColor = SplashColor.primaryColor()
         button.clipsToBounds = true
-        button.layer.cornerRadius = 25
+        button.layer.cornerRadius = 30
         button.tintColor = .white
         button.addShadows()
         button.addTarget(self, action: #selector(toCurrentLocation), for: .touchUpInside)
@@ -168,7 +169,7 @@ class GameViewController: UIViewController {
         button.isEnabled = true
         button.backgroundColor = SplashColor.primaryColor()
         button.clipsToBounds = true
-        button.layer.cornerRadius = 25
+        button.layer.cornerRadius = 30
         button.tintColor = .white
         button.addShadows()
         button.addTarget(self, action: #selector(takeScreenshot), for: .touchUpInside)
