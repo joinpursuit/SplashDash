@@ -11,6 +11,8 @@ import SnapKit
 import Firebase
 import ScrollableSegmentedControl
 
+import AVFoundation
+
 class HomeViewController: UIViewController {
     //MARK: - Properties
     var tapGestureRecognizer: UITapGestureRecognizer!
@@ -20,14 +22,16 @@ class HomeViewController: UIViewController {
     
     var teamName: UserTeam!
     
+    var player: AVPlayer?
+    
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let homeBackgroundImage = UIImage(named: "homeViewControllerBackground") {
-            self.view.backgroundColor = UIColor(patternImage: homeBackgroundImage)
-        }
-        
+//        if let homeBackgroundImage = UIImage(named: "homeViewControllerBackground") {
+//            self.view.backgroundColor = UIColor(patternImage: homeBackgroundImage)
+//        }
+
         //set up views
         setUpSegmentedControl()
         setUpViewHierarchy()
@@ -39,9 +43,45 @@ class HomeViewController: UIViewController {
         segmentedControl.selectedSegmentIndex = 0
         configureConstraints()
         
-        //set up keyboard-resigning tap gesture
+        //Set up keyboard-resigning tap gesture
         setUpTapGesture()
         
+        //Load the video from the app bundle.
+        setupLayerPlayer()
+        
+        //Add Observer and Loop Video
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(loopVideo),
+                                               name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+                                               object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    //MARK: - AVPlayer Functions
+    func setupLayerPlayer() {
+        let videoURL: URL = Bundle.main.url(forResource: "Fresh-Paint", withExtension: "mp4")!
+        
+        player = AVPlayer(url: videoURL)
+        player?.actionAtItemEnd = .none
+        player?.isMuted = true
+        
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        playerLayer.zPosition = -1
+        
+        playerLayer.frame = view.frame
+        
+        view.layer.addSublayer(playerLayer)
+        
+        player?.play()
+    }
+    
+    func loopVideo() {
+        player?.seek(to: kCMTimeZero)
+        player?.play()
     }
     
     //MARK: - Set Up Views and Constraints
