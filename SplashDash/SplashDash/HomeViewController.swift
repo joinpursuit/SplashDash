@@ -32,7 +32,7 @@ class HomeViewController: UIViewController {
 //            self.view.backgroundColor = UIColor(patternImage: homeBackgroundImage)
 //        }
 
-        //set up views
+        //Set up views
         setUpSegmentedControl()
         setUpViewHierarchy()
         
@@ -86,6 +86,7 @@ class HomeViewController: UIViewController {
     
     //MARK: - Set Up Views and Constraints
     func setUpViewHierarchy() {
+        self.view.addSubview(filterView)
         self.view.addSubview(containerView)
         self.view.addSubview(splashDashLogoImageView)
         self.view.addSubview(segmentedControl)
@@ -98,6 +99,11 @@ class HomeViewController: UIViewController {
     }
     
     func configureConstraints() {
+        //filterview
+        filterView.snp.makeConstraints { (view) in
+            view.leading.trailing.top.bottom.equalToSuperview()
+        }
+        
         //containerView
         containerView.snp.makeConstraints { (view) in
             view.centerX.equalToSuperview()
@@ -477,6 +483,14 @@ class HomeViewController: UIViewController {
     
     lazy var stackview: TeamStackView = {
         let view = TeamStackView()
+        
+        return view
+    }()
+    
+    lazy var filterView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black
+        view.alpha = 0.5
         
         return view
     }()
