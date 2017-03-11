@@ -14,10 +14,9 @@ import Firebase
 extension GameViewController{
     
     func fetchCurrentUserData(){
-        if currentUser == nil{
-            let uid = FIRAuth.auth()?.currentUser?.uid
+        if currentUser == nil, let uid = FIRAuth.auth()?.currentUser?.uid {
             
-            let linkRef = FIRDatabase.database().reference().child("Users").child(uid!)
+            let linkRef = FIRDatabase.database().reference().child("Users").child(uid)
             
             linkRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let value = snapshot.value as? NSDictionary{
@@ -87,11 +86,11 @@ extension GameViewController{
         
         contentScrollView.drawHierarchy(in: contentScrollView.bounds, afterScreenUpdates: true)
         
-        let screenShot = UIGraphicsGetImageFromCurrentImageContext()
+        guard let screenShot = UIGraphicsGetImageFromCurrentImageContext() else { return }
         UIGraphicsEndImageContext()
         
-        UIImageWriteToSavedPhotosAlbum(screenShot!, nil, nil, nil)
-        let score = colorArray(image: screenShot!)
+        UIImageWriteToSavedPhotosAlbum(screenShot, nil, nil, nil)
+        let score = colorArray(image: screenShot)
         print(score)
     }
     
@@ -104,7 +103,7 @@ extension GameViewController{
         
         var total: Double = 0.0
         
-        let img = image.cgImage!
+        guard let img = image.cgImage else { return [:] }
         let width = img.width
         let height = img.height
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -157,9 +156,9 @@ extension GameViewController{
         var components = DateComponents()
         components.day = 1
         components.second = -1
-        let end = Calendar.current.date(byAdding: components, to: Calendar.current.startOfDay(for: Date()))
+        guard let end = Calendar.current.date(byAdding: components, to: Calendar.current.startOfDay(for: Date())) else { return }
         
-        let diff = Calendar.current.dateComponents([Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: Date(), to: end!)
+        let diff = Calendar.current.dateComponents([Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: Date(), to: end)
         
         if let diffHour = diff.hour {
         bottomView.currentRunLabel.text = (bottomView.currentRunLabel.text ?? "") + "\nHours left: \(diffHour)"
