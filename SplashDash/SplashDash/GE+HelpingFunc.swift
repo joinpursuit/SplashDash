@@ -14,7 +14,7 @@ import Firebase
 extension GameViewController{
     
     func fetchCurrentUserData(){
-        if currentUser == nil{
+//        if currentUser == nil{
             let uid = FIRAuth.auth()?.currentUser?.uid
             
             let linkRef = FIRDatabase.database().reference().child("Users").child(uid!)
@@ -27,7 +27,7 @@ extension GameViewController{
                     }
                 }
             })
-        }
+//        }
     }
     
     func startButtonTapped() {
