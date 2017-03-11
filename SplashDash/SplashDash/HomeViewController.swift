@@ -24,7 +24,9 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "homeViewControllerBackground")!)
+        if let homeBackgroundImage = UIImage(named: "homeViewControllerBackground") {
+            self.view.backgroundColor = UIColor(patternImage: homeBackgroundImage)
+        }
         
         //set up views
         setUpSegmentedControl()
@@ -292,7 +294,7 @@ class HomeViewController: UIViewController {
                         guard let email = self.emailTextField.textField.text,
                             let username = self.usernameTextField.textField.text,
                             let password = self.passwordTextField.textField.text,
-                            let _ = self.teamName,
+                            let team = self.teamName,
                             email != "",
                             password != "" else {
                                 self.hiddenLabel.text = "Please verify all fields have been entered."
@@ -307,8 +309,8 @@ class HomeViewController: UIViewController {
                             }
                             
                             //Still need to determine teamName assignment logic
-                            let uid = user?.uid
-                            let newUser = User(email: email, username: username, uid: uid!, teamName: self.teamName, runs: [])
+                            guard let uid = user?.uid else { return }
+                            let newUser = User(email: email, username: username, uid: uid, teamName: team, runs: [])
                             self.addUserToDatabase(newUser: newUser)
                             
                             let defaults = UserDefaults()

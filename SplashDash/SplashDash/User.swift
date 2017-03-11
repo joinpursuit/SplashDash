@@ -33,12 +33,12 @@ class User {
         guard let email = validDict["email"] as? String,
             let username = validDict["username"] as? String,
             let uid = validDict["uid"] as? String,
-            let teamName = validDict["teamName"] as? String else {
+            let teamName = validDict["teamName"] as? String,
+            let userTeam = UserTeam(rawValue: teamName) else {
                 print("!!!!!Error parsing current user!!!!!")
                 return nil
         }
-        
-        self.init(email: email, username: username, uid: uid, teamName: UserTeam(rawValue: teamName)!, runs: [])
+        self.init(email: email, username: username, uid: uid, teamName: userTeam, runs: [])
     }
     
     //MARK: - Methods

@@ -23,8 +23,8 @@ extension GameViewController: CLLocationManagerDelegate{
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations.last!
-        guard let currentUser = currentUser else { return }
+        guard let location = locations.last,
+            let currentUser = currentUser else { return }
         //the average human can run at the speed of 15 miles per hour for short periods of time.
         if self.gameStatus {
             var currentSpeed = location.speed as Double
@@ -36,8 +36,9 @@ extension GameViewController: CLLocationManagerDelegate{
 //            print(currentSpeed)
 //            print(location.timestamp.timeIntervalSince1970)
 //            print("")
-            let currentUserId = FIRAuth.auth()?.currentUser?.uid
-            let coordinate = SplashCoordinate(userID: currentUserId!, midCoordinate: location.coordinate, speed: currentSpeed, teamName: currentUser.teamName, splashImageTag: 1, timestamp: location.timestamp.timeIntervalSince1970)
+
+            let currentUserId = currentUser.uid
+            let coordinate = SplashCoordinate(userID: currentUserId, midCoordinate: location.coordinate, speed: currentSpeed, teamName: currentUser.teamName, splashImageTag: 1, timestamp: location.timestamp.timeIntervalSince1970)
             
             //push coordinate to firebase
             self.currentRun.addCoordinate(coor: coordinate)

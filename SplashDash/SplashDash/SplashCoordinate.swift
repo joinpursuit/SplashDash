@@ -34,14 +34,15 @@ class SplashCoordinate {
             let splashImageTag = validDict["splashImageTag"] as? Int,
             let timestamp = validDict["timestamp"] as? Double,
             let longitude = validDict["longitude"] as? Double,
-            let latitude = validDict["latitude"] as? Double  else {
+            let latitude = validDict["latitude"] as? Double,
+            let userTeam = UserTeam(rawValue: teamName)  else {
                 print("!!!!!Error parsing coordinates!!!!!")
                 return nil
         }
         
         let midCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
-        self.init(userID: userID, midCoordinate: midCoordinate, speed: speed, teamName: UserTeam(rawValue: teamName)!, splashImageTag: splashImageTag, timestamp: timestamp)
+        self.init(userID: userID, midCoordinate: midCoordinate, speed: speed, teamName: userTeam, splashImageTag: splashImageTag, timestamp: timestamp)
     }
     
     var adjustedRatio: Double {

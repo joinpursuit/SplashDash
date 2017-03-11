@@ -18,7 +18,7 @@ class Run {
     }
     var timeStamp: Double {
         get{
-            return (allCoordinates.first?.timestamp)!
+            return (allCoordinates.first?.timestamp) ?? 0
         }
     }
     var runDuration: Double {
