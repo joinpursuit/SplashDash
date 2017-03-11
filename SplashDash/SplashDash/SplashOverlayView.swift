@@ -30,7 +30,11 @@ class SplashOverlayView: MKOverlayRenderer {
     
     init(overlay: MKOverlay, teamName: UserTeam, splashImageTag: Int) {
         //switch to choose color and shape
-        let splash = UIImage(named: "inkSample3")!
+        guard let splash = UIImage(named: "inkSample3") else {
+            self.overlayImage = #imageLiteral(resourceName: "inkSample3")
+            super.init(overlay: overlay)
+            return
+        }
         
         switch teamName {
         case .purple:
@@ -47,13 +51,13 @@ class SplashOverlayView: MKOverlayRenderer {
     }
     
     override func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
-        let imageReference = overlayImage.cgImage
+        guard let imageReference = overlayImage.cgImage else { return }
         
         let theMapRect = overlay.boundingMapRect
         let theRect = rect(for: theMapRect)
         
         context.scaleBy(x: 1.0, y: -1.0)
         context.translateBy(x: 0.0, y: -theRect.size.height)
-        context.draw(imageReference!, in: theRect)
+        context.draw(imageReference, in: theRect)
     }
 }

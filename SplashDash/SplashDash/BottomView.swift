@@ -61,7 +61,7 @@ class BottomView: UIView {
         contentSegmentedControl.snp.makeConstraints { (view) in
             view.leading.trailing.equalToSuperview()
             view.top.equalTo(topView.snp.bottom)
-            view.height.equalTo(25.0)
+            view.height.equalTo(44.0)
         }
         
 //        seperatorLine2.snp.makeConstraints { (view) in

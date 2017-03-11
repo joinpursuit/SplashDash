@@ -14,16 +14,17 @@ extension UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
         color1.setFill()
         
-        let context = UIGraphicsGetCurrentContext()!
+        guard let context = UIGraphicsGetCurrentContext() else { return UIImage() }
         context.translateBy(x: 0, y: self.size.height)
         context.scaleBy(x: 1.0, y: -1.0);
         context.setBlendMode(CGBlendMode.normal)
         
         let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
-        context.clip(to: rect, mask: self.cgImage!)
+        guard let cgImg = self.cgImage else { return UIImage() }
+        context.clip(to: rect, mask: cgImg)
         context.fill(rect)
         
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+        guard let newImage = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage() }
         UIGraphicsEndImageContext()
         
         return newImage

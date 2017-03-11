@@ -37,8 +37,8 @@ extension GameViewController{
         let data = coor.toData()
         
         linkRef.setValue(data) { (error, _) in
-            if error != nil{
-                print(error!.localizedDescription)
+            if let error = error {
+                print(error.localizedDescription)
                 return
             }
             // print("Splash coordinate successfully stored.")
