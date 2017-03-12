@@ -38,8 +38,6 @@
 		4743717A1E6CD47000391AF2 /* TeamStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474371791E6CD47000391AF2 /* TeamStackView.swift */; };
 		47F56CF21E68857E007375BB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F56CF11E68857E007375BB /* UIView+Extension.swift */; };
 		47F56CF41E69FB70007375BB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F56CF31E69FB70007375BB /* HomeViewController.swift */; };
-		47FCE6F01E74A8BA00F317E5 /* ColorRunTrimmed.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 47FCE6EF1E74A8BA00F317E5 /* ColorRunTrimmed.mp4 */; };
-		47FCE6F31E74A8D000F317E5 /* BucketsOfPaint.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 47FCE6F11E74A8D000F317E5 /* BucketsOfPaint.mp4 */; };
 		47FCE6F41E74A8D000F317E5 /* Fresh-Paint.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 47FCE6F21E74A8D000F317E5 /* Fresh-Paint.mp4 */; };
 		4B235F041E6DE6900079D2A0 /* CustomDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B235F031E6DE6900079D2A0 /* CustomDelegates.swift */; };
 		4B235F0A1E6E16E30079D2A0 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B235F091E6E16E30079D2A0 /* BottomView.swift */; };
@@ -89,8 +87,6 @@
 		474371791E6CD47000391AF2 /* TeamStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamStackView.swift; sourceTree = "<group>"; };
 		47F56CF11E68857E007375BB /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		47F56CF31E69FB70007375BB /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		47FCE6EF1E74A8BA00F317E5 /* ColorRunTrimmed.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ColorRunTrimmed.mp4; sourceTree = "<group>"; };
-		47FCE6F11E74A8D000F317E5 /* BucketsOfPaint.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = BucketsOfPaint.mp4; sourceTree = "<group>"; };
 		47FCE6F21E74A8D000F317E5 /* Fresh-Paint.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fresh-Paint.mp4"; sourceTree = "<group>"; };
 		4B235F031E6DE6900079D2A0 /* CustomDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDelegates.swift; sourceTree = "<group>"; };
 		4B235F091E6E16E30079D2A0 /* BottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
@@ -133,8 +129,6 @@
 		06B239A01E66127B0071E17F = {
 			isa = PBXGroup;
 			children = (
-				47FCE6EF1E74A8BA00F317E5 /* ColorRunTrimmed.mp4 */,
-				47FCE6F11E74A8D000F317E5 /* BucketsOfPaint.mp4 */,
 				47FCE6F21E74A8D000F317E5 /* Fresh-Paint.mp4 */,
 				06B239AB1E66127B0071E17F /* SplashDash */,
 				06B239AA1E66127B0071E17F /* Products */,
@@ -332,10 +326,8 @@
 				061074E41E6E5E5B00F665A0 /* CentralParkRun.gpx in Resources */,
 				47FCE6F41E74A8D000F317E5 /* Fresh-Paint.mp4 in Resources */,
 				061074E91E6E5E5B00F665A0 /* SquarespaceRun_3.gpx in Resources */,
-				47FCE6F31E74A8D000F317E5 /* BucketsOfPaint.mp4 in Resources */,
 				061074EA1E6E5E5B00F665A0 /* SquarespaceRun_4.gpx in Resources */,
 				061074E81E6E5E5B00F665A0 /* SquarespaceRun_2.gpx in Resources */,
-				47FCE6F01E74A8BA00F317E5 /* ColorRunTrimmed.mp4 in Resources */,
 				06B239B71E66127B0071E17F /* LaunchScreen.storyboard in Resources */,
 				06B239CB1E675BC20071E17F /* GoogleService-Info.plist in Resources */,
 				061074E71E6E5E5B00F665A0 /* SquarespaceRun_1.gpx in Resources */,
