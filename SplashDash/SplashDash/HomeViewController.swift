@@ -17,9 +17,10 @@ class HomeViewController: UIViewController {
     //MARK: - Properties
     var tapGestureRecognizer: UITapGestureRecognizer!
     var segmentedControl: ScrollableSegmentedControl!
+    var player: AVPlayer?
+    
     var databaseReference = FIRDatabase.database().reference()
     var teamName: UserTeam!
-    var player: AVPlayer?
     
     //MARK: - Methods
     override func viewDidLoad() {
@@ -140,7 +141,7 @@ class HomeViewController: UIViewController {
         ///hiddenLabel
         hiddenLabel.snp.makeConstraints { (view) in
             view.top.equalTo(loginRegisterButton.snp.bottom).offset(8.0)
-            view.width.equalToSuperview().multipliedBy(0.5)
+            view.width.equalToSuperview().multipliedBy(0.6)
             view.centerX.equalToSuperview()
         }
 
@@ -320,11 +321,11 @@ class HomeViewController: UIViewController {
                                 return
                             }
                             
-                            //Still need to determine teamName assignment logic
                             guard let uid = user?.uid else { return }
                             let newUser = User(email: email, username: username, uid: uid, teamName: team, runs: [])
                             self.addUserToDatabase(newUser: newUser)
                             
+                            //Sabrina's set up for team colors
                             let defaults = UserDefaults()
                             defaults.set(newUser.teamName.rawValue, forKey: "teamName")
                             
