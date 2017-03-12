@@ -37,6 +37,7 @@ extension GameViewController{
             self.startLocation = nil
             self.lastLocation = nil
             self.traveledDistanceInMiles = 0
+            self.totalDuration = 0
         }else{
             toCurrentLocation()
             gameButton.setTitle("Stop", for: .normal)

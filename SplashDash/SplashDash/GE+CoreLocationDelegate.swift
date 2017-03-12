@@ -31,6 +31,8 @@ extension GameViewController: CLLocationManagerDelegate{
             startLocation = locations.first
         } else {
             if let lastLocation = locations.last {
+                
+                // distance
                 let distanceInMeters = startLocation.distance(from: lastLocation)
                 // convert to miles
                 let distanceInMiles = distanceInMeters * 0.000621371
@@ -39,6 +41,17 @@ extension GameViewController: CLLocationManagerDelegate{
                 //display in two decimal places
                 let distance = String.localizedStringWithFormat("%.2f", traveledDistanceInMiles)
                 bottomView.distanceLabel.text = "Distance: \(distance) miles"
+
+                // duration
+                let timeSinceStart = lastLocation.timestamp.timeIntervalSince(startLocation.timestamp)
+                self.totalDuration += timeSinceStart
+                
+                // display duration in terms of hours/minutes/seconds
+                let hours = Int(self.totalDuration) / 3600
+                let minutes = Int(self.totalDuration) / 60 % 60
+                let seconds = Int(self.totalDuration) % 60
+                let durationString = String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+                bottomView.durationLabel.text = "Duration: \(durationString)"
                 
                 //the average human can run at the speed of 15 miles per hour for short periods of time.
                 var currentSpeed = lastLocation.speed as Double

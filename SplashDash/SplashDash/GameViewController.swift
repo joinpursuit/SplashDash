@@ -34,6 +34,9 @@ class GameViewController: UIViewController {
     var startLocation:CLLocation!
     var lastLocation: CLLocation!
     var traveledDistanceInMiles:Double = 0
+    
+    // To calculate duration
+    var totalDuration: TimeInterval = 0
 
     
     override func viewDidLoad() {
