@@ -17,24 +17,18 @@ class HomeViewController: UIViewController {
     //MARK: - Properties
     var tapGestureRecognizer: UITapGestureRecognizer!
     var segmentedControl: ScrollableSegmentedControl!
-    
     var databaseReference = FIRDatabase.database().reference()
-    
     var teamName: UserTeam!
-    
     var player: AVPlayer?
     
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        if let homeBackgroundImage = UIImage(named: "homeViewControllerBackground") {
-//            self.view.backgroundColor = UIColor(patternImage: homeBackgroundImage)
-//        }
 
         //Set up views
         setUpSegmentedControl()
         setUpViewHierarchy()
+        setupLayerPlayer()
         
         usernameTextField.isHidden = true
         stackview.isHidden = true
@@ -45,9 +39,6 @@ class HomeViewController: UIViewController {
         
         //Set up keyboard-resigning tap gesture
         setUpTapGesture()
-        
-        //Load the video from the app bundle.
-        setupLayerPlayer()
         
         //Add Observer and Loop Video
         NotificationCenter.default.addObserver(self,
@@ -101,7 +92,7 @@ class HomeViewController: UIViewController {
     func configureConstraints() {
         //filterview
         filterView.snp.makeConstraints { (view) in
-            view.leading.trailing.top.bottom.equalToSuperview()
+            view.leading.trailing.top.bottom.equalTo(self.view)
         }
         
         //containerView
@@ -114,24 +105,24 @@ class HomeViewController: UIViewController {
         
         //splashDashLogoImageView
         splashDashLogoImageView.snp.makeConstraints { (view) in
-            view.width.equalTo(self.view.snp.width).multipliedBy(0.40)
-            view.height.equalTo(self.view.snp.height).multipliedBy(0.22)
+            view.width.equalTo(self.view.snp.width).multipliedBy(0.30)
+            view.height.equalTo(self.view.snp.height).multipliedBy(0.165)
             view.centerX.equalTo(self.view.snp.centerX)
-            view.top.equalTo(self.containerView.snp.top).offset(50)
+            view.top.equalTo(self.containerView.snp.top)
             
         }
         
         //segmentedControl
         segmentedControl.snp.makeConstraints { (view) in
-            view.top.equalTo(self.splashDashLogoImageView.snp.bottom).offset(30)
-            view.height.equalTo(emailTextField.snp.height)
-            view.width.equalTo(self.containerView.snp.width)
+            view.top.equalTo(self.splashDashLogoImageView.snp.bottom).offset(40)
+            view.height.equalTo(emailTextField.snp.height).multipliedBy(1.3)
+            view.width.equalTo(self.emailTextField.snp.width).multipliedBy(0.93)
             view.centerX.equalToSuperview()
         }
 
         //emailTextField
         emailTextField.snp.makeConstraints { (view) in
-            view.top.equalTo(segmentedControl.snp.bottom).offset(30)
+            view.top.equalTo(segmentedControl.snp.bottom).offset(80)
             view.width.equalTo(containerView.snp.width).multipliedBy(0.9)
             view.centerX.equalToSuperview()
         }
@@ -144,14 +135,14 @@ class HomeViewController: UIViewController {
 
         //passwordTextField
         passwordTextField.snp.makeConstraints { (view) in
-            view.top.equalTo(emailTextField.snp.bottom).offset(30)
+            view.top.equalTo(emailTextField.snp.bottom).offset(80)
             view.width.equalTo(containerView.snp.width).multipliedBy(0.9)
             view.centerX.equalToSuperview()
         }
 
         //loginRegisterButton
         loginRegisterButton.snp.makeConstraints { (view) in
-            view.top.equalTo(passwordTextField.snp.bottom).offset(30)
+            view.top.equalTo(passwordTextField.snp.bottom).offset(40)
             view.width.equalToSuperview().multipliedBy(0.6)
             view.centerX.equalToSuperview()
         }
@@ -174,14 +165,13 @@ class HomeViewController: UIViewController {
     func setUpSegmentedControl() {
         segmentedControl = ScrollableSegmentedControl()
         segmentedControl.segmentStyle = .textOnly
-        segmentedControl.insertSegment(withTitle: "Log in", at: 0)
+        segmentedControl.insertSegment(withTitle: "Sign in", at: 0)
         segmentedControl.insertSegment(withTitle: "Register", at: 1)
         
         segmentedControl.underlineSelected = true
         segmentedControl.addTarget(self, action: #selector(didSelect), for: .valueChanged)
         
-        //Use color manager to determine color scheme here
-        segmentedControl.tintColor = UIColor.black
+        segmentedControl.tintColor = UIColor.lightGray
         
     }
     
@@ -253,7 +243,7 @@ class HomeViewController: UIViewController {
                 }
                 
                 self.emailTextField.snp.remakeConstraints { (view) in
-                    view.top.equalTo(self.segmentedControl.snp.bottom).offset(25)
+                    view.top.equalTo(self.segmentedControl.snp.bottom).offset(30)
                     view.width.equalTo(self.containerView.snp.width).multipliedBy(0.9)
                     view.centerX.equalToSuperview()
                 }
@@ -261,28 +251,28 @@ class HomeViewController: UIViewController {
                 self.usernameTextField.isHidden = false
                 self.usernameTextField.setNeedsDisplay()
                 self.usernameTextField.snp.remakeConstraints({ (view) in
-                    view.top.equalTo(self.emailTextField.snp.bottom).offset(25)
+                    view.top.equalTo(self.emailTextField.snp.bottom).offset(30)
                     view.width.equalTo(self.containerView.snp.width).multipliedBy(0.9)
                     view.centerX.equalToSuperview()
                 })
                 self.usernameTextField.alpha = 1.0
                 
                 self.passwordTextField.snp.remakeConstraints { (view) in
-                    view.top.equalTo(self.usernameTextField.snp.bottom).offset(25)
+                    view.top.equalTo(self.usernameTextField.snp.bottom).offset(30)
                     view.width.equalTo(self.containerView.snp.width).multipliedBy(0.9)
                     view.centerX.equalToSuperview()
                 }
                 
                 self.stackview.isHidden = false
                 self.stackview.snp.remakeConstraints({ (view) in
-                    view.top.equalTo(self.passwordTextField.snp.bottom).offset(25)
+                    view.top.equalTo(self.passwordTextField.snp.bottom).offset(40)
                     view.height.equalTo(30)
                     view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
                     view.centerX.equalToSuperview()
                 })
                 
                 self.loginRegisterButton.snp.remakeConstraints({ (view) in
-                    view.top.equalTo(self.stackview.snp.bottom).offset(25)
+                    view.top.equalTo(self.stackview.snp.bottom).offset(40)
                     view.width.equalToSuperview().multipliedBy(0.6)
                     view.centerX.equalToSuperview()
                 })
@@ -421,11 +411,7 @@ class HomeViewController: UIViewController {
     //MARK: - Lazy Instantiation
     lazy var containerView: UIView = {
         let view = UIView()
-        
-        //Use color manager to change the backgroundColor to the color determined by Sabrina and design mentor.
-        view.backgroundColor = UIColor.white
-        view.layer.cornerRadius = 12
-        view.addShadows()
+        view.backgroundColor = UIColor.clear
         
         return view
     }()
@@ -446,6 +432,7 @@ class HomeViewController: UIViewController {
     
     lazy var emailTextField: SplashDashTextField = {
         let textField = SplashDashTextField(placeHolderText: "Email")
+        textField.textField.keyboardType = .emailAddress
         
         return textField
     }()
@@ -459,12 +446,12 @@ class HomeViewController: UIViewController {
     
     lazy var loginRegisterButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = UIColor.black
-        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = UIColor.lightGray
+        button.setTitleColor(UIColor.black, for: .normal)
         button.setTitle("Log in", for: .normal)
         button.layer.borderWidth = 2.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.cornerRadius = 5
         button.addShadows()
         button.addTarget(self, action: #selector(loginRegisterButtonPressed), for: .touchUpInside)
@@ -490,7 +477,7 @@ class HomeViewController: UIViewController {
     lazy var filterView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.black
-        view.alpha = 0.5
+        view.alpha = 0.3
         
         return view
     }()

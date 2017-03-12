@@ -342,7 +342,7 @@ public class ScrollableSegmentedControl: UIControl {
         static let textPadding:CGFloat = 8.0
         static let imageToTextMargin:CGFloat = 14.0
         static let imageSize:CGFloat = 14.0
-        static let defaultFont = UIFont.systemFont(ofSize: 14)
+        static let defaultFont = UIFont.systemFont(ofSize: 18)
         static let defaultTextColor = UIColor.darkGray
         
         var underlineView:UIView?
