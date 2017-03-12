@@ -34,12 +34,12 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchGlobalSplash()
         fetchCurrentUserData()
         setupViewHierarchy()
         configureConstraints()
         setupLocationManager()
         updateLabel()
+        fetchGlobalSplash()
 //        mapView.preservesSuperviewLayoutMargins = true
         
 //        let displaylink = CADisplayLink(target: self, selector: #selector(updateLabel))
