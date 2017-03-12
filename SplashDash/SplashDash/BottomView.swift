@@ -39,17 +39,36 @@ class BottomView: UIView {
         self.addSubview(seperatorLine1)
 //        self.addSubview(seperatorLine2)
         
-        topView.addSubview(currentRunLabel)
+        topView.addSubview(currentRunLabelContainer)
+        currentRunLabelContainer.addSubview(durationLabel)
+        currentRunLabelContainer.addSubview(distanceLabel)
+        currentRunLabelContainer.addSubview(hoursLeftLabel)
+
     }
     
     func configureConstraints() {
-        currentRunLabel.snp.makeConstraints { (view) in
-            view.leading.top.bottom.equalToSuperview().inset(8.0)
+        
+        durationLabel.snp.makeConstraints { (view) in
+            view.leading.top.equalToSuperview().inset(8.0)
+        }
+        
+        distanceLabel.snp.makeConstraints { (view) in
+            view.leading.equalToSuperview().inset(8.0)
+            view.top.equalTo(durationLabel.snp.bottom).offset(8.0)
+        }
+        
+        hoursLeftLabel.snp.makeConstraints { (view) in
+            view.leading.bottom.equalToSuperview().inset(8.0)
+            view.top.equalTo(distanceLabel.snp.bottom).offset(8.0)
+        }
+        
+        currentRunLabelContainer.snp.makeConstraints { (view) in
+            view.leading.top.trailing.bottom.equalToSuperview().inset(8.0)
         }
         
         topView.snp.makeConstraints { (view) in
             view.leading.top.trailing.equalToSuperview()
-            view.height.equalTo(self.topViewSpacing)
+//            view.height.equalTo(self.topViewSpacing)
         }
         
         seperatorLine1.snp.makeConstraints { (view) in
@@ -110,16 +129,40 @@ class BottomView: UIView {
         return view
     }()
     
-    lazy var currentRunLabel: UILabel = {
+    lazy var currentRunLabelContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    lazy var durationLabel: UILabel = {
         let label = UILabel()
-        var labelText = "Duration of run: \("30 mins")\nDistance: \("2.1 miles")"
+        var labelText = "Duration of run: 0"
         label.text = labelText
         label.textColor = SplashColor.lightPrimaryColor()
         label.numberOfLines = 0
         return label
     }()
     
-    private lazy var contentCollectionView: ContentCollectionView = {
+    lazy var distanceLabel: UILabel = {
+        let label = UILabel()
+        var labelText = "Distance: 0"
+        label.text = labelText
+        label.textColor = SplashColor.lightPrimaryColor()
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var hoursLeftLabel: UILabel = {
+        let label = UILabel()
+        var labelText = ""
+        label.text = labelText
+        label.textColor = SplashColor.lightPrimaryColor()
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var contentCollectionView: ContentCollectionView = {
         let view = ContentCollectionView()
         return view
     }()

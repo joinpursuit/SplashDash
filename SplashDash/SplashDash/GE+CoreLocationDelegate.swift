@@ -23,26 +23,57 @@ extension GameViewController: CLLocationManagerDelegate{
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last,
-            let currentUser = currentUser else { return }
-        //the average human can run at the speed of 15 miles per hour for short periods of time.
-        if self.gameStatus {
-            var currentSpeed = location.speed as Double
-            if currentSpeed < 0 {
-                currentSpeed = Double(arc4random_uniform(500) + 500)/100
-            }
-//            print(location.coordinate.latitude)
-//            print(location.coordinate.longitude)
-//            print(currentSpeed)
-//            print(location.timestamp.timeIntervalSince1970)
-//            print("")
+        
+        guard let currentUser = currentUser, self.gameStatus
+            else { return }
+        
+        if startLocation == nil {
+            startLocation = locations.first
+        } else {
+            if let lastLocation = locations.last {
+                
+                // distance
+                let distanceInMeters = startLocation.distance(from: lastLocation)
+                // convert to miles
+                let distanceInMiles = distanceInMeters * 0.000621371
+                traveledDistanceInMiles += distanceInMiles
+                
+                //display in two decimal places
+                let distance = String.localizedStringWithFormat("%.2f", traveledDistanceInMiles)
+                bottomView.distanceLabel.text = "Distance: \(distance) miles"
 
-            let currentUserId = currentUser.uid
-            let coordinate = SplashCoordinate(userID: currentUserId, midCoordinate: location.coordinate, speed: currentSpeed, teamName: currentUser.teamName, splashImageTag: 1, timestamp: location.timestamp.timeIntervalSince1970)
-            
-            //push coordinate to firebase
-            self.currentRun.addCoordinate(coor: coordinate)
-            pushSplashToDatabase(coor: coordinate)
+                // duration
+                let timeSinceStart = lastLocation.timestamp.timeIntervalSince(startLocation.timestamp)
+                self.totalDuration += timeSinceStart
+                
+                // display duration in terms of hours/minutes/seconds
+                let hours = Int(self.totalDuration) / 3600
+                let minutes = Int(self.totalDuration) / 60 % 60
+                let seconds = Int(self.totalDuration) % 60
+                let durationString = String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+                bottomView.durationLabel.text = "Duration: \(durationString)"
+                
+                //the average human can run at the speed of 15 miles per hour for short periods of time.
+                var currentSpeed = lastLocation.speed as Double
+                if currentSpeed < 0 {
+                    currentSpeed = Double(arc4random_uniform(500) + 500)/100
+                }
+                
+                //            print(location.coordinate.latitude)
+                //            print(location.coordinate.longitude)
+                //            print(currentSpeed)
+                //            print(location.timestamp.timeIntervalSince1970)
+                //            print("")
+                
+                let currentUserId = currentUser.uid
+                let coordinate = SplashCoordinate(userID: currentUserId, midCoordinate: lastLocation.coordinate, speed: currentSpeed, teamName: currentUser.teamName, splashImageTag: 1, timestamp: lastLocation.timestamp.timeIntervalSince1970)
+                
+                //push coordinate to firebase
+                self.currentRun.addCoordinate(coor: coordinate)
+                pushSplashToDatabase(coor: coordinate)
+                
+            }
         }
+        startLocation = locations.last
     }
 }
