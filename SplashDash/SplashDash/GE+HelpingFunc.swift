@@ -34,6 +34,10 @@ extension GameViewController{
         if self.gameStatus{
             gameButton.setTitle("Start", for: .normal)
             endRunUpdate()
+            self.startLocation = nil
+            self.lastLocation = nil
+            self.traveledDistanceInMiles = 0
+            self.totalDuration = 0
         }else{
             toCurrentLocation()
             gameButton.setTitle("Stop", for: .normal)
@@ -41,15 +45,6 @@ extension GameViewController{
         }
         
         gameStatus = !gameStatus
-    }
-    
-    func endGameScreenshot(){
-        endGame = true
-        let center = CLLocationCoordinate2D(latitude: 40.738468, longitude: -73.991808)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08))
-        
-        self.mapView.setRegion(region, animated: true)
-        
     }
     
     func toCurrentLocation(){
@@ -176,7 +171,7 @@ extension GameViewController{
 
     func takeScreenshot() {
         
-        guard let contentScrollView = self.mapView.subviews.first?.subviews.first else { return }
+        guard let contentScrollView = self.invisibleMapView.subviews.first?.subviews.first else { return }
         
         UIGraphicsBeginImageContextWithOptions(contentScrollView.bounds.size, false, 0.0)
         
@@ -257,7 +252,7 @@ extension GameViewController{
         let diff = Calendar.current.dateComponents([Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: Date(), to: end)
         
         if let diffHour = diff.hour {
-        bottomView.currentRunLabel.text = (bottomView.currentRunLabel.text ?? "") + "\nHours left: \(diffHour)"
+        bottomView.hoursLeftLabel.text = "Hours left: \(diffHour)"
         }
 //        bottomView.currentRunLabel.text = "Hours left: \(diff.hour!):\(diff.minute!):\(diff.second!)"
         

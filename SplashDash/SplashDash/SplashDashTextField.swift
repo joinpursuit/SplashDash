@@ -23,8 +23,8 @@ class SplashDashTextField: UIView, UITextFieldDelegate {
     private var textLabelPlaceholder: String!
     internal var identifier: String = ""
     
-    let largeLabelFont = UIFont.systemFont(ofSize: 18.0)
-    let smallLabelFont = UIFont.systemFont(ofSize: 14.0)
+    let largeLabelFont = UIFont.systemFont(ofSize: 20.0)
+    let smallLabelFont = UIFont.boldSystemFont(ofSize: 14.0)
     
     private var labelEmptyConstraint: NSLayoutConstraint!
     private var labelFilledConstraint: NSLayoutConstraint!
@@ -95,7 +95,7 @@ class SplashDashTextField: UIView, UITextFieldDelegate {
         labelEmptyConstraint.isActive = true
         
         // label non-empty text state
-        labelFilledConstraint = textLabel.bottomAnchor.constraint(equalTo: self.textField.topAnchor, constant: 0.0)
+        labelFilledConstraint = textLabel.bottomAnchor.constraint(equalTo: self.textField.topAnchor, constant: -4.0)
         labelFilledConstraint.isActive = false
         
         // textfield
@@ -185,6 +185,7 @@ class SplashDashTextField: UIView, UITextFieldDelegate {
             self.labelFilledConstraint.isActive = true
             self.labelEmptyConstraint.isActive = false
             self.textLabel.font = smallLabelFont
+            self.textLabel.text = self.textLabel.text?.capitalized
             
         case .down:
             self.labelFilledConstraint.isActive = false

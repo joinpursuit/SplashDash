@@ -49,32 +49,27 @@ class TeamStackView: UIView {
     
     //MARK: - Methods
     func setUpViewHierarchy() {
-        //red team
         let logo = UIImage(named: "logoSplash")
         let colorableLogo = logo?.withRenderingMode(.alwaysTemplate)
         
         tealImageView = UIImageView(image: colorableLogo)
         tealImageView.contentMode = .scaleAspectFill
         tealImageView.isUserInteractionEnabled = true
-        tealImageView.addShadows()
         tealImageView.tintColor = UIColor(hex: SplashColor.colorsDict["teal"]!, alpha: alpha)
         
         orangeImageView = UIImageView(image: colorableLogo)
         orangeImageView.contentMode = .scaleAspectFill
         orangeImageView.isUserInteractionEnabled = true
-        orangeImageView.addShadows()
         orangeImageView.tintColor = UIColor(hex: SplashColor.colorsDict["orange"]!, alpha: alpha)
         
         greenImageView = UIImageView(image: colorableLogo)
         greenImageView.contentMode = .scaleAspectFill
         greenImageView.isUserInteractionEnabled = true
-        greenImageView.addShadows()
         greenImageView.tintColor = UIColor(hex: SplashColor.colorsDict["green"]!, alpha: alpha)
         
         purpleImageView = UIImageView(image: colorableLogo)
         purpleImageView.contentMode = .scaleAspectFill
         purpleImageView.isUserInteractionEnabled = true
-        purpleImageView.addShadows()
         purpleImageView.tintColor = UIColor(hex: SplashColor.colorsDict["purple"]!, alpha: alpha)
         
         stackview = UIStackView(arrangedSubviews: [tealImageView, orangeImageView, greenImageView, purpleImageView])

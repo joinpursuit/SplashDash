@@ -15,7 +15,6 @@ class GameViewController: UIViewController {
     let databaseReference = FIRDatabase.database().reference().child("Public")
     var locationManager: CLLocationManager!
     var currentRun: Run = Run(allCoordinates: [])
-    var endGame: Bool = false
     var gameStatus: Bool = false
     var isButtonsOffScreen: Bool = false
     var bottomViewPreviousPosition: CGFloat = 0.0
@@ -32,6 +31,14 @@ class GameViewController: UIViewController {
             }
         }
     }
+    
+    // To calculate total distance
+    var startLocation:CLLocation!
+    var lastLocation: CLLocation!
+    var traveledDistanceInMiles:Double = 0
+    
+    // To calculate duration
+    var totalDuration: TimeInterval = 0
 
     
     override func viewDidLoad() {
@@ -43,7 +50,7 @@ class GameViewController: UIViewController {
         setupLocationManager()
         updateLabel()
         fetchGlobalSplash()
-//        mapView.preservesSuperviewLayoutMargins = true
+        self.bottomView.contentCollectionView.preservesSuperviewLayoutMargins = true
         
 //        let displaylink = CADisplayLink(target: self, selector: #selector(updateLabel))
 //        displaylink.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
@@ -59,19 +66,20 @@ class GameViewController: UIViewController {
 
     }
 
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
+    // THIS IS WHERE THE COLLECTIONVIEW BUG HAPPENS
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
 //        print("self.view.frame.height is \(self.view.frame.height)")
 //        print("self.bottomCorneredContainerView.frame.height is \(self.bottomCorneredContainerView.frame.height)")
 //        print("---The difference is \(self.view.frame.height - self.bottomCorneredContainerView.frame.height)---")
-//        print("self.bottomRootView.frame.height is \(self.bottomRootView.frame.height)")
-//        print()
-//    }
+        print("self.bottomRootView.frame.height is \(self.bottomRootView.frame.height)")
+        print()
+    }
     
     // MARK: - Setup
     
     func setupViewHierarchy(){
-
+        self.view.addSubview(invisibleMapView)
         self.view.addSubview(mapView)
         self.mapView.addSubview(findMeButton)
         self.mapView.addSubview(endGameButton)
@@ -83,11 +91,15 @@ class GameViewController: UIViewController {
         self.bottomCorneredContainerView.addSubview(bottomView)
         self.bottomRootView.addSubview(gameButton)
         
-        self.view.addSubview(displayView)
-        self.view.addSubview(gameReadyLabel)
+//        self.view.addSubview(displayView)
+//        self.view.addSubview(gameReadyLabel)
     }
     
     func configureConstraints(){
+        invisibleMapView.snp.remakeConstraints { (view) in
+            view.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
         mapView.snp.remakeConstraints { (view) in
             view.top.bottom.leading.trailing.equalToSuperview()
         }
@@ -127,18 +139,29 @@ class GameViewController: UIViewController {
             view.size.equalTo(CGSize(width: 60, height: 60))
         }
         
-        displayView.snp.remakeConstraints { (view) in
-            view.leading.trailing.centerY.equalToSuperview()
-            view.height.equalTo(200)
-        }
+//        displayView.snp.remakeConstraints { (view) in
+//            view.leading.trailing.centerY.equalToSuperview()
+//            view.height.equalTo(200)
+//        }
         
-        gameReadyLabel.snp.remakeConstraints { (view) in
-            view.center.equalToSuperview()
-            view.width.equalTo(1000)
-        }
+//        gameReadyLabel.snp.remakeConstraints { (view) in
+//            view.center.equalToSuperview()
+//            view.width.equalTo(1000)
+//        }
     }
     
     //MARK: - Lazy inits
+    lazy var invisibleMapView: MKMapView = {
+        let view = MKMapView()
+        view.mapType = .standard
+        view.showsUserLocation = false
+        view.showsScale = false
+        view.showsCompass = false
+        view.showsBuildings = false
+        view.showsPointsOfInterest = false
+        view.delegate = self
+        return view
+    }()
     
     lazy var mapView: MKMapView = {
         let view = MKMapView()
@@ -189,7 +212,7 @@ class GameViewController: UIViewController {
         button.layer.cornerRadius = 30
         button.tintColor = .white
         button.addShadows()
-        button.addTarget(self, action: #selector(endGameScreenshot), for: .touchUpInside)
+        button.addTarget(self, action: #selector(takeScreenshot), for: .touchUpInside)
         return button
     }()
     

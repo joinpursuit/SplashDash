@@ -54,9 +54,11 @@ extension GameViewController: MKMapViewDelegate{
 //    }
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
-        if endGame{
+        switch mapView {
+        case invisibleMapView:
             takeScreenshot()
+        default:
+            return
         }
-        self.endGame = false
     }
 }
