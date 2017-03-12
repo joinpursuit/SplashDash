@@ -20,8 +20,6 @@ class SplashOverlay: NSObject, MKOverlay {
         coordinate = coor.midCoordinate
         teamName = coor.teamName
         splashImageTag = coor.splashImageTag
-        
-        
     }
 }
 
@@ -37,16 +35,7 @@ class SplashOverlayView: MKOverlayRenderer {
         }
         
         self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: teamName.rawValue))
-//        switch teamName {
-//        case .purple:
-//        case .teal:
-//            self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: "teal"))
-//        case .green:
-//            self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: "green"))
-//        case .orange:
-//            self.overlayImage = splash.imageWithColor(color1: SplashColor.teamColor(for: "orange"))
-//        }
-        
+
         super.init(overlay: overlay)
     }
     
@@ -58,6 +47,7 @@ class SplashOverlayView: MKOverlayRenderer {
         
         context.scaleBy(x: 1.0, y: -1.0)
         context.translateBy(x: 0.0, y: -theRect.size.height)
+        
         context.draw(imageReference, in: theRect)
     }
 }

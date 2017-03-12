@@ -16,10 +16,15 @@ extension GameViewController: CLLocationManagerDelegate{
     func setupLocationManager(){
         locationManager = CLLocationManager()
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.distanceFilter = 50
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
+        
+        let center = CLLocationCoordinate2D(latitude: 40.738468, longitude: -73.991808)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08))
+        
+        self.mapView.setRegion(region, animated: false)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -43,6 +48,10 @@ extension GameViewController: CLLocationManagerDelegate{
             //push coordinate to firebase
             self.currentRun.addCoordinate(coor: coordinate)
             pushSplashToDatabase(coor: coordinate)
+            
+            let region = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            
+            self.mapView.setRegion(region, animated: true)
         }
     }
 }

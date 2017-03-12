@@ -20,6 +20,9 @@ class GameViewController: UIViewController {
     var isButtonsOffScreen: Bool = false
     var bottomViewPreviousPosition: CGFloat = 0.0
     
+    var mySwitch = true
+    var allLabel: [UILabel] = []
+    
     var currentUser: User? {
         didSet {
             // This should be refactored into registration/login 
@@ -79,6 +82,9 @@ class GameViewController: UIViewController {
         self.bottomRootView.addSubview(bottomCorneredContainerView)
         self.bottomCorneredContainerView.addSubview(bottomView)
         self.bottomRootView.addSubview(gameButton)
+        
+        self.view.addSubview(displayView)
+        self.view.addSubview(gameReadyLabel)
     }
     
     func configureConstraints(){
@@ -119,6 +125,16 @@ class GameViewController: UIViewController {
             view.centerX.equalTo(findMeButton)
             view.bottom.equalTo(findMeButton.snp.top).offset(-30)
             view.size.equalTo(CGSize(width: 60, height: 60))
+        }
+        
+        displayView.snp.remakeConstraints { (view) in
+            view.leading.trailing.centerY.equalToSuperview()
+            view.height.equalTo(200)
+        }
+        
+        gameReadyLabel.snp.remakeConstraints { (view) in
+            view.center.equalToSuperview()
+            view.width.equalTo(1000)
         }
     }
     
@@ -173,8 +189,24 @@ class GameViewController: UIViewController {
         button.layer.cornerRadius = 30
         button.tintColor = .white
         button.addShadows()
-        button.addTarget(self, action: #selector(takeScreenshot), for: .touchUpInside)
+        button.addTarget(self, action: #selector(endGameScreenshot), for: .touchUpInside)
         return button
+    }()
+    
+    lazy var displayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.alpha = 0.4
+        return view
+    }()
+    
+    lazy var gameReadyLabel: UILabel = {
+        let view = UILabel()
+        view.text = "READY"
+        view.font = UIFont.boldSystemFont(ofSize: 40)
+        view.tintColor = .red
+        view.textAlignment = .natural
+        return view
     }()
     
     lazy var bottomRootView: UIView = {
