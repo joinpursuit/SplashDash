@@ -28,7 +28,7 @@ class HomeViewController: UIViewController {
         //Set up views
         setUpSegmentedControl()
         setUpViewHierarchy()
-        setupLayerPlayer()
+        setupPlayerLayer()
         
         usernameTextField.isHidden = true
         stackview.isHidden = true
@@ -52,7 +52,7 @@ class HomeViewController: UIViewController {
     }
     
     //MARK: - AVPlayer Functions
-    func setupLayerPlayer() {
+    func setupPlayerLayer() {
         let videoURL: URL = Bundle.main.url(forResource: "Fresh-Paint", withExtension: "mp4")!
         
         player = AVPlayer(url: videoURL)
