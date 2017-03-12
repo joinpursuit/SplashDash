@@ -142,7 +142,6 @@ extension GameViewController{
                     orangeCoverage += 1.0
                     total += 1.0
                 default:
-                    total += 1.0
                     continue
                 }
             }

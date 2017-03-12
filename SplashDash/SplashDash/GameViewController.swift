@@ -75,7 +75,6 @@ class GameViewController: UIViewController {
     }
     
     // MARK: - Setup
-    
     func setupViewHierarchy(){
 
         self.view.addSubview(mapView)
