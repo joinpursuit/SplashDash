@@ -34,6 +34,9 @@ extension GameViewController{
         if self.gameStatus{
             gameButton.setTitle("Start", for: .normal)
             endRunUpdate()
+            self.startLocation = nil
+            self.lastLocation = nil
+            self.traveledDistanceInMiles = 0
         }else{
             toCurrentLocation()
             gameButton.setTitle("Stop", for: .normal)
@@ -161,7 +164,7 @@ extension GameViewController{
         let diff = Calendar.current.dateComponents([Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: Date(), to: end)
         
         if let diffHour = diff.hour {
-        bottomView.currentRunLabel.text = (bottomView.currentRunLabel.text ?? "") + "\nHours left: \(diffHour)"
+        bottomView.hoursLeftLabel.text = "Hours left: \(diffHour)"
         }
 //        countDownLabel.text = "Hours left: \(diff.hour!)"
         

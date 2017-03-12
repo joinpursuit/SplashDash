@@ -29,6 +29,11 @@ class GameViewController: UIViewController {
             }
         }
     }
+    
+    // To calculate total distance
+    var startLocation:CLLocation!
+    var lastLocation: CLLocation!
+    var traveledDistanceInMiles:Double = 0
 
     
     override func viewDidLoad() {
@@ -40,7 +45,7 @@ class GameViewController: UIViewController {
         setupLocationManager()
         updateLabel()
         fetchGlobalSplash()
-//        mapView.preservesSuperviewLayoutMargins = true
+        self.bottomView.contentCollectionView.preservesSuperviewLayoutMargins = true
         
 //        let displaylink = CADisplayLink(target: self, selector: #selector(updateLabel))
 //        displaylink.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
@@ -56,14 +61,15 @@ class GameViewController: UIViewController {
 
     }
 
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
+    // THIS IS WHERE THE COLLECTIONVIEW BUG HAPPENS
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
 //        print("self.view.frame.height is \(self.view.frame.height)")
 //        print("self.bottomCorneredContainerView.frame.height is \(self.bottomCorneredContainerView.frame.height)")
 //        print("---The difference is \(self.view.frame.height - self.bottomCorneredContainerView.frame.height)---")
-//        print("self.bottomRootView.frame.height is \(self.bottomRootView.frame.height)")
-//        print()
-//    }
+        print("self.bottomRootView.frame.height is \(self.bottomRootView.frame.height)")
+        print()
+    }
     
     // MARK: - Setup
     
