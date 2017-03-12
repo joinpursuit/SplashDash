@@ -78,7 +78,6 @@ class HomeViewController: UIViewController {
     //MARK: - Set Up Views and Constraints
     func setUpViewHierarchy() {
         self.view.addSubview(filterView)
-        self.view.addSubview(containerView)
         self.view.addSubview(splashDashLogoImageView)
         self.view.addSubview(segmentedControl)
         self.view.addSubview(emailTextField)
@@ -95,35 +94,26 @@ class HomeViewController: UIViewController {
             view.leading.trailing.top.bottom.equalTo(self.view)
         }
         
-        //containerView
-        containerView.snp.makeConstraints { (view) in
-            view.centerX.equalToSuperview()
-            view.centerY.equalToSuperview()
-            view.height.equalToSuperview().multipliedBy(0.73)
-            view.width.equalToSuperview().multipliedBy(0.85)
-        }
-        
         //splashDashLogoImageView
         splashDashLogoImageView.snp.makeConstraints { (view) in
             view.width.equalTo(self.view.snp.width).multipliedBy(0.30)
             view.height.equalTo(self.view.snp.height).multipliedBy(0.165)
             view.centerX.equalTo(self.view.snp.centerX)
-            view.top.equalTo(self.containerView.snp.top)
-            
+            view.top.equalTo(self.view.snp.top).offset(50)
         }
         
         //segmentedControl
         segmentedControl.snp.makeConstraints { (view) in
             view.top.equalTo(self.splashDashLogoImageView.snp.bottom).offset(40)
-            view.height.equalTo(emailTextField.snp.height).multipliedBy(1.3)
+            view.height.equalTo(emailTextField.snp.height).multipliedBy(1.2)
             view.width.equalTo(self.emailTextField.snp.width).multipliedBy(0.93)
             view.centerX.equalToSuperview()
         }
 
         //emailTextField
         emailTextField.snp.makeConstraints { (view) in
-            view.top.equalTo(segmentedControl.snp.bottom).offset(80)
-            view.width.equalTo(containerView.snp.width).multipliedBy(0.9)
+            view.top.equalTo(segmentedControl.snp.bottom).offset(50)
+            view.width.equalToSuperview().multipliedBy(0.765)
             view.centerX.equalToSuperview()
         }
 
@@ -135,14 +125,14 @@ class HomeViewController: UIViewController {
 
         //passwordTextField
         passwordTextField.snp.makeConstraints { (view) in
-            view.top.equalTo(emailTextField.snp.bottom).offset(80)
-            view.width.equalTo(containerView.snp.width).multipliedBy(0.9)
+            view.top.equalTo(emailTextField.snp.bottom).offset(50)
+            view.width.equalToSuperview().multipliedBy(0.765)
             view.centerX.equalToSuperview()
         }
 
         //loginRegisterButton
         loginRegisterButton.snp.makeConstraints { (view) in
-            view.top.equalTo(passwordTextField.snp.bottom).offset(40)
+            view.top.equalTo(passwordTextField.snp.bottom).offset(50)
             view.width.equalToSuperview().multipliedBy(0.6)
             view.centerX.equalToSuperview()
         }
@@ -150,7 +140,7 @@ class HomeViewController: UIViewController {
         ///hiddenLabel
         hiddenLabel.snp.makeConstraints { (view) in
             view.top.equalTo(loginRegisterButton.snp.bottom).offset(8.0)
-            view.width.equalToSuperview().multipliedBy(0.6)
+            view.width.equalToSuperview().multipliedBy(0.5)
             view.centerX.equalToSuperview()
         }
 
@@ -192,16 +182,9 @@ class HomeViewController: UIViewController {
         
         if segmentedControl.selectedSegmentIndex == 0 {
             animator.addAnimations {
-                self.containerView.snp.remakeConstraints { (view) in
-                    view.centerX.equalToSuperview()
-                    view.centerY.equalToSuperview()
-                    view.height.equalToSuperview().multipliedBy(0.73)
-                    view.width.equalToSuperview().multipliedBy(0.85)
-                }
-                
                 self.emailTextField.snp.remakeConstraints { (view) in
-                    view.top.equalTo(self.segmentedControl.snp.bottom).offset(30)
-                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.9)
+                    view.top.equalTo(self.segmentedControl.snp.bottom).offset(50)
+                    view.width.equalToSuperview().multipliedBy(0.765)
                     view.centerX.equalToSuperview()
                 }
                 
@@ -213,8 +196,8 @@ class HomeViewController: UIViewController {
                 })
                 
                 self.passwordTextField.snp.remakeConstraints { (view) in
-                    view.top.equalTo(self.emailTextField.snp.bottom).offset(30)
-                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.9)
+                    view.top.equalTo(self.emailTextField.snp.bottom).offset(50)
+                    view.width.equalToSuperview().multipliedBy(0.765)
                     view.centerX.equalToSuperview()
                 }
                 
@@ -225,7 +208,7 @@ class HomeViewController: UIViewController {
                 }
                 
                 self.loginRegisterButton.snp.remakeConstraints { (view) in
-                    view.top.equalTo(self.passwordTextField.snp.bottom).offset(30)
+                    view.top.equalTo(self.passwordTextField.snp.bottom).offset(50)
                     view.width.equalToSuperview().multipliedBy(0.6)
                     view.centerX.equalToSuperview()
                 }
@@ -235,31 +218,24 @@ class HomeViewController: UIViewController {
         }
         else {
             animator.addAnimations {
-                self.containerView.snp.remakeConstraints { (view) in
-                    view.centerX.equalToSuperview()
-                    view.centerY.equalToSuperview()
-                    view.height.equalToSuperview().multipliedBy(0.87)
-                    view.width.equalToSuperview().multipliedBy(0.85)
-                }
-                
                 self.emailTextField.snp.remakeConstraints { (view) in
-                    view.top.equalTo(self.segmentedControl.snp.bottom).offset(30)
-                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.9)
+                    view.top.equalTo(self.segmentedControl.snp.bottom).offset(40)
+                    view.width.equalToSuperview().multipliedBy(0.765)
                     view.centerX.equalToSuperview()
                 }
                 
                 self.usernameTextField.isHidden = false
                 self.usernameTextField.setNeedsDisplay()
                 self.usernameTextField.snp.remakeConstraints({ (view) in
-                    view.top.equalTo(self.emailTextField.snp.bottom).offset(30)
-                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.9)
+                    view.top.equalTo(self.emailTextField.snp.bottom).offset(40)
+                    view.width.equalToSuperview().multipliedBy(0.765)
                     view.centerX.equalToSuperview()
                 })
                 self.usernameTextField.alpha = 1.0
                 
                 self.passwordTextField.snp.remakeConstraints { (view) in
-                    view.top.equalTo(self.usernameTextField.snp.bottom).offset(30)
-                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.9)
+                    view.top.equalTo(self.usernameTextField.snp.bottom).offset(40)
+                    view.width.equalToSuperview().multipliedBy(0.765)
                     view.centerX.equalToSuperview()
                 }
                 
@@ -267,7 +243,7 @@ class HomeViewController: UIViewController {
                 self.stackview.snp.remakeConstraints({ (view) in
                     view.top.equalTo(self.passwordTextField.snp.bottom).offset(40)
                     view.height.equalTo(30)
-                    view.width.equalTo(self.containerView.snp.width).multipliedBy(0.8)
+                    view.width.equalToSuperview().multipliedBy(0.8)
                     view.centerX.equalToSuperview()
                 })
                 
@@ -409,13 +385,6 @@ class HomeViewController: UIViewController {
     }
     
     //MARK: - Lazy Instantiation
-    lazy var containerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.clear
-        
-        return view
-    }()
-    
     lazy var splashDashLogoImageView: UIImageView = {
         let image = UIImage(named: "splashDash-icon")
         let imageView = UIImageView(image: image)
