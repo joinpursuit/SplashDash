@@ -26,6 +26,7 @@ class GameViewController: UIViewController {
             let defaults = UserDefaults()
             if let user = currentUser {
                 defaults.set(user.teamName.rawValue, forKey: "teamName")
+                bottomView.contentCollectionView.userRunHistoryView.user = user
             }
         }
     }
@@ -64,15 +65,15 @@ class GameViewController: UIViewController {
 
     }
 
-    // THIS IS WHERE THE COLLECTIONVIEW BUG HAPPENS
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-//        print("self.view.frame.height is \(self.view.frame.height)")
-//        print("self.bottomCorneredContainerView.frame.height is \(self.bottomCorneredContainerView.frame.height)")
-//        print("---The difference is \(self.view.frame.height - self.bottomCorneredContainerView.frame.height)---")
-        print("self.bottomRootView.frame.height is \(self.bottomRootView.frame.height)")
-        print()
-    }
+//    // THIS IS WHERE THE COLLECTIONVIEW BUG HAPPENS
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+////        print("self.view.frame.height is \(self.view.frame.height)")
+////        print("self.bottomCorneredContainerView.frame.height is \(self.bottomCorneredContainerView.frame.height)")
+////        print("---The difference is \(self.view.frame.height - self.bottomCorneredContainerView.frame.height)---")
+//        print("self.bottomRootView.frame.height is \(self.bottomRootView.frame.height)")
+//        print()
+//    }
     
     // MARK: - Setup
     

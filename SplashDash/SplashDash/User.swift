@@ -30,15 +30,35 @@ class User {
     }
     
     convenience init?(_ validDict: NSDictionary) {
+//        let allCoordinates = [SplashCoordinate]()
+//        let runs = Run(allCoordinates: [])
+        
         guard let email = validDict["email"] as? String,
             let username = validDict["username"] as? String,
             let uid = validDict["uid"] as? String,
             let teamName = validDict["teamName"] as? String,
-            let userTeam = UserTeam(rawValue: teamName) else {
+            let userTeam = UserTeam(rawValue: teamName),
+            let runsArr = validDict["runs"] as? [String: AnyObject]
+        else {
                 print("!!!!!Error parsing current user!!!!!")
                 return nil
         }
-        self.init(email: email, username: username, uid: uid, teamName: userTeam, runs: [])
+        
+        var allRuns = [Run]()
+        
+        for run in runsArr.values {
+            guard let coordsInRun = run["allCoordinates"] as? [[String:AnyObject]] else { continue }
+
+            var splashCoords = [SplashCoordinate]()
+            for coordinate in coordsInRun {
+                if let coord = SplashCoordinate(coordinate as NSDictionary) {
+                    splashCoords.append(coord)
+                }
+            }
+            allRuns.append(Run(allCoordinates: splashCoords))
+        }
+        
+        self.init(email: email, username: username, uid: uid, teamName: userTeam, runs: allRuns)
     }
     
     //MARK: - Methods
@@ -47,6 +67,6 @@ class User {
                 "username": self.username,
                 "uid": self.uid,
                 "teamName": self.teamName.rawValue,
-                "runs": []] as [String: Any]
+                "runs": self.runs] as [String: Any]
     }
 }

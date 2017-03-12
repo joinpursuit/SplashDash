@@ -19,6 +19,7 @@ extension GameViewController{
             let linkRef = FIRDatabase.database().reference().child("Users").child(uid)
             
             linkRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                print("snapshot is \(snapshot)")
                 if let value = snapshot.value as? NSDictionary{
                     if let user = User(value){
                         self.currentUser = user

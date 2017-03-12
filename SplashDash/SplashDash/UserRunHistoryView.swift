@@ -13,6 +13,19 @@ import ISHPullUp
  
 class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
     
+    var user: User? {
+        didSet {
+            guard let user = user else { return }
+                userRuns = user.runs
+        }
+    }
+    
+    var userRuns: [Run] = [] {
+        didSet {
+            self.userHistoryTableView.reloadData()
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViewHierarchy()
@@ -60,17 +73,18 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return userRuns.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.cellIdentifier, for: indexPath) as! HistoryTableViewCell
         
-        cell.runLabel.text = "Date: 4/3/13\nTime: 3:33PM\nDistance: 2.5 miles\nDuration: 30 mins\nAverage Speed: \(2.5/0.5) mph"
-                
+        let run = userRuns[indexPath.row]
+ 
+        cell.runLabel.text = "TimeStamp: \(run.timeStamp)\nTotal Distance: \(run.totalDistance)\nDuration: \(run.runDuration)\nAverage Speed: \(run.averageSpeed)"
         return cell
     }
-    
+ 
     // MARK: - Views
     
     private lazy var historyLabel: UILabel = {
