@@ -84,7 +84,7 @@ class HomeViewController: UIViewController {
         self.view.addSubview(emailTextField)
         self.view.addSubview(usernameTextField)
         self.view.addSubview(passwordTextField)
-        self.view.addSubview(loginRegisterButton)
+        self.view.addSubview(signinRegisterButton)
         self.view.addSubview(hiddenLabel)
         self.view.addSubview(stackview)
     }
@@ -131,8 +131,8 @@ class HomeViewController: UIViewController {
             view.centerX.equalToSuperview()
         }
 
-        //loginRegisterButton
-        loginRegisterButton.snp.makeConstraints { (view) in
+        //signinRegisterButton
+        signinRegisterButton.snp.makeConstraints { (view) in
             view.top.equalTo(passwordTextField.snp.bottom).offset(50)
             view.width.equalToSuperview().multipliedBy(0.6)
             view.centerX.equalToSuperview()
@@ -140,7 +140,7 @@ class HomeViewController: UIViewController {
 
         ///hiddenLabel
         hiddenLabel.snp.makeConstraints { (view) in
-            view.top.equalTo(loginRegisterButton.snp.bottom).offset(8.0)
+            view.top.equalTo(signinRegisterButton.snp.bottom).offset(8.0)
             view.width.equalToSuperview().multipliedBy(0.6)
             view.centerX.equalToSuperview()
         }
@@ -170,7 +170,7 @@ class HomeViewController: UIViewController {
     func didSelect() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            segmentedControlWasSwitched(title: "Log in")
+            segmentedControlWasSwitched(title: "Sign in")
             self.hiddenLabel.text = ""
         default:
             segmentedControlWasSwitched(title: "Register")
@@ -208,7 +208,7 @@ class HomeViewController: UIViewController {
                     view.size.equalTo(CGSize(width: 1, height: 1))
                 }
                 
-                self.loginRegisterButton.snp.remakeConstraints { (view) in
+                self.signinRegisterButton.snp.remakeConstraints { (view) in
                     view.top.equalTo(self.passwordTextField.snp.bottom).offset(50)
                     view.width.equalToSuperview().multipliedBy(0.6)
                     view.centerX.equalToSuperview()
@@ -248,7 +248,7 @@ class HomeViewController: UIViewController {
                     view.centerX.equalToSuperview()
                 })
                 
-                self.loginRegisterButton.snp.remakeConstraints({ (view) in
+                self.signinRegisterButton.snp.remakeConstraints({ (view) in
                     view.top.equalTo(self.stackview.snp.bottom).offset(40)
                     view.width.equalToSuperview().multipliedBy(0.6)
                     view.centerX.equalToSuperview()
@@ -263,7 +263,7 @@ class HomeViewController: UIViewController {
         }
         
         animator.addCompletion { (position) in
-            self.loginRegisterButton.setTitle(title, for: .normal)
+            self.signinRegisterButton.setTitle(title, for: .normal)
         }
         
         animator.startAnimation()
@@ -283,10 +283,10 @@ class HomeViewController: UIViewController {
     }
     
     //MARK: - Firebase Authentication
-    func loginRegisterButtonPressed() {
+    func signinRegisterButtonPressed() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            loginButtonPressed()
+            signinButtonPressed()
             self.hiddenLabel.text = ""
         default:
             registerButtonPressed()
@@ -297,11 +297,11 @@ class HomeViewController: UIViewController {
     func registerButtonPressed() {
         UIView.animate(withDuration: 0.1,
                        animations: {
-                        self.loginRegisterButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+                        self.signinRegisterButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         },
                        completion: { _ in
                         UIView.animate(withDuration: 0.1) {
-                            self.loginRegisterButton.transform = CGAffineTransform.identity
+                            self.signinRegisterButton.transform = CGAffineTransform.identity
                         }
                         
                         guard let email = self.emailTextField.textField.text,
@@ -334,17 +334,17 @@ class HomeViewController: UIViewController {
         })
     }
     
-    func loginButtonPressed() {
+    func signinButtonPressed() {
         UIView.animate(withDuration: 0.1,
                        animations: {
-                        self.loginRegisterButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+                        self.signinRegisterButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         },
                        completion: { _ in
                         UIView.animate(withDuration: 0.1) {
-                            self.loginRegisterButton.transform = CGAffineTransform.identity
+                            self.signinRegisterButton.transform = CGAffineTransform.identity
                         }
                         
-                        //Login via Firebase
+                        //Sign in via Firebase
                         guard let email = self.emailTextField.textField.text,
                             let password = self.passwordTextField.textField.text,
                             email != "",
@@ -414,17 +414,17 @@ class HomeViewController: UIViewController {
         return textField
     }()
     
-    lazy var loginRegisterButton: UIButton = {
+    lazy var signinRegisterButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor.lightGray
         button.setTitleColor(UIColor.black, for: .normal)
-        button.setTitle("Log in", for: .normal)
+        button.setTitle("Sign in", for: .normal)
         button.layer.borderWidth = 2.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.cornerRadius = 5
         button.addShadows()
-        button.addTarget(self, action: #selector(loginRegisterButtonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(signinRegisterButtonPressed), for: .touchUpInside)
         
         return button
     }()

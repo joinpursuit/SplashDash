@@ -22,8 +22,8 @@ extension HomeViewController: TeamStackViewDelegate {
         self.passwordTextField.textLabel.textColor = UIColor(hex: SplashColor.colorsDict["teal"]!, alpha: 1.0)
         self.passwordTextField.textField.textColor = UIColor(hex: SplashColor.colorsDict["teal"]!, alpha: 1.0)
         
-        self.loginRegisterButton.backgroundColor = UIColor(hex: SplashColor.colorsDict["teal"]!, alpha: 1.0)
-        self.loginRegisterButton.layer.borderColor = UIColor(hex: SplashColor.colorsDict["teal"]!, alpha: 1.0).cgColor
+        self.signinRegisterButton.backgroundColor = UIColor(hex: SplashColor.colorsDict["teal"]!, alpha: 1.0)
+        self.signinRegisterButton.layer.borderColor = UIColor(hex: SplashColor.colorsDict["teal"]!, alpha: 1.0).cgColor
         
         self.hiddenLabel.textColor = UIColor(hex: SplashColor.colorsDict["teal"]!, alpha: 1.0)
         
@@ -49,8 +49,8 @@ extension HomeViewController: TeamStackViewDelegate {
         self.passwordTextField.textLabel.textColor = UIColor(hex: SplashColor.colorsDict["orange"]!, alpha: 1.0)
         self.passwordTextField.textField.textColor = UIColor(hex: SplashColor.colorsDict["orange"]!, alpha: 1.0)
         
-        self.loginRegisterButton.backgroundColor = UIColor(hex: SplashColor.colorsDict["orange"]!, alpha: 1.0)
-        self.loginRegisterButton.layer.borderColor = UIColor(hex: SplashColor.colorsDict["orange"]!, alpha: 1.0).cgColor
+        self.signinRegisterButton.backgroundColor = UIColor(hex: SplashColor.colorsDict["orange"]!, alpha: 1.0)
+        self.signinRegisterButton.layer.borderColor = UIColor(hex: SplashColor.colorsDict["orange"]!, alpha: 1.0).cgColor
         
         self.hiddenLabel.textColor = UIColor(hex: SplashColor.colorsDict["orange"]!, alpha: 1.0)
         
@@ -76,8 +76,8 @@ extension HomeViewController: TeamStackViewDelegate {
         self.passwordTextField.textLabel.textColor = UIColor(hex: SplashColor.colorsDict["green"]!, alpha: 1.0)
         self.passwordTextField.textField.textColor = UIColor(hex: SplashColor.colorsDict["green"]!, alpha: 1.0)
         
-        self.loginRegisterButton.backgroundColor = UIColor(hex: SplashColor.colorsDict["green"]!, alpha: 1.0)
-        self.loginRegisterButton.layer.borderColor = UIColor(hex: SplashColor.colorsDict["green"]!, alpha: 1.0).cgColor
+        self.signinRegisterButton.backgroundColor = UIColor(hex: SplashColor.colorsDict["green"]!, alpha: 1.0)
+        self.signinRegisterButton.layer.borderColor = UIColor(hex: SplashColor.colorsDict["green"]!, alpha: 1.0).cgColor
         
         self.hiddenLabel.textColor = UIColor(hex: SplashColor.colorsDict["green"]!, alpha: 1.0)
         
@@ -103,8 +103,8 @@ extension HomeViewController: TeamStackViewDelegate {
         self.passwordTextField.textLabel.textColor = UIColor(hex: SplashColor.colorsDict["purple"]!, alpha: 1.0)
         self.passwordTextField.textField.textColor = UIColor(hex: SplashColor.colorsDict["purple"]!, alpha: 1.0)
         
-        self.loginRegisterButton.backgroundColor = UIColor(hex: SplashColor.colorsDict["purple"]!, alpha: 1.0)
-        self.loginRegisterButton.layer.borderColor = UIColor(hex: SplashColor.colorsDict["purple"]!, alpha: 1.0).cgColor
+        self.signinRegisterButton.backgroundColor = UIColor(hex: SplashColor.colorsDict["purple"]!, alpha: 1.0)
+        self.signinRegisterButton.layer.borderColor = UIColor(hex: SplashColor.colorsDict["purple"]!, alpha: 1.0).cgColor
         
         self.hiddenLabel.textColor = UIColor(hex: SplashColor.colorsDict["purple"]!, alpha: 1.0)
         
