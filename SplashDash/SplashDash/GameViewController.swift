@@ -87,6 +87,9 @@ class GameViewController: UIViewController {
         self.bottomRootView.addSubview(bottomCorneredContainerView)
         self.bottomCorneredContainerView.addSubview(bottomView)
         self.bottomRootView.addSubview(gameButton)
+        
+        //Leaderboard views
+        self.view.addSubview(firstPlaceView)
     }
     
     func configureConstraints(){
@@ -127,6 +130,14 @@ class GameViewController: UIViewController {
             view.centerX.equalTo(findMeButton)
             view.bottom.equalTo(findMeButton.snp.top).offset(-30)
             view.size.equalTo(CGSize(width: 70, height: 70))
+        }
+        
+        firstPlaceView.snp.remakeConstraints { (view) in
+            view.trailing.equalToSuperview().offset(20.0)
+            view.top.equalToSuperview().offset(20.0)
+            view.height.equalToSuperview().multipliedBy(0.06)
+            view.leading.equalTo(self.view.snp.centerX).multipliedBy(0.9)
+            
         }
     }
     
@@ -205,7 +216,21 @@ class GameViewController: UIViewController {
     
     lazy var bottomView: BottomView = {
         let view = BottomView()
-                view.isUserInteractionEnabled = true
+        view.isUserInteractionEnabled = true
+        
+        return view
+    }()
+    
+    lazy var firstPlaceView: LeaderboardView = {
+        let view = LeaderboardView()
+        view.layer.cornerRadius = 20.0
+
+        view.rankingLabel.text = "1st"
+        
+        //This needs to be dynamically changed
+        view.teamNameLabel.text = "Test Team A"
+        
+        
         return view
     }()
 }
