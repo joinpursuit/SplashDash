@@ -73,10 +73,24 @@ extension GameViewController{
                 self.gameButton.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.findMeButton.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.endGameButton.transform = CGAffineTransform(translationX: 0, y: 0)
+                
+                //Leaderboard views
+                self.firstPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.secondPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.thirdPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.fourthPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+                
             }else{
                 self.gameButton.transform = CGAffineTransform(translationX: 150, y: 0)
                 self.findMeButton.transform = CGAffineTransform(translationX: 150, y: 0)
                 self.endGameButton.transform = CGAffineTransform(translationX: 150, y: 0)
+                
+                //Leaderboard views
+                self.firstPlaceView.transform = CGAffineTransform(translationX: 300, y: 0)
+                self.secondPlaceView.transform = CGAffineTransform(translationX: 250, y: 0)
+                self.thirdPlaceView.transform = CGAffineTransform(translationX: 200, y: 0)
+                self.fourthPlaceView.transform = CGAffineTransform(translationX: 150, y: 0)
+                
             }
             self.isButtonsOffScreen = !self.isButtonsOffScreen
         }, completion: nil)
