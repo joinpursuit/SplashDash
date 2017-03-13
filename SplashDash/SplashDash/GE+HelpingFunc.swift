@@ -72,18 +72,37 @@ extension GameViewController{
     }
     
     func animateAllButtons(){
-        UIView.animate(withDuration: 0.3, animations: {
-            if self.isButtonsOffScreen{
-                self.gameButton.transform = CGAffineTransform(translationX: 0, y: 0)
+        
+        if self.isButtonsOffScreen{
+        
+            UIView.animate(withDuration: 0.30, delay: 0, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.25, options: [], animations: { 
+                //Leaderboard views
+                self.firstPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.secondPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.thirdPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.fourthPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+                
+                self.gameButton.transform = CGAffineTransform.identity
                 self.findMeButton.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.endGameButton.transform = CGAffineTransform(translationX: 0, y: 0)
-            }else{
-                self.gameButton.transform = CGAffineTransform(translationX: 100, y: 0)
-                self.findMeButton.transform = CGAffineTransform(translationX: 300, y: 0)
-                self.endGameButton.transform = CGAffineTransform(translationX: 900, y: 0)
-            }
-            self.isButtonsOffScreen = !self.isButtonsOffScreen
-        }, completion: nil)
+//                self.endGameButton.transform = CGAffineTransform(translationX: 0, y: 0)
+            }, completion: nil)
+        }
+        else {
+            
+            UIView.animate(withDuration: 0.20, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: [], animations: { 
+                //Leaderboard views
+                self.firstPlaceView.transform = CGAffineTransform(translationX: 215, y: 0)
+                self.secondPlaceView.transform = CGAffineTransform(translationX: 200, y: 0)
+                self.thirdPlaceView.transform = CGAffineTransform(translationX: 200, y: 0)
+                self.fourthPlaceView.transform = CGAffineTransform(translationX: 175, y: 0)
+                
+                self.gameButton.transform = CGAffineTransform(translationX: 175, y: 0)
+                self.findMeButton.transform = CGAffineTransform(translationX: 175, y: 0)
+//                self.endGameButton.transform = CGAffineTransform(translationX: 175, y: 0)
+            }, completion: nil)
+        }
+        
+        self.isButtonsOffScreen = !self.isButtonsOffScreen
     }
     
     func animateStartGame(){
@@ -150,11 +169,15 @@ extension GameViewController{
         UIGraphicsEndImageContext()
         
 //        UIImageWriteToSavedPhotosAlbum(screenShot, nil, nil, nil)
-        let score = colorArray(image: screenShot)
-        print(score)
+        self.currentScore = colorArray(image: screenShot)
+        print(currentScore)
+        
+        //updating leaderboard count and handle colors
+        updateLeaderboard()
+        
     }
     
-    func colorArray(image: UIImage) -> [String: Double] {
+    func colorArray(image: UIImage) -> [(color: String, score: Double)] {
         
         var purpleCoverage = 0.0
         var tealCoverage = 0.0
@@ -163,7 +186,7 @@ extension GameViewController{
         
         var total: Double = 0.0
         
-        guard let img = image.cgImage else { return [:] }
+        guard let img = image.cgImage else { return [] }
         let width = img.width
         let height = img.height
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -217,10 +240,10 @@ extension GameViewController{
         }
         //return winer
         print("\(height),  \(width)")
-        return ["purple": purpleCoverage/total,
-                "teal": tealCoverage/total,
-                "green": greenCoverage/total,
-                "orange": orangeCoverage/total]
+        return [("purple", purpleCoverage/total),
+                ("teal", tealCoverage/total),
+                ("green", greenCoverage/total),
+                ("orange", orangeCoverage/total)]
     }
     
     func updateLabel() {
@@ -238,4 +261,29 @@ extension GameViewController{
 //        bottomView.currentRunLabel.text = "Hours left: \(diff.hour!):\(diff.minute!):\(diff.second!)"
         
     }
+    
+    func updateLeaderboard() {
+        let sortedScores = self.currentScore.sorted { $0.score > $1.score }
+        
+        self.firstPlaceView.teamNameLabel.text = "\(sortedScores[0].color)"
+        self.firstPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[0].color)")
+        
+        self.secondPlaceView.teamNameLabel.text = "\(sortedScores[1].color)"
+        self.secondPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[1].color)")
+        
+        self.thirdPlaceView.teamNameLabel.text = "\(sortedScores[2].color)"
+        self.thirdPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[2].color)")
+        
+        self.fourthPlaceView.teamNameLabel.text = "\(sortedScores[3].color)"
+        self.fourthPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[3].color)")
+        
+        UIView.animate(withDuration: 0.5) {
+            self.firstPlaceView.alpha = 1
+            self.secondPlaceView.alpha = 1
+            self.thirdPlaceView.alpha = 1
+            self.fourthPlaceView.alpha = 1
+        }
+        
+    }
+
 }
