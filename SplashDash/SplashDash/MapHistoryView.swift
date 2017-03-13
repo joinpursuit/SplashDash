@@ -14,6 +14,7 @@ import SnapKit
 class MapHistoryView: UIView, MKMapViewDelegate {
     //MARK: - Properties
     var regionCalculations: (minLat: CLLocationDegrees, minLong: CLLocationDegrees, maxLat: CLLocationDegrees, maxLong: CLLocationDegrees)!
+    var datePickerDate: String!
 //    let databaseReference: FIRDatabase!
     
     //MARK: - Methods
@@ -36,7 +37,8 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         let format = DateFormatter()
         format.dateFormat = "yyyyMMdd"
         
-        print("Date changed to \(format.string(from: date))")
+        self.datePickerDate = format.string(from: date)
+        print("Date changed to \(self.datePickerDate!)")
     }
     
     // MARK: - Setup Views
@@ -156,14 +158,24 @@ class MapHistoryView: UIView, MKMapViewDelegate {
 
     lazy var datePicker: UIDatePicker = {
         let dp = UIDatePicker()
-        dp.datePickerMode = .date
         
+        //Max date should always be yesterday
         let calendar = Calendar.current
-        let twoDaysAgo = calendar.date(byAdding: .day, value: -1, to: Date())
-        dp.maximumDate = twoDaysAgo
+        let oneDayAgo = calendar.date(byAdding: .day, value: -1, to: Date())
         
+        //Min date should be 03/10/17 since this is the first day that we have data for
+        var dateComponent = DateComponents()
+        dateComponent.year = 2017
+        dateComponent.month = 03
+        dateComponent.day = 10
+        let date = Calendar(identifier: Calendar.Identifier.gregorian).date(from: dateComponent)
+        
+        dp.datePickerMode = .date
+        dp.maximumDate = oneDayAgo
+        dp.minimumDate = date
         dp.addTarget(self, action: #selector(datePickerChanged(_:)), for: .valueChanged)
+        
         return dp
     }()
-    
+    // Get Date given the above date components
 }
