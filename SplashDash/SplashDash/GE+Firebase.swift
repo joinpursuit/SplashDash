@@ -26,6 +26,7 @@ extension GameViewController{
                     
                     //draw all splashes parsed from database
                     let splash = SplashOverlay(coor: coor)
+                    self.invisibleMapView.addOverlays([splash])
                     self.mapView.addOverlays([splash])
                 }
             }

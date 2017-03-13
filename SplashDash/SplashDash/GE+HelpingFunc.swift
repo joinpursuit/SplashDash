@@ -72,6 +72,14 @@ extension GameViewController{
             
             self.mapView.setRegion(region, animated: true)
         }
+        
+//        if mySwitch{
+//            animateReadySign()
+//        }else{
+//            _ = allLabel.map{ $0.removeFromSuperview() }
+//            allLabel = []
+//        }
+//        mySwitch = !mySwitch
     }
     
     func animateAllButtons(){
@@ -88,10 +96,98 @@ extension GameViewController{
             self.isButtonsOffScreen = !self.isButtonsOffScreen
         }, completion: nil)
     }
+    
+    func animateReadySign(){
+        let animator = UIViewPropertyAnimator(duration: 0.8, curve: .easeOut, animations: nil)
+        let r = UILabel()
+        r.text = "R "
+        let e = UILabel()
+        e.text = "E "
+        let a = UILabel()
+        a.text = "A "
+        let d = UILabel()
+        d.text = "D "
+        let y = UILabel()
+        y.text = "Y "
+        allLabel = [r,e,a,d,y]
+        view.addSubview(r)
+        view.addSubview(e)
+        view.addSubview(a)
+        view.addSubview(d)
+        view.addSubview(y)
+        
+        r.snp.makeConstraints { (view) in
+            view.centerY.equalToSuperview()
+            view.leading.equalToSuperview().offset(700)
+        }
+        
+        e.snp.makeConstraints { (view) in
+            view.centerY.equalToSuperview()
+            view.leading.equalToSuperview().offset(700)
+        }
+        
+        a.snp.makeConstraints { (view) in
+            view.centerY.equalToSuperview()
+            view.leading.equalToSuperview().offset(700)
+        }
+        
+        d.snp.makeConstraints { (view) in
+            view.centerY.equalToSuperview()
+            view.leading.equalToSuperview().offset(700)
+        }
+        
+        y.snp.makeConstraints { (view) in
+            view.centerY.equalToSuperview()
+            view.leading.equalToSuperview().offset(700)
+        }
+        
+        self.view.layoutIfNeeded()
+        
+        animator.addAnimations({ 
+            r.snp.remakeConstraints { (view) in
+                view.center.equalToSuperview()
+            }
+            self.view.layoutIfNeeded()
+        }, delayFactor: 0)
+        
+        animator.addAnimations({
+            e.snp.remakeConstraints { (view) in
+                view.leading.equalTo(r.snp.trailing)
+                view.centerY.equalToSuperview()
+            }
+            self.view.layoutIfNeeded()
+        }, delayFactor: 0.2)
+        
+        animator.addAnimations({
+            a.snp.remakeConstraints { (view) in
+                view.leading.equalTo(e.snp.trailing)
+                view.centerY.equalToSuperview()
+            }
+            self.view.layoutIfNeeded()
+        }, delayFactor: 0.4)
+        
+        animator.addAnimations({
+            d.snp.remakeConstraints { (view) in
+                view.leading.equalTo(a.snp.trailing)
+                view.centerY.equalToSuperview()
+            }
+            self.view.layoutIfNeeded()
+        }, delayFactor: 0.6)
+        
+        animator.addAnimations({
+            y.snp.remakeConstraints { (view) in
+                view.leading.equalTo(d.snp.trailing)
+                view.centerY.equalToSuperview()
+            }
+            self.view.layoutIfNeeded()
+        }, delayFactor: 0.8)
+        
+        animator.startAnimation()
+    }
 
     func takeScreenshot() {
         
-        guard let contentScrollView = self.mapView.subviews.first?.subviews.first else { return }
+        guard let contentScrollView = self.invisibleMapView.subviews.first?.subviews.first else { return }
         
         UIGraphicsBeginImageContextWithOptions(contentScrollView.bounds.size, false, 0.0)
         
@@ -100,7 +196,7 @@ extension GameViewController{
         guard let screenShot = UIGraphicsGetImageFromCurrentImageContext() else { return }
         UIGraphicsEndImageContext()
         
-        UIImageWriteToSavedPhotosAlbum(screenShot, nil, nil, nil)
+//        UIImageWriteToSavedPhotosAlbum(screenShot, nil, nil, nil)
         let score = colorArray(image: screenShot)
         print(score)
     }
@@ -149,7 +245,6 @@ extension GameViewController{
                     orangeCoverage += 1.0
                     total += 1.0
                 default:
-                    total += 1.0
                     continue
                 }
             }
@@ -174,7 +269,7 @@ extension GameViewController{
         if let diffHour = diff.hour {
         bottomView.hoursLeftLabel.text = "Hours left: \(diffHour)"
         }
-//        countDownLabel.text = "Hours left: \(diff.hour!)"
+//        bottomView.currentRunLabel.text = "Hours left: \(diff.hour!):\(diff.minute!):\(diff.second!)"
         
     }
 }
