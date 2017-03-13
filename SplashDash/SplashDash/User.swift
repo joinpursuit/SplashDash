@@ -47,7 +47,10 @@ class User {
         var allRuns = [Run]()
         
         for run in runsArr.values {
-            guard let coordsInRun = run["allCoordinates"] as? [[String:AnyObject]] else { continue }
+            guard let coordsInRun = run["allCoordinates"] as? [[String:AnyObject]],
+                let totalDistance = run["totalDistance"] as? Double,
+                let runDuration = run["runDuration"] as? Int
+            else { continue }
 
             var splashCoords = [SplashCoordinate]()
             for coordinate in coordsInRun {
@@ -55,7 +58,7 @@ class User {
                     splashCoords.append(coord)
                 }
             }
-            allRuns.append(Run(allCoordinates: splashCoords))
+            allRuns.append(Run(allCoordinates: splashCoords, totalDistance: totalDistance, runDuration: runDuration))
         }
         
         self.init(email: email, username: username, uid: uid, teamName: userTeam, runs: allRuns)
