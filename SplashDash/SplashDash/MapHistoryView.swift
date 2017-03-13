@@ -15,7 +15,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     //MARK: - Properties
     var regionCalculations: (minLat: CLLocationDegrees, minLong: CLLocationDegrees, maxLat: CLLocationDegrees, maxLong: CLLocationDegrees)!
     var datePickerDate: String!
-//    let databaseReference: FIRDatabase!
+    var databaseReference: FIRDatabaseReference!
     
     //MARK: - Methods
     override init(frame: CGRect) {
@@ -32,13 +32,16 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     // MARK: - Actions
 
     func datePickerChanged(_ sender: UIDatePicker) {
-        let date = self.datePicker.date
-        
+        //Formatting date string
         let format = DateFormatter()
         format.dateFormat = "yyyyMMdd"
         
+        let date = self.datePicker.date
         self.datePickerDate = format.string(from: date)
-        print("Date changed to \(self.datePickerDate!)")
+        
+        if let date = self.datePickerDate {
+            fetchSplashForPickerDate(date: date)
+        }
     }
     
     // MARK: - Setup Views
@@ -69,10 +72,32 @@ class MapHistoryView: UIView, MKMapViewDelegate {
 //        self.mapView.setRegion(region, animated: false)
 //    }
     
-//    func fetchSplashForPickerDate(){
-//        self.databaseReference = FIRDatabase.database().reference().child("Public")
-//        let linkRef = databaseReference.child(getRootName())
-//        
+    func fetchSplashForPickerDate(date: String){
+        //Setting database reference to date selected from datePicker
+        guard let date = self.datePickerDate else { return }
+        self.databaseReference = FIRDatabase.database().reference().child("Public/\(date)")
+        
+        self.databaseReference.observeSingleEvent(of: FIRDataEventType.value) { (snapshot: FIRDataSnapshot) in
+            if let value = snapshot.value as? NSDictionary {
+                print(value)
+            }
+        }
+        
+//        "-Kf-sNjE81U7dU_VxWOU" =     {
+//            latitude = "40.728858118395";
+//            longitude = "-74.0070760875";
+//            speed = "7.85";
+//            splashImageTag = 1;
+//            teamName = purple;
+//            timestamp = "1489294691.226886";
+//            userID = 9Jj1UC1ChjdAWClWIfxUIzRle292;
+//        };
+        
+        
+        
+        
+        
+        
 //        linkRef.observe(FIRDataEventType.childAdded, with: { (snapshot) in
 //            if let value = snapshot.value as? NSDictionary{
 //                if let coor = SplashCoordinate(value){
@@ -84,7 +109,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
 //                }
 //            }
 //        })
-//    }
+    }
     
 //    func setMapPinAndRegion() {
 //        mapView.removeAnnotations(mapView.annotations)
