@@ -71,11 +71,12 @@ extension GameViewController{
         }
     }
     
+    
     func animateAllButtons(){
         
         if self.isButtonsOffScreen{
-        
-            UIView.animate(withDuration: 0.30, delay: 0, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.25, options: [], animations: { 
+            
+            UIView.animate(withDuration: 0.30, delay: 0, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.25, options: [], animations: {
                 //Leaderboard views
                 self.firstPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.secondPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
@@ -84,12 +85,12 @@ extension GameViewController{
                 
                 self.gameButton.transform = CGAffineTransform.identity
                 self.findMeButton.transform = CGAffineTransform(translationX: 0, y: 0)
-//                self.endGameButton.transform = CGAffineTransform(translationX: 0, y: 0)
+                //                self.endGameButton.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
         }
         else {
             
-            UIView.animate(withDuration: 0.20, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: [], animations: { 
+            UIView.animate(withDuration: 0.20, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: [], animations: {
                 //Leaderboard views
                 self.firstPlaceView.transform = CGAffineTransform(translationX: 215, y: 0)
                 self.secondPlaceView.transform = CGAffineTransform(translationX: 200, y: 0)
@@ -98,7 +99,7 @@ extension GameViewController{
                 
                 self.gameButton.transform = CGAffineTransform(translationX: 175, y: 0)
                 self.findMeButton.transform = CGAffineTransform(translationX: 175, y: 0)
-//                self.endGameButton.transform = CGAffineTransform(translationX: 175, y: 0)
+                //                self.endGameButton.transform = CGAffineTransform(translationX: 175, y: 0)
             }, completion: nil)
         }
         
@@ -140,7 +141,7 @@ extension GameViewController{
         
         let animator = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn, animations: nil)
         
-        animator.addAnimations { 
+        animator.addAnimations {
             label.snp.remakeConstraints({ (view) in
                 view.top.bottom.leading.trailing.equalToSuperview()
             })

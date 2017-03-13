@@ -20,6 +20,7 @@ class GameViewController: UIViewController {
     var bottomViewPreviousPosition: CGFloat = 0.0
     var myTimer: Timer!
     
+    var mySwitch = true
     var allLabel: [UILabel] = []
     
     var currentUser: User? {
@@ -271,6 +272,15 @@ class GameViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = .black
         view.alpha = 0.3
+        return view
+    }()
+
+    lazy var gameReadyLabel: UILabel = {
+        let view = UILabel()
+        view.text = "READY"
+        view.font = UIFont.boldSystemFont(ofSize: 40)
+        view.tintColor = .red
+        view.textAlignment = .natural
         return view
     }()
     
