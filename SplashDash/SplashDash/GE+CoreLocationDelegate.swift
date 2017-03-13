@@ -68,6 +68,10 @@ extension GameViewController: CLLocationManagerDelegate{
                 //push coordinate to firebase
                 self.currentRun.addCoordinate(coor: coordinate)
                 pushSplashToDatabase(coor: coordinate)
+                
+                let region = MKCoordinateRegion(center: currentLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+                
+                self.mapView.setRegion(region, animated: true)
             }
         }
         // current location becomes the start location

@@ -78,6 +78,14 @@ extension GameViewController{
             
             self.mapView.setRegion(region, animated: true)
         }
+        
+//        if mySwitch{
+//            animateReadySign()
+//        }else{
+//            _ = allLabel.map{ $0.removeFromSuperview() }
+//            allLabel = []
+//        }
+//        mySwitch = !mySwitch
     }
     
     func animateAllButtons(){
@@ -162,6 +170,52 @@ extension GameViewController{
                 
             })
         }
+        
+        y.snp.makeConstraints { (view) in
+            view.centerY.equalToSuperview()
+            view.leading.equalToSuperview().offset(700)
+        }
+        
+        self.view.layoutIfNeeded()
+        
+        animator.addAnimations({ 
+            r.snp.remakeConstraints { (view) in
+                view.center.equalToSuperview()
+            }
+            self.view.layoutIfNeeded()
+        }, delayFactor: 0)
+        
+        animator.addAnimations({
+            e.snp.remakeConstraints { (view) in
+                view.leading.equalTo(r.snp.trailing)
+                view.centerY.equalToSuperview()
+            }
+            self.view.layoutIfNeeded()
+        }, delayFactor: 0.2)
+        
+        animator.addAnimations({
+            a.snp.remakeConstraints { (view) in
+                view.leading.equalTo(e.snp.trailing)
+                view.centerY.equalToSuperview()
+            }
+            self.view.layoutIfNeeded()
+        }, delayFactor: 0.4)
+        
+        animator.addAnimations({
+            d.snp.remakeConstraints { (view) in
+                view.leading.equalTo(a.snp.trailing)
+                view.centerY.equalToSuperview()
+            }
+            self.view.layoutIfNeeded()
+        }, delayFactor: 0.6)
+        
+        animator.addAnimations({
+            y.snp.remakeConstraints { (view) in
+                view.leading.equalTo(d.snp.trailing)
+                view.centerY.equalToSuperview()
+            }
+            self.view.layoutIfNeeded()
+        }, delayFactor: 0.8)
         
         animator.startAnimation()
     }
