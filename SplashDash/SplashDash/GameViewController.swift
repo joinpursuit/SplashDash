@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 import Firebase
+import SpriteKit
+import GameplayKit
 
 class GameViewController: UIViewController {
     
@@ -20,6 +22,7 @@ class GameViewController: UIViewController {
     var bottomViewPreviousPosition: CGFloat = 0.0
     var timer: Timer?
     
+    var scene: SplashScene!
     var mySwitch = true
     var allLabel: [UILabel] = []
     
@@ -88,10 +91,7 @@ class GameViewController: UIViewController {
         
         //add timer to calculate score every ten mins
         Timer.scheduledTimer(timeInterval: 600, target: self, selector: #selector(takeScreenshot), userInfo: nil, repeats:true);
-        
     }
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -111,10 +111,22 @@ class GameViewController: UIViewController {
     
     // MARK: - Setup
     func setupViewHierarchy(){
+        
         self.view.addSubview(invisibleMapView)
         self.view.addSubview(mapView)
         self.mapView.addSubview(gameButton)
         self.mapView.addSubview(findMeButton)
+        
+        let skView = SplashSKView(frame: self.view.frame)
+        skView.allowsTransparency = true
+        mapView.addSubview(skView)
+        
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.ignoresSiblingOrder = true
+        
+        
+        
 //        self.mapView.addSubview(endGameButton)
 
 //        self.mapView.addSubview(bottomRootView)
@@ -129,7 +141,13 @@ class GameViewController: UIViewController {
         self.view.addSubview(secondPlaceView)
         self.view.addSubview(thirdPlaceView)
         self.view.addSubview(fourthPlaceView)
-        // self.view.addSubview(displayView)
+
+        self.view.addSubview(displayView)
+        
+        self.scene = SplashScene(size: skView.bounds.size)
+        scene.scaleMode = .aspectFill
+        skView.presentScene(scene)
+        
     }
     
     func configureConstraints(){

@@ -44,14 +44,11 @@ extension GameViewController: MKMapViewDelegate{
         return MKOverlayRenderer(overlay: overlay)
     }
     
-//    func mapView(_ mapView: MKMapView, didAdd renderers: [MKOverlayRenderer]) {
-//        for layer in renderers{
-//            
-//            UIView.animate(withDuration: 10, animations: {
-//                layer.alpha = 0.2
-//            })
-//        }
-//    }
+    func mapView(_ mapView: MKMapView, didAdd renderers: [MKOverlayRenderer]) {
+        for _ in renderers{
+            scene.dropSplash(on: CGPoint(x: self.view.frame.midX, y: self.view.frame.midY))
+        }
+    }
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
         switch mapView {
