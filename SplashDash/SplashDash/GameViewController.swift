@@ -14,11 +14,11 @@ class GameViewController: UIViewController {
     
     let databaseReference = FIRDatabase.database().reference().child("Public")
     var locationManager: CLLocationManager!
-    var currentRun: Run = Run(allCoordinates: [])
+    var currentRunCoordinates: [SplashCoordinate] = []
     var gameStatus: Bool = false
     var isButtonsOffScreen: Bool = false
     var bottomViewPreviousPosition: CGFloat = 0.0
-    var myTimer: Timer!
+    var timer: Timer?
     
     var mySwitch = true
     var allLabel: [UILabel] = []
@@ -36,11 +36,19 @@ class GameViewController: UIViewController {
     
     // To calculate total distance
     var previousLocation:CLLocation!
-    var traveledDistanceInMeters:Double = 0
+    var traveledDistanceInMeters:Double = 0 {
+        didSet {
+            guard traveledDistanceInMeters > 0 else {
+                self.bottomView.distanceLabel.text = "Distance: 0"
+                return }
+            // convert to miles
+            let traveledDistanceInMiles = traveledDistanceInMeters * 0.000621371
+            let distance = String.localizedStringWithFormat("%.2f", traveledDistanceInMiles)
+            self.bottomView.distanceLabel.text = "Distance: \(distance) miles"
+        }
+    }
     
     // To calculate duration
-    var timer: Timer?
-    
     var duration = 0 {
         didSet {
             guard duration > 0 else {
@@ -52,10 +60,10 @@ class GameViewController: UIViewController {
             let seconds = (duration % 3600) % 60
             
             if hours > 0 {
-                durationString += "\(hours)h,"
+                durationString += "\(hours)h "
             }
             if minutes > 0 {
-                durationString += "\(minutes)m,"
+                durationString += "\(minutes)m "
             }
             durationString += "\(seconds)s"
             
@@ -90,8 +98,8 @@ class GameViewController: UIViewController {
         self.bottomCorneredContainerView.clipsToBounds = true
 
     }
-
-//    // THIS IS WHERE THE COLLECTIONVIEW BUG HAPPENS
+//
+////    // THIS IS WHERE THE COLLECTIONVIEW BUG HAPPENS
 //    override func viewDidLayoutSubviews() {
 //        super.viewDidLayoutSubviews()
 ////        print("self.view.frame.height is \(self.view.frame.height)")
