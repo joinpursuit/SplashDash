@@ -55,7 +55,7 @@ extension GameViewController{
     }
     
     func endGameScreenshot(){
-        endGame = true
+        // endGame = true
         let center = CLLocationCoordinate2D(latitude: 40.728233, longitude: -73.992033)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08))
         
