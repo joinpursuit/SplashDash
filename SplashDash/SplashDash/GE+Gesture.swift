@@ -62,7 +62,8 @@ extension GameViewController{
                 gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
                 
                 self.bringUpBottomView()
-                
+                self.displayView.isHidden = false
+                print("display view is hidden: \(displayView.isHidden)")
                 return }
                 // Max Y
             else {
@@ -70,6 +71,8 @@ extension GameViewController{
                 gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
                 
                 self.configureBottomView()
+                self.displayView.isHidden = true
+                print("display view is hidden: \(displayView.isHidden)")
                 return
             }
         default: return

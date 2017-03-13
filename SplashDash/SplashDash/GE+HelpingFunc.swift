@@ -35,7 +35,6 @@ extension GameViewController{
         if self.gameStatus{
             gameButton.setTitle("Start", for: .normal)
             uploadRun()
-            
             self.previousLocation = nil
             self.timer?.invalidate()
             timer = nil
@@ -43,13 +42,12 @@ extension GameViewController{
             self.traveledDistanceInMeters = 0
             self.duration = 0
             self.fetchCurrentUserData()
-            
-            
         } else{
             guard self.locationManager.location != nil else {
                 print("no location")
                 return }
             animateStartGame()
+            self.displayView.isHidden = false
             toCurrentLocation()
             animateAllButtons()
             gameButton.setTitle("Stop", for: .normal)
@@ -59,6 +57,9 @@ extension GameViewController{
     }
     
     func updateCounter() {
+        if self.duration == 1 {
+            displayView.isHidden = true
+        }
         self.duration += 1
     }
     
@@ -109,7 +110,6 @@ extension GameViewController{
     }
     
     func animateStartGame(){
-        self.displayView.isHidden = false
         let countDownLabels = ["3", "2", "1", "GO!"]
         var colorArr = SplashColor.teamColorArray()
         
@@ -136,7 +136,6 @@ extension GameViewController{
     
     func startGameTimer(){
         guard let label = allLabel.popLast() else {
-            displayView.isHidden = true
             self.updateCounter()
             return
         }

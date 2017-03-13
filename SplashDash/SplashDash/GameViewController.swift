@@ -119,6 +119,7 @@ class GameViewController: UIViewController {
 
 //        self.mapView.addSubview(bottomRootView)
 //        self.view.addSubview(bottomRootView)
+        self.view.addSubview(displayView)
 
         self.view.addSubview(bottomCorneredContainerView)
         self.bottomCorneredContainerView.addSubview(bottomView)
@@ -128,7 +129,7 @@ class GameViewController: UIViewController {
         self.view.addSubview(secondPlaceView)
         self.view.addSubview(thirdPlaceView)
         self.view.addSubview(fourthPlaceView)
-        self.view.addSubview(displayView)
+        // self.view.addSubview(displayView)
     }
     
     func configureConstraints(){
@@ -193,7 +194,7 @@ class GameViewController: UIViewController {
         displayView.snp.remakeConstraints { (view) in
             view.leading.trailing.top.bottom.equalToSuperview()
         }
-        displayView.isHidden = true
+//        displayView.isHidden = true
         
     }
     
@@ -299,6 +300,7 @@ class GameViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = .black
         view.alpha = 0.3
+        view.isHidden = true
         return view
     }()
 
