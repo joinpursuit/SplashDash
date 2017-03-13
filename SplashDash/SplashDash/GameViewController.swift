@@ -18,8 +18,8 @@ class GameViewController: UIViewController {
     var gameStatus: Bool = false
     var isButtonsOffScreen: Bool = false
     var bottomViewPreviousPosition: CGFloat = 0.0
+    var myTimer: Timer!
     
-    var mySwitch = true
     var allLabel: [UILabel] = []
     
     var currentUser: User? {
@@ -62,7 +62,9 @@ class GameViewController: UIViewController {
             
         }
     }
-
+    
+    //Color count
+    var currentScore: [(color: String, score: Double)]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,9 +77,8 @@ class GameViewController: UIViewController {
         fetchGlobalSplash()
         self.bottomView.contentCollectionView.preservesSuperviewLayoutMargins = true
         
-//        let displaylink = CADisplayLink(target: self, selector: #selector(updateLabel))
-//        displaylink.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
-//        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateLabel), userInfo: nil, repeats:true);
+        //add timer to calculate score every ten mins
+        Timer.scheduledTimer(timeInterval: 600, target: self, selector: #selector(takeScreenshot), userInfo: nil, repeats:true);
         
     }
     
@@ -100,12 +101,11 @@ class GameViewController: UIViewController {
 //    }
     
     // MARK: - Setup
-    
     func setupViewHierarchy(){
         self.view.addSubview(invisibleMapView)
         self.view.addSubview(mapView)
         self.mapView.addSubview(findMeButton)
-        self.mapView.addSubview(endGameButton)
+//        self.mapView.addSubview(endGameButton)
 
 //        self.mapView.addSubview(bottomRootView)
         self.view.addSubview(bottomRootView)
@@ -114,8 +114,12 @@ class GameViewController: UIViewController {
         self.bottomCorneredContainerView.addSubview(bottomView)
         self.bottomRootView.addSubview(gameButton)
         
-//        self.view.addSubview(displayView)
-//        self.view.addSubview(gameReadyLabel)
+        //Leaderboard views
+        self.view.addSubview(firstPlaceView)
+        self.view.addSubview(secondPlaceView)
+        self.view.addSubview(thirdPlaceView)
+        self.view.addSubview(fourthPlaceView)
+        self.view.addSubview(displayView)
     }
     
     func configureConstraints(){
@@ -156,21 +160,45 @@ class GameViewController: UIViewController {
             view.size.equalTo(CGSize(width: 60, height: 60))
         }
         
-        endGameButton.snp.remakeConstraints { (view) in
-            view.centerX.equalTo(findMeButton)
-            view.bottom.equalTo(findMeButton.snp.top).offset(-30)
-            view.size.equalTo(CGSize(width: 60, height: 60))
+//        endGameButton.snp.remakeConstraints { (view) in
+//            view.centerX.equalTo(findMeButton)
+//            view.bottom.equalTo(findMeButton.snp.top).offset(-30)
+//            view.size.equalTo(CGSize(width: 60, height: 60))
+//        }
+        
+        firstPlaceView.snp.remakeConstraints { (view) in
+            view.trailing.equalToSuperview().offset(20.0)
+            view.top.equalToSuperview().offset(8.0)
+            view.height.equalToSuperview().multipliedBy(0.06)
+            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.05)
         }
         
-//        displayView.snp.remakeConstraints { (view) in
-//            view.leading.trailing.centerY.equalToSuperview()
-//            view.height.equalTo(200)
-//        }
+        secondPlaceView.snp.remakeConstraints { (view) in
+            view.top.equalTo(firstPlaceView.snp.bottom).offset(8.0)
+            view.trailing.equalToSuperview().offset(20.0)
+            view.height.equalToSuperview().multipliedBy(0.06)
+            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.15)
+        }
         
-//        gameReadyLabel.snp.remakeConstraints { (view) in
-//            view.center.equalToSuperview()
-//            view.width.equalTo(1000)
-//        }
+        thirdPlaceView.snp.remakeConstraints { (view) in
+            view.top.equalTo(secondPlaceView.snp.bottom).offset(8.0)
+            view.trailing.equalToSuperview().offset(20.0)
+            view.height.equalToSuperview().multipliedBy(0.06)
+            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.25)
+        }
+        
+        fourthPlaceView.snp.remakeConstraints { (view) in
+            view.top.equalTo(thirdPlaceView.snp.bottom).offset(8.0)
+            view.trailing.equalToSuperview().offset(20.0)
+            view.height.equalToSuperview().multipliedBy(0.06)
+            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.35)
+        }
+
+        displayView.snp.remakeConstraints { (view) in
+            view.leading.trailing.top.bottom.equalToSuperview()
+        }
+        displayView.isHidden = true
+        
     }
     
     //MARK: - Lazy inits
@@ -227,31 +255,22 @@ class GameViewController: UIViewController {
         return button
     }()
     
-    lazy var endGameButton: UIButton = {
-        let button = UIButton(type: UIButtonType.infoLight)
-        button.isEnabled = true
-        button.backgroundColor = SplashColor.primaryColor()
-        button.clipsToBounds = true
-        button.layer.cornerRadius = 30
-        button.tintColor = .white
-        button.addShadows()
-        button.addTarget(self, action: #selector(takeScreenshot), for: .touchUpInside)
-        return button
-    }()
+//    lazy var endGameButton: UIButton = {
+//        let button = UIButton(type: UIButtonType.infoLight)
+//        button.isEnabled = true
+//        button.backgroundColor = SplashColor.primaryColor()
+//        button.clipsToBounds = true
+//        button.layer.cornerRadius = 30
+//        button.tintColor = .white
+//        button.addShadows()
+//        button.addTarget(self, action: #selector(takeScreenshot), for: .touchUpInside)
+//        return button
+//    }()
     
     lazy var displayView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
-        view.alpha = 0.4
-        return view
-    }()
-    
-    lazy var gameReadyLabel: UILabel = {
-        let view = UILabel()
-        view.text = "READY"
-        view.font = UIFont.boldSystemFont(ofSize: 40)
-        view.tintColor = .red
-        view.textAlignment = .natural
+        view.backgroundColor = .black
+        view.alpha = 0.3
         return view
     }()
     
@@ -277,7 +296,48 @@ class GameViewController: UIViewController {
     
     lazy var bottomView: BottomView = {
         let view = BottomView()
-                view.isUserInteractionEnabled = true
+        view.isUserInteractionEnabled = true
+        
+        return view
+    }()
+    
+    lazy var firstPlaceView: LeaderboardView = {
+        let view = LeaderboardView()
+        view.layer.cornerRadius = 20.0
+
+        view.rankingLabel.text = "1st"
+        view.alpha = 0
+        
+        return view
+    }()
+    
+    lazy var secondPlaceView: LeaderboardView = {
+        let view = LeaderboardView()
+        view.layer.cornerRadius = 20.0
+        
+        view.rankingLabel.text = "2nd"
+        view.alpha = 0
+        
+        return view
+    }()
+    
+    lazy var thirdPlaceView: LeaderboardView = {
+        let view = LeaderboardView()
+        view.layer.cornerRadius = 20.0
+        
+        view.rankingLabel.text = "3rd"
+        view.alpha = 0
+        
+        return view
+    }()
+    
+    lazy var fourthPlaceView: LeaderboardView = {
+        let view = LeaderboardView()
+        view.layer.cornerRadius = 20.0
+        
+        view.rankingLabel.text = "4th"
+        view.alpha = 0
+        
         return view
     }()
 }

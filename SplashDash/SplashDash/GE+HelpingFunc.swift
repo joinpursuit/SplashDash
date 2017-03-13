@@ -35,15 +35,21 @@ extension GameViewController{
         if self.gameStatus{
             gameButton.setTitle("Start", for: .normal)
             endRunUpdate()
+//            self.startLocation = nil
+//            self.lastLocation = nil
+//            self.traveledDistanceInMiles = 0
+//            self.totalDuration = 0
+//        }else{
             self.previousLocation = nil
             self.traveledDistanceInMeters = 0
             self.timer?.invalidate()
             timer = nil
             self.duration = 0
         } else{
+            animateStartGame()
             toCurrentLocation()
-            gameButton.setTitle("Stop", for: .normal)
             animateAllButtons()
+            gameButton.setTitle("Stop", for: .normal)
             self.timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
         }
         
@@ -72,115 +78,90 @@ extension GameViewController{
             
             self.mapView.setRegion(region, animated: true)
         }
-        
-//        if mySwitch{
-//            animateReadySign()
-//        }else{
-//            _ = allLabel.map{ $0.removeFromSuperview() }
-//            allLabel = []
-//        }
-//        mySwitch = !mySwitch
     }
     
     func animateAllButtons(){
-        UIView.animate(withDuration: 0.8, animations: {
-            if self.isButtonsOffScreen{
-                self.gameButton.transform = CGAffineTransform(translationX: 0, y: 0)
+        
+        if self.isButtonsOffScreen{
+        
+            UIView.animate(withDuration: 0.30, delay: 0, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.25, options: [], animations: { 
+                //Leaderboard views
+                self.firstPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.secondPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.thirdPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.fourthPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+                
+                self.gameButton.transform = CGAffineTransform.identity
                 self.findMeButton.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.endGameButton.transform = CGAffineTransform(translationX: 0, y: 0)
-            }else{
-                self.gameButton.transform = CGAffineTransform(translationX: 150, y: 0)
-                self.findMeButton.transform = CGAffineTransform(translationX: 150, y: 0)
-                self.endGameButton.transform = CGAffineTransform(translationX: 150, y: 0)
-            }
-            self.isButtonsOffScreen = !self.isButtonsOffScreen
-        }, completion: nil)
+//                self.endGameButton.transform = CGAffineTransform(translationX: 0, y: 0)
+            }, completion: nil)
+        }
+        else {
+            
+            UIView.animate(withDuration: 0.20, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: [], animations: { 
+                //Leaderboard views
+                self.firstPlaceView.transform = CGAffineTransform(translationX: 215, y: 0)
+                self.secondPlaceView.transform = CGAffineTransform(translationX: 200, y: 0)
+                self.thirdPlaceView.transform = CGAffineTransform(translationX: 200, y: 0)
+                self.fourthPlaceView.transform = CGAffineTransform(translationX: 175, y: 0)
+                
+                self.gameButton.transform = CGAffineTransform(translationX: 175, y: 0)
+                self.findMeButton.transform = CGAffineTransform(translationX: 175, y: 0)
+//                self.endGameButton.transform = CGAffineTransform(translationX: 175, y: 0)
+            }, completion: nil)
+        }
+        
+        self.isButtonsOffScreen = !self.isButtonsOffScreen
     }
     
-    func animateReadySign(){
-        let animator = UIViewPropertyAnimator(duration: 0.8, curve: .easeOut, animations: nil)
-        let r = UILabel()
-        r.text = "R "
-        let e = UILabel()
-        e.text = "E "
-        let a = UILabel()
-        a.text = "A "
-        let d = UILabel()
-        d.text = "D "
-        let y = UILabel()
-        y.text = "Y "
-        allLabel = [r,e,a,d,y]
-        view.addSubview(r)
-        view.addSubview(e)
-        view.addSubview(a)
-        view.addSubview(d)
-        view.addSubview(y)
+    func animateStartGame(){
+        self.displayView.isHidden = false
+        let countDownLabels = ["3", "2", "1", "GO!"]
+        var colorArr = SplashColor.teamColorArray()
         
-        r.snp.makeConstraints { (view) in
-            view.centerY.equalToSuperview()
-            view.leading.equalToSuperview().offset(700)
-        }
-        
-        e.snp.makeConstraints { (view) in
-            view.centerY.equalToSuperview()
-            view.leading.equalToSuperview().offset(700)
-        }
-        
-        a.snp.makeConstraints { (view) in
-            view.centerY.equalToSuperview()
-            view.leading.equalToSuperview().offset(700)
-        }
-        
-        d.snp.makeConstraints { (view) in
-            view.centerY.equalToSuperview()
-            view.leading.equalToSuperview().offset(700)
-        }
-        
-        y.snp.makeConstraints { (view) in
-            view.centerY.equalToSuperview()
-            view.leading.equalToSuperview().offset(700)
+        for char in countDownLabels.reversed(){
+            let label = UILabel()
+            label.text = char
+            label.textColor = colorArr.removeLast()
+            label.textAlignment = .center
+            label.font = UIFont.boldSystemFont(ofSize: 120)
+            
+            
+            allLabel.append(label)
+            view.addSubview(label)
+            label.snp.makeConstraints { (view) in
+                view.center.equalToSuperview()
+                view.size.equalTo(CGSize(width: 1, height: 1))
+            }
         }
         
         self.view.layoutIfNeeded()
         
-        animator.addAnimations({ 
-            r.snp.remakeConstraints { (view) in
-                view.center.equalToSuperview()
-            }
-            self.view.layoutIfNeeded()
-        }, delayFactor: 0)
+        myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(animateCountDown), userInfo: nil, repeats: true)
+    }
+    
+    func animateCountDown(){
+        guard let label = allLabel.popLast() else{
+            displayView.isHidden = true
+            myTimer.invalidate()
+            return
+        }
         
-        animator.addAnimations({
-            e.snp.remakeConstraints { (view) in
-                view.leading.equalTo(r.snp.trailing)
-                view.centerY.equalToSuperview()
-            }
-            self.view.layoutIfNeeded()
-        }, delayFactor: 0.2)
+        let animator = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn, animations: nil)
         
-        animator.addAnimations({
-            a.snp.remakeConstraints { (view) in
-                view.leading.equalTo(e.snp.trailing)
-                view.centerY.equalToSuperview()
-            }
+        animator.addAnimations { 
+            label.snp.remakeConstraints({ (view) in
+                view.top.bottom.leading.trailing.equalToSuperview()
+            })
             self.view.layoutIfNeeded()
-        }, delayFactor: 0.4)
+        }
         
-        animator.addAnimations({
-            d.snp.remakeConstraints { (view) in
-                view.leading.equalTo(a.snp.trailing)
-                view.centerY.equalToSuperview()
-            }
-            self.view.layoutIfNeeded()
-        }, delayFactor: 0.6)
-        
-        animator.addAnimations({
-            y.snp.remakeConstraints { (view) in
-                view.leading.equalTo(d.snp.trailing)
-                view.centerY.equalToSuperview()
-            }
-            self.view.layoutIfNeeded()
-        }, delayFactor: 0.8)
+        animator.addCompletion { (_) in
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.7, execute: {
+                label.removeFromSuperview()
+                
+            })
+        }
         
         animator.startAnimation()
     }
@@ -197,11 +178,15 @@ extension GameViewController{
         UIGraphicsEndImageContext()
         
 //        UIImageWriteToSavedPhotosAlbum(screenShot, nil, nil, nil)
-        let score = colorArray(image: screenShot)
-        print(score)
+        self.currentScore = colorArray(image: screenShot)
+        print(currentScore)
+        
+        //updating leaderboard count and handle colors
+        updateLeaderboard()
+        
     }
     
-    func colorArray(image: UIImage) -> [String: Double] {
+    func colorArray(image: UIImage) -> [(color: String, score: Double)] {
         
         var purpleCoverage = 0.0
         var tealCoverage = 0.0
@@ -210,7 +195,7 @@ extension GameViewController{
         
         var total: Double = 0.0
         
-        guard let img = image.cgImage else { return [:] }
+        guard let img = image.cgImage else { return [] }
         let width = img.width
         let height = img.height
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -226,35 +211,48 @@ extension GameViewController{
         for x in 0..<height {
             for y in 0..<width {
                 let byteIndex = (bytesPerRow * x) + y * bytesPerPixel
-                
                 let red   = rawData[byteIndex]
                 let green = rawData[byteIndex + 1]
                 let blue  = rawData[byteIndex + 2]
-                
+                // (103, 58, 183) for purple
+                // (0, 188, 212)  for teal
+                // (76, 175, 80)  for green
+                // (255, 87, 34)  for orange
                 switch (red, green, blue) {
-                case (103, 58, 183):
+                case (93...113, 48...68, 173...193):
                     purpleCoverage += 1.0
                     total += 1.0
-                case (0, 188, 212):
+                default: ()
+                }
+                
+                switch (red, green, blue) {
+                case (0...10, 178...198, 202...222):
                     tealCoverage += 1.0
                     total += 1.0
-                case (76, 175, 80):
+                default: ()
+                }
+                
+                switch (red, green, blue) {
+                case (66...86, 165...185, 70...90):
                     greenCoverage += 1.0
                     total += 1.0
-                case (255, 87, 34):
+                default: ()
+                }
+                
+                switch (red, green, blue) {
+                case (245...255, 77...97, 24...44):
                     orangeCoverage += 1.0
                     total += 1.0
-                default:
-                    continue
+                default: ()
                 }
             }
         }
         //return winer
         print("\(height),  \(width)")
-        return ["purple": purpleCoverage/total,
-                "teal": tealCoverage/total,
-                "green": greenCoverage/total,
-                "orange": orangeCoverage/total]
+        return [("purple", purpleCoverage/total),
+                ("teal", tealCoverage/total),
+                ("green", greenCoverage/total),
+                ("orange", orangeCoverage/total)]
     }
     
     func updateLabel() {
@@ -272,4 +270,29 @@ extension GameViewController{
 //        bottomView.currentRunLabel.text = "Hours left: \(diff.hour!):\(diff.minute!):\(diff.second!)"
         
     }
+    
+    func updateLeaderboard() {
+        let sortedScores = self.currentScore.sorted { $0.score > $1.score }
+        
+        self.firstPlaceView.teamNameLabel.text = "\(sortedScores[0].color)"
+        self.firstPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[0].color)")
+        
+        self.secondPlaceView.teamNameLabel.text = "\(sortedScores[1].color)"
+        self.secondPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[1].color)")
+        
+        self.thirdPlaceView.teamNameLabel.text = "\(sortedScores[2].color)"
+        self.thirdPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[2].color)")
+        
+        self.fourthPlaceView.teamNameLabel.text = "\(sortedScores[3].color)"
+        self.fourthPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[3].color)")
+        
+        UIView.animate(withDuration: 0.5) {
+            self.firstPlaceView.alpha = 1
+            self.secondPlaceView.alpha = 1
+            self.thirdPlaceView.alpha = 1
+            self.fourthPlaceView.alpha = 1
+        }
+        
+    }
+
 }

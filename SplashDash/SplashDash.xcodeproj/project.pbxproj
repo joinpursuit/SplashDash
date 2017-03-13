@@ -36,6 +36,7 @@
 		472AC9511E73137800E11851 /* UIImageView+VibrationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472AC9501E73137800E11851 /* UIImageView+VibrationAnimation.swift */; };
 		474371781E6A29CE00391AF2 /* SplashDashTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474371771E6A29CE00391AF2 /* SplashDashTextField.swift */; };
 		4743717A1E6CD47000391AF2 /* TeamStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474371791E6CD47000391AF2 /* TeamStackView.swift */; };
+		4762B5A51E75FEA4002D6BA9 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762B5A41E75FEA4002D6BA9 /* LeaderboardView.swift */; };
 		47F56CF21E68857E007375BB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F56CF11E68857E007375BB /* UIView+Extension.swift */; };
 		47F56CF41E69FB70007375BB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F56CF31E69FB70007375BB /* HomeViewController.swift */; };
 		47FCE6F41E74A8D000F317E5 /* Fresh-Paint.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 47FCE6F21E74A8D000F317E5 /* Fresh-Paint.mp4 */; };
@@ -85,6 +86,7 @@
 		472AC9501E73137800E11851 /* UIImageView+VibrationAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+VibrationAnimation.swift"; sourceTree = "<group>"; };
 		474371771E6A29CE00391AF2 /* SplashDashTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashDashTextField.swift; sourceTree = "<group>"; };
 		474371791E6CD47000391AF2 /* TeamStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamStackView.swift; sourceTree = "<group>"; };
+		4762B5A41E75FEA4002D6BA9 /* LeaderboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		47F56CF11E68857E007375BB /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		47F56CF31E69FB70007375BB /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		47FCE6F21E74A8D000F317E5 /* Fresh-Paint.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fresh-Paint.mp4"; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 		4B9BF6C21E6763DE00EA0410 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4762B5A41E75FEA4002D6BA9 /* LeaderboardView.swift */,
 				474371791E6CD47000391AF2 /* TeamStackView.swift */,
 				4B9BF6C01E6763D700EA0410 /* UserRunHistoryView.swift */,
 				4BC54AC11E6CE3E90014F3B3 /* MapHistoryView.swift */,
@@ -403,6 +406,7 @@
 				4B3A907F1E6C9B580028FBC1 /* ContentCollectionViewCell.swift in Sources */,
 				47F56CF21E68857E007375BB /* UIView+Extension.swift in Sources */,
 				471458241E712B2100467881 /* HVC+TeamStackViewDelegate.swift in Sources */,
+				4762B5A51E75FEA4002D6BA9 /* LeaderboardView.swift in Sources */,
 				06B239CF1E6763DF0071E17F /* GE+SnapKit.swift in Sources */,
 				4B9BF6C41E6765E700EA0410 /* HistoryTableViewCell.swift in Sources */,
 				06B239DB1E68BFBB0071E17F /* GE+Firebase.swift in Sources */,
@@ -546,6 +550,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = R7DWEPXN5Y;
 				INFOPLIST_FILE = SplashDash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
@@ -562,6 +567,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = R7DWEPXN5Y;
 				INFOPLIST_FILE = SplashDash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
