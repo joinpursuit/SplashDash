@@ -12,11 +12,14 @@ import Firebase
 import SnapKit
 
 class MapHistoryView: UIView, MKMapViewDelegate {
+    //MARK: - Properties
+    var locationManager: CLLocationManager!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViewHierarchy()
         configureConstraints()
+        setUpMapViewLocation()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -50,16 +53,26 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         }
     }
     
+    //MARK: - Methods
+    func setUpMapViewLocation() {
+        //40.725128, -73.995064
+        let center = CLLocationCoordinate2D(latitude: 40.725128, longitude: -73.995064) //40.751085, -73.984946
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.08))
+        self.mapView.setRegion(region, animated: false)
+
+    }
+    
     // MARK: - Views
 
     lazy var mapView: MKMapView = {
         let view = MKMapView()
         view.mapType = .standard
-        view.showsUserLocation = true
+        view.showsUserLocation = false
         view.showsScale = true
         view.showsCompass = true
         view.showsBuildings = false
         view.showsPointsOfInterest = false
+        view.showsCompass = false
         view.delegate = self
         return view
     }()

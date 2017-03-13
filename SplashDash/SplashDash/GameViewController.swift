@@ -81,6 +81,7 @@ class GameViewController: UIViewController {
         //add timer to calculate score every ten mins
         Timer.scheduledTimer(timeInterval: 600, target: self, selector: #selector(takeScreenshot), userInfo: nil, repeats:true);
         
+        
     }
     
     
