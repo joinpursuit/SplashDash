@@ -68,11 +68,10 @@ extension GameViewController{
     }
     
     func animateAllButtons(){
-        UIView.animate(withDuration: 0.8, animations: {
-            if self.isButtonsOffScreen{
-                self.gameButton.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.findMeButton.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.endGameButton.transform = CGAffineTransform(translationX: 0, y: 0)
+        
+        if self.isButtonsOffScreen{
+            
+            UIView.animate(withDuration: 0.30, delay: 0, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.25, options: [], animations: {
                 
                 //Leaderboard views
                 self.firstPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
@@ -80,22 +79,74 @@ extension GameViewController{
                 self.thirdPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.fourthPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
                 
-            }else{
-                self.gameButton.transform = CGAffineTransform(translationX: 150, y: 0)
-                self.findMeButton.transform = CGAffineTransform(translationX: 150, y: 0)
-                self.endGameButton.transform = CGAffineTransform(translationX: 150, y: 0)
+                self.gameButton.transform = CGAffineTransform.identity
+                self.findMeButton.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.endGameButton.transform = CGAffineTransform(translationX: 0, y: 0)
                 
-                //Leaderboard views
-                self.firstPlaceView.transform = CGAffineTransform(translationX: 300, y: 0)
-                self.secondPlaceView.transform = CGAffineTransform(translationX: 250, y: 0)
-                self.thirdPlaceView.transform = CGAffineTransform(translationX: 200, y: 0)
-                self.fourthPlaceView.transform = CGAffineTransform(translationX: 150, y: 0)
+            }) { (bool: Bool) in
                 
             }
-            self.isButtonsOffScreen = !self.isButtonsOffScreen
-        }, completion: nil)
-    }
+        }
+        else{
+            
+            UIView.animate(withDuration: 0.20, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: [], animations: {
+                
+                //Leaderboard views
+                self.firstPlaceView.transform = CGAffineTransform(translationX: 205, y: 0)
+                self.secondPlaceView.transform = CGAffineTransform(translationX: 200, y: 0)
+                self.thirdPlaceView.transform = CGAffineTransform(translationX: 200, y: 0)
+                self.fourthPlaceView.transform = CGAffineTransform(translationX: 175, y: 0)
+                
+                self.gameButton.transform = CGAffineTransform(translationX: 175, y: 0)
+                self.findMeButton.transform = CGAffineTransform(translationX: 175, y: 0)
+                self.endGameButton.transform = CGAffineTransform(translationX: 175, y: 0)
+                
+            }) { (bool: Bool) in
 
+            }
+            
+        }
+        
+        self.isButtonsOffScreen = !self.isButtonsOffScreen
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//        UIView.animate(withDuration: 0.8, animations: {
+//            if self.isButtonsOffScreen{
+//                self.gameButton.transform = CGAffineTransform(translationX: 0, y: 0)
+//                self.findMeButton.transform = CGAffineTransform(translationX: 0, y: 0)
+//                self.endGameButton.transform = CGAffineTransform(translationX: 0, y: 0)
+//                
+//                //Leaderboard views
+//                self.firstPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+//                self.secondPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+//                self.thirdPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+//                self.fourthPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
+//                
+//            }else{
+//                self.gameButton.transform = CGAffineTransform(translationX: 150, y: 0)
+//                self.findMeButton.transform = CGAffineTransform(translationX: 150, y: 0)
+//                self.endGameButton.transform = CGAffineTransform(translationX: 150, y: 0)
+//                
+//                //Leaderboard views
+//                self.firstPlaceView.transform = CGAffineTransform(translationX: 300, y: 0)
+//                self.secondPlaceView.transform = CGAffineTransform(translationX: 250, y: 0)
+//                self.thirdPlaceView.transform = CGAffineTransform(translationX: 200, y: 0)
+//                self.fourthPlaceView.transform = CGAffineTransform(translationX: 150, y: 0)
+//                
+//            }
+//            self.isButtonsOffScreen = !self.isButtonsOffScreen
+//        }, completion: nil)
+        
+    }
+    
     func takeScreenshot() {
         
         guard let contentScrollView = self.mapView.subviews.first?.subviews.first else { return }
