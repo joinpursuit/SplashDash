@@ -139,28 +139,28 @@ class GameViewController: UIViewController {
             view.trailing.equalToSuperview().offset(20.0)
             view.top.equalToSuperview().offset(20.0)
             view.height.equalToSuperview().multipliedBy(0.06)
-            view.leading.equalTo(self.view.snp.centerX).multipliedBy(0.9)
+            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.1)
         }
         
         secondPlaceView.snp.remakeConstraints { (view) in
             view.top.equalTo(firstPlaceView.snp.bottom).offset(8.0)
             view.trailing.equalToSuperview().offset(20.0)
             view.height.equalToSuperview().multipliedBy(0.06)
-            view.leading.equalTo(self.view.snp.centerX)
+            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.2)
         }
         
         thirdPlaceView.snp.remakeConstraints { (view) in
             view.top.equalTo(secondPlaceView.snp.bottom).offset(8.0)
             view.trailing.equalToSuperview().offset(20.0)
             view.height.equalToSuperview().multipliedBy(0.06)
-            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.1)
+            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.3)
         }
         
         fourthPlaceView.snp.remakeConstraints { (view) in
             view.top.equalTo(thirdPlaceView.snp.bottom).offset(8.0)
             view.trailing.equalToSuperview().offset(20.0)
             view.height.equalToSuperview().multipliedBy(0.06)
-            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.2)
+            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.4)
         }
     }
     
@@ -252,7 +252,7 @@ class GameViewController: UIViewController {
         view.rankingLabel.text = "1st"
         
         //This needs to be dynamically changed
-        view.teamNameLabel.text = "Test Team A"
+        view.teamNameLabel.text = "Color"
         
         return view
     }()
@@ -265,7 +265,7 @@ class GameViewController: UIViewController {
         view.rankingLabel.text = "2nd"
         
         //This needs to be dynamically changed
-        view.teamNameLabel.text = "Test Team B"
+        view.teamNameLabel.text = "Color"
         
         return view
     }()
@@ -278,7 +278,7 @@ class GameViewController: UIViewController {
         view.rankingLabel.text = "3rd"
         
         //This needs to be dynamically changed
-        view.teamNameLabel.text = "Test Team C"
+        view.teamNameLabel.text = "Color"
         
         return view
     }()
@@ -291,7 +291,7 @@ class GameViewController: UIViewController {
         view.rankingLabel.text = "4th"
         
         //This needs to be dynamically changed
-        view.teamNameLabel.text = "Test Team D"
+        view.teamNameLabel.text = "Color"
         
         return view
     }()
