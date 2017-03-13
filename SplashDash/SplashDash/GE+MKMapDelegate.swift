@@ -44,10 +44,21 @@ extension GameViewController: MKMapViewDelegate{
         return MKOverlayRenderer(overlay: overlay)
     }
     
+//    func mapView(_ mapView: MKMapView, didAdd renderers: [MKOverlayRenderer]) {
+//        for layer in renderers{
+//            
+//            UIView.animate(withDuration: 10, animations: {
+//                layer.alpha = 0.2
+//            })
+//        }
+//    }
+    
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
-        if endGame{
+        switch mapView {
+        case invisibleMapView:
             takeScreenshot()
+        default:
+            return
         }
-        self.endGame = false
     }
 }

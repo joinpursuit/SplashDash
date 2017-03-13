@@ -15,10 +15,12 @@ class GameViewController: UIViewController {
     let databaseReference = FIRDatabase.database().reference().child("Public")
     var locationManager: CLLocationManager!
     var currentRun: Run = Run(allCoordinates: [])
-    var endGame: Bool = false
     var gameStatus: Bool = false
     var isButtonsOffScreen: Bool = false
     var bottomViewPreviousPosition: CGFloat = 0.0
+    var myTimer: Timer!
+    
+    var allLabel: [UILabel] = []
     
     var currentUser: User? {
         didSet {
@@ -26,18 +28,43 @@ class GameViewController: UIViewController {
             let defaults = UserDefaults()
             if let user = currentUser {
                 defaults.set(user.teamName.rawValue, forKey: "teamName")
+                bottomView.contentCollectionView.userRunHistoryView.user = user
             }
         }
     }
     
     // To calculate total distance
-    var startLocation:CLLocation!
-    var lastLocation: CLLocation!
-    var traveledDistanceInMiles:Double = 0
+    var previousLocation:CLLocation!
+    var traveledDistanceInMeters:Double = 0
     
     // To calculate duration
-    var totalDuration: TimeInterval = 0
-
+    var timer: Timer?
+    
+    var duration = 0 {
+        didSet {
+            guard duration > 0 else {
+                self.bottomView.durationLabel.text = "Duration: 0"
+                return }
+            var durationString = ""
+            let hours = duration / 3600
+            let minutes = (duration % 3600) / 60
+            let seconds = (duration % 3600) % 60
+            
+            if hours > 0 {
+                durationString += "\(hours)h,"
+            }
+            if minutes > 0 {
+                durationString += "\(minutes)m,"
+            }
+            durationString += "\(seconds)s"
+            
+            self.bottomView.durationLabel.text = "Duration: \(durationString)"
+            
+        }
+    }
+    
+    //Color count
+    var currentScore: [(color: String, score: Double)]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,9 +77,8 @@ class GameViewController: UIViewController {
         fetchGlobalSplash()
         self.bottomView.contentCollectionView.preservesSuperviewLayoutMargins = true
         
-//        let displaylink = CADisplayLink(target: self, selector: #selector(updateLabel))
-//        displaylink.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
-//        Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(updateLabel), userInfo: nil, repeats:true);
+        //add timer to calculate score every ten mins
+        Timer.scheduledTimer(timeInterval: 600, target: self, selector: #selector(takeScreenshot), userInfo: nil, repeats:true);
         
     }
     
@@ -64,19 +90,19 @@ class GameViewController: UIViewController {
 
     }
 
-    // THIS IS WHERE THE COLLECTIONVIEW BUG HAPPENS
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-//        print("self.view.frame.height is \(self.view.frame.height)")
-//        print("self.bottomCorneredContainerView.frame.height is \(self.bottomCorneredContainerView.frame.height)")
-//        print("---The difference is \(self.view.frame.height - self.bottomCorneredContainerView.frame.height)---")
-        print("self.bottomRootView.frame.height is \(self.bottomRootView.frame.height)")
-        print()
-    }
+//    // THIS IS WHERE THE COLLECTIONVIEW BUG HAPPENS
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+////        print("self.view.frame.height is \(self.view.frame.height)")
+////        print("self.bottomCorneredContainerView.frame.height is \(self.bottomCorneredContainerView.frame.height)")
+////        print("---The difference is \(self.view.frame.height - self.bottomCorneredContainerView.frame.height)---")
+//        print("self.bottomRootView.frame.height is \(self.bottomRootView.frame.height)")
+//        print()
+//    }
     
     // MARK: - Setup
     func setupViewHierarchy(){
-
+        self.view.addSubview(invisibleMapView)
         self.view.addSubview(mapView)
         self.mapView.addSubview(findMeButton)
         self.mapView.addSubview(endGameButton)
@@ -93,9 +119,14 @@ class GameViewController: UIViewController {
         self.view.addSubview(secondPlaceView)
         self.view.addSubview(thirdPlaceView)
         self.view.addSubview(fourthPlaceView)
+        self.view.addSubview(displayView)
     }
     
     func configureConstraints(){
+        invisibleMapView.snp.remakeConstraints { (view) in
+            view.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
         mapView.snp.remakeConstraints { (view) in
             view.top.bottom.leading.trailing.equalToSuperview()
         }
@@ -126,13 +157,13 @@ class GameViewController: UIViewController {
         findMeButton.snp.remakeConstraints { (view) in
             view.trailing.equalTo(gameButton)
             view.bottom.equalTo(gameButton.snp.top).offset(-40)
-            view.size.equalTo(CGSize(width: 70, height: 70))
+            view.size.equalTo(CGSize(width: 60, height: 60))
         }
         
         endGameButton.snp.remakeConstraints { (view) in
             view.centerX.equalTo(findMeButton)
             view.bottom.equalTo(findMeButton.snp.top).offset(-30)
-            view.size.equalTo(CGSize(width: 70, height: 70))
+            view.size.equalTo(CGSize(width: 60, height: 60))
         }
         
         firstPlaceView.snp.remakeConstraints { (view) in
@@ -162,9 +193,26 @@ class GameViewController: UIViewController {
             view.height.equalToSuperview().multipliedBy(0.06)
             view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.4)
         }
+
+        displayView.snp.remakeConstraints { (view) in
+            view.leading.trailing.top.bottom.equalToSuperview()
+        }
+        displayView.isHidden = true
+        
     }
     
     //MARK: - Lazy inits
+    lazy var invisibleMapView: MKMapView = {
+        let view = MKMapView()
+        view.mapType = .standard
+        view.showsUserLocation = false
+        view.showsScale = false
+        view.showsCompass = false
+        view.showsBuildings = false
+        view.showsPointsOfInterest = false
+        view.delegate = self
+        return view
+    }()
     
     lazy var mapView: MKMapView = {
         let view = MKMapView()
@@ -184,11 +232,11 @@ class GameViewController: UIViewController {
     lazy var gameButton: UIButton = {
         let button = UIButton()
         button.setTitle("Start", for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.isEnabled = true
         let originalSplash = UIImage(named: "logoSplash")
-        let colorableSplash = originalSplash?.withRenderingMode(.alwaysTemplate)
+        let colorableSplash = originalSplash?.withRenderingMode(.alwaysTemplate).imageWithColor(color1: SplashColor.primaryColor())
         button.setBackgroundImage(colorableSplash, for: .normal)
-        button.tintColor = SplashColor.primaryColor()
         button.addShadows()
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
@@ -198,9 +246,10 @@ class GameViewController: UIViewController {
     lazy var findMeButton: UIButton = {
         let button = UIButton(type: UIButtonType.contactAdd)
         button.isEnabled = true
-        button.backgroundColor = .white
+        button.backgroundColor = SplashColor.primaryColor()
         button.clipsToBounds = true
-        button.layer.cornerRadius = 35
+        button.layer.cornerRadius = 30
+        button.tintColor = .white
         button.addShadows()
         button.addTarget(self, action: #selector(toCurrentLocation), for: .touchUpInside)
         return button
@@ -209,12 +258,20 @@ class GameViewController: UIViewController {
     lazy var endGameButton: UIButton = {
         let button = UIButton(type: UIButtonType.infoLight)
         button.isEnabled = true
-        button.backgroundColor = .white
+        button.backgroundColor = SplashColor.primaryColor()
         button.clipsToBounds = true
-        button.layer.cornerRadius = 35
+        button.layer.cornerRadius = 30
+        button.tintColor = .white
         button.addShadows()
         button.addTarget(self, action: #selector(takeScreenshot), for: .touchUpInside)
         return button
+    }()
+    
+    lazy var displayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0.3
+        return view
     }()
     
     lazy var bottomRootView: UIView = {
