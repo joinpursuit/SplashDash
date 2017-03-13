@@ -60,15 +60,6 @@ extension GameViewController{
         self.duration += 1
     }
     
-    func endGameScreenshot(){
-        // endGame = true
-        let center = CLLocationCoordinate2D(latitude: 40.728233, longitude: -73.992033)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08))
-        
-        self.mapView.setRegion(region, animated: true)
-        
-    }
-    
     func toCurrentLocation(){
         print("-----------current location button tapped------------")
         if let current = self.locationManager.location{
@@ -78,21 +69,14 @@ extension GameViewController{
             
             self.mapView.setRegion(region, animated: true)
         }
-        
-//        if mySwitch{
-//            animateReadySign()
-//        }else{
-//            _ = allLabel.map{ $0.removeFromSuperview() }
-//            allLabel = []
-//        }
-//        mySwitch = !mySwitch
     }
+    
     
     func animateAllButtons(){
         
         if self.isButtonsOffScreen{
-        
-            UIView.animate(withDuration: 0.30, delay: 0, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.25, options: [], animations: { 
+            
+            UIView.animate(withDuration: 0.30, delay: 0, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.25, options: [], animations: {
                 //Leaderboard views
                 self.firstPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.secondPlaceView.transform = CGAffineTransform(translationX: 0, y: 0)
@@ -101,12 +85,12 @@ extension GameViewController{
                 
                 self.gameButton.transform = CGAffineTransform.identity
                 self.findMeButton.transform = CGAffineTransform(translationX: 0, y: 0)
-//                self.endGameButton.transform = CGAffineTransform(translationX: 0, y: 0)
+                //                self.endGameButton.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
         }
         else {
             
-            UIView.animate(withDuration: 0.20, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: [], animations: { 
+            UIView.animate(withDuration: 0.20, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: [], animations: {
                 //Leaderboard views
                 self.firstPlaceView.transform = CGAffineTransform(translationX: 215, y: 0)
                 self.secondPlaceView.transform = CGAffineTransform(translationX: 200, y: 0)
@@ -115,7 +99,7 @@ extension GameViewController{
                 
                 self.gameButton.transform = CGAffineTransform(translationX: 175, y: 0)
                 self.findMeButton.transform = CGAffineTransform(translationX: 175, y: 0)
-//                self.endGameButton.transform = CGAffineTransform(translationX: 175, y: 0)
+                //                self.endGameButton.transform = CGAffineTransform(translationX: 175, y: 0)
             }, completion: nil)
         }
         
@@ -157,7 +141,7 @@ extension GameViewController{
         
         let animator = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn, animations: nil)
         
-        animator.addAnimations { 
+        animator.addAnimations {
             label.snp.remakeConstraints({ (view) in
                 view.top.bottom.leading.trailing.equalToSuperview()
             })
@@ -170,52 +154,6 @@ extension GameViewController{
                 
             })
         }
-        
-        y.snp.makeConstraints { (view) in
-            view.centerY.equalToSuperview()
-            view.leading.equalToSuperview().offset(700)
-        }
-        
-        self.view.layoutIfNeeded()
-        
-        animator.addAnimations({ 
-            r.snp.remakeConstraints { (view) in
-                view.center.equalToSuperview()
-            }
-            self.view.layoutIfNeeded()
-        }, delayFactor: 0)
-        
-        animator.addAnimations({
-            e.snp.remakeConstraints { (view) in
-                view.leading.equalTo(r.snp.trailing)
-                view.centerY.equalToSuperview()
-            }
-            self.view.layoutIfNeeded()
-        }, delayFactor: 0.2)
-        
-        animator.addAnimations({
-            a.snp.remakeConstraints { (view) in
-                view.leading.equalTo(e.snp.trailing)
-                view.centerY.equalToSuperview()
-            }
-            self.view.layoutIfNeeded()
-        }, delayFactor: 0.4)
-        
-        animator.addAnimations({
-            d.snp.remakeConstraints { (view) in
-                view.leading.equalTo(a.snp.trailing)
-                view.centerY.equalToSuperview()
-            }
-            self.view.layoutIfNeeded()
-        }, delayFactor: 0.6)
-        
-        animator.addAnimations({
-            y.snp.remakeConstraints { (view) in
-                view.leading.equalTo(d.snp.trailing)
-                view.centerY.equalToSuperview()
-            }
-            self.view.layoutIfNeeded()
-        }, delayFactor: 0.8)
         
         animator.startAnimation()
     }

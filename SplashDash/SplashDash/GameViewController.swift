@@ -274,14 +274,7 @@ class GameViewController: UIViewController {
         view.alpha = 0.3
         return view
     }()
-    
-    lazy var displayView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.alpha = 0.4
-        return view
-    }()
-    
+
     lazy var gameReadyLabel: UILabel = {
         let view = UILabel()
         view.text = "READY"
