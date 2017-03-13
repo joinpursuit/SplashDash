@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 class ContentCollectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+    
     var selectedSegmentIndex = 0 {
         didSet {
             let indexPath = IndexPath(item: selectedSegmentIndex, section: 0)
@@ -27,15 +27,7 @@ class ContentCollectionView: UIView, UICollectionViewDelegate, UICollectionViewD
         self.setupViewHierarchy()
         self.configureConstraints()
         
-        let tempView1 = UserRunHistoryView()
-        tempView1.backgroundColor = SplashColor.primaryColor()
-        let tempView2 = MapHistoryView()
-        tempView2.backgroundColor = SplashColor.primaryColor()
-//        let tempView3 = UIView()
-//        tempView3.backgroundColor = SplashColor.primaryColor()
-//        let tempView4 = UIView()
-//        tempView4.backgroundColor = SplashColor.primaryColor()
-        contentViews = [tempView1, tempView2]
+        contentViews = [userRunHistoryView, mapHistoryView]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -104,5 +96,17 @@ class ContentCollectionView: UIView, UICollectionViewDelegate, UICollectionViewD
 //        cv.showsHorizontalScrollIndicator = false
         cv.register(ContentCollectionViewCell.self, forCellWithReuseIdentifier: ContentCollectionViewCell.identifier)
         return cv
+    }()
+    
+    lazy var userRunHistoryView: UserRunHistoryView = {
+        let view = UserRunHistoryView()
+        view.backgroundColor = SplashColor.primaryColor()
+        return view
+    }()
+    
+    lazy var mapHistoryView: MapHistoryView = {
+        let view = MapHistoryView()
+        view.backgroundColor = SplashColor.primaryColor()
+        return view
     }()
 }

@@ -19,6 +19,7 @@ extension GameViewController{
             let linkRef = FIRDatabase.database().reference().child("Users").child(uid)
             
             linkRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                print("snapshot is \(snapshot)")
                 if let value = snapshot.value as? NSDictionary{
                     if let user = User(value){
                         self.currentUser = user
@@ -34,18 +35,29 @@ extension GameViewController{
         if self.gameStatus{
             gameButton.setTitle("Start", for: .normal)
             endRunUpdate()
-            self.startLocation = nil
-            self.lastLocation = nil
-            self.traveledDistanceInMiles = 0
-            self.totalDuration = 0
-        }else{
+//            self.startLocation = nil
+//            self.lastLocation = nil
+//            self.traveledDistanceInMiles = 0
+//            self.totalDuration = 0
+//        }else{
+            self.previousLocation = nil
+            self.traveledDistanceInMeters = 0
+            self.timer?.invalidate()
+            timer = nil
+            self.duration = 0
+        } else{
             animateStartGame()
             toCurrentLocation()
             animateAllButtons()
             gameButton.setTitle("Stop", for: .normal)
+            self.timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
         }
         
         gameStatus = !gameStatus
+    }
+    
+    func updateCounter() {
+        self.duration += 1
     }
     
     func toCurrentLocation(){

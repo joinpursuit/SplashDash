@@ -28,17 +28,40 @@ class GameViewController: UIViewController {
             let defaults = UserDefaults()
             if let user = currentUser {
                 defaults.set(user.teamName.rawValue, forKey: "teamName")
+                bottomView.contentCollectionView.userRunHistoryView.user = user
             }
         }
     }
     
     // To calculate total distance
-    var startLocation:CLLocation!
-    var lastLocation: CLLocation!
-    var traveledDistanceInMiles:Double = 0
+    var previousLocation:CLLocation!
+    var traveledDistanceInMeters:Double = 0
     
     // To calculate duration
-    var totalDuration: TimeInterval = 0
+    var timer: Timer?
+    
+    var duration = 0 {
+        didSet {
+            guard duration > 0 else {
+                self.bottomView.durationLabel.text = "Duration: 0"
+                return }
+            var durationString = ""
+            let hours = duration / 3600
+            let minutes = (duration % 3600) / 60
+            let seconds = (duration % 3600) % 60
+            
+            if hours > 0 {
+                durationString += "\(hours)h,"
+            }
+            if minutes > 0 {
+                durationString += "\(minutes)m,"
+            }
+            durationString += "\(seconds)s"
+            
+            self.bottomView.durationLabel.text = "Duration: \(durationString)"
+            
+        }
+    }
 
     
     override func viewDidLoad() {
@@ -65,15 +88,15 @@ class GameViewController: UIViewController {
 
     }
 
-    // THIS IS WHERE THE COLLECTIONVIEW BUG HAPPENS
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-//        print("self.view.frame.height is \(self.view.frame.height)")
-//        print("self.bottomCorneredContainerView.frame.height is \(self.bottomCorneredContainerView.frame.height)")
-//        print("---The difference is \(self.view.frame.height - self.bottomCorneredContainerView.frame.height)---")
-        print("self.bottomRootView.frame.height is \(self.bottomRootView.frame.height)")
-        print()
-    }
+//    // THIS IS WHERE THE COLLECTIONVIEW BUG HAPPENS
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+////        print("self.view.frame.height is \(self.view.frame.height)")
+////        print("self.bottomCorneredContainerView.frame.height is \(self.bottomCorneredContainerView.frame.height)")
+////        print("---The difference is \(self.view.frame.height - self.bottomCorneredContainerView.frame.height)---")
+//        print("self.bottomRootView.frame.height is \(self.bottomRootView.frame.height)")
+//        print()
+//    }
     
     // MARK: - Setup
     

@@ -11,6 +11,7 @@ import ScrollableSegmentedControl
 
 class BottomView: UIView {
 
+    var currentUser: User?
     let topViewSpacing: CGFloat = 100.0
     
     override init(frame: CGRect) {
