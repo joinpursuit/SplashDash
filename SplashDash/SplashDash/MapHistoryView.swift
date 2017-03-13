@@ -31,7 +31,12 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     // MARK: - Actions
 
     func datePickerChanged(_ sender: UIDatePicker) {
-        print("Date changed to \(self.datePicker.date)")
+        let date = self.datePicker.date
+        
+        let format = DateFormatter()
+        format.dateFormat = "yyyyMMdd"
+        
+        print("Date changed to \(format.string(from: date))")
     }
     
     // MARK: - Setup Views
@@ -160,11 +165,5 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         dp.addTarget(self, action: #selector(datePickerChanged(_:)), for: .valueChanged)
         return dp
     }()
-    
-//    lazy var amLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "12 AM"
-//        
-//    }()
     
 }
