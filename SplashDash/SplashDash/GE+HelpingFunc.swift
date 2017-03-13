@@ -34,8 +34,21 @@ extension GameViewController{
         print("-----------start button tapped-----------")
         if self.gameStatus{
             gameButton.setTitle("Start", for: .normal)
-            endRunUpdate()
+            uploadRun()
+            
+            self.previousLocation = nil
+            self.timer?.invalidate()
+            timer = nil
+            self.currentRunCoordinates = []
+            self.traveledDistanceInMeters = 0
+            self.duration = 0
+            self.fetchCurrentUserData()
+            
+            
         } else{
+            guard self.locationManager.location != nil else {
+                print("no location")
+                return }
             animateStartGame()
             toCurrentLocation()
             animateAllButtons()
