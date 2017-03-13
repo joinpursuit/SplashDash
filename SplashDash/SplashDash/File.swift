@@ -11,6 +11,9 @@ import UIKit
 
 extension HomeViewController{
     override func viewDidAppear(_ animated: Bool) {
+//        emailTextField.textField.text = "wa@haha.com"
+//        passwordTextField.textField.text = "000000"
+        
         emailTextField.textField.text = "sabrina@gmail.com"
         passwordTextField.textField.text = "123123"
     }

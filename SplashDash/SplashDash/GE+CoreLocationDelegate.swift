@@ -69,7 +69,7 @@ extension GameViewController: CLLocationManagerDelegate{
                 self.currentRun.addCoordinate(coor: coordinate)
                 pushSplashToDatabase(coor: coordinate)
                 
-                let region = MKCoordinateRegion(center: lastLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+                let region = MKCoordinateRegion(center: currentLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
                 
                 self.mapView.setRegion(region, animated: true)
             }

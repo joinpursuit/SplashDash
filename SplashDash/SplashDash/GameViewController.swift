@@ -18,8 +18,8 @@ class GameViewController: UIViewController {
     var gameStatus: Bool = false
     var isButtonsOffScreen: Bool = false
     var bottomViewPreviousPosition: CGFloat = 0.0
+    var myTimer: Timer!
     
-    var mySwitch = true
     var allLabel: [UILabel] = []
     
     var currentUser: User? {
@@ -75,9 +75,8 @@ class GameViewController: UIViewController {
         fetchGlobalSplash()
         self.bottomView.contentCollectionView.preservesSuperviewLayoutMargins = true
         
-//        let displaylink = CADisplayLink(target: self, selector: #selector(updateLabel))
-//        displaylink.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
-//        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateLabel), userInfo: nil, repeats:true);
+        //add timer to calculate score every ten mins
+        Timer.scheduledTimer(timeInterval: 600, target: self, selector: #selector(takeScreenshot), userInfo: nil, repeats:true);
         
     }
     
@@ -114,8 +113,7 @@ class GameViewController: UIViewController {
         self.bottomCorneredContainerView.addSubview(bottomView)
         self.bottomRootView.addSubview(gameButton)
         
-//        self.view.addSubview(displayView)
-//        self.view.addSubview(gameReadyLabel)
+        self.view.addSubview(displayView)
     }
     
     func configureConstraints(){
@@ -162,15 +160,11 @@ class GameViewController: UIViewController {
             view.size.equalTo(CGSize(width: 60, height: 60))
         }
         
-//        displayView.snp.remakeConstraints { (view) in
-//            view.leading.trailing.centerY.equalToSuperview()
-//            view.height.equalTo(200)
-//        }
+        displayView.snp.remakeConstraints { (view) in
+            view.leading.trailing.top.bottom.equalToSuperview()
+        }
+        displayView.isHidden = true
         
-//        gameReadyLabel.snp.remakeConstraints { (view) in
-//            view.center.equalToSuperview()
-//            view.width.equalTo(1000)
-//        }
     }
     
     //MARK: - Lazy inits
@@ -241,17 +235,8 @@ class GameViewController: UIViewController {
     
     lazy var displayView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
-        view.alpha = 0.4
-        return view
-    }()
-    
-    lazy var gameReadyLabel: UILabel = {
-        let view = UILabel()
-        view.text = "READY"
-        view.font = UIFont.boldSystemFont(ofSize: 40)
-        view.tintColor = .red
-        view.textAlignment = .natural
+        view.backgroundColor = .black
+        view.alpha = 0.3
         return view
     }()
     
