@@ -35,17 +35,23 @@ extension GameViewController{
         if self.gameStatus{
             gameButton.setTitle("Start", for: .normal)
             endRunUpdate()
-            self.startLocation = nil
-            self.lastLocation = nil
-            self.traveledDistanceInMiles = 0
-            self.totalDuration = 0
-        }else{
+            self.previousLocation = nil
+            self.traveledDistanceInMeters = 0
+            self.timer?.invalidate()
+            timer = nil
+            self.duration = 0
+        } else{
             toCurrentLocation()
             gameButton.setTitle("Stop", for: .normal)
             animateAllButtons()
+            self.timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
         }
         
         gameStatus = !gameStatus
+    }
+    
+    func updateCounter() {
+        self.duration += 1
     }
     
     func endGameScreenshot(){

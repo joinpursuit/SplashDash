@@ -80,8 +80,20 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.cellIdentifier, for: indexPath) as! HistoryTableViewCell
         
         let run = userRuns[indexPath.row]
+        
+        let date = Date(timeIntervalSince1970: run.timeStamp)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        let dateString = dateFormatter.string(from: date)
+        
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateStyle = .none
+        timeFormatter.timeStyle = .short
+        let timeString = timeFormatter.string(from: date)
  
-        cell.runLabel.text = "TimeStamp: \(run.timeStamp)\nTotal Distance: \(run.totalDistance)\nDuration: \(run.runDuration)\nAverage Speed: \(run.averageSpeed)"
+        cell.runLabel.text = "Date: \(dateString)\nTime: \(timeString)\nTotal Distance: \(run.totalDistance)\nDuration: \(run.runDuration)\nAverage Speed: \(run.averageSpeed)"
         return cell
     }
  
