@@ -39,9 +39,10 @@ extension GameViewController{
             self.traveledDistanceInMiles = 0
             self.totalDuration = 0
         }else{
+            animateStartGame()
             toCurrentLocation()
-            gameButton.setTitle("Stop", for: .normal)
             animateAllButtons()
+            gameButton.setTitle("Stop", for: .normal)
         }
         
         gameStatus = !gameStatus
@@ -56,14 +57,6 @@ extension GameViewController{
             
             self.mapView.setRegion(region, animated: true)
         }
-        
-//        if mySwitch{
-//            animateReadySign()
-//        }else{
-//            _ = allLabel.map{ $0.removeFromSuperview() }
-//            allLabel = []
-//        }
-//        mySwitch = !mySwitch
     }
     
     func animateAllButtons(){
@@ -81,90 +74,68 @@ extension GameViewController{
         }, completion: nil)
     }
     
-    func animateReadySign(){
-        let animator = UIViewPropertyAnimator(duration: 0.8, curve: .easeOut, animations: nil)
-        let r = UILabel()
-        r.text = "R "
-        let e = UILabel()
-        e.text = "E "
-        let a = UILabel()
-        a.text = "A "
-        let d = UILabel()
-        d.text = "D "
-        let y = UILabel()
-        y.text = "Y "
-        allLabel = [r,e,a,d,y]
-        view.addSubview(r)
-        view.addSubview(e)
-        view.addSubview(a)
-        view.addSubview(d)
-        view.addSubview(y)
+    func animateStartGame(){
+        self.displayView.isHidden = false
+        let countDownLabels = ["3", "2", "1", "GO!"]
+        var colorArr = SplashColor.teamColorArray()
         
-        r.snp.makeConstraints { (view) in
-            view.centerY.equalToSuperview()
-            view.leading.equalToSuperview().offset(700)
+        for char in countDownLabels.reversed(){
+            let label = UILabel()
+            label.text = char
+            label.textColor = colorArr.removeLast()
+            label.textAlignment = .center
+            label.font = UIFont.boldSystemFont(ofSize: 120)
+            
+            
+            allLabel.append(label)
+            view.addSubview(label)
+        }
+        allLabel[0].snp.makeConstraints { (view) in
+            view.center.equalToSuperview()
+            view.size.equalTo(CGSize(width: 1, height: 1))
         }
         
-        e.snp.makeConstraints { (view) in
-            view.centerY.equalToSuperview()
-            view.leading.equalToSuperview().offset(700)
+        allLabel[1].snp.makeConstraints { (view) in
+            view.center.equalToSuperview()
+            view.size.equalTo(CGSize(width: 1, height: 1))
         }
         
-        a.snp.makeConstraints { (view) in
-            view.centerY.equalToSuperview()
-            view.leading.equalToSuperview().offset(700)
+        allLabel[2].snp.makeConstraints { (view) in
+            view.center.equalToSuperview()
+            view.size.equalTo(CGSize(width: 1, height: 1))
         }
         
-        d.snp.makeConstraints { (view) in
-            view.centerY.equalToSuperview()
-            view.leading.equalToSuperview().offset(700)
+        allLabel[3].snp.makeConstraints { (view) in
+            view.center.equalToSuperview()
+            view.size.equalTo(CGSize(width: 1, height: 1))
         }
-        
-        y.snp.makeConstraints { (view) in
-            view.centerY.equalToSuperview()
-            view.leading.equalToSuperview().offset(700)
-        }
-        
         self.view.layoutIfNeeded()
         
-        animator.addAnimations({ 
-            r.snp.remakeConstraints { (view) in
-                view.center.equalToSuperview()
-            }
-            self.view.layoutIfNeeded()
-        }, delayFactor: 0)
+        myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(animateCountDown), userInfo: nil, repeats: true)
+    }
+    
+    func animateCountDown(){
+        guard let label = allLabel.popLast() else{
+            displayView.isHidden = true
+            myTimer.invalidate()
+            return
+        }
         
-        animator.addAnimations({
-            e.snp.remakeConstraints { (view) in
-                view.leading.equalTo(r.snp.trailing)
-                view.centerY.equalToSuperview()
-            }
-            self.view.layoutIfNeeded()
-        }, delayFactor: 0.2)
+        let animator = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn, animations: nil)
         
-        animator.addAnimations({
-            a.snp.remakeConstraints { (view) in
-                view.leading.equalTo(e.snp.trailing)
-                view.centerY.equalToSuperview()
-            }
+        animator.addAnimations { 
+            label.snp.remakeConstraints({ (view) in
+                view.top.bottom.leading.trailing.equalToSuperview()
+            })
             self.view.layoutIfNeeded()
-        }, delayFactor: 0.4)
+        }
         
-        animator.addAnimations({
-            d.snp.remakeConstraints { (view) in
-                view.leading.equalTo(a.snp.trailing)
-                view.centerY.equalToSuperview()
-            }
-            self.view.layoutIfNeeded()
-        }, delayFactor: 0.6)
-        
-        animator.addAnimations({
-            y.snp.remakeConstraints { (view) in
-                view.leading.equalTo(d.snp.trailing)
-                view.centerY.equalToSuperview()
-            }
-            self.view.layoutIfNeeded()
-        }, delayFactor: 0.8)
+        animator.addCompletion { (_) in
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.7, execute: {
+                label.removeFromSuperview()
+                
+            })
+        }
         
         animator.startAnimation()
     }
