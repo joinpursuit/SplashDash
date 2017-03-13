@@ -84,21 +84,21 @@ extension GameViewController{
                 
                 self.gameButton.transform = CGAffineTransform.identity
                 self.findMeButton.transform = CGAffineTransform(translationX: 0, y: 0)
-                self.endGameButton.transform = CGAffineTransform(translationX: 0, y: 0)
+//                self.endGameButton.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: nil)
         }
         else {
             
             UIView.animate(withDuration: 0.20, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: [], animations: { 
                 //Leaderboard views
-                self.firstPlaceView.transform = CGAffineTransform(translationX: 205, y: 0)
+                self.firstPlaceView.transform = CGAffineTransform(translationX: 215, y: 0)
                 self.secondPlaceView.transform = CGAffineTransform(translationX: 200, y: 0)
                 self.thirdPlaceView.transform = CGAffineTransform(translationX: 200, y: 0)
                 self.fourthPlaceView.transform = CGAffineTransform(translationX: 175, y: 0)
                 
                 self.gameButton.transform = CGAffineTransform(translationX: 175, y: 0)
                 self.findMeButton.transform = CGAffineTransform(translationX: 175, y: 0)
-                self.endGameButton.transform = CGAffineTransform(translationX: 175, y: 0)
+//                self.endGameButton.transform = CGAffineTransform(translationX: 175, y: 0)
             }, completion: nil)
         }
         
@@ -120,26 +120,12 @@ extension GameViewController{
             
             allLabel.append(label)
             view.addSubview(label)
-        }
-        allLabel[0].snp.makeConstraints { (view) in
-            view.center.equalToSuperview()
-            view.size.equalTo(CGSize(width: 1, height: 1))
-        }
-        
-        allLabel[1].snp.makeConstraints { (view) in
-            view.center.equalToSuperview()
-            view.size.equalTo(CGSize(width: 1, height: 1))
+            label.snp.makeConstraints { (view) in
+                view.center.equalToSuperview()
+                view.size.equalTo(CGSize(width: 1, height: 1))
+            }
         }
         
-        allLabel[2].snp.makeConstraints { (view) in
-            view.center.equalToSuperview()
-            view.size.equalTo(CGSize(width: 1, height: 1))
-        }
-        
-        allLabel[3].snp.makeConstraints { (view) in
-            view.center.equalToSuperview()
-            view.size.equalTo(CGSize(width: 1, height: 1))
-        }
         self.view.layoutIfNeeded()
         
         myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(animateCountDown), userInfo: nil, repeats: true)
@@ -184,6 +170,7 @@ extension GameViewController{
         
 //        UIImageWriteToSavedPhotosAlbum(screenShot, nil, nil, nil)
         self.currentScore = colorArray(image: screenShot)
+        print(currentScore)
         
         //updating leaderboard count and handle colors
         updateLeaderboard()
@@ -215,26 +202,39 @@ extension GameViewController{
         for x in 0..<height {
             for y in 0..<width {
                 let byteIndex = (bytesPerRow * x) + y * bytesPerPixel
-                
                 let red   = rawData[byteIndex]
                 let green = rawData[byteIndex + 1]
                 let blue  = rawData[byteIndex + 2]
-                
+                // (103, 58, 183) for purple
+                // (0, 188, 212)  for teal
+                // (76, 175, 80)  for green
+                // (255, 87, 34)  for orange
                 switch (red, green, blue) {
-                case (103, 58, 183):
+                case (93...113, 48...68, 173...193):
                     purpleCoverage += 1.0
                     total += 1.0
-                case (0, 188, 212):
+                default: ()
+                }
+                
+                switch (red, green, blue) {
+                case (0...10, 178...198, 202...222):
                     tealCoverage += 1.0
                     total += 1.0
-                case (76, 175, 80):
+                default: ()
+                }
+                
+                switch (red, green, blue) {
+                case (66...86, 165...185, 70...90):
                     greenCoverage += 1.0
                     total += 1.0
-                case (255, 87, 34):
+                default: ()
+                }
+                
+                switch (red, green, blue) {
+                case (245...255, 77...97, 24...44):
                     orangeCoverage += 1.0
                     total += 1.0
-                default:
-                    continue
+                default: ()
                 }
             }
         }
@@ -265,8 +265,24 @@ extension GameViewController{
     func updateLeaderboard() {
         let sortedScores = self.currentScore.sorted { $0.score > $1.score }
         
-        self.firstPlaceView.teamNameLabel = sortedScores[0].color
-        self.firstPlaceView.backgroundColor =
+        self.firstPlaceView.teamNameLabel.text = "\(sortedScores[0].color)"
+        self.firstPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[0].color)")
+        
+        self.secondPlaceView.teamNameLabel.text = "\(sortedScores[1].color)"
+        self.secondPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[1].color)")
+        
+        self.thirdPlaceView.teamNameLabel.text = "\(sortedScores[2].color)"
+        self.thirdPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[2].color)")
+        
+        self.fourthPlaceView.teamNameLabel.text = "\(sortedScores[3].color)"
+        self.fourthPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[3].color)")
+        
+        UIView.animate(withDuration: 0.5) {
+            self.firstPlaceView.alpha = 1
+            self.secondPlaceView.alpha = 1
+            self.thirdPlaceView.alpha = 1
+            self.fourthPlaceView.alpha = 1
+        }
         
     }
 

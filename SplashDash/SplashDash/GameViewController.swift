@@ -105,7 +105,7 @@ class GameViewController: UIViewController {
         self.view.addSubview(invisibleMapView)
         self.view.addSubview(mapView)
         self.mapView.addSubview(findMeButton)
-        self.mapView.addSubview(endGameButton)
+//        self.mapView.addSubview(endGameButton)
 
 //        self.mapView.addSubview(bottomRootView)
         self.view.addSubview(bottomRootView)
@@ -160,38 +160,38 @@ class GameViewController: UIViewController {
             view.size.equalTo(CGSize(width: 60, height: 60))
         }
         
-        endGameButton.snp.remakeConstraints { (view) in
-            view.centerX.equalTo(findMeButton)
-            view.bottom.equalTo(findMeButton.snp.top).offset(-30)
-            view.size.equalTo(CGSize(width: 60, height: 60))
-        }
+//        endGameButton.snp.remakeConstraints { (view) in
+//            view.centerX.equalTo(findMeButton)
+//            view.bottom.equalTo(findMeButton.snp.top).offset(-30)
+//            view.size.equalTo(CGSize(width: 60, height: 60))
+//        }
         
         firstPlaceView.snp.remakeConstraints { (view) in
             view.trailing.equalToSuperview().offset(20.0)
-            view.top.equalToSuperview().offset(20.0)
+            view.top.equalToSuperview().offset(8.0)
             view.height.equalToSuperview().multipliedBy(0.06)
-            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.1)
+            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.05)
         }
         
         secondPlaceView.snp.remakeConstraints { (view) in
             view.top.equalTo(firstPlaceView.snp.bottom).offset(8.0)
             view.trailing.equalToSuperview().offset(20.0)
             view.height.equalToSuperview().multipliedBy(0.06)
-            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.2)
+            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.15)
         }
         
         thirdPlaceView.snp.remakeConstraints { (view) in
             view.top.equalTo(secondPlaceView.snp.bottom).offset(8.0)
             view.trailing.equalToSuperview().offset(20.0)
             view.height.equalToSuperview().multipliedBy(0.06)
-            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.3)
+            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.25)
         }
         
         fourthPlaceView.snp.remakeConstraints { (view) in
             view.top.equalTo(thirdPlaceView.snp.bottom).offset(8.0)
             view.trailing.equalToSuperview().offset(20.0)
             view.height.equalToSuperview().multipliedBy(0.06)
-            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.4)
+            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.35)
         }
 
         displayView.snp.remakeConstraints { (view) in
@@ -255,17 +255,17 @@ class GameViewController: UIViewController {
         return button
     }()
     
-    lazy var endGameButton: UIButton = {
-        let button = UIButton(type: UIButtonType.infoLight)
-        button.isEnabled = true
-        button.backgroundColor = SplashColor.primaryColor()
-        button.clipsToBounds = true
-        button.layer.cornerRadius = 30
-        button.tintColor = .white
-        button.addShadows()
-        button.addTarget(self, action: #selector(takeScreenshot), for: .touchUpInside)
-        return button
-    }()
+//    lazy var endGameButton: UIButton = {
+//        let button = UIButton(type: UIButtonType.infoLight)
+//        button.isEnabled = true
+//        button.backgroundColor = SplashColor.primaryColor()
+//        button.clipsToBounds = true
+//        button.layer.cornerRadius = 30
+//        button.tintColor = .white
+//        button.addShadows()
+//        button.addTarget(self, action: #selector(takeScreenshot), for: .touchUpInside)
+//        return button
+//    }()
     
     lazy var displayView: UIView = {
         let view = UIView()
@@ -303,52 +303,40 @@ class GameViewController: UIViewController {
     
     lazy var firstPlaceView: LeaderboardView = {
         let view = LeaderboardView()
-        view.backgroundColor = SplashColor.teamColor(for: "purple")
         view.layer.cornerRadius = 20.0
 
         view.rankingLabel.text = "1st"
-        
-        //This needs to be dynamically changed
-        view.teamNameLabel.text = "Color"
+        view.alpha = 0
         
         return view
     }()
     
     lazy var secondPlaceView: LeaderboardView = {
         let view = LeaderboardView()
-        view.backgroundColor = SplashColor.teamColor(for: "green")
         view.layer.cornerRadius = 20.0
         
         view.rankingLabel.text = "2nd"
-        
-        //This needs to be dynamically changed
-        view.teamNameLabel.text = "Color"
+        view.alpha = 0
         
         return view
     }()
     
     lazy var thirdPlaceView: LeaderboardView = {
         let view = LeaderboardView()
-        view.backgroundColor = SplashColor.teamColor(for: "orange")
         view.layer.cornerRadius = 20.0
         
         view.rankingLabel.text = "3rd"
-        
-        //This needs to be dynamically changed
-        view.teamNameLabel.text = "Color"
+        view.alpha = 0
         
         return view
     }()
     
     lazy var fourthPlaceView: LeaderboardView = {
         let view = LeaderboardView()
-        view.backgroundColor = SplashColor.teamColor(for: "teal")
         view.layer.cornerRadius = 20.0
         
         view.rankingLabel.text = "4th"
-        
-        //This needs to be dynamically changed
-        view.teamNameLabel.text = "Color"
+        view.alpha = 0
         
         return view
     }()
