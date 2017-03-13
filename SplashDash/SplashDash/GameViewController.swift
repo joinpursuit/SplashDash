@@ -90,6 +90,9 @@ class GameViewController: UIViewController {
         
         //Leaderboard views
         self.view.addSubview(firstPlaceView)
+        self.view.addSubview(secondPlaceView)
+        self.view.addSubview(thirdPlaceView)
+        self.view.addSubview(fourthPlaceView)
     }
     
     func configureConstraints(){
@@ -137,7 +140,27 @@ class GameViewController: UIViewController {
             view.top.equalToSuperview().offset(20.0)
             view.height.equalToSuperview().multipliedBy(0.06)
             view.leading.equalTo(self.view.snp.centerX).multipliedBy(0.9)
-            
+        }
+        
+        secondPlaceView.snp.remakeConstraints { (view) in
+            view.top.equalTo(firstPlaceView.snp.bottom).offset(8.0)
+            view.trailing.equalToSuperview().offset(20.0)
+            view.height.equalToSuperview().multipliedBy(0.06)
+            view.leading.equalTo(self.view.snp.centerX)
+        }
+        
+        thirdPlaceView.snp.remakeConstraints { (view) in
+            view.top.equalTo(secondPlaceView.snp.bottom).offset(8.0)
+            view.trailing.equalToSuperview().offset(20.0)
+            view.height.equalToSuperview().multipliedBy(0.06)
+            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.1)
+        }
+        
+        fourthPlaceView.snp.remakeConstraints { (view) in
+            view.top.equalTo(thirdPlaceView.snp.bottom).offset(8.0)
+            view.trailing.equalToSuperview().offset(20.0)
+            view.height.equalToSuperview().multipliedBy(0.06)
+            view.leading.equalTo(self.view.snp.centerX).multipliedBy(1.2)
         }
     }
     
@@ -223,6 +246,7 @@ class GameViewController: UIViewController {
     
     lazy var firstPlaceView: LeaderboardView = {
         let view = LeaderboardView()
+        view.backgroundColor = SplashColor.teamColor(for: "purple")
         view.layer.cornerRadius = 20.0
 
         view.rankingLabel.text = "1st"
@@ -230,6 +254,44 @@ class GameViewController: UIViewController {
         //This needs to be dynamically changed
         view.teamNameLabel.text = "Test Team A"
         
+        return view
+    }()
+    
+    lazy var secondPlaceView: LeaderboardView = {
+        let view = LeaderboardView()
+        view.backgroundColor = SplashColor.teamColor(for: "green")
+        view.layer.cornerRadius = 20.0
+        
+        view.rankingLabel.text = "2nd"
+        
+        //This needs to be dynamically changed
+        view.teamNameLabel.text = "Test Team B"
+        
+        return view
+    }()
+    
+    lazy var thirdPlaceView: LeaderboardView = {
+        let view = LeaderboardView()
+        view.backgroundColor = SplashColor.teamColor(for: "orange")
+        view.layer.cornerRadius = 20.0
+        
+        view.rankingLabel.text = "3rd"
+        
+        //This needs to be dynamically changed
+        view.teamNameLabel.text = "Test Team C"
+        
+        return view
+    }()
+    
+    lazy var fourthPlaceView: LeaderboardView = {
+        let view = LeaderboardView()
+        view.backgroundColor = SplashColor.teamColor(for: "teal")
+        view.layer.cornerRadius = 20.0
+        
+        view.rankingLabel.text = "4th"
+        
+        //This needs to be dynamically changed
+        view.teamNameLabel.text = "Test Team D"
         
         return view
     }()
