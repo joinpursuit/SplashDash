@@ -16,11 +16,11 @@ class GameViewController: UIViewController {
     
     let databaseReference = FIRDatabase.database().reference().child("Public")
     var locationManager: CLLocationManager!
-    var currentRun: Run = Run(allCoordinates: [])
+    var currentRunCoordinates: [SplashCoordinate] = []
     var gameStatus: Bool = false
     var isButtonsOffScreen: Bool = false
     var bottomViewPreviousPosition: CGFloat = 0.0
-    var myTimer: Timer!
+    var timer: Timer?
     
     var scene: SplashScene!
     var mySwitch = true
@@ -39,11 +39,19 @@ class GameViewController: UIViewController {
     
     // To calculate total distance
     var previousLocation:CLLocation!
-    var traveledDistanceInMeters:Double = 0
+    var traveledDistanceInMeters:Double = 0 {
+        didSet {
+            guard traveledDistanceInMeters > 0 else {
+                self.bottomView.distanceLabel.text = "Distance: 0"
+                return }
+            // convert to miles
+            let traveledDistanceInMiles = traveledDistanceInMeters * 0.000621371
+            let distance = String.localizedStringWithFormat("%.2f", traveledDistanceInMiles)
+            self.bottomView.distanceLabel.text = "Distance: \(distance) miles"
+        }
+    }
     
     // To calculate duration
-    var timer: Timer?
-    
     var duration = 0 {
         didSet {
             guard duration > 0 else {
@@ -55,10 +63,10 @@ class GameViewController: UIViewController {
             let seconds = (duration % 3600) % 60
             
             if hours > 0 {
-                durationString += "\(hours)h,"
+                durationString += "\(hours)h "
             }
             if minutes > 0 {
-                durationString += "\(minutes)m,"
+                durationString += "\(minutes)m "
             }
             durationString += "\(seconds)s"
             
@@ -90,8 +98,8 @@ class GameViewController: UIViewController {
         self.bottomCorneredContainerView.clipsToBounds = true
 
     }
-
-//    // THIS IS WHERE THE COLLECTIONVIEW BUG HAPPENS
+//
+////    // THIS IS WHERE THE COLLECTIONVIEW BUG HAPPENS
 //    override func viewDidLayoutSubviews() {
 //        super.viewDidLayoutSubviews()
 ////        print("self.view.frame.height is \(self.view.frame.height)")
@@ -106,6 +114,7 @@ class GameViewController: UIViewController {
         
         self.view.addSubview(invisibleMapView)
         self.view.addSubview(mapView)
+        self.mapView.addSubview(gameButton)
         self.mapView.addSubview(findMeButton)
         
         let skView = SplashSKView(frame: self.view.frame)
@@ -121,17 +130,18 @@ class GameViewController: UIViewController {
 //        self.mapView.addSubview(endGameButton)
 
 //        self.mapView.addSubview(bottomRootView)
-        self.view.addSubview(bottomRootView)
+//        self.view.addSubview(bottomRootView)
+        self.view.addSubview(displayView)
 
-        self.bottomRootView.addSubview(bottomCorneredContainerView)
+        self.view.addSubview(bottomCorneredContainerView)
         self.bottomCorneredContainerView.addSubview(bottomView)
-        self.bottomRootView.addSubview(gameButton)
         
         //Leaderboard views
         self.view.addSubview(firstPlaceView)
         self.view.addSubview(secondPlaceView)
         self.view.addSubview(thirdPlaceView)
         self.view.addSubview(fourthPlaceView)
+
         self.view.addSubview(displayView)
         
         self.scene = SplashScene(size: skView.bounds.size)
@@ -149,32 +159,19 @@ class GameViewController: UIViewController {
             view.top.bottom.leading.trailing.equalToSuperview()
         }
         
-        bottomRootView.snp.remakeConstraints { (view) in
-            view.leading.trailing.equalToSuperview()
-//          This extension of bottomRootView allows all buttons to be selectable
-            view.top.equalTo(self.gameButton.snp.top)
-            view.bottom.equalTo(bottomCorneredContainerView.snp.bottom)
-        }
+        configureBottomView()
         
-        bottomCorneredContainerView.snp.remakeConstraints { (view) in
-            view.leading.trailing.equalToSuperview()
-            view.top.equalTo(self.view.snp.bottom).inset(bottomView.topViewSpacing)
-            view.height.equalTo(self.view.snp.height).offset(-bottomView.topViewSpacing)
-        }
-        
-        bottomView.snp.remakeConstraints { (view) in
-            view.leading.top.trailing.bottom.equalToSuperview()
+        // TO DELETE - BUTTON HERE FOR DEBUGGING
+        findMeButton.snp.remakeConstraints { (view) in
+            view.centerX.equalTo(gameButton.snp.centerX)
+            view.bottom.equalTo(gameButton.snp.top).offset(-40)
+            view.size.equalTo(CGSize(width: 44, height: 44))
         }
         
         gameButton.snp.remakeConstraints { (view) in
-            view.centerY.equalTo(bottomCorneredContainerView.snp.top)
             view.trailing.equalToSuperview().offset(-30)
-            view.size.equalTo(CGSize(width: 70, height: 70))
-        }
-        
-        findMeButton.snp.remakeConstraints { (view) in
-            view.trailing.equalTo(gameButton)
-            view.bottom.equalTo(gameButton.snp.top).offset(-40)
+//            view.bottom.equalToSuperview().offset(-bottomView.topView.frame.height - 30)
+            view.bottom.equalToSuperview().offset(-130)
             view.size.equalTo(CGSize(width: 60, height: 60))
         }
         
@@ -215,8 +212,39 @@ class GameViewController: UIViewController {
         displayView.snp.remakeConstraints { (view) in
             view.leading.trailing.top.bottom.equalToSuperview()
         }
-        displayView.isHidden = true
+//        displayView.isHidden = true
         
+    }
+    
+    func configureBottomView() {
+        //        bottomRootView.snp.remakeConstraints { (view) in
+        //            view.leading.trailing.equalToSuperview()
+        ////          This extension of bottomRootView allows all buttons to be selectable
+        //            view.top.equalTo(bottomCorneredContainerView.snp.top)
+        //            view.bottom.equalTo(bottomCorneredContainerView.snp.bottom)
+        //        }
+        
+        bottomCorneredContainerView.snp.remakeConstraints { (view) in
+            view.leading.trailing.equalToSuperview()
+            view.top.equalTo(self.view.snp.bottom).inset(bottomView.topViewSpacing)
+            view.height.equalTo(self.view.snp.height).offset(-bottomView.topViewSpacing)
+        }
+        
+        bottomView.snp.remakeConstraints { (view) in
+            view.leading.top.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    func bringUpBottomView() {
+        bottomCorneredContainerView.snp.remakeConstraints { (view) in
+            view.leading.trailing.equalToSuperview()
+            view.top.equalTo(self.view.snp.top).inset(bottomView.topViewSpacing)
+            view.height.equalTo(self.view.snp.height).offset(-bottomView.topViewSpacing)
+        }
+        
+        bottomView.snp.remakeConstraints { (view) in
+            view.leading.top.trailing.bottom.equalToSuperview()
+        }
     }
     
     //MARK: - Lazy inits
@@ -266,9 +294,10 @@ class GameViewController: UIViewController {
         button.isEnabled = true
         button.backgroundColor = SplashColor.primaryColor()
         button.clipsToBounds = true
-        button.layer.cornerRadius = 30
+        button.layer.cornerRadius = 22
         button.tintColor = .white
         button.addShadows()
+        button.alpha = 0.2
         button.addTarget(self, action: #selector(toCurrentLocation), for: .touchUpInside)
         return button
     }()
@@ -289,6 +318,7 @@ class GameViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = .black
         view.alpha = 0.3
+        view.isHidden = true
         return view
     }()
 
@@ -301,15 +331,15 @@ class GameViewController: UIViewController {
         return view
     }()
     
-    lazy var bottomRootView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-//        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-//        view.addGestureRecognizer(gestureRecognizer)
-
-
-        return view
-    }()
+//    lazy var bottomRootView: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = .clear
+////        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+////        view.addGestureRecognizer(gestureRecognizer)
+//
+//
+//        return view
+//    }()
     
     lazy var bottomCorneredContainerView: UIView = {
         let view = UIView()

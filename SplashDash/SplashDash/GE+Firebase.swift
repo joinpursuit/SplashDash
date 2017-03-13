@@ -46,17 +46,21 @@ extension GameViewController{
         }
     }
     
-    func endRunUpdate(){
+    func uploadRun(){
         guard let currentUser = FIRAuth.auth()?.currentUser?.uid,
-            currentRun.allCoordinates.count > 0 else { return }
+            currentRunCoordinates.count > 0 else { return }
+        
         let linkRef = FIRDatabase.database().reference().child("Users").child(currentUser).child("runs")
-        let data = currentRun.toData()
+        
+        let thisRun = Run(allCoordinates: currentRunCoordinates, totalDistance: self.traveledDistanceInMeters, runDuration: self.duration)
+        let data = thisRun.toData()
+        
         linkRef.childByAutoId().setValue(data) { (error, _) in
-            if let bad = error{
-                print(bad.localizedDescription)
-            }else{
+            if let error = error {
+                print(error.localizedDescription)
+            } else{
                 print("Current run updated")
-                self.currentRun.reset()
+              
             }
         }
         
