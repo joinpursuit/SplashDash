@@ -14,7 +14,7 @@ import Firebase
 extension GameViewController{
     
     func fetchCurrentUserData(){
-        if currentUser == nil, let uid = FIRAuth.auth()?.currentUser?.uid {
+        if let uid = FIRAuth.auth()?.currentUser?.uid {
             
             let linkRef = FIRDatabase.database().reference().child("Users").child(uid)
             
@@ -35,22 +35,11 @@ extension GameViewController{
         if self.gameStatus{
             gameButton.setTitle("Start", for: .normal)
             endRunUpdate()
-//            self.startLocation = nil
-//            self.lastLocation = nil
-//            self.traveledDistanceInMiles = 0
-//            self.totalDuration = 0
-//        }else{
-            self.previousLocation = nil
-            self.traveledDistanceInMeters = 0
-            self.timer?.invalidate()
-            timer = nil
-            self.duration = 0
         } else{
             animateStartGame()
             toCurrentLocation()
             animateAllButtons()
             gameButton.setTitle("Stop", for: .normal)
-            self.timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
         }
         
         gameStatus = !gameStatus
@@ -129,13 +118,13 @@ extension GameViewController{
         
         self.view.layoutIfNeeded()
         
-        myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(animateCountDown), userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(startGameTimer), userInfo: nil, repeats: true)
     }
     
-    func animateCountDown(){
-        guard let label = allLabel.popLast() else{
+    func startGameTimer(){
+        guard let label = allLabel.popLast() else {
             displayView.isHidden = true
-            myTimer.invalidate()
+            self.updateCounter()
             return
         }
         
