@@ -15,10 +15,12 @@ class GameViewController: UIViewController {
     let databaseReference = FIRDatabase.database().reference().child("Public")
     var locationManager: CLLocationManager!
     var currentRun: Run = Run(allCoordinates: [])
-    var endGame: Bool = false
     var gameStatus: Bool = false
     var isButtonsOffScreen: Bool = false
     var bottomViewPreviousPosition: CGFloat = 0.0
+    
+    var mySwitch = true
+    var allLabel: [UILabel] = []
     
     var currentUser: User? {
         didSet {
@@ -75,7 +77,7 @@ class GameViewController: UIViewController {
         
 //        let displaylink = CADisplayLink(target: self, selector: #selector(updateLabel))
 //        displaylink.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
-//        Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(updateLabel), userInfo: nil, repeats:true);
+//        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateLabel), userInfo: nil, repeats:true);
         
     }
     
@@ -100,7 +102,7 @@ class GameViewController: UIViewController {
     // MARK: - Setup
     
     func setupViewHierarchy(){
-
+        self.view.addSubview(invisibleMapView)
         self.view.addSubview(mapView)
         self.mapView.addSubview(findMeButton)
         self.mapView.addSubview(endGameButton)
@@ -111,9 +113,16 @@ class GameViewController: UIViewController {
         self.bottomRootView.addSubview(bottomCorneredContainerView)
         self.bottomCorneredContainerView.addSubview(bottomView)
         self.bottomRootView.addSubview(gameButton)
+        
+//        self.view.addSubview(displayView)
+//        self.view.addSubview(gameReadyLabel)
     }
     
     func configureConstraints(){
+        invisibleMapView.snp.remakeConstraints { (view) in
+            view.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
         mapView.snp.remakeConstraints { (view) in
             view.top.bottom.leading.trailing.equalToSuperview()
         }
@@ -144,17 +153,38 @@ class GameViewController: UIViewController {
         findMeButton.snp.remakeConstraints { (view) in
             view.trailing.equalTo(gameButton)
             view.bottom.equalTo(gameButton.snp.top).offset(-40)
-            view.size.equalTo(CGSize(width: 70, height: 70))
+            view.size.equalTo(CGSize(width: 60, height: 60))
         }
         
         endGameButton.snp.remakeConstraints { (view) in
             view.centerX.equalTo(findMeButton)
             view.bottom.equalTo(findMeButton.snp.top).offset(-30)
-            view.size.equalTo(CGSize(width: 70, height: 70))
+            view.size.equalTo(CGSize(width: 60, height: 60))
         }
+        
+//        displayView.snp.remakeConstraints { (view) in
+//            view.leading.trailing.centerY.equalToSuperview()
+//            view.height.equalTo(200)
+//        }
+        
+//        gameReadyLabel.snp.remakeConstraints { (view) in
+//            view.center.equalToSuperview()
+//            view.width.equalTo(1000)
+//        }
     }
     
     //MARK: - Lazy inits
+    lazy var invisibleMapView: MKMapView = {
+        let view = MKMapView()
+        view.mapType = .standard
+        view.showsUserLocation = false
+        view.showsScale = false
+        view.showsCompass = false
+        view.showsBuildings = false
+        view.showsPointsOfInterest = false
+        view.delegate = self
+        return view
+    }()
     
     lazy var mapView: MKMapView = {
         let view = MKMapView()
@@ -174,11 +204,11 @@ class GameViewController: UIViewController {
     lazy var gameButton: UIButton = {
         let button = UIButton()
         button.setTitle("Start", for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.isEnabled = true
         let originalSplash = UIImage(named: "logoSplash")
-        let colorableSplash = originalSplash?.withRenderingMode(.alwaysTemplate)
+        let colorableSplash = originalSplash?.withRenderingMode(.alwaysTemplate).imageWithColor(color1: SplashColor.primaryColor())
         button.setBackgroundImage(colorableSplash, for: .normal)
-        button.tintColor = SplashColor.primaryColor()
         button.addShadows()
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
@@ -188,9 +218,10 @@ class GameViewController: UIViewController {
     lazy var findMeButton: UIButton = {
         let button = UIButton(type: UIButtonType.contactAdd)
         button.isEnabled = true
-        button.backgroundColor = .white
+        button.backgroundColor = SplashColor.primaryColor()
         button.clipsToBounds = true
-        button.layer.cornerRadius = 35
+        button.layer.cornerRadius = 30
+        button.tintColor = .white
         button.addShadows()
         button.addTarget(self, action: #selector(toCurrentLocation), for: .touchUpInside)
         return button
@@ -199,12 +230,29 @@ class GameViewController: UIViewController {
     lazy var endGameButton: UIButton = {
         let button = UIButton(type: UIButtonType.infoLight)
         button.isEnabled = true
-        button.backgroundColor = .white
+        button.backgroundColor = SplashColor.primaryColor()
         button.clipsToBounds = true
-        button.layer.cornerRadius = 35
+        button.layer.cornerRadius = 30
+        button.tintColor = .white
         button.addShadows()
         button.addTarget(self, action: #selector(takeScreenshot), for: .touchUpInside)
         return button
+    }()
+    
+    lazy var displayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.alpha = 0.4
+        return view
+    }()
+    
+    lazy var gameReadyLabel: UILabel = {
+        let view = UILabel()
+        view.text = "READY"
+        view.font = UIFont.boldSystemFont(ofSize: 40)
+        view.tintColor = .red
+        view.textAlignment = .natural
+        return view
     }()
     
     lazy var bottomRootView: UIView = {
