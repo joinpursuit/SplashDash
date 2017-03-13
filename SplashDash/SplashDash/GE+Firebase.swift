@@ -46,11 +46,7 @@ extension GameViewController{
         }
     }
     
-    func endRunUpdate(){
-        self.previousLocation = nil
-        self.timer?.invalidate()
-        timer = nil
-        
+    func uploadRun(){
         guard let currentUser = FIRAuth.auth()?.currentUser?.uid,
             currentRunCoordinates.count > 0 else { return }
         
@@ -64,10 +60,7 @@ extension GameViewController{
                 print(error.localizedDescription)
             } else{
                 print("Current run updated")
-                self.currentRunCoordinates = []
-                self.traveledDistanceInMeters = 0
-                self.duration = 0
-                self.fetchCurrentUserData()                
+              
             }
         }
         
