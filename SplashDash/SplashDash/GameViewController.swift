@@ -141,8 +141,6 @@ class GameViewController: UIViewController {
         self.view.addSubview(secondPlaceView)
         self.view.addSubview(thirdPlaceView)
         self.view.addSubview(fourthPlaceView)
-
-        self.view.addSubview(displayView)
         
         self.scene = SplashScene(size: skView.bounds.size)
         scene.scaleMode = .aspectFill

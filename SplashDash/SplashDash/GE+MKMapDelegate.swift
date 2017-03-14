@@ -45,8 +45,16 @@ extension GameViewController: MKMapViewDelegate{
     }
     
     func mapView(_ mapView: MKMapView, didAdd renderers: [MKOverlayRenderer]) {
-        for _ in renderers{
-            scene.dropSplash(on: CGPoint(x: self.view.frame.midX, y: self.view.frame.midY))
+        switch mapView {
+        case self.mapView:
+            if gameStatus {
+                for layer in renderers{
+                    let point = mapView.convert(layer.overlay.coordinate, toPointTo: self.view)
+                    dump(point)
+                    scene.dropSplash(on: point)
+                }
+            }
+        default: ()
         }
     }
     

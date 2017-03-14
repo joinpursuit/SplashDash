@@ -10,7 +10,7 @@ import SpriteKit
 
 class SplashScene: SKScene {
     
-    private var splashNode : SKShapeNode?
+    private var splashNode : SKSpriteNode?
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -24,38 +24,28 @@ class SplashScene: SKScene {
     
     override func didMove(to view: SKView) {
         // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.splashNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-        
-        if let spinnyNode = self.splashNode {
-            spinnyNode.lineWidth = 2.5
+        let w = (self.size.width + self.size.height) * 0.7
+        self.splashNode = SKSpriteNode(imageNamed: "inkSample3")
+        if let splash = self.splashNode {
+            splash.size = CGSize(width: w, height: w)
             
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(M_PI), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
+//            splash.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(M_PI), duration: 1)))
+            splash.run(SKAction.sequence([SKAction.resize(toWidth: 1, height: 1, duration: 1),
+                                          SKAction.removeFromParent()]))
+            
+//            spinnyNode.lineWidth = 2.5
+//            
+//            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(M_PI), duration: 1)))
+//            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
+//                                              SKAction.fadeOut(withDuration: 0.5),
+//                                              SKAction.removeFromParent()]))
         }
     }
     
     func dropSplash(on pos: CGPoint){
-        if let splash = self.splashNode?.copy() as! SKShapeNode? {
+        if let splash = self.splashNode?.copy() as! SKSpriteNode? {
             splash.position = pos
-            splash.strokeColor = SKColor.green
             self.addChild(splash)
         }
-    }
-    
-    
-    
-    func touchDown(atPoint pos : CGPoint) {
-        if let n = self.splashNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
 }
