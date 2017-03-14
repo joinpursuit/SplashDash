@@ -16,10 +16,14 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     var regionCalculations: (minLat: CLLocationDegrees, minLong: CLLocationDegrees, maxLat: CLLocationDegrees, maxLong: CLLocationDegrees)!
     var datePickerDate: String!
     var databaseReference: FIRDatabaseReference!
+    var splashOverlays: [SplashOverlay]!
     
     //MARK: - Methods
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        self.splashOverlays = []
+        
         setupViewHierarchy()
         configureConstraints()
         setUpMapViewLocation()
@@ -29,8 +33,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Actions
-
+    //MARK: - Actions
     func datePickerChanged(_ sender: UIDatePicker) {
         //Formatting date string
         let format = DateFormatter()
@@ -44,8 +47,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         }
     }
     
-    // MARK: - Setup Views
-    
+    //MARK: - Setup Views
     func setupViewHierarchy() {
         self.addSubview(mapView)
         self.addSubview(datePicker)
@@ -71,9 +73,14 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     }
     
     func fetchSplashForPickerDate(date: String){
+        //Remove all current overlay views prior to populating the map
+        self.mapView.removeOverlays(self.mapView.overlays)
+        
         //Setting database reference to date selected from datePicker
         guard let date = self.datePickerDate else { return }
         self.databaseReference = FIRDatabase.database().reference().child("Public/\(date)")
+        
+        var overlays: [SplashOverlay] = []
         
         self.databaseReference.observeSingleEvent(of: FIRDataEventType.value) { (snapshot: FIRDataSnapshot) in
             let enumerator = snapshot.children
@@ -84,12 +91,13 @@ class MapHistoryView: UIView, MKMapViewDelegate {
                         
                         //draw all splashes parsed from database
                         let splash = SplashOverlay(coor: splashCoor)
-                        self.mapView.addOverlays([splash])
-
+                        overlays.append(splash)
+                        
+                        self.splashOverlays = overlays
                     }
-                    
                 }
             }
+            self.mapView.addOverlays(self.splashOverlays)
         }
     }
     
