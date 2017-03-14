@@ -11,6 +11,9 @@ import SpriteKit
 class SplashScene: SKScene {
     
     private var splashNode : SKSpriteNode?
+    private var stickmanNode : SKSpriteNode?
+    
+    private var runningMotion: SKAction?
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -32,7 +35,17 @@ class SplashScene: SKScene {
             splash.run(SKAction.sequence([SKAction.resize(toWidth: 10, height: 10, duration: 0.24),
                                           SKAction.removeFromParent()]))
         }
+        self.stickmanNode = SKSpriteNode(imageNamed: "Run_1")
         
+        var runningMotions: [SKTexture] = []
+        
+        for index in 1...24{
+            let texture = SKTexture(imageNamed: "Run_\(index)")
+            runningMotions.append(texture)
+        }
+        
+        let runningAnimation = SKAction.animate(with: runningMotions, timePerFrame: 0.03)
+        self.runningMotion = SKAction.repeatForever(runningAnimation)
         
     }
     
@@ -43,7 +56,35 @@ class SplashScene: SKScene {
         }
     }
     
-    func stickmanStartRuning(){
+    func stickmanInit(){
+        let origin = CGPoint(x: self.frame.minX-50, y: self.frame.minY+50)
+        self.stickmanNode!.position = origin
+        self.stickmanNode!.setScale(0.3)
         
+        self.addChild(self.stickmanNode!)
+    }
+    
+    func stickmanStartRunning(to pos: CGPoint){
+        self.stickmanNode!.run(self.runningMotion!)
+        self.stickmanNode!.run(SKAction.move(to: pos, duration: 2))
+    }
+    
+    func stickmanRunningOffScreen(to pos: CGPoint){
+        self.stickmanNode!.run(SKAction.move(to: pos, duration: 1)) { 
+            self.stickmanNode?.removeFromParent()
+            self.stickmanInit()
+        }
+    }
+    
+    func printErrorMessage(str: String, fontColor: UIColor){
+        let label = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        label.text = str
+        label.fontColor = fontColor
+        label.fontSize = 30
+        label.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        self.addChild(label)
+        label.run(SKAction.fadeOut(withDuration: 3)) {
+            label.removeFromParent()
+        }
     }
 }

@@ -27,7 +27,7 @@ class BottomView: UIView {
     // MARK: - Actions
     
     func segmentSelected(sender:ScrollableSegmentedControl) {
-        print("Segment at index \(sender.selectedSegmentIndex)  selected")
+//        print("Segment at index \(sender.selectedSegmentIndex)  selected")
         contentCollectionView.selectedSegmentIndex = sender.selectedSegmentIndex
     }
     
