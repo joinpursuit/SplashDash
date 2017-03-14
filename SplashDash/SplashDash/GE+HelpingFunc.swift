@@ -16,7 +16,6 @@ extension GameViewController{
     func startButtonTapped() {
         if self.gameStatus{
             // end the game
-            self.mapView.setUserTrackingMode(MKUserTrackingMode.none, animated: true)
             gameButton.setTitle("Start", for: .normal)
             uploadAndAddRun()
             self.previousLocation = nil
@@ -25,17 +24,24 @@ extension GameViewController{
             self.currentRunCoordinates = []
             self.traveledDistanceInMeters = 0
             self.duration = 0
+            
+            //stickman running off screen
+            let offScreen = CGPoint(x: self.scene.frame.maxX+100, y: self.scene.frame.minY+50)
+            self.scene.stickmanRunningOffScreen(to: offScreen)
         } else{
             guard self.locationManager.location != nil else {
-                print("game does not start, no location")
+                self.scene.printErrorMessage(str: "We could not find you", fontColor: self.currentUser!.myColor)
                 return }
+            
             // start the game
             animateStartGame()
             self.displayView.isHidden = false
-            self.mapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
-            toCurrentLocation()
             animateAllButtons()
             gameButton.setTitle("Stop", for: .normal)
+            
+            //stickman strat running
+            let lowerRight = CGPoint(x: self.scene.frame.maxX-60, y: self.scene.frame.minY+50)
+            self.scene.stickmanStartRunning(to: lowerRight)
         }
         
         gameStatus = !gameStatus
@@ -46,6 +52,8 @@ extension GameViewController{
     }
     
     func toCurrentLocation(){
+        
+        self.scene.printErrorMessage(str: "We could not find you", fontColor: self.currentUser!.myColor)
         if let current = self.locationManager.location{
             print(current)
             let center = CLLocationCoordinate2D(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
@@ -160,8 +168,8 @@ extension GameViewController{
         
         //updating leaderboard count and handle colors
         updateLeaderboard()
+
         invisibleMapView.removeFromSuperview()
-        
     }
     
     func colorArray(image: UIImage) -> [(color: String, score: Double)] {

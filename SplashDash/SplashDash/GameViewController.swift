@@ -103,6 +103,9 @@ class GameViewController: UIViewController {
         
         //add timer to calculate score every ten mins
 //        Timer.scheduledTimer(timeInterval: 600, target: self, selector: #selector(takeScreenshot), userInfo: nil, repeats:true);
+        
+        //init a stickman off screen
+        self.scene.stickmanInit()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,7 +123,7 @@ class GameViewController: UIViewController {
         
         let skView = SplashSKView(frame: self.view.frame)
         skView.allowsTransparency = true
-        mapView.addSubview(skView)
+        
         
         skView.showsFPS = true
         skView.showsNodeCount = true
@@ -130,6 +133,8 @@ class GameViewController: UIViewController {
 
         self.view.addSubview(bottomCorneredContainerView)
         self.bottomCorneredContainerView.addSubview(bottomView)
+        
+        self.view.addSubview(skView)
         
         //Leaderboard views
         self.view.addSubview(firstPlaceView)
