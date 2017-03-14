@@ -102,7 +102,7 @@ class GameViewController: UIViewController {
         self.bottomView.contentCollectionView.preservesSuperviewLayoutMargins = true
         
         //add timer to calculate score every ten mins
-        Timer.scheduledTimer(timeInterval: 600, target: self, selector: #selector(takeScreenshot), userInfo: nil, repeats:true);
+//        Timer.scheduledTimer(timeInterval: 600, target: self, selector: #selector(takeScreenshot), userInfo: nil, repeats:true);
     }
     
     override func viewWillAppear(_ animated: Bool) {
