@@ -22,7 +22,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         super.init(frame: frame)
         setupViewHierarchy()
         configureConstraints()
-//        setUpMapViewLocation()
+        setUpMapViewLocation()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -56,21 +56,19 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         datePicker.snp.remakeConstraints { (view) in
             view.leading.trailing.top.equalToSuperview()
             view.height.equalTo(50.0)
-//            view.bottom.equalTo(mapView.snp.top)
         }
         mapView.snp.remakeConstraints { (view) in
             view.leading.trailing.bottom.equalToSuperview()
-            //view.height.equalTo(mapView.snp.width)
             view.top.equalTo(datePicker.snp.bottom)
         }
     }
     
-//    func setUpMapViewLocation() {
-//        //40.730043, -73.991250
-//        let center = CLLocationCoordinate2D(latitude: 40.730043, longitude: -73.991250) //40.751085, -73.984946
-//        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04))
-//        self.mapView.setRegion(region, animated: false)
-//    }
+    func setUpMapViewLocation() {
+        //40.730043, -73.991250
+        let center = CLLocationCoordinate2D(latitude: 40.730043, longitude: -73.991250) //40.751085, -73.984946
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04))
+        self.mapView.setRegion(region, animated: false)
+    }
     
     func fetchSplashForPickerDate(date: String){
         //Setting database reference to date selected from datePicker
@@ -78,37 +76,42 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         self.databaseReference = FIRDatabase.database().reference().child("Public/\(date)")
         
         self.databaseReference.observeSingleEvent(of: FIRDataEventType.value) { (snapshot: FIRDataSnapshot) in
-            if let value = snapshot.value as? NSDictionary {
-                print(value)
+            let enumerator = snapshot.children
+            while let child = enumerator.nextObject() as? FIRDataSnapshot {
+                
+                if let value = child.value as? NSDictionary {
+                    if let splashCoor = SplashCoordinate(value) {
+                        
+                        //draw all splashes parsed from database
+                        let splash = SplashOverlay(coor: splashCoor)
+                        self.mapView.addOverlays([splash])
+
+                    }
+                    
+                }
             }
         }
+    }
+    
+    //MARK: - MKMap Delegate Methods
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if let myOverlay = overlay as? SplashOverlay{
+            let splashOverlay = SplashOverlayView(overlay: myOverlay, teamName: myOverlay.teamName, splashImageTag: myOverlay.splashImageTag)
+            return splashOverlay
+        } else if overlay is MKCircle{
+            let circleRenderer = MKCircleRenderer(overlay: overlay)
+            circleRenderer.fillColor = .orange
+            return circleRenderer
+        } else if overlay is MKPolyline {
+            let lineView = MKPolylineRenderer(overlay: overlay)
+            lineView.lineWidth = CGFloat(Int(arc4random_uniform(15) + 5))
+            lineView.strokeColor = .green
+            lineView.miterLimit = 0
+            lineView.lineDashPhase = 100
+            return lineView
+        }
         
-//        "-Kf-sNjE81U7dU_VxWOU" =     {
-//            latitude = "40.728858118395";
-//            longitude = "-74.0070760875";
-//            speed = "7.85";
-//            splashImageTag = 1;
-//            teamName = purple;
-//            timestamp = "1489294691.226886";
-//            userID = 9Jj1UC1ChjdAWClWIfxUIzRle292;
-//        };
-        
-        
-        
-        
-        
-        
-//        linkRef.observe(FIRDataEventType.childAdded, with: { (snapshot) in
-//            if let value = snapshot.value as? NSDictionary{
-//                if let coor = SplashCoordinate(value){
-//                    
-//                    //draw all splashes parsed from database
-//                    let splash = SplashOverlay(coor: coor)
-//                    self.invisibleMapView.addOverlays([splash])
-//                    self.mapView.addOverlays([splash])
-//                }
-//            }
-//        })
+        return MKOverlayRenderer(overlay: overlay)
     }
     
 //    func setMapPinAndRegion() {
@@ -170,8 +173,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     lazy var mapView: MKMapView = {
         let view = MKMapView()
         view.mapType = .standard
-        view.isUserInteractionEnabled = false
-        view.showsUserLocation = false
+//        view.isUserInteractionEnabled = false
         view.showsScale = true
         view.showsCompass = true
         view.showsBuildings = false
