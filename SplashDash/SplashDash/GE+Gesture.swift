@@ -10,12 +10,6 @@ import UIKit
 import MapKit
 
 extension GameViewController{
-
-//    func addGestures(){
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(tappedOnMap(sender:)))
-//        tap.numberOfTapsRequired = 1
-//        mapView.addGestureRecognizer(tap)
-//    }
     
     func tappedOnMap(sender: UIGestureRecognizer) {
         guard let tapGesture: UITapGestureRecognizer = sender as? UITapGestureRecognizer else { return }
@@ -50,29 +44,25 @@ extension GameViewController{
             if movingView.center.y - movingView.frame.height/2 < spacing + snapBuffer {
                 movingView.center = CGPoint(x: movingView.center.x, y: spacing + movingView.frame.height/2)
                 gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+                self.bottomViewIsUp = true
                 return }
             else if movingView.center.y - movingView.frame.height/2 > self.view.frame.height - spacing - snapBuffer {
                 movingView.center = CGPoint(x: movingView.center.x, y: self.view.frame.height + movingView.frame.height/2 - spacing)
                 gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+                self.bottomViewIsUp = false
                 return
             }
                 // Min Y
             else if movingView.center.y < self.bottomViewPreviousPosition {
                 movingView.center = CGPoint(x: movingView.center.x, y: spacing + movingView.frame.height/2)
                 gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
-                
-                self.bringUpBottomView()
-                self.displayView.isHidden = false
-                print("display view is hidden: \(displayView.isHidden)")
+                self.bottomViewIsUp = true
                 return }
                 // Max Y
             else {
                 movingView.center = CGPoint(x: movingView.center.x, y: self.view.frame.height + movingView.frame.height/2 - spacing)
                 gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
-                
-                self.configureBottomView()
-                self.displayView.isHidden = true
-                print("display view is hidden: \(displayView.isHidden)")
+                self.bottomViewIsUp = false
                 return
             }
         default: return

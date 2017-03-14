@@ -14,22 +14,22 @@ import Firebase
 extension GameViewController{
     
     func startButtonTapped() {
-        print("-----------start button tapped-----------")
         if self.gameStatus{
+            // end the game
             self.mapView.setUserTrackingMode(MKUserTrackingMode.none, animated: true)
             gameButton.setTitle("Start", for: .normal)
-            uploadRun()
+            uploadAndAddRun()
             self.previousLocation = nil
             self.timer?.invalidate()
             timer = nil
             self.currentRunCoordinates = []
             self.traveledDistanceInMeters = 0
             self.duration = 0
-            self.fetchCurrentUserData()
         } else{
             guard self.locationManager.location != nil else {
-                print("no location")
+                print("game does not start, no location")
                 return }
+            // start the game
             animateStartGame()
             self.displayView.isHidden = false
             self.mapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
@@ -42,14 +42,10 @@ extension GameViewController{
     }
     
     func updateCounter() {
-        if self.duration == 1 {
-            displayView.isHidden = true
-        }
         self.duration += 1
     }
     
     func toCurrentLocation(){
-        print("-----------current location button tapped------------")
         if let current = self.locationManager.location{
             print(current)
             let center = CLLocationCoordinate2D(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
@@ -123,6 +119,9 @@ extension GameViewController{
         guard let label = allLabel.popLast() else {
             self.updateCounter()
             return
+        }
+        if allLabel == [] {
+            self.displayView.isHidden = true
         }
         
         let animator = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn, animations: nil)
@@ -225,7 +224,7 @@ extension GameViewController{
                 }
             }
         }
-        //return winer
+        //return winner
         print("\(height),  \(width)")
         return [("purple", purpleCoverage/total),
                 ("teal", tealCoverage/total),
@@ -234,7 +233,6 @@ extension GameViewController{
     }
     
     func updateLabel() {
-        
         var components = DateComponents()
         components.day = 1
         components.second = -1
@@ -245,8 +243,6 @@ extension GameViewController{
         if let diffHour = diff.hour {
         bottomView.hoursLeftLabel.text = "Hours left: \(diffHour)"
         }
-//        bottomView.currentRunLabel.text = "Hours left: \(diff.hour!):\(diff.minute!):\(diff.second!)"
-        
     }
     
     func updateLeaderboard() {

@@ -23,11 +23,10 @@ extension GameViewController{
             let linkRef = FIRDatabase.database().reference().child("Users").child(uid)
             
             linkRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                print("snapshot is \(snapshot)")
+//                print("snapshot is \(snapshot)")
                 if let value = snapshot.value as? NSDictionary{
                     if let user = User(value){
                         self.currentUser = user
-                        dump(user)
                     }
                 }
             })
@@ -63,13 +62,25 @@ extension GameViewController{
         }
     }
     
-    func uploadRun(){
-        guard let currentUser = FIRAuth.auth()?.currentUser?.uid,
+    func uploadAndAddRun(){
+        let thisRun = Run(allCoordinates: currentRunCoordinates, totalDistance: self.traveledDistanceInMeters, runDuration: self.duration)
+        
+        // add run
+        self.currentUser?.runs.append(thisRun)
+        let sortedRuns = self.currentUser?.runs.sorted {
+            return $0.timeStamp > $1.timeStamp
+        }
+        if let runs = sortedRuns {
+            bottomView.contentCollectionView.userRunHistoryView.userRuns = runs
+        }
+        
+        //upload run
+        guard let currentUserID = FIRAuth.auth()?.currentUser?.uid,
             currentRunCoordinates.count > 0 else { return }
         
-        let linkRef = FIRDatabase.database().reference().child("Users").child(currentUser).child("runs")
+        let linkRef = FIRDatabase.database().reference().child("Users").child(currentUserID).child("runs")
         
-        let thisRun = Run(allCoordinates: currentRunCoordinates, totalDistance: self.traveledDistanceInMeters, runDuration: self.duration)
+
         let data = thisRun.toData()
         
         linkRef.childByAutoId().setValue(data) { (error, _) in
@@ -80,7 +91,6 @@ extension GameViewController{
               
             }
         }
-        
     }
     
 }
