@@ -17,6 +17,23 @@ extension GameViewController{
         return format.string(from: Date())
     }
     
+    func fetchCurrentUserData(){
+        if let uid = FIRAuth.auth()?.currentUser?.uid {
+            
+            let linkRef = FIRDatabase.database().reference().child("Users").child(uid)
+            
+            linkRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                print("snapshot is \(snapshot)")
+                if let value = snapshot.value as? NSDictionary{
+                    if let user = User(value){
+                        self.currentUser = user
+                        dump(user)
+                    }
+                }
+            })
+        }
+    }
+    
     func fetchGlobalSplash(){
         let linkRef = databaseReference.child(getRootName())
         

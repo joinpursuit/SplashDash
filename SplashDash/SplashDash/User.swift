@@ -37,8 +37,7 @@ class User {
             let username = validDict["username"] as? String,
             let uid = validDict["uid"] as? String,
             let teamName = validDict["teamName"] as? String,
-            let userTeam = UserTeam(rawValue: teamName),
-            let runsArr = validDict["runs"] as? [String: AnyObject]
+            let userTeam = UserTeam(rawValue: teamName)
         else {
                 print("!!!!!Error parsing current user!!!!!")
                 return nil
@@ -46,22 +45,24 @@ class User {
         
         var allRuns = [Run]()
         
-        for run in runsArr.values {
-            guard let coordsInRun = run["allCoordinates"] as? [[String:AnyObject]],
-                let totalDistance = run["totalDistance"] as? Double,
-                let runDuration = run["runDuration"] as? Int
-            else { continue }
-
-            var splashCoords = [SplashCoordinate]()
-            for coordinate in coordsInRun {
-                if let coord = SplashCoordinate(coordinate as NSDictionary) {
-                    splashCoords.append(coord)
+        if let runsArr = validDict["runs"] as? [String: AnyObject]{
+            for run in runsArr.values {
+                guard let coordsInRun = run["allCoordinates"] as? [[String:AnyObject]],
+                    let totalDistance = run["totalDistance"] as? Double,
+                    let runDuration = run["runDuration"] as? Int
+                    else { continue }
+                
+                var splashCoords = [SplashCoordinate]()
+                for coordinate in coordsInRun {
+                    if let coord = SplashCoordinate(coordinate as NSDictionary) {
+                        splashCoords.append(coord)
+                    }
                 }
+                allRuns.append(Run(allCoordinates: splashCoords, totalDistance: totalDistance, runDuration: runDuration))
             }
-            allRuns.append(Run(allCoordinates: splashCoords, totalDistance: totalDistance, runDuration: runDuration))
         }
-        
         self.init(email: email, username: username, uid: uid, teamName: userTeam, runs: allRuns)
+        
     }
     
     //MARK: - Methods

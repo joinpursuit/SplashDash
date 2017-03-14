@@ -13,26 +13,10 @@ import Firebase
 
 extension GameViewController{
     
-    func fetchCurrentUserData(){
-        if let uid = FIRAuth.auth()?.currentUser?.uid {
-            
-            let linkRef = FIRDatabase.database().reference().child("Users").child(uid)
-            
-            linkRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                print("snapshot is \(snapshot)")
-                if let value = snapshot.value as? NSDictionary{
-                    if let user = User(value){
-                        self.currentUser = user
-                        dump(user)
-                    }
-                }
-            })
-        }
-    }
-    
     func startButtonTapped() {
         print("-----------start button tapped-----------")
         if self.gameStatus{
+            self.mapView.setUserTrackingMode(MKUserTrackingMode.none, animated: true)
             gameButton.setTitle("Start", for: .normal)
             uploadRun()
             self.previousLocation = nil
@@ -48,6 +32,7 @@ extension GameViewController{
                 return }
             animateStartGame()
             self.displayView.isHidden = false
+            self.mapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
             toCurrentLocation()
             animateAllButtons()
             gameButton.setTitle("Stop", for: .normal)
