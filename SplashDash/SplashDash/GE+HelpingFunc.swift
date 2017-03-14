@@ -161,6 +161,7 @@ extension GameViewController{
         
         //updating leaderboard count and handle colors
         updateLeaderboard()
+        invisibleMapView.removeFromSuperview()
         
     }
     
