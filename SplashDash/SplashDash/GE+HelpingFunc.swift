@@ -13,30 +13,26 @@ import Firebase
 
 extension GameViewController{
     
-    func fetchCurrentUserData(){
-        if let uid = FIRAuth.auth()?.currentUser?.uid {
-            
-            let linkRef = FIRDatabase.database().reference().child("Users").child(uid)
-            
-            linkRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                print("snapshot is \(snapshot)")
-                if let value = snapshot.value as? NSDictionary{
-                    if let user = User(value){
-                        self.currentUser = user
-                        dump(user)
-                    }
-                }
-            })
-        }
-    }
-    
     func startButtonTapped() {
         print("-----------start button tapped-----------")
         if self.gameStatus{
+            self.mapView.setUserTrackingMode(MKUserTrackingMode.none, animated: true)
             gameButton.setTitle("Start", for: .normal)
-            endRunUpdate()
+            uploadRun()
+            self.previousLocation = nil
+            self.timer?.invalidate()
+            timer = nil
+            self.currentRunCoordinates = []
+            self.traveledDistanceInMeters = 0
+            self.duration = 0
+            self.fetchCurrentUserData()
         } else{
+            guard self.locationManager.location != nil else {
+                print("no location")
+                return }
             animateStartGame()
+            self.displayView.isHidden = false
+            self.mapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
             toCurrentLocation()
             animateAllButtons()
             gameButton.setTitle("Stop", for: .normal)
@@ -46,6 +42,9 @@ extension GameViewController{
     }
     
     func updateCounter() {
+        if self.duration == 1 {
+            displayView.isHidden = true
+        }
         self.duration += 1
     }
     
@@ -96,7 +95,6 @@ extension GameViewController{
     }
     
     func animateStartGame(){
-        self.displayView.isHidden = false
         let countDownLabels = ["3", "2", "1", "GO!"]
         var colorArr = SplashColor.teamColorArray()
         
@@ -123,7 +121,6 @@ extension GameViewController{
     
     func startGameTimer(){
         guard let label = allLabel.popLast() else {
-            displayView.isHidden = true
             self.updateCounter()
             return
         }

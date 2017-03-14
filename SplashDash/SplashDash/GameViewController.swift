@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 import Firebase
+import SpriteKit
+import GameplayKit
 
 class GameViewController: UIViewController {
     
@@ -20,6 +22,7 @@ class GameViewController: UIViewController {
     var bottomViewPreviousPosition: CGFloat = 0.0
     var timer: Timer?
     
+    var scene: SplashScene!
     var mySwitch = true
     var allLabel: [UILabel] = []
     
@@ -88,11 +91,7 @@ class GameViewController: UIViewController {
         
         //add timer to calculate score every ten mins
         Timer.scheduledTimer(timeInterval: 600, target: self, selector: #selector(takeScreenshot), userInfo: nil, repeats:true);
-        
-        
     }
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -112,24 +111,41 @@ class GameViewController: UIViewController {
     
     // MARK: - Setup
     func setupViewHierarchy(){
+        
         self.view.addSubview(invisibleMapView)
         self.view.addSubview(mapView)
+        self.mapView.addSubview(gameButton)
         self.mapView.addSubview(findMeButton)
+        
+        let skView = SplashSKView(frame: self.view.frame)
+        skView.allowsTransparency = true
+        mapView.addSubview(skView)
+        
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.ignoresSiblingOrder = true
+        
+        
+        
 //        self.mapView.addSubview(endGameButton)
 
 //        self.mapView.addSubview(bottomRootView)
-        self.view.addSubview(bottomRootView)
+//        self.view.addSubview(bottomRootView)
+        self.view.addSubview(displayView)
 
-        self.bottomRootView.addSubview(bottomCorneredContainerView)
+        self.view.addSubview(bottomCorneredContainerView)
         self.bottomCorneredContainerView.addSubview(bottomView)
-        self.bottomRootView.addSubview(gameButton)
         
         //Leaderboard views
         self.view.addSubview(firstPlaceView)
         self.view.addSubview(secondPlaceView)
         self.view.addSubview(thirdPlaceView)
         self.view.addSubview(fourthPlaceView)
-        self.view.addSubview(displayView)
+        
+        self.scene = SplashScene(size: skView.bounds.size)
+        scene.scaleMode = .aspectFill
+        skView.presentScene(scene)
+        
     }
     
     func configureConstraints(){
@@ -141,32 +157,19 @@ class GameViewController: UIViewController {
             view.top.bottom.leading.trailing.equalToSuperview()
         }
         
-        bottomRootView.snp.remakeConstraints { (view) in
-            view.leading.trailing.equalToSuperview()
-//          This extension of bottomRootView allows all buttons to be selectable
-            view.top.equalTo(self.gameButton.snp.top)
-            view.bottom.equalTo(bottomCorneredContainerView.snp.bottom)
-        }
+        configureBottomView()
         
-        bottomCorneredContainerView.snp.remakeConstraints { (view) in
-            view.leading.trailing.equalToSuperview()
-            view.top.equalTo(self.view.snp.bottom).inset(bottomView.topViewSpacing)
-            view.height.equalTo(self.view.snp.height).offset(-bottomView.topViewSpacing)
-        }
-        
-        bottomView.snp.remakeConstraints { (view) in
-            view.leading.top.trailing.bottom.equalToSuperview()
+        // TO DELETE - BUTTON HERE FOR DEBUGGING
+        findMeButton.snp.remakeConstraints { (view) in
+            view.centerX.equalTo(gameButton.snp.centerX)
+            view.bottom.equalTo(gameButton.snp.top).offset(-40)
+            view.size.equalTo(CGSize(width: 44, height: 44))
         }
         
         gameButton.snp.remakeConstraints { (view) in
-            view.centerY.equalTo(bottomCorneredContainerView.snp.top)
             view.trailing.equalToSuperview().offset(-30)
-            view.size.equalTo(CGSize(width: 70, height: 70))
-        }
-        
-        findMeButton.snp.remakeConstraints { (view) in
-            view.trailing.equalTo(gameButton)
-            view.bottom.equalTo(gameButton.snp.top).offset(-40)
+//            view.bottom.equalToSuperview().offset(-bottomView.topView.frame.height - 30)
+            view.bottom.equalToSuperview().offset(-130)
             view.size.equalTo(CGSize(width: 60, height: 60))
         }
         
@@ -207,8 +210,39 @@ class GameViewController: UIViewController {
         displayView.snp.remakeConstraints { (view) in
             view.leading.trailing.top.bottom.equalToSuperview()
         }
-        displayView.isHidden = true
+//        displayView.isHidden = true
         
+    }
+    
+    func configureBottomView() {
+        //        bottomRootView.snp.remakeConstraints { (view) in
+        //            view.leading.trailing.equalToSuperview()
+        ////          This extension of bottomRootView allows all buttons to be selectable
+        //            view.top.equalTo(bottomCorneredContainerView.snp.top)
+        //            view.bottom.equalTo(bottomCorneredContainerView.snp.bottom)
+        //        }
+        
+        bottomCorneredContainerView.snp.remakeConstraints { (view) in
+            view.leading.trailing.equalToSuperview()
+            view.top.equalTo(self.view.snp.bottom).inset(bottomView.topViewSpacing)
+            view.height.equalTo(self.view.snp.height).offset(-bottomView.topViewSpacing)
+        }
+        
+        bottomView.snp.remakeConstraints { (view) in
+            view.leading.top.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    func bringUpBottomView() {
+        bottomCorneredContainerView.snp.remakeConstraints { (view) in
+            view.leading.trailing.equalToSuperview()
+            view.top.equalTo(self.view.snp.top).inset(bottomView.topViewSpacing)
+            view.height.equalTo(self.view.snp.height).offset(-bottomView.topViewSpacing)
+        }
+        
+        bottomView.snp.remakeConstraints { (view) in
+            view.leading.top.trailing.bottom.equalToSuperview()
+        }
     }
     
     //MARK: - Lazy inits
@@ -258,9 +292,10 @@ class GameViewController: UIViewController {
         button.isEnabled = true
         button.backgroundColor = SplashColor.primaryColor()
         button.clipsToBounds = true
-        button.layer.cornerRadius = 30
+        button.layer.cornerRadius = 22
         button.tintColor = .white
         button.addShadows()
+        button.alpha = 0.2
         button.addTarget(self, action: #selector(toCurrentLocation), for: .touchUpInside)
         return button
     }()
@@ -281,6 +316,7 @@ class GameViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = .black
         view.alpha = 0.3
+        view.isHidden = true
         return view
     }()
 
@@ -293,15 +329,15 @@ class GameViewController: UIViewController {
         return view
     }()
     
-    lazy var bottomRootView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-//        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-//        view.addGestureRecognizer(gestureRecognizer)
-
-
-        return view
-    }()
+//    lazy var bottomRootView: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = .clear
+////        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+////        view.addGestureRecognizer(gestureRecognizer)
+//
+//
+//        return view
+//    }()
     
     lazy var bottomCorneredContainerView: UIView = {
         let view = UIView()
