@@ -16,7 +16,6 @@ extension GameViewController{
     func startButtonTapped() {
         print("-----------start button tapped-----------")
         if self.gameStatus{
-            self.mapView.setUserTrackingMode(MKUserTrackingMode.none, animated: true)
             gameButton.setTitle("Start", for: .normal)
             uploadRun()
             self.previousLocation = nil
@@ -32,8 +31,6 @@ extension GameViewController{
                 return }
             animateStartGame()
             self.displayView.isHidden = false
-            self.mapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
-            toCurrentLocation()
             animateAllButtons()
             gameButton.setTitle("Stop", for: .normal)
         }
@@ -161,7 +158,6 @@ extension GameViewController{
         
         //updating leaderboard count and handle colors
         updateLeaderboard()
-        
     }
     
     func colorArray(image: UIImage) -> [(color: String, score: Double)] {

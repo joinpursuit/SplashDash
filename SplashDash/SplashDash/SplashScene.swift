@@ -23,16 +23,17 @@ class SplashScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.7
+        // Create splash when drop ink on map
+        let w = (self.size.width + self.size.height) * 0.3
         self.splashNode = SKSpriteNode(imageNamed: "inkSample3")
         if let splash = self.splashNode {
             splash.size = CGSize(width: w, height: w)
             
-//            splash.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(M_PI), duration: 1)))
             splash.run(SKAction.sequence([SKAction.resize(toWidth: 10, height: 10, duration: 0.24),
                                           SKAction.removeFromParent()]))
         }
+        
+        
     }
     
     func dropSplash(on pos: CGPoint){
@@ -40,5 +41,9 @@ class SplashScene: SKScene {
             splash.position = pos
             self.addChild(splash)
         }
+    }
+    
+    func stickmanStartRuning(){
+        
     }
 }
