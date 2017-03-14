@@ -58,9 +58,17 @@ extension GameViewController: MKMapViewDelegate{
         }
     }
     
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        //Map camera will follow user's location after game started
+        if gameStatus{
+            self.mapView.setCenter(userLocation.coordinate, animated: true)
+        }
+    }
+    
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
         switch mapView {
         case invisibleMapView:
+            //init ranking labels at current time
             takeScreenshot()
         default:
             return

@@ -30,15 +30,8 @@ class SplashScene: SKScene {
             splash.size = CGSize(width: w, height: w)
             
 //            splash.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(M_PI), duration: 1)))
-            splash.run(SKAction.sequence([SKAction.resize(toWidth: 1, height: 1, duration: 1),
+            splash.run(SKAction.sequence([SKAction.resize(toWidth: 10, height: 10, duration: 0.24),
                                           SKAction.removeFromParent()]))
-            
-//            spinnyNode.lineWidth = 2.5
-//            
-//            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(M_PI), duration: 1)))
-//            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-//                                              SKAction.fadeOut(withDuration: 0.5),
-//                                              SKAction.removeFromParent()]))
         }
     }
     
