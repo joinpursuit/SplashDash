@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import SnapKit
 
-class MapSliderview: UIView {
+class MapSliderView: UIView {
     //MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,14 +27,13 @@ class MapSliderview: UIView {
     func setUpViewHierarchy() {
         self.addSubview(mapView)
         self.addSubview(sliderContainerView)
-        self.addSubview(slider)
-        
-        self.layer.cornerRadius = 8
+//        self.addSubview(slider)
     }
     
     func configureConstraints() {
         mapView.snp.makeConstraints { (view) in
             view.leading.top.trailing.equalToSuperview()
+            view.bottom.equalTo(self.snp.centerY)
         }
         
         sliderContainerView.snp.makeConstraints { (view) in
@@ -42,11 +41,11 @@ class MapSliderview: UIView {
             view.leading.trailing.bottom.equalToSuperview()
         }
         
-        slider.snp.makeConstraints { (view) in
-            view.centerX.centerY.equalTo(sliderContainerView)
-            view.leading.equalToSuperview().offset(8.0)
-            view.trailing.equalToSuperview().inset(8.0)
-        }
+//        slider.snp.makeConstraints { (view) in
+//            view.centerX.centerY.equalTo(sliderContainerView)
+//            view.leading.equalToSuperview().offset(8.0)
+//            view.trailing.equalToSuperview().inset(8.0)
+//        }
     }
     
     //MARK: - Views
@@ -59,7 +58,7 @@ class MapSliderview: UIView {
         view.showsBuildings = false
         view.showsPointsOfInterest = false
         view.showsCompass = false
-        view.delegate = self
+//        view.delegate = self
         
         return view
     }()

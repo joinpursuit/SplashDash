@@ -26,7 +26,6 @@ class ContentCollectionView: UIView, UICollectionViewDelegate, UICollectionViewD
         super.init(frame: frame)
         self.setupViewHierarchy()
         self.configureConstraints()
-        
         contentViews = [userRunHistoryView, mapHistoryView]
     }
     
@@ -107,6 +106,7 @@ class ContentCollectionView: UIView, UICollectionViewDelegate, UICollectionViewD
     lazy var mapHistoryView: MapHistoryView = {
         let view = MapHistoryView()
         view.backgroundColor = SplashColor.primaryColor()
+        
         return view
     }()
 }

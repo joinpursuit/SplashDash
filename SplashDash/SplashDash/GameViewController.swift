@@ -112,6 +112,8 @@ class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.bottomCorneredContainerView.clipsToBounds = true
+        self.bottomView.contentCollectionView.mapHistoryView.mapSliderView.layer.cornerRadius = 5
+        self.bottomView.contentCollectionView.mapHistoryView.mapSliderView.layer.masksToBounds = true
     }
     
     // MARK: - Setup
