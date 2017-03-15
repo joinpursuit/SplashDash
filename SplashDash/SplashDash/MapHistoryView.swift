@@ -142,24 +142,6 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         
         var overlays: [SplashOverlay] = []
         
-//        self.databaseReference.observeSingleEvent(of: FIRDataEventType.value) { (snapshot: FIRDataSnapshot) in
-//            let enumerator = snapshot.children
-//            while let child = enumerator.nextObject() as? FIRDataSnapshot {
-//                
-//                if let value = child.value as? NSDictionary {
-//                    if let splashCoor = SplashCoordinate(value) {
-//                        
-//                        //draw all splashes parsed from database
-//                        let splash = SplashOverlay(coor: splashCoor)
-//                        overlays.append(splash)
-//                        
-//                        self.splashOverlays = overlays
-//                    }
-//                }
-//            }
-//            self.mapSliderView.mapView.addOverlays(self.splashOverlays)
-//        }
-        
         let chronologicalQuery = self.databaseReference.queryOrderedByKey()
         chronologicalQuery.observeSingleEvent(of: FIRDataEventType.value) { (snapshot: FIRDataSnapshot) in
             let enumerator = snapshot.children
@@ -176,7 +158,6 @@ class MapHistoryView: UIView, MKMapViewDelegate {
                     }
                 }
             }
-//            self.mapSliderView.mapView.addOverlays(self.splashOverlays)
         }
     }
     
