@@ -55,7 +55,6 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     
     //MARK: - Setup Views
     func setupViewHierarchy() {
-//        self.addSubview(mapView)
         self.addSubview(mapSliderView)
         self.addSubview(datePicker)
         self.addSubview(monthUpCaretLabel)
@@ -104,11 +103,6 @@ class MapHistoryView: UIView, MKMapViewDelegate {
             view.leading.trailing.equalToSuperview()
             view.height.equalTo(50)
         }
-//        mapView.snp.remakeConstraints { (view) in
-//            view.leading.trailing.bottom.equalToSuperview()
-////            view.top.equalTo(datePicker.snp.bottom).offset(8.0)
-//            view.top.equalTo(yearDownCaretLabel.snp.bottom).offset(16.0)
-//        }
         
         mapSliderView.snp.remakeConstraints { (view) in
             view.leading.trailing.bottom.equalToSuperview()
@@ -139,7 +133,26 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         
         var overlays: [SplashOverlay] = []
         
-        self.databaseReference.observeSingleEvent(of: FIRDataEventType.value) { (snapshot: FIRDataSnapshot) in
+//        self.databaseReference.observeSingleEvent(of: FIRDataEventType.value) { (snapshot: FIRDataSnapshot) in
+//            let enumerator = snapshot.children
+//            while let child = enumerator.nextObject() as? FIRDataSnapshot {
+//                
+//                if let value = child.value as? NSDictionary {
+//                    if let splashCoor = SplashCoordinate(value) {
+//                        
+//                        //draw all splashes parsed from database
+//                        let splash = SplashOverlay(coor: splashCoor)
+//                        overlays.append(splash)
+//                        
+//                        self.splashOverlays = overlays
+//                    }
+//                }
+//            }
+//            self.mapSliderView.mapView.addOverlays(self.splashOverlays)
+//        }
+        
+        let x = self.databaseReference.queryOrderedByKey()
+        x.observeSingleEvent(of: FIRDataEventType.value) { (snapshot: FIRDataSnapshot) in
             let enumerator = snapshot.children
             while let child = enumerator.nextObject() as? FIRDataSnapshot {
                 
@@ -221,21 +234,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
 //
 //    }
     
-    // MARK: - Views
-
-//    lazy var mapView: MKMapView = {
-//        let view = MKMapView()
-//        view.mapType = .standard
-////        view.isUserInteractionEnabled = false
-//        view.showsScale = true
-//        view.showsCompass = true
-//        view.showsBuildings = false
-//        view.showsPointsOfInterest = false
-//        view.showsCompass = false
-//        view.delegate = self
-//        return view
-//    }()
-    
+    //MARK: - Views
     lazy var mapSliderView: MapSliderView = {
         let view = MapSliderView()
         view.mapView.delegate = self
