@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
     var segmentedControl: ScrollableSegmentedControl!
     var player: AVPlayer?
     
-    var databaseReference = FIRDatabase.database().reference()
+    var databaseReference: FIRDatabaseReference!
     var teamName: UserTeam!
     
     //MARK: - Methods
@@ -31,6 +31,7 @@ class HomeViewController: UIViewController {
         setUpViewHierarchy()
         setupPlayerLayer()
         
+        databaseReference = FIRDatabase.database().reference()
         usernameTextField.isHidden = true
         stackview.isHidden = true
         stackview.delegate = self
@@ -46,6 +47,12 @@ class HomeViewController: UIViewController {
                                                selector: #selector(loopVideo),
                                                name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
                                                object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.databaseReference.removeAllObservers()
     }
     
     deinit {
@@ -329,6 +336,7 @@ class HomeViewController: UIViewController {
                             let defaults = UserDefaults()
                             defaults.set(newUser.teamName.rawValue, forKey: "teamName")
                             
+                            self.player?.pause()
                             self.present(GameViewController(), animated: true, completion: nil)
                         })
         })
@@ -362,14 +370,15 @@ class HomeViewController: UIViewController {
                             print("User ID: \(user?.uid)")
                             
                             guard let uid = user?.uid else { return }
-                            let linkRef = FIRDatabase.database().reference().child("Users").child(uid)
+                            self.databaseReference = FIRDatabase.database().reference().child("Users").child(uid)
                             
-                            linkRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                            self.databaseReference.observeSingleEvent(of: .value, with: { (snapshot) in
                                 if let value = snapshot.value as? NSDictionary{
                                     if let user = User(value){
                                         let defaults = UserDefaults()
                                         defaults.set(user.teamName.rawValue, forKey: "teamName")
                                         let gameVC = GameViewController()
+                                        self.player?.pause()
                                         self.present(gameVC, animated: true, completion: nil)
                                     }
                                 }

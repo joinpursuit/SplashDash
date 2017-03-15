@@ -175,8 +175,8 @@ extension GameViewController{
         
         //updating leaderboard count and handle colors
         updateLeaderboard()
-
-        invisibleMapView.removeFromSuperview()
+//        invisibleMapView.removeFromSuperview()
+        
     }
     
     func colorArray(image: UIImage) -> [(color: String, score: Double)] {
