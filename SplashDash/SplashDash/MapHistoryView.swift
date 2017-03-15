@@ -68,6 +68,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         }
         mapView.snp.remakeConstraints { (view) in
             view.leading.trailing.bottom.equalToSuperview()
+            view.top.equalTo(datePicker.snp.bottom)
         }
     }
     
