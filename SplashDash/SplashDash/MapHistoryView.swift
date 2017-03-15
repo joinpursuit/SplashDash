@@ -118,19 +118,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         if let myOverlay = overlay as? SplashOverlay{
             let splashOverlay = SplashOverlayView(overlay: myOverlay, teamName: myOverlay.teamName, splashImageTag: myOverlay.splashImageTag)
             return splashOverlay
-        } else if overlay is MKCircle{
-            let circleRenderer = MKCircleRenderer(overlay: overlay)
-            circleRenderer.fillColor = .orange
-            return circleRenderer
-        } else if overlay is MKPolyline {
-            let lineView = MKPolylineRenderer(overlay: overlay)
-            lineView.lineWidth = CGFloat(Int(arc4random_uniform(15) + 5))
-            lineView.strokeColor = .green
-            lineView.miterLimit = 0
-            lineView.lineDashPhase = 100
-            return lineView
         }
-        
         return MKOverlayRenderer(overlay: overlay)
     }
     
