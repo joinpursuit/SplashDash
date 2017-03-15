@@ -227,9 +227,6 @@ class BottomView: UIView {
     
     lazy var contentCollectionView: ContentCollectionView = {
         let view = ContentCollectionView()
-        // TO DO: FIGURE OUT WHETHER TO ENABLE USER INTERACTION
-        // DISABLED FOR NOW, TO TEST SLIDER
-        view.isUserInteractionEnabled = false
         return view
     }()
 }
