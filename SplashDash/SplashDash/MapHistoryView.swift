@@ -28,7 +28,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         
         setupViewHierarchy()
         configureConstraints()
-//        setUpMapViewLocation()
+        setUpMapViewLocation()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,7 +41,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         self.datePickerDate = returnFormattedDate(date: selectedDate)
         
         if let date = self.datePickerDate {
-//            fetchSplashForPickerDate(date: date)
+            fetchSplashForPickerDate(date: date)
         }
     }
     
@@ -117,46 +117,46 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         }
     }
     
-//    func setUpMapViewLocation() {
-//        //load mapview for the current date selected on the picker
-//        let oneDayAgo: Date = calendar.date(byAdding: .day, value: -1, to: Date())!
-//        self.datePickerDate = returnFormattedDate(date: oneDayAgo)
-////        fetchSplashForPickerDate(date: self.datePickerDate)
-//        
-//        //40.730043, -73.991250
-//        let center = CLLocationCoordinate2D(latitude: 40.730043, longitude: -73.991250) //40.751085, -73.984946
-//        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04))
-//        self.mapView.setRegion(region, animated: false)
-//    }
-//    
-//    func fetchSplashForPickerDate(date: String){
-//        //Remove all current overlay views prior to populating the map
-//        self.mapView.removeOverlays(self.mapView.overlays)
-//        
-//        //Setting database reference to date selected from datePicker
-//        guard let date = self.datePickerDate else { return }
-//        self.databaseReference = FIRDatabase.database().reference().child("Public/\(date)")
-//        
-//        var overlays: [SplashOverlay] = []
-//        
-//        self.databaseReference.observeSingleEvent(of: FIRDataEventType.value) { (snapshot: FIRDataSnapshot) in
-//            let enumerator = snapshot.children
-//            while let child = enumerator.nextObject() as? FIRDataSnapshot {
-//                
-//                if let value = child.value as? NSDictionary {
-//                    if let splashCoor = SplashCoordinate(value) {
-//                        
-//                        //draw all splashes parsed from database
-//                        let splash = SplashOverlay(coor: splashCoor)
-//                        overlays.append(splash)
-//                        
-//                        self.splashOverlays = overlays
-//                    }
-//                }
-//            }
-//            self.mapView.addOverlays(self.splashOverlays)
-//        }
-//    }
+    func setUpMapViewLocation() {
+        //load mapview for the current date selected on the picker
+        let oneDayAgo: Date = calendar.date(byAdding: .day, value: -1, to: Date())!
+        self.datePickerDate = returnFormattedDate(date: oneDayAgo)
+        fetchSplashForPickerDate(date: self.datePickerDate)
+        
+        //40.730043, -73.991250
+        let center = CLLocationCoordinate2D(latitude: 40.730043, longitude: -73.991250) //40.751085, -73.984946
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04))
+        self.mapSliderView.mapView.setRegion(region, animated: false)
+    }
+
+    func fetchSplashForPickerDate(date: String){
+        //Remove all current overlay views prior to populating the map
+        self.mapSliderView.mapView.removeOverlays(self.mapSliderView.mapView.overlays)
+        
+        //Setting database reference to date selected from datePicker
+        guard let date = self.datePickerDate else { return }
+        self.databaseReference = FIRDatabase.database().reference().child("Public/\(date)")
+        
+        var overlays: [SplashOverlay] = []
+        
+        self.databaseReference.observeSingleEvent(of: FIRDataEventType.value) { (snapshot: FIRDataSnapshot) in
+            let enumerator = snapshot.children
+            while let child = enumerator.nextObject() as? FIRDataSnapshot {
+                
+                if let value = child.value as? NSDictionary {
+                    if let splashCoor = SplashCoordinate(value) {
+                        
+                        //draw all splashes parsed from database
+                        let splash = SplashOverlay(coor: splashCoor)
+                        overlays.append(splash)
+                        
+                        self.splashOverlays = overlays
+                    }
+                }
+            }
+            self.mapSliderView.mapView.addOverlays(self.splashOverlays)
+        }
+    }
     
     //MARK: - MKMap Delegate Methods
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -238,6 +238,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     
     lazy var mapSliderView: MapSliderView = {
         let view = MapSliderView()
+        view.mapView.delegate = self
         
         return view
     }()

@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import SnapKit
 
-class MapSliderView: UIView {
+class MapSliderView: UIView, MKMapViewDelegate {
     //MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -73,6 +73,7 @@ class MapSliderView: UIView {
     lazy var slider: UISlider = {
         let slider = UISlider()
         slider.thumbTintColor = SplashColor.primaryColor()
+        slider.minimumTrackTintColor = SplashColor.primaryColor()
         
         return slider
     }()
