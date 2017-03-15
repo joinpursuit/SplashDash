@@ -87,6 +87,8 @@ extension GameViewController{
     }
     
     func uploadAndAddRun(){
+        guard currentRunCoordinates.count > 0 else { return }
+        
         let thisRun = Run(allCoordinates: currentRunCoordinates, totalDistance: self.traveledDistanceInMeters, runDuration: self.duration)
         
         // add run
@@ -99,8 +101,7 @@ extension GameViewController{
         }
         
         //upload run
-        guard let currentUserID = FIRAuth.auth()?.currentUser?.uid,
-            currentRunCoordinates.count > 0 else { return }
+        guard let currentUserID = self.currentUser?.uid else { return }
         
         let linkRef = FIRDatabase.database().reference().child("Users").child(currentUserID).child("runs")
         

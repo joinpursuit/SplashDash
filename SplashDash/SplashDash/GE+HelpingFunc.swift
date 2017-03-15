@@ -37,6 +37,7 @@ extension GameViewController{
             // start the game
             self.displayView.isHidden = false
             self.scene.beforeStartGame {
+                //this completion handle after count down animation
                 self.updateCounter()
                 self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateCounter), userInfo: nil, repeats: true)
                 self.displayView.isHidden = true
@@ -44,7 +45,7 @@ extension GameViewController{
             animateAllButtons()
             gameButton.setTitle("Stop", for: .normal)
             
-            //stickman strat running
+            //stickman start running
             let lowerRight = CGPoint(x: self.scene.frame.maxX-60, y: self.scene.frame.minY+50)
             self.scene.stickmanStartRunning(to: lowerRight)
         }
