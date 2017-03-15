@@ -329,6 +329,7 @@ class HomeViewController: UIViewController {
                             let defaults = UserDefaults()
                             defaults.set(newUser.teamName.rawValue, forKey: "teamName")
                             
+                            self.player?.pause()
                             self.present(GameViewController(), animated: true, completion: nil)
                         })
         })
