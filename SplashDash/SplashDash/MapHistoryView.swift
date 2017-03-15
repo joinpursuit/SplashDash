@@ -18,6 +18,8 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     var databaseReference: FIRDatabaseReference!
     var splashOverlays: [SplashOverlay]!
     
+    let calendar: Calendar = Calendar.current
+    
     //MARK: - Methods
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,16 +37,20 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     
     //MARK: - Actions
     func datePickerChanged(_ sender: UIDatePicker) {
-        //Formatting date string
-        let format = DateFormatter()
-        format.dateFormat = "yyyyMMdd"
-        
-        let date = self.datePicker.date
-        self.datePickerDate = format.string(from: date)
+        let selectedDate = self.datePicker.date
+        self.datePickerDate = returnFormattedDate(date: selectedDate)
         
         if let date = self.datePickerDate {
             fetchSplashForPickerDate(date: date)
         }
+    }
+    
+    func returnFormattedDate(date: Date) -> String {
+        //Formatting date string
+        let format = DateFormatter()
+        format.dateFormat = "yyyyMMdd"
+        
+        return format.string(from: date)
     }
     
     //MARK: - Setup Views
@@ -66,6 +72,11 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     }
     
     func setUpMapViewLocation() {
+        //load mapview for the current date selected on the picker
+        let oneDayAgo: Date = calendar.date(byAdding: .day, value: -1, to: Date())!
+        self.datePickerDate = returnFormattedDate(date: oneDayAgo)
+        fetchSplashForPickerDate(date: self.datePickerDate)
+        
         //40.730043, -73.991250
         let center = CLLocationCoordinate2D(latitude: 40.730043, longitude: -73.991250) //40.751085, -73.984946
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04))
