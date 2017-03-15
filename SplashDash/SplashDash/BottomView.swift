@@ -70,7 +70,8 @@ class BottomView: UIView {
         }
         
         durationLabel.snp.makeConstraints { (view) in
-            view.leading.bottom.equalToSuperview().inset(8.0)
+            view.leading.equalToSuperview().inset(16.0)
+            view.bottom.equalToSuperview().inset(8.0)
             view.top.equalTo(durationNumLabel.snp.bottom).offset(8.0)
         }
 
@@ -80,7 +81,8 @@ class BottomView: UIView {
         }
         
         hoursLeftLabel.snp.makeConstraints { (view) in
-            view.trailing.bottom.equalToSuperview().inset(8.0)
+            view.trailing.equalToSuperview().inset(16.0)
+            view.bottom.equalToSuperview().inset(8.0)
             view.top.equalTo(hoursLeftNumLabel.snp.bottom).offset(8.0)
         }
         
@@ -225,6 +227,9 @@ class BottomView: UIView {
     
     lazy var contentCollectionView: ContentCollectionView = {
         let view = ContentCollectionView()
+        // TO DO: FIGURE OUT WHETHER TO ENABLE USER INTERACTION
+        // DISABLED FOR NOW, TO TEST SLIDER
+        view.isUserInteractionEnabled = false
         return view
     }()
 }

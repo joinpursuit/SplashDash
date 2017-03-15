@@ -37,18 +37,26 @@ class GameViewController: UIViewController {
         }
     }
     
-    //BottomView bottomViewPreviousPosition
     var bottomViewIsUp = false {
         didSet {
             if bottomViewIsUp {
-                bringUpBottomView()
+                UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
+                    self.bringUpBottomView()
+                    self.view.layoutIfNeeded()
+                }, completion: nil)
                 self.displayView.isHidden = false
                 if !isButtonsOffScreen {
                     animateAllButtons()
                 }
             } else {
-                configureBottomView()
+                UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
+                    self.configureBottomView()
+                    self.view.layoutIfNeeded()
+                }, completion: nil)
                 self.displayView.isHidden = true
+                if isButtonsOffScreen {
+                    animateAllButtons()
+                }
             }
         }
     }
@@ -294,6 +302,8 @@ class GameViewController: UIViewController {
         view.backgroundColor = .black
         view.alpha = 0.3
         view.isHidden = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(displayViewTapped(sender:)))
+        view.addGestureRecognizer(tapGestureRecognizer)
         return view
     }()
 

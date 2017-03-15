@@ -20,7 +20,10 @@ extension GameViewController{
         default:
             print("Map was tapped, but not with one finger!")
         }
-        
+    }
+    
+    func displayViewTapped(sender: UIGestureRecognizer) {
+        self.bottomViewIsUp = false
     }
     
     // MARK: - Pan Gesture Recognizer
@@ -30,38 +33,39 @@ extension GameViewController{
         
         let spacing = bottomView.topViewSpacing
         let snapBuffer: CGFloat = 30.0
+        var startTime = Date()
         
         switch gestureRecognizer.state {
         case .began:
             self.bottomViewPreviousPosition = movingView.center.y
+            startTime = Date()
         case .changed:
             let translation = gestureRecognizer.translation(in: self.view)
             movingView.center = CGPoint(x: movingView.center.x, y: movingView.center.y + translation.y)
             gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
         case .ended:
-            // don't change position if change is within buffer
-            
+            let duration = Date().timeIntervalSince(startTime) + 0.2
             if movingView.center.y - movingView.frame.height/2 < spacing + snapBuffer {
-                movingView.center = CGPoint(x: movingView.center.x, y: spacing + movingView.frame.height/2)
-                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
-                self.bottomViewIsUp = true
+                UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut, animations: {
+                    movingView.center = CGPoint(x: movingView.center.x, y: spacing + movingView.frame.height/2)
+                    gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+                    self.bottomViewIsUp = true
+                }, completion: nil)
                 return }
             else if movingView.center.y - movingView.frame.height/2 > self.view.frame.height - spacing - snapBuffer {
-                movingView.center = CGPoint(x: movingView.center.x, y: self.view.frame.height + movingView.frame.height/2 - spacing)
-                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
-                self.bottomViewIsUp = false
+                UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut, animations: {
+                    movingView.center = CGPoint(x: movingView.center.x, y: self.view.frame.height + movingView.frame.height/2 - spacing)
+                    gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+                    self.bottomViewIsUp = false
+                }, completion: nil)
                 return
             }
                 // Min Y
             else if movingView.center.y < self.bottomViewPreviousPosition {
-                movingView.center = CGPoint(x: movingView.center.x, y: spacing + movingView.frame.height/2)
-                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
                 self.bottomViewIsUp = true
                 return }
                 // Max Y
             else {
-                movingView.center = CGPoint(x: movingView.center.x, y: self.view.frame.height + movingView.frame.height/2 - spacing)
-                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
                 self.bottomViewIsUp = false
                 return
             }
@@ -71,41 +75,58 @@ extension GameViewController{
 
     
 //    func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
-//        guard let allMovingViews = gestureRecognizer.view?.superview,
-//            let movingView = gestureRecognizer.view else { return }
+//        guard let movingView = gestureRecognizer.view else { return }
 //        
 //        let spacing = bottomView.topViewSpacing
-//        let heightDiff = allMovingViews.frame.height - movingView.frame.height
 //        let snapBuffer: CGFloat = 30.0
+//        var startTime = Date()
 //        
 //        switch gestureRecognizer.state {
 //        case .began:
-//            self.bottomViewPreviousPosition = allMovingViews.center.y
+//            self.bottomViewPreviousPosition = movingView.center.y
+//            startTime = Date()
 //        case .changed:
 //            let translation = gestureRecognizer.translation(in: self.view)
-//            allMovingViews.center = CGPoint(x: allMovingViews.center.x, y: allMovingViews.center.y + translation.y)
+//            movingView.center = CGPoint(x: movingView.center.x, y: movingView.center.y + translation.y)
 //            gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
 //        case .ended:
-//            // don't change position if change is within buffer
-//            
-//            if allMovingViews.center.y - allMovingViews.frame.height/2 < spacing - heightDiff + snapBuffer {
-//                allMovingViews.center = CGPoint(x: allMovingViews.center.x, y: spacing - heightDiff + allMovingViews.frame.height/2)
+//            //            let duration = Date().timeIntervalSince(startTime) + 0.2
+//            if movingView.center.y - movingView.frame.height/2 < spacing + snapBuffer {
+//                //                UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut, animations: {
+//                movingView.center = CGPoint(x: movingView.center.x, y: spacing + movingView.frame.height/2)
 //                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+//                self.bottomViewIsUp = true
+//                //                }, completion: nil)
 //                return }
-//            else if allMovingViews.center.y - allMovingViews.frame.height/2 > self.view.frame.height - spacing - heightDiff - snapBuffer {
-//                allMovingViews.center = CGPoint(x: allMovingViews.center.x, y: self.view.frame.height + allMovingViews.frame.height/2 - spacing - heightDiff)
+//            else if movingView.center.y - movingView.frame.height/2 > self.view.frame.height - spacing - snapBuffer {
+//                
+//                //                                UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut, animations: {
+//                movingView.center = CGPoint(x: movingView.center.x, y: self.view.frame.height + movingView.frame.height/2 - spacing)
 //                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+//                self.bottomViewIsUp = false
+//                //                                }, completion: nil)
+//                
 //                return
 //            }
-//            // Min Y
-//            else if allMovingViews.center.y < self.bottomViewPreviousPosition {
-//                allMovingViews.center = CGPoint(x: allMovingViews.center.x, y: spacing - heightDiff + allMovingViews.frame.height/2)
-//                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+//                // Min Y
+//            else if movingView.center.y < self.bottomViewPreviousPosition {
+//                //
+//                //                                UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut, animations: {
+//                //                movingView.center = CGPoint(x: movingView.center.x, y: spacing + movingView.frame.height/2)
+//                //                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+//                self.bottomViewIsUp = true
+//                //                                }, completion: nil)
+//                
 //                return }
-//            // Max Y
+//                // Max Y
 //            else {
-//                allMovingViews.center = CGPoint(x: allMovingViews.center.x, y: self.view.frame.height + allMovingViews.frame.height/2 - spacing - heightDiff)
-//                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+//                //
+//                //                                UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut, animations: {
+//                //                movingView.center = CGPoint(x: movingView.center.x, y: self.view.frame.height + movingView.frame.height/2 - spacing)
+//                //                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+//                self.bottomViewIsUp = false
+//                
+//                //                                }, completion: nil)
 //                return
 //            }
 //        default: return

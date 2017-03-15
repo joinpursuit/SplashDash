@@ -39,35 +39,14 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
 
     func setupViewHierarchy() {
-        self.addSubview(historyLabel)
         self.addSubview(userHistoryTableView)
-//        self.addSubview(logoutButton)
     }
     
     func configureConstraints() {
-        historyLabel.snp.makeConstraints { (view) in
-            view.top.equalToSuperview().offset(16.0)
-            view.leading.equalToSuperview().offset(8.0)
-        }
-        
-//        logoutButton.snp.makeConstraints { (view) in
-//            view.centerX.equalToSuperview()
-//            view.bottom.equalToSuperview().inset(20.0)
-//            view.width.equalTo(200.0)
-//        }
-        
         userHistoryTableView.snp.makeConstraints { (view) in
-            view.leading.trailing.equalToSuperview()
-            view.top.equalTo(historyLabel.snp.bottom).offset(8.0)
-            view.bottom.equalToSuperview()
+            view.leading.trailing.top.bottom.equalToSuperview()
         }
     }
-    
-//    // MARK: - Actions
-//    
-//    func logoutButtonTapped(){
-//        print("logout button tapped")
-//    }
     
     // MARK: - TableView Methods
     
@@ -120,13 +99,6 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
  
     // MARK: - Views
     
-    private lazy var historyLabel: UILabel = {
-        let label = UILabel()
-        label.text = "HISTORY"
-        label.textColor = SplashColor.lightPrimaryColor()
-        return label
-    }()
-    
     lazy var userHistoryTableView: UITableView = {
         let tView = UITableView()
         tView.delegate = self
@@ -136,12 +108,4 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         tView.rowHeight = UITableViewAutomaticDimension
         return tView
     }()
-    
-//    private lazy var logoutButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("LOG OUT", for: .normal)
-//        button.backgroundColor = SplashColor.darkPrimaryColor()
-//        button.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
-//        return button
-//    }()
 }

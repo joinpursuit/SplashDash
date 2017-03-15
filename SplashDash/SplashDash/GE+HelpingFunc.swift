@@ -31,7 +31,7 @@ extension GameViewController{
             }, completion: nil)
             
             //stickman running off screen
-            let offScreen = CGPoint(x: self.scene.frame.maxX+100, y: self.scene.frame.minY+50)
+            let offScreen = CGPoint(x: self.scene.frame.maxX+100, y: self.scene.frame.minY+40)
             self.scene.stickmanRunningOffScreen(to: offScreen)
         } else{
             guard self.locationManager.location != nil else {
@@ -58,7 +58,7 @@ extension GameViewController{
             gameButton.setTitle("Stop", for: .normal)
             
             //stickman start running
-            let lowerRight = CGPoint(x: self.scene.frame.maxX-60, y: self.scene.frame.minY+50)
+            let lowerRight = CGPoint(x: self.scene.frame.maxX-60, y: self.scene.frame.minY+40)
             self.scene.stickmanStartRunning(to: lowerRight)
         }
         
