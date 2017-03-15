@@ -20,7 +20,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     
     let calendar: Calendar = Calendar.current
     
-    //MARK: - Methods
+    //MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         

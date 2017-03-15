@@ -42,7 +42,7 @@ class LeaderboardView: UIView {
         
         self.teamNameLabel = UILabel()
         self.teamNameLabel.textColor = UIColor.white
-        self.teamNameLabel.font = UIFont(name: "MarkerFelt-Thin", size: 24.0)
+        self.teamNameLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
         self.addSubview(self.teamNameLabel)
         
         self.alpha = 0.9
