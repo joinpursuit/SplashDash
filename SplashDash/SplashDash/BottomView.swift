@@ -106,7 +106,7 @@ class BottomView: UIView {
     
     private lazy var seperatorLine1: UIView = {
         let view = UIView()
-        view.backgroundColor = SplashColor.lightPrimaryColor()
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.30)
         return view
     }()
     
@@ -140,7 +140,7 @@ class BottomView: UIView {
         let label = UILabel()
         var labelText = "Duration of run: 0"
         label.text = labelText
-        label.textColor = SplashColor.lightPrimaryColor()
+        label.textColor = UIColor.white
         label.numberOfLines = 0
         return label
     }()
@@ -149,7 +149,7 @@ class BottomView: UIView {
         let label = UILabel()
         var labelText = "Distance: 0"
         label.text = labelText
-        label.textColor = SplashColor.lightPrimaryColor()
+        label.textColor = UIColor.white
         label.numberOfLines = 0
         return label
     }()
@@ -158,7 +158,7 @@ class BottomView: UIView {
         let label = UILabel()
         var labelText = ""
         label.text = labelText
-        label.textColor = SplashColor.lightPrimaryColor()
+        label.textColor = UIColor.white
         label.numberOfLines = 0
         return label
     }()
