@@ -49,10 +49,7 @@ class ContentCollectionView: UIView, UICollectionViewDelegate, UICollectionViewD
         contentView.snp.remakeConstraints{ (view) in
             view.leading.top.trailing.bottom.equalToSuperview()
         }
-        if let bottomView = self.superview as? BottomView {
-            bottomView.contentSegmentedControl.selectedSegmentIndex = indexPath.item
-        }
-        
+
         return cell
     }
     
@@ -65,9 +62,23 @@ class ContentCollectionView: UIView, UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(sideMargin, sideMargin, sideMargin, sideMargin)
+        return UIEdgeInsetsMake(sideMargin, sideMargin, 0, sideMargin)
     }
-
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        print(targetContentOffset.pointee.x)
+//        print(self.frame.width)
+        let currentPage = Int((targetContentOffset.pointee.x + (sideMargin*2)) / self.frame.width)
+//        print("current page \(currentPage)")
+        if let bottomView = self.superview as? BottomView {
+            bottomView.contentSegmentedControl.selectedSegmentIndex = currentPage
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.endEditing(true)
+    }
+    
     // MARK: - Setup Views
     
     func setupViewHierarchy() {

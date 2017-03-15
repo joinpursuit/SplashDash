@@ -43,6 +43,9 @@ class GameViewController: UIViewController {
             if bottomViewIsUp {
                 bringUpBottomView()
                 self.displayView.isHidden = false
+                if !isButtonsOffScreen {
+                    animateAllButtons()
+                }
             } else {
                 configureBottomView()
                 self.displayView.isHidden = true
@@ -55,12 +58,12 @@ class GameViewController: UIViewController {
     var traveledDistanceInMeters:Double = 0 {
         didSet {
             guard traveledDistanceInMeters > 0 else {
-                self.bottomView.distanceLabel.text = "Distance: 0"
+                self.bottomView.distanceNumLabel.text = "0"
                 return }
             // convert to miles
             let traveledDistanceInMiles = traveledDistanceInMeters * 0.000621371
             let distance = String.localizedStringWithFormat("%.2f", traveledDistanceInMiles)
-            self.bottomView.distanceLabel.text = "Distance: \(distance) miles"
+            self.bottomView.distanceNumLabel.text = "\(distance) miles"
         }
     }
     
@@ -68,7 +71,7 @@ class GameViewController: UIViewController {
     var duration = 0 {
         didSet {
             guard duration > 0 else {
-                self.bottomView.durationLabel.text = "Duration: 0"
+                self.bottomView.durationNumLabel.text = "0"
                 return }
             var durationString = ""
             let hours = duration / 3600
@@ -83,7 +86,7 @@ class GameViewController: UIViewController {
             }
             durationString += "\(seconds)s"
             
-            self.bottomView.durationLabel.text = "Duration: \(durationString)"
+            self.bottomView.durationNumLabel.text = durationString
         }
     }
     
