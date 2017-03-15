@@ -74,7 +74,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         userHistoryTableView.snp.makeConstraints { (view) in
             view.leading.trailing.equalToSuperview()
             view.top.equalTo(historyLabel.snp.bottom).offset(8.0)
-            view.bottom.equalToSuperview().offset(-16.0)
+            view.bottom.equalToSuperview()
         }
     }
     
