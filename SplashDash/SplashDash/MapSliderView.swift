@@ -27,13 +27,13 @@ class MapSliderView: UIView {
     func setUpViewHierarchy() {
         self.addSubview(mapView)
         self.addSubview(sliderContainerView)
-//        self.addSubview(slider)
+        self.addSubview(slider)
     }
     
     func configureConstraints() {
         mapView.snp.makeConstraints { (view) in
             view.leading.top.trailing.equalToSuperview()
-            view.bottom.equalTo(self.snp.centerY)
+            view.bottom.equalTo(self.snp.centerY).multipliedBy(1.5)
         }
         
         sliderContainerView.snp.makeConstraints { (view) in
@@ -41,11 +41,11 @@ class MapSliderView: UIView {
             view.leading.trailing.bottom.equalToSuperview()
         }
         
-//        slider.snp.makeConstraints { (view) in
-//            view.centerX.centerY.equalTo(sliderContainerView)
-//            view.leading.equalToSuperview().offset(8.0)
-//            view.trailing.equalToSuperview().inset(8.0)
-//        }
+        slider.snp.makeConstraints { (view) in
+            view.centerX.centerY.equalTo(sliderContainerView)
+            view.leading.equalToSuperview().offset(16.0)
+            view.trailing.equalToSuperview().inset(16.0)
+        }
     }
     
     //MARK: - Views
@@ -73,7 +73,6 @@ class MapSliderView: UIView {
     lazy var slider: UISlider = {
         let slider = UISlider()
         slider.thumbTintColor = SplashColor.primaryColor()
-        slider.backgroundColor = UIColor.lightGray
         
         return slider
     }()
