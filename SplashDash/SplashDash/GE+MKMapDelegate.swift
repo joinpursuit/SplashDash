@@ -44,21 +44,21 @@ extension GameViewController: MKMapViewDelegate{
         return MKOverlayRenderer(overlay: overlay)
     }
     
-    func mapView(_ mapView: MKMapView, didAdd renderers: [MKOverlayRenderer]) {
-        switch mapView {
-        case self.mapView:
-            if gameStatus {
-                for layer in renderers{
-                    if let thisLayer = layer as? SplashOverlayView{
-                        let point = mapView.convert(layer.overlay.coordinate, toPointTo: self.view)
-                        scene.dropSplash(on: point, with: thisLayer.overlayImage)
-                    }
-                    
-                }
-            }
-        default: ()
-        }
-    }
+//    func mapView(_ mapView: MKMapView, didAdd renderers: [MKOverlayRenderer]) {
+//        switch mapView {
+//        case self.mapView:
+//            if gameStatus {
+//                for layer in renderers{
+//                    if let thisLayer = layer as? SplashOverlayView{
+//                        let point = mapView.convert(layer.overlay.coordinate, toPointTo: self.view)
+//                        scene.dropSplash(on: point, with: thisLayer.overlayImage)
+//                    }
+//                    
+//                }
+//            }
+//        default: ()
+//        }
+//    }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         //Map camera will follow user's location after game started

@@ -35,8 +35,12 @@ extension GameViewController{
                 return }
             
             // start the game
-            animateStartGame()
             self.displayView.isHidden = false
+            self.scene.beforeStartGame {
+                self.updateCounter()
+                self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateCounter), userInfo: nil, repeats: true)
+                self.displayView.isHidden = true
+            }
             animateAllButtons()
             gameButton.setTitle("Stop", for: .normal)
             
@@ -59,6 +63,9 @@ extension GameViewController{
             let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
             
             self.mapView.setRegion(region, animated: true)
+        } else {
+            self.scene.printErrorMessage(str: "We could not find you", fontColor: self.currentUser!.myColor)
+            
         }
     }
     
@@ -97,58 +104,58 @@ extension GameViewController{
         self.isButtonsOffScreen = !self.isButtonsOffScreen
     }
     
-    func animateStartGame(){
-        let countDownLabels = ["3", "2", "1", "GO!"]
-        var colorArr = SplashColor.teamColorArray()
-        
-        for char in countDownLabels.reversed(){
-            let label = UILabel()
-            label.text = char
-            label.textColor = colorArr.removeLast()
-            label.textAlignment = .center
-            label.font = UIFont.boldSystemFont(ofSize: 120)
-            
-            
-            allLabel.append(label)
-            view.addSubview(label)
-            label.snp.makeConstraints { (view) in
-                view.center.equalToSuperview()
-                view.size.equalTo(CGSize(width: 1, height: 1))
-            }
-        }
-        
-        self.view.layoutIfNeeded()
-        
-        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(startGameTimer), userInfo: nil, repeats: true)
-    }
-    
-    func startGameTimer(){
-        guard let label = allLabel.popLast() else {
-            self.updateCounter()
-            return
-        }
-        if allLabel == [] {
-            self.displayView.isHidden = true
-        }
-        
-        let animator = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn, animations: nil)
-        
-        animator.addAnimations {
-            label.snp.remakeConstraints({ (view) in
-                view.top.bottom.leading.trailing.equalToSuperview()
-            })
-            self.view.layoutIfNeeded()
-        }
-        
-        animator.addCompletion { (_) in
-            DispatchQueue.main.asyncAfter(deadline: .now()+0.7, execute: {
-                label.removeFromSuperview()
-                
-            })
-        }
-        
-        animator.startAnimation()
-    }
+//    func animateStartGame(){
+//        let countDownLabels = ["3", "2", "1", "GO!"]
+//        var colorArr = SplashColor.teamColorArray()
+//        
+//        for char in countDownLabels.reversed(){
+//            let label = UILabel()
+//            label.text = char
+//            label.textColor = colorArr.removeLast()
+//            label.textAlignment = .center
+//            label.font = UIFont.boldSystemFont(ofSize: 120)
+//            
+//            
+//            allLabel.append(label)
+//            view.addSubview(label)
+//            label.snp.makeConstraints { (view) in
+//                view.center.equalToSuperview()
+//                view.size.equalTo(CGSize(width: 1, height: 1))
+//            }
+//        }
+//        
+//        self.view.layoutIfNeeded()
+//        
+//        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(startGameTimer), userInfo: nil, repeats: true)
+//    }
+//    
+//    func startGameTimer(){
+//        guard let label = allLabel.popLast() else {
+//            self.updateCounter()
+//            return
+//        }
+//        if allLabel == [] {
+//            self.displayView.isHidden = true
+//        }
+//        
+//        let animator = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn, animations: nil)
+//        
+//        animator.addAnimations {
+//            label.snp.remakeConstraints({ (view) in
+//                view.top.bottom.leading.trailing.equalToSuperview()
+//            })
+//            self.view.layoutIfNeeded()
+//        }
+//        
+//        animator.addCompletion { (_) in
+//            DispatchQueue.main.asyncAfter(deadline: .now()+0.7, execute: {
+//                label.removeFromSuperview()
+//                
+//            })
+//        }
+//        
+//        animator.startAnimation()
+//    }
 
     func takeScreenshot() {
         

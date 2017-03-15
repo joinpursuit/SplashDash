@@ -47,7 +47,7 @@ class SplashCoordinate {
     
     var adjustedRatio: Double {
         get{
-            return speed/6000
+            return speed/5000
         }
     }
     var teamColor: UIColor {

@@ -68,9 +68,9 @@ struct SplashColor {
         return UIColor(hex: self.colorsDict[team]!, alpha: alpha)
     }
     static func teamColorArray(alpha: CGFloat = 1.0) -> [UIColor] {
-        return [UIColor(hex: self.colorsDict["purple"]!, alpha: alpha),
+        return [UIColor(hex: self.colorsDict["green"]!, alpha: alpha),
                 UIColor(hex: self.colorsDict["teal"]!, alpha: alpha),
-                UIColor(hex: self.colorsDict["green"]!, alpha: alpha),
-                UIColor(hex: self.colorsDict["orange"]!, alpha: alpha)]
+                UIColor(hex: self.colorsDict["orange"]!, alpha: alpha),
+                UIColor(hex: self.colorsDict["purple"]!, alpha: alpha)]
     }
 }
