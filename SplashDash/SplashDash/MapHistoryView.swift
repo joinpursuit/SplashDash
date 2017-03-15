@@ -63,11 +63,11 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         
         datePicker.snp.remakeConstraints { (view) in
             view.leading.trailing.top.equalToSuperview()
-            view.height.equalTo(50.0)
+            view.height.equalTo(50)
+            
         }
         mapView.snp.remakeConstraints { (view) in
             view.leading.trailing.bottom.equalToSuperview()
-            view.top.equalTo(datePicker.snp.bottom)
         }
     }
     
@@ -205,7 +205,6 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     lazy var datePicker: UIDatePicker = {
         let dp = UIDatePicker()
         dp.setValue(UIColor.white, forKey: "textColor")
-        
         
         //Max date should always be yesterday
         let calendar = Calendar.current

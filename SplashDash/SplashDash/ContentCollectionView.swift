@@ -66,7 +66,7 @@ class ContentCollectionView: UIView, UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(sideMargin, sideMargin, sideMargin, sideMargin)
+        return UIEdgeInsetsMake(-10.0, sideMargin, sideMargin, sideMargin)
     }
 
     // MARK: - Setup Views
