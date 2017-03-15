@@ -29,8 +29,8 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    let kCloseCellHeight: CGFloat = 75
-    let kOpenCellHeight: CGFloat = 300
+    let kCloseCellHeight: CGFloat = 120
+    let kOpenCellHeight: CGFloat = 360
     var cellHeights = [CGFloat]()
     
     override init(frame: CGRect) {
@@ -137,11 +137,12 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.cellIdentifier, for: indexPath) as! RunHistoryFoldingTableViewCell
         
-        cell.layer.masksToBounds = true
-        cell.layer.borderColor = UIColor.clear.cgColor
-        cell.layer.borderWidth = 5.0
         
-        return cell
+        cell.layer.masksToBounds = true
+        cell.layer.borderWidth = 15.0
+        cell.layer.cornerRadius = 15.0
+        cell.layer.borderColor = UIColor.clear.cgColor
+//
         //without folding cell
 //        let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.cellIdentifier, for: indexPath) as! HistoryTableViewCell
 //        
@@ -179,7 +180,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
 //        let speedString = String.localizedStringWithFormat("%.2f", mph)
 // 
 //        cell.runLabel.text = "Date: \(dateString)\nTime: \(timeString)\nTotal Distance: \(distanceString) miles\nDuration: \(durationString)\nAverage Speed: \(speedString)"
-//        return cell
+        return cell
     }
  
     // MARK: - Views
@@ -195,6 +196,8 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         let tView = UITableView()
         tView.delegate = self
         tView.dataSource = self
+        tView.backgroundColor = SplashColor.primaryColor()
+        tView.separatorStyle = .none
         //Register folding cell to user's table view
         tView.register(UINib(nibName: "RunHistoryFoldingTableViewCell", bundle: nil), forCellReuseIdentifier: HistoryTableViewCell.cellIdentifier)
 //        tView.register(HistoryTableViewCell.self, forCellReuseIdentifier: HistoryTableViewCell.cellIdentifier)

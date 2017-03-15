@@ -14,8 +14,9 @@ class RunHistoryFoldingTableViewCell: FoldingCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.addShadows()
         
-        self.itemCount = 4
+        self.itemCount = 3
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
