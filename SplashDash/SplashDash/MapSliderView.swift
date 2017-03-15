@@ -74,6 +74,7 @@ class MapSliderView: UIView, MKMapViewDelegate {
         slider.thumbTintColor = SplashColor.primaryColor()
         slider.minimumTrackTintColor = SplashColor.primaryColor()
         slider.minimumValue = 0
+        slider.isContinuous = true
         
         return slider
     }()

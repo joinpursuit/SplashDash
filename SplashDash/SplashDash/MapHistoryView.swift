@@ -19,7 +19,6 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     var splashOverlays: [SplashOverlay] = [] {
         didSet {
             self.mapSliderView.slider.maximumValue = Float(self.splashOverlays.count - 1)
-            print(self.mapSliderView.slider.maximumValue)
         }
     }
     
@@ -56,6 +55,11 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         format.dateFormat = "yyyyMMdd"
         
         return format.string(from: date)
+    }
+    
+    func sliderValueChanged(sender: UISlider) {
+        print(Int(sender.value))
+        self.mapSliderView.mapView.addOverlays([self.splashOverlays[Int(sender.value)]])
     }
     
     //MARK: - Setup Views
@@ -172,7 +176,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
                     }
                 }
             }
-            self.mapSliderView.mapView.addOverlays(self.splashOverlays)
+//            self.mapSliderView.mapView.addOverlays(self.splashOverlays)
         }
     }
     
@@ -243,6 +247,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     lazy var mapSliderView: MapSliderView = {
         let view = MapSliderView()
         view.mapView.delegate = self
+        view.slider.addTarget(self, action: #selector(sliderValueChanged(sender:)), for: UIControlEvents.valueChanged)
         
         return view
     }()
