@@ -56,7 +56,8 @@ struct SplashColor {
         return UIColor(hex: self.colorsDict["primaryColor"]!, alpha: alpha)
     }
     static func lightPrimaryColor(alpha: CGFloat = 1.0) -> UIColor {
-        return UIColor(hex: self.colorsDict["lightPrimaryColor"]!, alpha: alpha)
+        return .white
+//        return UIColor(hex: self.colorsDict["lightPrimaryColor"]!, alpha: alpha)
     }
     static func primaryTextColor(alpha: CGFloat = 1.0) -> UIColor {
         return UIColor(hex: self.colorsDict["primaryTextColor"]!, alpha: alpha)

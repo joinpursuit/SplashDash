@@ -25,6 +25,10 @@ extension GameViewController{
             self.currentRunCoordinates = []
             self.traveledDistanceInMeters = 0
             self.duration = 0
+            UIView.animate(withDuration: 1.5, delay: 0.0, options: .curveEaseOut, animations: {
+                self.bottomView.hoursLeftLabel.alpha = 1.0
+                self.bottomView.hoursLeftNumLabel.alpha = 1.0
+            }, completion: nil)
             
             //stickman running off screen
             let offScreen = CGPoint(x: self.scene.frame.maxX+100, y: self.scene.frame.minY+50)
@@ -36,11 +40,19 @@ extension GameViewController{
             
             // start the game
             self.displayView.isHidden = false
+            
+            UIView.animate(withDuration: 2, delay: 2.0, options: .curveEaseIn, animations: {
+                self.bottomView.hoursLeftLabel.alpha = 0.0
+                self.bottomView.hoursLeftNumLabel.alpha = 0.0
+            }, completion: nil)
+            
             self.scene.beforeStartGame {
                 //this completion handle after count down animation
                 self.updateCounter()
                 self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateCounter), userInfo: nil, repeats: true)
                 self.displayView.isHidden = true
+//                self.bottomView.hoursLeftLabel.isHidden = true
+//                self.bottomView.hoursLeftNumLabel.isHidden = true
             }
             animateAllButtons()
             gameButton.setTitle("Stop", for: .normal)
@@ -257,7 +269,7 @@ extension GameViewController{
         let diff = Calendar.current.dateComponents([Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: Date(), to: end)
         
         if let diffHour = diff.hour {
-        bottomView.hoursLeftLabel.text = "Hours left: \(diffHour)"
+        bottomView.hoursLeftNumLabel.text = String(diffHour)
         }
     }
     
