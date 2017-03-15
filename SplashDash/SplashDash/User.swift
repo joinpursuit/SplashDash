@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum UserTeam: String {
     case teal, purple, orange, green
@@ -19,6 +20,12 @@ class User {
     let uid: String
     let teamName: UserTeam
     var runs: [Run]
+    
+    var myColor: UIColor {
+        get{
+            return SplashColor.teamColor(for: self.teamName.rawValue)
+        }
+    }
     
     //MARK: - Initializer
     init(email: String, username: String, uid: String, teamName: UserTeam, runs: [Run]) {

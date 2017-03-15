@@ -36,6 +36,29 @@ extension GameViewController{
     func fetchGlobalSplash(){
         let linkRef = databaseReference.child(getRootName())
         
+        linkRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            var allSplashes: [SplashOverlay] = []
+            
+            let validDict = snapshot.children
+            while let coorSnapshot = validDict.nextObject() as? FIRDataSnapshot,
+                  let value = coorSnapshot.value as? NSDictionary {
+                    
+                    if let coor = SplashCoordinate(value){
+                        allSplashes.append(SplashOverlay(coor: coor))
+                    }
+            }
+            //draw all splashes parsed from database
+            self.invisibleMapView.addOverlays(allSplashes)
+            self.mapView.addOverlays(allSplashes)
+            //Add observe to GameHall
+            print(allSplashes.count)
+            self.observingNewSplash()
+        })
+    }
+    
+    func observingNewSplash(){
+        let linkRef = databaseReference.child(getRootName()).child("GameHall")
+        
         linkRef.observe(FIRDataEventType.childAdded, with: { (snapshot) in
             if let value = snapshot.value as? NSDictionary{
                 if let coor = SplashCoordinate(value){
@@ -50,7 +73,8 @@ extension GameViewController{
     }
     
     func pushSplashToDatabase(coor: SplashCoordinate){
-        let linkRef = databaseReference.child(getRootName()).childByAutoId()
+        
+        let linkRef = databaseReference.child(getRootName()).child("GameHall").childByAutoId()
         let data = coor.toData()
         
         linkRef.setValue(data) { (error, _) in
@@ -63,6 +87,8 @@ extension GameViewController{
     }
     
     func uploadAndAddRun(){
+        guard currentRunCoordinates.count > 0 else { return }
+        
         let thisRun = Run(allCoordinates: currentRunCoordinates, totalDistance: self.traveledDistanceInMeters, runDuration: self.duration)
         
         // add run
@@ -75,8 +101,7 @@ extension GameViewController{
         }
         
         //upload run
-        guard let currentUserID = FIRAuth.auth()?.currentUser?.uid,
-            currentRunCoordinates.count > 0 else { return }
+        guard let currentUserID = self.currentUser?.uid else { return }
         
         let linkRef = FIRDatabase.database().reference().child("Users").child(currentUserID).child("runs")
         
@@ -91,6 +116,26 @@ extension GameViewController{
               
             }
         }
+    }
+    
+    func endRunCoorsUpdate(){
+        let todayRoom = databaseReference.child(getRootName())
+        
+        let gameHall = todayRoom.child("GameHall")
+        
+        //get each child coor belong to current user
+        gameHall.queryOrdered(byChild: "userID").queryEqual(toValue: self.currentUser?.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let validDict = snapshot.children
+            while let coor = validDict.nextObject() as? FIRDataSnapshot{
+                //write to the new node
+                todayRoom.child(coor.key).setValue(coor.value)
+                //get a reference to the data we just read and remove it
+                gameHall.child(coor.key).removeValue()
+            
+            }
+        })
+        
     }
     
 }
