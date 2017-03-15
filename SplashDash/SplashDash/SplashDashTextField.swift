@@ -116,7 +116,7 @@ class SplashDashTextField: UIView, UITextFieldDelegate {
         textLabel.text = textLabelPlaceholder
         
         //Use color manager to adjust this when scheme is determined
-        textLabel.textColor = UIColor.black
+        textLabel.textColor = UIColor.white
         
         textLabel.font = largeLabelFont
         textLabel.textAlignment = .left
@@ -129,7 +129,7 @@ class SplashDashTextField: UIView, UITextFieldDelegate {
         textField.autocapitalizationType = .none
         
         //Use color manager to determine color scheme
-        textField.textColor = UIColor.black
+        textField.textColor = UIColor.white
         
         textField.font = UIFont.systemFont(ofSize: 18.0)
         

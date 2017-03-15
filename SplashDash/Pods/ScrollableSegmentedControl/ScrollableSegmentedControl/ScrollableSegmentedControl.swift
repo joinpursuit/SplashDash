@@ -343,7 +343,7 @@ public class ScrollableSegmentedControl: UIControl {
         static let imageToTextMargin:CGFloat = 14.0
         static let imageSize:CGFloat = 14.0
         static let defaultFont = UIFont.systemFont(ofSize: 18)
-        static let defaultTextColor = UIColor.darkGray
+        static let defaultTextColor = UIColor.white
         
         var underlineView:UIView?
         
@@ -413,14 +413,14 @@ public class ScrollableSegmentedControl: UIControl {
         
         override var isHighlighted: Bool {
             didSet {
-                titleLabel.textColor = (isHighlighted == true) ? UIColor.black : UIColor.darkGray
+                titleLabel.textColor = (isHighlighted == true) ? UIColor.white : UIColor.white.withAlphaComponent(0.70)
             }
         }
         
         override var isSelected: Bool {
             didSet {
-                titleLabel.textColor = (isSelected == true) ? UIColor.black : UIColor.darkGray
-                //titleLabel.font = (isSelected == true) ? UIFont.boldSystemFont(ofSize: 14) : UIFont.systemFont(ofSize: 14)
+                titleLabel.textColor = (isSelected == true) ? UIColor.white : UIColor.white.withAlphaComponent(0.70)
+                titleLabel.font = (isSelected == true) ? UIFont.boldSystemFont(ofSize: 18) : UIFont.systemFont(ofSize: 18)
             }
         }
         

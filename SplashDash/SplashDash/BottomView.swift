@@ -127,20 +127,20 @@ class BottomView: UIView {
     
     private lazy var seperatorLine1: UIView = {
         let view = UIView()
-        view.backgroundColor = SplashColor.lightPrimaryColor()
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.30)
         return view
     }()
     
     lazy var contentSegmentedControl: ScrollableSegmentedControl = {
         let control = ScrollableSegmentedControl()
         control.segmentStyle = .textOnly
-        control.insertSegment(withTitle: "My Runs", at: 0)
-        control.insertSegment(withTitle: "Team Run History", at: 1)
+        control.insertSegment(withTitle: "MY ACTIVITY", at: 0)
+        control.insertSegment(withTitle: "ALL ACTIVITY", at: 1)
         control.underlineSelected = true
         control.addTarget(self, action: #selector(self.segmentSelected(sender:)), for: .valueChanged)
         //Use color manager to determine color scheme here
-        control.tintColor = UIColor.black
-//        control.backgroundColor = SplashColor.primaryColor()
+        control.tintColor = UIColor.white
+        control.backgroundColor = SplashColor.primaryColor()
         control.selectedSegmentIndex = 0
         return control
     }()
@@ -161,7 +161,7 @@ class BottomView: UIView {
         let label = UILabel()
         var labelText = "Duration"
         label.text = labelText
-        label.textColor = SplashColor.lightPrimaryColor()
+        label.textColor = UIColor.white
         label.numberOfLines = 0
         label.font = label.font.withSize(13)
         label.textAlignment = NSTextAlignment.center
@@ -172,7 +172,7 @@ class BottomView: UIView {
         let label = UILabel()
         var labelText = "Distance"
         label.text = labelText
-        label.textColor = SplashColor.lightPrimaryColor()
+        label.textColor = UIColor.white
         label.numberOfLines = 0
         label.font = label.font.withSize(13)
         label.textAlignment = NSTextAlignment.center
@@ -216,7 +216,7 @@ class BottomView: UIView {
         let label = UILabel()
         var labelText = "0"
         label.text = labelText
-        label.textColor = SplashColor.lightPrimaryColor()
+        label.textColor = UIColor.white
         label.numberOfLines = 0
         label.font = label.font.withSize(24)
         label.textAlignment = NSTextAlignment.center
