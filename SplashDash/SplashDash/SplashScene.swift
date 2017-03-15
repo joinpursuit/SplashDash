@@ -5,15 +5,16 @@
 //  Created by Tong Lin on 3/13/17.
 //  Copyright © 2017 SHT. All rights reserved.
 //
-
+import UIKit
 import SpriteKit
 
 class SplashScene: SKScene {
     
     private var splashNode : SKSpriteNode?
     private var stickmanNode : SKSpriteNode?
-    
     private var runningMotion: SKAction?
+    
+    private var readySignNodes: [SKLabelNode] = []
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -27,16 +28,16 @@ class SplashScene: SKScene {
     
     override func didMove(to view: SKView) {
         // Create splash when drop ink on map
-        let w = (self.size.width + self.size.height) * 0.3
+        let w = (self.size.width + self.size.height) * 0.2
         self.splashNode = SKSpriteNode(imageNamed: "inkSample3")
         if let splash = self.splashNode {
             splash.size = CGSize(width: w, height: w)
-            
-            splash.run(SKAction.sequence([SKAction.resize(toWidth: 10, height: 10, duration: 0.24),
+            splash.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.8),
                                           SKAction.removeFromParent()]))
         }
-        self.stickmanNode = SKSpriteNode(imageNamed: "Run_1")
         
+        //stickman setup
+        self.stickmanNode = SKSpriteNode(imageNamed: "Run_1")
         var runningMotions: [SKTexture] = []
         
         for index in 1...24{
@@ -44,13 +45,54 @@ class SplashScene: SKScene {
             runningMotions.append(texture)
         }
         
-        let runningAnimation = SKAction.animate(with: runningMotions, timePerFrame: 0.03)
+        let runningAnimation = SKAction.animate(with: runningMotions, timePerFrame: 0.05)
         self.runningMotion = SKAction.repeatForever(runningAnimation)
+        
+        
+        //prepare all label sign node
+        let countDownLabels = ["3", "2", "1", "GO!"]
+        var colorArr = SplashColor.teamColorArray()
+        
+        for char in countDownLabels{
+            let label = SKLabelNode(fontNamed: "AvenirNext-Bold")
+            label.text = char
+            label.fontColor = colorArr.removeLast()
+            label.fontSize = 120
+            label.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+            
+            readySignNodes.append(label)
+        }
+    }
+    
+    func beforeStartGame(completion: @escaping (()->Void)){
+        for label in readySignNodes{
+            label.alpha = 1.0
+        }
+        
+        self.addChild(readySignNodes[0])
+        readySignNodes[0].run(SKAction.fadeOut(withDuration: 1)) {
+            self.addChild(self.readySignNodes[1])
+            self.readySignNodes[1].run(SKAction.fadeOut(withDuration: 1)) {
+                self.addChild(self.readySignNodes[2])
+                self.readySignNodes[2].run(SKAction.fadeOut(withDuration: 1)) {
+                    self.addChild(self.readySignNodes[3])
+                    self.readySignNodes[3].run(SKAction.fadeOut(withDuration: 1)) {
+                        //end count down
+                        completion()
+                        self.readySignNodes[3].removeFromParent()
+                        self.readySignNodes[2].removeFromParent()
+                        self.readySignNodes[1].removeFromParent()
+                        self.readySignNodes[0].removeFromParent()
+                    }
+                }
+            }
+        }
         
     }
     
-    func dropSplash(on pos: CGPoint){
+    func dropSplash(on pos: CGPoint, with: UIImage){
         if let splash = self.splashNode?.copy() as! SKSpriteNode? {
+            splash.texture = SKTexture(image: with)
             splash.position = pos
             self.addChild(splash)
         }
@@ -66,7 +108,7 @@ class SplashScene: SKScene {
     
     func stickmanStartRunning(to pos: CGPoint){
         self.stickmanNode!.run(self.runningMotion!)
-        self.stickmanNode!.run(SKAction.move(to: pos, duration: 2))
+        self.stickmanNode!.run(SKAction.move(to: pos, duration: 4))
     }
     
     func stickmanRunningOffScreen(to pos: CGPoint){
