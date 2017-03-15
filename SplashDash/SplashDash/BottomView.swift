@@ -163,6 +163,33 @@ class BottomView: UIView {
         return label
     }()
     
+    lazy var durationLabel: UILabel = {
+        let label = UILabel()
+        var labelText = "Duration of run: 0"
+        label.text = labelText
+        label.textColor = SplashColor.lightPrimaryColor()
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var distanceLabel: UILabel = {
+        let label = UILabel()
+        var labelText = "Distance: 0"
+        label.text = labelText
+        label.textColor = SplashColor.lightPrimaryColor()
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var hoursLeftLabel: UILabel = {
+        let label = UILabel()
+        var labelText = ""
+        label.text = labelText
+        label.textColor = SplashColor.lightPrimaryColor()
+        label.numberOfLines = 0
+        return label
+    }()
+    
     lazy var contentCollectionView: ContentCollectionView = {
         let view = ContentCollectionView()
         return view
