@@ -29,8 +29,18 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    let kCloseCellHeight: CGFloat = 120
-    let kOpenCellHeight: CGFloat = 360
+    var kCloseCellHeight: CGFloat {
+        get{
+            return self.kOpenCellHeight/3
+        }
+    }
+    
+    var kOpenCellHeight: CGFloat {
+        get{
+            return self.userHistoryTableView.frame.height
+        }
+    }
+    
     var cellHeights = [CGFloat]()
     
     override init(frame: CGRect) {
@@ -96,9 +106,9 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         }
         
         if cellHeights[(indexPath as NSIndexPath).row] == kCloseCellHeight {
-            cell.selectedAnimation(false, animated: false, completion:nil)
+            cell.selectedAnimation(false, animated: true, completion:nil)
         } else {
-            cell.selectedAnimation(true, animated: false, completion: nil)
+            cell.selectedAnimation(true, animated: true, completion: nil)
         }
         
     }
@@ -115,11 +125,16 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         if cellHeights[indexPath.row] == kCloseCellHeight {
             // open cell
             cellHeights[indexPath.row] = kOpenCellHeight
-            cell.selectedAnimation(true, animated: true, completion: nil)
+            cell.selectedAnimation(true, animated: true, completion: { (_) in
+                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                tableView.isScrollEnabled = false
+            })
             duration = 0.5
         } else {// close cell
             cellHeights[indexPath.row] = kCloseCellHeight
-            cell.selectedAnimation(false, animated: true, completion: nil)
+            cell.selectedAnimation(false, animated: true, completion: { (_) in
+                tableView.isScrollEnabled = true
+            })
             duration = 0.8
         }
         
@@ -139,47 +154,47 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         
         
         cell.layer.masksToBounds = true
-        cell.layer.borderWidth = 15.0
+        cell.layer.borderWidth = 50.0
         cell.layer.cornerRadius = 15.0
         cell.layer.borderColor = UIColor.clear.cgColor
 //
         //without folding cell
 //        let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.cellIdentifier, for: indexPath) as! HistoryTableViewCell
 //        
-//        let run = userRuns[indexPath.row]
-//        
-//        let date = Date(timeIntervalSince1970: run.timeStamp)
-//        
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateStyle = .short
-//        dateFormatter.timeStyle = .none
-//        let dateString = dateFormatter.string(from: date)
-//        
-//        let timeFormatter = DateFormatter()
-//        timeFormatter.dateStyle = .none
-//        timeFormatter.timeStyle = .short
-//        let timeString = timeFormatter.string(from: date)
-//        
-//        let miles = run.totalDistance * 0.000621371
-//        let distanceString = String.localizedStringWithFormat("%.2f", miles)
-//        
-//        var durationString = ""
-//        let hours = run.runDuration / 3600
-//        let minutes = (run.runDuration % 3600) / 60
-//        let seconds = (run.runDuration % 3600) % 60
-//        
-//        if hours > 0 {
-//            durationString += "\(hours)h "
-//        }
-//        if minutes > 0 {
-//            durationString += "\(minutes)m "
-//        }
-//        durationString += "\(seconds)s"
-//        
-//        let mph = run.averageSpeed * 2.23694
-//        let speedString = String.localizedStringWithFormat("%.2f", mph)
-// 
-//        cell.runLabel.text = "Date: \(dateString)\nTime: \(timeString)\nTotal Distance: \(distanceString) miles\nDuration: \(durationString)\nAverage Speed: \(speedString)"
+        let run = userRuns[indexPath.row]
+        
+        let date = Date(timeIntervalSince1970: run.timeStamp)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        let dateString = dateFormatter.string(from: date)
+        
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateStyle = .none
+        timeFormatter.timeStyle = .short
+        let timeString = timeFormatter.string(from: date)
+        
+        let miles = run.totalDistance * 0.000621371
+        let distanceString = String.localizedStringWithFormat("%.2f", miles)
+        
+        var durationString = ""
+        let hours = run.runDuration / 3600
+        let minutes = (run.runDuration % 3600) / 60
+        let seconds = (run.runDuration % 3600) % 60
+        
+        if hours > 0 {
+            durationString += "\(hours)h "
+        }
+        if minutes > 0 {
+            durationString += "\(minutes)m "
+        }
+        durationString += "\(seconds)s"
+        
+        let mph = run.averageSpeed * 2.23694
+        let speedString = String.localizedStringWithFormat("%.2f", mph)
+ 
+        cell.runLabel.text = "Date: \(dateString)\nTime: \(timeString)\nTotal Distance: \(distanceString) miles\nDuration: \(durationString)\nAverage Speed: \(speedString)"
         return cell
     }
  

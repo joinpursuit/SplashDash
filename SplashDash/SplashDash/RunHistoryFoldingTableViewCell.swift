@@ -8,13 +8,17 @@
 
 import UIKit
 import FoldingCell
+import SnapKit
 
 class RunHistoryFoldingTableViewCell: FoldingCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.addShadows()
+        self.foregroundView.addSubview(runLabel)
+        runLabel.snp.makeConstraints { (view) in
+            view.leading.trailing.top.bottom.equalToSuperview().inset(5.0)
+        }
         
         self.itemCount = 3
     }
@@ -30,4 +34,12 @@ class RunHistoryFoldingTableViewCell: FoldingCell {
         let durations = [0.33, 0.26, 0.26, 0.26, 0.33] // timing animation for each view
         return durations[itemIndex]
     }
+    
+    // MARK: - Views
+    lazy var runLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
+
 }
