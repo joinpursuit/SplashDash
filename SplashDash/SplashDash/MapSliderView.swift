@@ -58,7 +58,6 @@ class MapSliderView: UIView, MKMapViewDelegate {
         view.showsBuildings = false
         view.showsPointsOfInterest = false
         view.showsCompass = false
-//        view.delegate = self
         
         return view
     }()
@@ -74,6 +73,7 @@ class MapSliderView: UIView, MKMapViewDelegate {
         let slider = UISlider()
         slider.thumbTintColor = SplashColor.primaryColor()
         slider.minimumTrackTintColor = SplashColor.primaryColor()
+        slider.minimumValue = 0
         
         return slider
     }()

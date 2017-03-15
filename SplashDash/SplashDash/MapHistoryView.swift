@@ -16,7 +16,12 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     var regionCalculations: (minLat: CLLocationDegrees, minLong: CLLocationDegrees, maxLat: CLLocationDegrees, maxLong: CLLocationDegrees)!
     var datePickerDate: String!
     var databaseReference: FIRDatabaseReference!
-    var splashOverlays: [SplashOverlay]!
+    var splashOverlays: [SplashOverlay] = [] {
+        didSet {
+            self.mapSliderView.slider.maximumValue = Float(self.splashOverlays.count - 1)
+            print(self.mapSliderView.slider.maximumValue)
+        }
+    }
     
     let calendar: Calendar = Calendar.current
     
@@ -24,7 +29,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.splashOverlays = []
+//        self.splashOverlays = []
         
         setupViewHierarchy()
         configureConstraints()
@@ -151,8 +156,8 @@ class MapHistoryView: UIView, MKMapViewDelegate {
 //            self.mapSliderView.mapView.addOverlays(self.splashOverlays)
 //        }
         
-        let x = self.databaseReference.queryOrderedByKey()
-        x.observeSingleEvent(of: FIRDataEventType.value) { (snapshot: FIRDataSnapshot) in
+        let chronologicalQuery = self.databaseReference.queryOrderedByKey()
+        chronologicalQuery.observeSingleEvent(of: FIRDataEventType.value) { (snapshot: FIRDataSnapshot) in
             let enumerator = snapshot.children
             while let child = enumerator.nextObject() as? FIRDataSnapshot {
                 
