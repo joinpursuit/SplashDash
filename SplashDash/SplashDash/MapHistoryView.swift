@@ -204,6 +204,8 @@ class MapHistoryView: UIView, MKMapViewDelegate {
 
     lazy var datePicker: UIDatePicker = {
         let dp = UIDatePicker()
+        dp.setValue(UIColor.white, forKey: "textColor")
+        
         
         //Max date should always be yesterday
         let calendar = Calendar.current
