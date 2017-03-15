@@ -27,6 +27,7 @@ PODS:
   - FirebaseStorage (1.1.0):
     - FirebaseAnalytics (~> 3.7)
     - GTMSessionFetcher/Core (~> 1.1)
+  - FoldingCell (2.0.3)
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/Defines (2.1.1)
@@ -46,6 +47,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Database
   - Firebase/Storage
+  - FoldingCell (~> 2.0.3)
   - ISHPullUp
   - ScrollableSegmentedControl (~> 1.0)
   - SnapKit
@@ -58,12 +60,13 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 05c96d7b43a7368dc91c07791adb49683e1738d1
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   FirebaseStorage: a5c55b23741a49a72af8f30f95b3bb5ddbeda12d
+  FoldingCell: 2f3113051609167776743415fc00ed877ac6d62c
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
   ISHPullUp: b98a286f3e85dc885a3bf20bf75853947984277d
   ScrollableSegmentedControl: ecf2204048ef68d824fa6e40ddd17fe47550e595
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
 
-PODFILE CHECKSUM: 647417cb4cd8323ec0adc0b5acfe1c43e0fbe845
+PODFILE CHECKSUM: d1e33d2eecaffca7ab957374b63371f1367141ee
 
 COCOAPODS: 1.1.1
