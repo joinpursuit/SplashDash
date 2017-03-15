@@ -27,12 +27,11 @@ class SplashScene: SKScene {
     
     override func didMove(to view: SKView) {
         // Create splash when drop ink on map
-        let w = (self.size.width + self.size.height) * 0.3
+        let w = (self.size.width + self.size.height) * 0.2
         self.splashNode = SKSpriteNode(imageNamed: "inkSample3")
         if let splash = self.splashNode {
             splash.size = CGSize(width: w, height: w)
-            
-            splash.run(SKAction.sequence([SKAction.resize(toWidth: 10, height: 10, duration: 0.24),
+            splash.run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.8),
                                           SKAction.removeFromParent()]))
         }
         self.stickmanNode = SKSpriteNode(imageNamed: "Run_1")
@@ -44,13 +43,14 @@ class SplashScene: SKScene {
             runningMotions.append(texture)
         }
         
-        let runningAnimation = SKAction.animate(with: runningMotions, timePerFrame: 0.03)
+        let runningAnimation = SKAction.animate(with: runningMotions, timePerFrame: 0.05)
         self.runningMotion = SKAction.repeatForever(runningAnimation)
         
     }
     
-    func dropSplash(on pos: CGPoint){
+    func dropSplash(on pos: CGPoint, with: UIImage){
         if let splash = self.splashNode?.copy() as! SKSpriteNode? {
+            splash.texture = SKTexture(image: with)
             splash.position = pos
             self.addChild(splash)
         }
@@ -66,7 +66,7 @@ class SplashScene: SKScene {
     
     func stickmanStartRunning(to pos: CGPoint){
         self.stickmanNode!.run(self.runningMotion!)
-        self.stickmanNode!.run(SKAction.move(to: pos, duration: 2))
+        self.stickmanNode!.run(SKAction.move(to: pos, duration: 4))
     }
     
     func stickmanRunningOffScreen(to pos: CGPoint){

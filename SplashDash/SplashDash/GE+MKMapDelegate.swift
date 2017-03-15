@@ -49,9 +49,11 @@ extension GameViewController: MKMapViewDelegate{
         case self.mapView:
             if gameStatus {
                 for layer in renderers{
-                    let point = mapView.convert(layer.overlay.coordinate, toPointTo: self.view)
-                    dump(point)
-                    scene.dropSplash(on: point)
+                    if let thisLayer = layer as? SplashOverlayView{
+                        let point = mapView.convert(layer.overlay.coordinate, toPointTo: self.view)
+                        scene.dropSplash(on: point, with: thisLayer.overlayImage)
+                    }
+                    
                 }
             }
         default: ()
@@ -69,7 +71,10 @@ extension GameViewController: MKMapViewDelegate{
         switch mapView {
         case invisibleMapView:
             //init ranking labels at current time
-            takeScreenshot()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
+                self.takeScreenshot()
+            })
         default:
             return
         }

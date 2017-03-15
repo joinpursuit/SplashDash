@@ -18,6 +18,7 @@ extension GameViewController{
             // end the game
             gameButton.setTitle("Start", for: .normal)
             uploadAndAddRun()
+            endRunCoorsUpdate()
             self.previousLocation = nil
             self.timer?.invalidate()
             timer = nil
@@ -52,8 +53,6 @@ extension GameViewController{
     }
     
     func toCurrentLocation(){
-        
-        self.scene.printErrorMessage(str: "We could not find you", fontColor: self.currentUser!.myColor)
         if let current = self.locationManager.location{
             print(current)
             let center = CLLocationCoordinate2D(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
