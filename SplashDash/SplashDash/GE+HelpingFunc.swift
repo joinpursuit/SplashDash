@@ -53,13 +53,15 @@ extension GameViewController{
     
     func toCurrentLocation(){
         
-        self.scene.printErrorMessage(str: "We could not find you", fontColor: self.currentUser!.myColor)
         if let current = self.locationManager.location{
             print(current)
             let center = CLLocationCoordinate2D(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
             let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
             
             self.mapView.setRegion(region, animated: true)
+        } else {
+            self.scene.printErrorMessage(str: "We could not find you", fontColor: self.currentUser!.myColor)
+            
         }
     }
     

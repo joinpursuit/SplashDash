@@ -17,7 +17,7 @@ extension GameViewController: CLLocationManagerDelegate{
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        locationManager.distanceFilter = 30
+        locationManager.distanceFilter = 60
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
