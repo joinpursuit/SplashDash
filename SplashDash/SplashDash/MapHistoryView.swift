@@ -21,14 +21,13 @@ class MapHistoryView: UIView, MKMapViewDelegate {
             self.mapSliderView.slider.maximumValue = Float(self.splashOverlays.count - 1)
         }
     }
+    var lastSliderValue: Float = 0
     
     let calendar: Calendar = Calendar.current
     
     //MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-//        self.splashOverlays = []
         
         setupViewHierarchy()
         configureConstraints()
@@ -58,8 +57,22 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     }
     
     func sliderValueChanged(sender: UISlider) {
-        print(Int(sender.value))
-        self.mapSliderView.mapView.addOverlays([self.splashOverlays[Int(sender.value)]])
+        self.lastSliderValue = sender.value
+    }
+    
+    func sliderMoving(sender: UISlider) {
+        switch sender {
+        case _ where Int(sender.value) > Int(self.lastSliderValue):
+            self.mapSliderView.mapView.addOverlays([self.splashOverlays[Int(sender.value)]])
+        case _ where Int(sender.value) < Int(self.lastSliderValue):
+            self.mapSliderView.mapView.removeOverlays([self.splashOverlays[Int(sender.value)]])
+        case _ where Int(self.lastSliderValue) == self.splashOverlays.count - 1:
+               self.mapSliderView.mapView.addOverlays(self.splashOverlays)
+        case _ where self.lastSliderValue == 0:
+            self.mapSliderView.mapView.removeOverlays(self.splashOverlays)
+            default:
+            return
+        }
     }
     
     //MARK: - Setup Views
@@ -228,7 +241,8 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     lazy var mapSliderView: MapSliderView = {
         let view = MapSliderView()
         view.mapView.delegate = self
-        view.slider.addTarget(self, action: #selector(sliderValueChanged(sender:)), for: UIControlEvents.valueChanged)
+        view.slider.addTarget(self, action: #selector(sliderValueChanged(sender:)), for: UIControlEvents.touchUpInside)
+        view.slider.addTarget(self, action: #selector(sliderMoving(sender:)), for: .valueChanged)
         
         return view
     }()
@@ -251,7 +265,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         dp.datePickerMode = .date
         dp.maximumDate = oneDayAgo
         dp.minimumDate = date
-        dp.addTarget(self, action: #selector(datePickerChanged(_:)), for: .valueChanged)
+        dp.addTarget(self, action: #selector(datePickerChanged(_:)), for: .touchUpInside)
         
         return dp
     }()
