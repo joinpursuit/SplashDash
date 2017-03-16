@@ -33,6 +33,16 @@ extension GameViewController{
             //stickman running off screen
             let offScreen = CGPoint(x: self.scene.frame.maxX+100, y: self.scene.frame.minY+40)
             self.scene.stickmanRunningOffScreen(to: offScreen)
+            
+            //take screenshot and update ranking labels
+            let center = CLLocationCoordinate2D(latitude: 40.751085, longitude: -73.984946)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08))
+            
+            self.mapView.setRegion(region, animated: true)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+                self.takeScreenshot()
+            })
         } else{
             guard self.locationManager.location != nil else {
                 self.scene.printErrorMessage(str: "We could not find you", fontColor: self.currentUser!.myColor)
@@ -169,10 +179,10 @@ extension GameViewController{
 //        
 //        animator.startAnimation()
 //    }
-
+    
     func takeScreenshot() {
         
-        guard let contentScrollView = self.invisibleMapView.subviews.first?.subviews.first else { return }
+        guard let contentScrollView = self.mapView.subviews.first?.subviews.first else { return }
         
         UIGraphicsBeginImageContextWithOptions(contentScrollView.bounds.size, false, 0.0)
         

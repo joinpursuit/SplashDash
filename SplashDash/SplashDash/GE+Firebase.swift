@@ -48,10 +48,12 @@ extension GameViewController{
                     }
             }
             //draw all splashes parsed from database
-            self.invisibleMapView.addOverlays(allSplashes)
             self.mapView.addOverlays(allSplashes)
             //Add observe to GameHall
             print(allSplashes.count)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+                self.takeScreenshot()
+            })
             self.observingNewSplash()
         })
     }
@@ -65,7 +67,7 @@ extension GameViewController{
                     
                     //draw all splashes parsed from database
                     let splash = SplashOverlay(coor: coor)
-                    self.invisibleMapView.addOverlays([splash])
+//                    self.invisibleMapView.addOverlays([splash])
                     self.mapView.addOverlays([splash])
                 }
             }
