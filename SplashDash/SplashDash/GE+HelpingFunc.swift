@@ -40,15 +40,17 @@ extension GameViewController{
             
             self.mapView.setRegion(region, animated: true)
 
-            self.scene.isUserInteractionEnabled = false
+            self.mapView.isUserInteractionEnabled = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self.takeScreenshot()
-                self.scene.isUserInteractionEnabled = true
+                self.mapView.isUserInteractionEnabled = true
             })
         } else{
             guard self.locationManager.location != nil else {
                 self.scene.printErrorMessage(str: "We could not find you", fontColor: self.currentUser!.myColor)
                 return }
+            
+            toCurrentLocation()
             
             // start the game
             self.displayView.isHidden = false
@@ -194,14 +196,9 @@ extension GameViewController{
         
 //        UIImageWriteToSavedPhotosAlbum(screenShot, nil, nil, nil)
         self.currentScore = colorArray(image: screenShot)
-        print(currentScore)
-        
+        self.updateLeaderboard()
         //Push score to Firebase
-        gameScoreManager(with: .set, score: currentScore, completion: nil)
-        
-        //updating leaderboard count and handle colors
-        updateLeaderboard()
-        
+        gameScoreManager(with: .set, for: self.getRootName(), score: self.currentScore, completion: nil)
     }
     
     func colorArray(image: UIImage) -> [(color: String, score: Double)] {
@@ -309,6 +306,8 @@ extension GameViewController{
             self.thirdPlaceView.alpha = 1
             self.fourthPlaceView.alpha = 1
         }
+        
+        print(currentScore)
         
     }
 

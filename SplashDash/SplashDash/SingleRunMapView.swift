@@ -12,6 +12,13 @@ import SnapKit
 
 class SingleRunMapView: UIView, MKMapViewDelegate {
 
+    var splashOverlay: [SplashOverlay] = [] {
+        didSet(value){
+            //do something
+            configureConstraints()
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViewHierarchy()

@@ -86,9 +86,9 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         }
         
         if cellHeights[(indexPath as NSIndexPath).row] == kCloseCellHeight {
-            cell.selectedAnimation(false, animated: true, completion:nil)
+            cell.selectedAnimation(false, animated: false, completion:nil)
         } else {
-            cell.selectedAnimation(true, animated: true, completion: nil)
+            cell.selectedAnimation(true, animated: false, completion: nil)
         }
         
     }
@@ -105,28 +105,30 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         if cellHeights[indexPath.row] == kCloseCellHeight {
             // open cell
             cellHeights[indexPath.row] = kOpenCellHeight
-            //add map to cell
-            cell.containerView.addSubview(singleRunMap)
-            singleRunMap.snp.makeConstraints({ (view) in
-                view.top.bottom.leading.trailing.equalToSuperview()
-            })
+            tableView.isScrollEnabled = false
+            
             cell.selectedAnimation(true, animated: true, completion: { (_) in
                 tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-                tableView.isScrollEnabled = false
+                //add map to cell
+                cell.containerView.addSubview(self.singleRunMap)
+                self.singleRunMap.snp.makeConstraints({ (view) in
+                    view.top.bottom.leading.trailing.equalToSuperview()
+                })
             })
             duration = 0.5
         } else {// close cell
             cellHeights[indexPath.row] = kCloseCellHeight
-            singleRunMap.removeFromSuperview()
+            tableView.isScrollEnabled = true
             cell.selectedAnimation(false, animated: true, completion: { (_) in
-                tableView.isScrollEnabled = true
+                self.singleRunMap.removeFromSuperview()
             })
             duration = 0.8
         }
         
         
         UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { () -> Void in
-            tableView.reloadData()
+            tableView.beginUpdates()
+            tableView.endUpdates()
         }, completion: nil)
         
     }
@@ -137,12 +139,6 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.cellIdentifier, for: indexPath) as! RunHistoryFoldingTableViewCell
-        
-        
-        cell.layer.masksToBounds = true
-        cell.layer.borderWidth = 50.0
-        cell.layer.cornerRadius = 15.0
-        cell.layer.borderColor = UIColor.clear.cgColor
 //
         //without folding cell
 //        let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.cellIdentifier, for: indexPath) as! HistoryTableViewCell

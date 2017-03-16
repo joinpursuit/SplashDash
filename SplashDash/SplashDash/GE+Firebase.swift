@@ -51,8 +51,11 @@ extension GameViewController{
             print(allSplashes.count)
             
             //get current global score
-            self.gameScoreManager(with: .get, score: nil, completion: { (score) in
-                self.currentScore = score
+            self.gameScoreManager(with: .get, for: self.getRootName(), score: nil, completion: { (newScore) in
+                guard let new = newScore else {return}
+                
+                self.currentScore = new
+                //updating leaderboard count and handle colors
                 self.updateLeaderboard()
             })
             
@@ -142,8 +145,8 @@ extension GameViewController{
         
     }
     
-    func gameScoreManager(with type: RequestType, score: [(color: String, score: Double)]?, completion: ((_ score: [(color: String, score: Double)]) -> Void)?){
-        let linkRef = databaseReference.child(getRootName()).child("Score")
+    func gameScoreManager(with type: RequestType, for date: String, score: [(color: String, score: Double)]?, completion: (([(color: String, score: Double)]?)->Void)?){
+        let linkRef = databaseReference.child(date).child("Score")
         
         switch type {
         case .get:
@@ -157,12 +160,11 @@ extension GameViewController{
                             return
                     }
                     
-                    let current: [(color: String, score: Double)] = [("purple", purple),
-                                                               ("teal", teal),
-                                                               ("green", green),
-                                                               ("orange", orange)]
-                    
-                    completion!(current)
+                    completion!([("purple", purple),
+                                 ("teal", teal),
+                                 ("green", green),
+                                 ("orange", orange)])
+                    return
                 }else{
                     print("No records found")
                 }
@@ -179,6 +181,8 @@ extension GameViewController{
                         print(error!.localizedDescription)
                     }
                 })
+            }else{
+                print("No valid score data")
             }
             
         }
