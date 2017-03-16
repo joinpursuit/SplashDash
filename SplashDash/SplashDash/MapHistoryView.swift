@@ -16,7 +16,11 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     var regionCalculations: (minLat: CLLocationDegrees, minLong: CLLocationDegrees, maxLat: CLLocationDegrees, maxLong: CLLocationDegrees)!
     var datePickerDate: String!
     var databaseReference: FIRDatabaseReference!
-    var splashOverlays: [SplashOverlay]!
+    var splashOverlays: [SplashOverlay] = [] {
+        didSet {
+            self.mapSliderView.slider.maximumValue = Float(self.splashOverlays.count - 1)
+        }
+    }
     
     let calendar: Calendar = Calendar.current
     
@@ -24,7 +28,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.splashOverlays = []
+//        self.splashOverlays = []
         
         setupViewHierarchy()
         configureConstraints()
@@ -53,22 +57,66 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         return format.string(from: date)
     }
     
+    func sliderValueChanged(sender: UISlider) {
+        print(Int(sender.value))
+        self.mapSliderView.mapView.addOverlays([self.splashOverlays[Int(sender.value)]])
+    }
+    
     //MARK: - Setup Views
     func setupViewHierarchy() {
-        self.addSubview(mapView)
+        self.addSubview(mapSliderView)
         self.addSubview(datePicker)
+        self.addSubview(monthUpCaretLabel)
+        self.addSubview(monthDownCaretLabel)
+        self.addSubview(dateUpCaretLabel)
+        self.addSubview(dateDownCaretLabel)
+        self.addSubview(yearUpCaretLabel)
+        self.addSubview(yearDownCaretLabel)
     }
     
     func configureConstraints() {
+        monthUpCaretLabel.snp.remakeConstraints { (view) in
+            view.centerX.equalToSuperview().multipliedBy(0.45)
+            view.top.equalToSuperview()
+            view.bottom.equalTo(datePicker.snp.top).offset(8.0)
+        }
+        
+        monthDownCaretLabel.snp.remakeConstraints { (view) in
+            view.centerX.equalToSuperview().multipliedBy(0.45)
+            view.top.equalTo(datePicker.snp.bottom).inset(8.0)
+        }
+        
+        dateUpCaretLabel.snp.remakeConstraints { (view) in
+            view.centerX.equalToSuperview().multipliedBy(1.13)
+            view.top.equalToSuperview()
+            view.bottom.equalTo(datePicker.snp.top).offset(8.0)
+        }
+        
+        dateDownCaretLabel.snp.remakeConstraints { (view) in
+            view.centerX.equalToSuperview().multipliedBy(1.13)
+            view.top.equalTo(datePicker.snp.bottom).inset(8.0)
+        }
+        
+        yearUpCaretLabel.snp.remakeConstraints { (view) in
+            view.centerX.equalToSuperview().multipliedBy(1.55)
+            view.top.equalToSuperview()
+            view.bottom.equalTo(datePicker.snp.top).offset(8.0)
+        }
+        
+        yearDownCaretLabel.snp.remakeConstraints { (view) in
+            view.centerX.equalToSuperview().multipliedBy(1.55)
+            view.top.equalTo(datePicker.snp.bottom).inset(8.0)
+        }
         
         datePicker.snp.remakeConstraints { (view) in
-            view.leading.trailing.top.equalToSuperview()
+            view.leading.trailing.equalToSuperview()
             view.height.equalTo(50)
-            
         }
-        mapView.snp.remakeConstraints { (view) in
+        
+        mapSliderView.snp.remakeConstraints { (view) in
             view.leading.trailing.bottom.equalToSuperview()
-            view.top.equalTo(datePicker.snp.bottom)
+            //            view.top.equalTo(datePicker.snp.bottom).offset(8.0)
+            view.top.equalTo(yearDownCaretLabel.snp.bottom).offset(16.0)
         }
     }
     
@@ -81,12 +129,12 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         //40.730043, -73.991250
         let center = CLLocationCoordinate2D(latitude: 40.730043, longitude: -73.991250) //40.751085, -73.984946
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.04, longitudeDelta: 0.04))
-        self.mapView.setRegion(region, animated: false)
+        self.mapSliderView.mapView.setRegion(region, animated: false)
     }
-    
+
     func fetchSplashForPickerDate(date: String){
         //Remove all current overlay views prior to populating the map
-        self.mapView.removeOverlays(self.mapView.overlays)
+        self.mapSliderView.mapView.removeOverlays(self.mapSliderView.mapView.overlays)
         
         //Setting database reference to date selected from datePicker
         guard let date = self.datePickerDate else { return }
@@ -94,7 +142,8 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         
         var overlays: [SplashOverlay] = []
         
-        self.databaseReference.observeSingleEvent(of: FIRDataEventType.value) { (snapshot: FIRDataSnapshot) in
+        let chronologicalQuery = self.databaseReference.queryOrderedByKey()
+        chronologicalQuery.observeSingleEvent(of: FIRDataEventType.value) { (snapshot: FIRDataSnapshot) in
             let enumerator = snapshot.children
             while let child = enumerator.nextObject() as? FIRDataSnapshot {
                 
@@ -109,7 +158,6 @@ class MapHistoryView: UIView, MKMapViewDelegate {
                     }
                 }
             }
-            self.mapView.addOverlays(self.splashOverlays)
         }
     }
     
@@ -118,19 +166,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         if let myOverlay = overlay as? SplashOverlay{
             let splashOverlay = SplashOverlayView(overlay: myOverlay, teamName: myOverlay.teamName, splashImageTag: myOverlay.splashImageTag)
             return splashOverlay
-        } else if overlay is MKCircle{
-            let circleRenderer = MKCircleRenderer(overlay: overlay)
-            circleRenderer.fillColor = .orange
-            return circleRenderer
-        } else if overlay is MKPolyline {
-            let lineView = MKPolylineRenderer(overlay: overlay)
-            lineView.lineWidth = CGFloat(Int(arc4random_uniform(15) + 5))
-            lineView.strokeColor = .green
-            lineView.miterLimit = 0
-            lineView.lineDashPhase = 100
-            return lineView
         }
-        
         return MKOverlayRenderer(overlay: overlay)
     }
     
@@ -188,18 +224,12 @@ class MapHistoryView: UIView, MKMapViewDelegate {
 //
 //    }
     
-    // MARK: - Views
-
-    lazy var mapView: MKMapView = {
-        let view = MKMapView()
-        view.mapType = .standard
-//        view.isUserInteractionEnabled = false
-        view.showsScale = true
-        view.showsCompass = true
-        view.showsBuildings = false
-        view.showsPointsOfInterest = false
-        view.showsCompass = false
-        view.delegate = self
+    //MARK: - Views
+    lazy var mapSliderView: MapSliderView = {
+        let view = MapSliderView()
+        view.mapView.delegate = self
+        view.slider.addTarget(self, action: #selector(sliderValueChanged(sender:)), for: UIControlEvents.valueChanged)
+        
         return view
     }()
 
@@ -225,5 +255,55 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         
         return dp
     }()
-    // Get Date given the above date components
+    
+    lazy var monthUpCaretLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.text = "^"
+        
+        return label
+    }()
+    
+    lazy var monthDownCaretLabel: UILabel = {
+       let label = UILabel()
+        label.textColor = UIColor.white
+        label.text = "^"
+        label.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        
+        return label
+    }()
+    
+    lazy var dateUpCaretLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.text = "^"
+        
+        return label
+    }()
+    
+    lazy var dateDownCaretLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.text = "^"
+        label.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        
+        return label
+    }()
+    
+    lazy var yearUpCaretLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.text = "^"
+        
+        return label
+    }()
+    
+    lazy var yearDownCaretLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.text = "^"
+        label.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        
+        return label
+    }()
 }

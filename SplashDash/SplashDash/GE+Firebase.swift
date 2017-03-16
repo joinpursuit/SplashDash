@@ -51,7 +51,7 @@ extension GameViewController{
             self.mapView.addOverlays(allSplashes)
             //Add observe to GameHall
             print(allSplashes.count)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self.takeScreenshot()
             })
             self.observingNewSplash()
