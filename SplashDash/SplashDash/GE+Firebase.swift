@@ -50,14 +50,8 @@ extension GameViewController{
             //Add observe to GameHall
             print(allSplashes.count)
             
-            //get current global score
-            self.gameScoreManager(with: .get, for: self.getRootName(), score: nil, completion: { (newScore) in
-                guard let new = newScore else {return}
-                
-                self.currentScore = new
-                //updating leaderboard count and handle colors
-                self.updateLeaderboard()
-            })
+            //fetch current global score
+            self.observingScore()
             
             //add real-time observe for new splashes
             self.observingNewSplash()
@@ -145,50 +139,69 @@ extension GameViewController{
         
     }
     
-    func gameScoreManager(with type: RequestType, for date: String, score: [(color: String, score: Double)]?, completion: (([(color: String, score: Double)]?)->Void)?){
+    func observingScore(){
+        let linkRef = databaseReference.child(getRootName()).child("Score")
+        
+        linkRef.observe(.value, with: { (snapshot) in
+            if let value = snapshot.value as? NSDictionary{
+                guard let purple = value["purple"] as? Double,
+                    let teal = value["teal"] as? Double,
+                    let green = value["green"] as? Double,
+                    let orange = value["orange"] as? Double else{
+                        print("!!!!!Error parsing game score!!!!!")
+                        return
+                }
+                self.currentScore = [("purple", purple),
+                                     ("teal", teal),
+                                     ("green", green),
+                                     ("orange", orange)]
+                
+                //updating leaderboard count and handle colors
+                self.updateLeaderboard()
+            }else{
+                print("No records found")
+            }
+        })
+    }
+    
+    func pushNewScore(score value: [(color: String, score: Double)]){
+        if value.count != 4{
+            print("Invalid score, push aborted!")
+            return
+        }
+        let linkRef = databaseReference.child(getRootName()).child("Score")
+        var newScore: [String: Double] = [:]
+        for item in value{
+            newScore[item.color] = item.score
+        }
+        
+        linkRef.setValue(newScore, withCompletionBlock: { (error, ref) in
+            if error != nil{
+                print(error!.localizedDescription)
+            }
+        })
+        
+    }
+    
+    func fetchHistoryScore(for date: String, completion: @escaping (([(color: String, score: Double)])->Void)) {
         let linkRef = databaseReference.child(date).child("Score")
         
-        switch type {
-        case .get:
-            linkRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                if let value = snapshot.value as? NSDictionary{
-                    guard let purple = value["purple"] as? Double,
-                        let teal = value["teal"] as? Double,
-                        let green = value["green"] as? Double,
-                        let orange = value["orange"] as? Double else{
-                            print("!!!!!Error parsing game score!!!!!")
-                            return
-                    }
-                    
-                    completion!([("purple", purple),
-                                 ("teal", teal),
-                                 ("green", green),
-                                 ("orange", orange)])
-                    return
-                }else{
-                    print("No records found")
+        linkRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let value = snapshot.value as? NSDictionary{
+                guard let purple = value["purple"] as? Double,
+                    let teal = value["teal"] as? Double,
+                    let green = value["green"] as? Double,
+                    let orange = value["orange"] as? Double else{
+                        print("!!!!!Error parsing game score!!!!!")
+                        return
                 }
-            })
-        case .set:
-            if let value = score{
-                var newScore: [String: Double] = [:]
-                for item in value{
-                    newScore[item.color] = item.score
-                }
-                
-                linkRef.setValue(newScore, withCompletionBlock: { (error, ref) in
-                    if error != nil{
-                        print(error!.localizedDescription)
-                    }
-                })
+                completion([("purple", purple),
+                             ("teal", teal),
+                             ("green", green),
+                             ("orange", orange)])
             }else{
-                print("No valid score data")
+                print("No records found")
             }
-            
-        }
+        })
     }
-}
-
-enum RequestType {
-    case get, set
 }
