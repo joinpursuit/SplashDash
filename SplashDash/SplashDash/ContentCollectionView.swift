@@ -76,6 +76,8 @@ class ContentCollectionView: UIView, UICollectionViewDelegate, UICollectionViewD
         }
     }
     
+    
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.endEditing(true)
     }

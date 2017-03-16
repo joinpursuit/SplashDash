@@ -99,7 +99,7 @@ class SplashScene: SKScene {
     }
     
     func stickmanInit(){
-        let origin = CGPoint(x: self.frame.minX-50, y: self.frame.minY+50)
+        let origin = CGPoint(x: self.frame.minX-50, y: self.frame.minY+40)
         self.stickmanNode!.position = origin
         self.stickmanNode!.setScale(0.3)
         
