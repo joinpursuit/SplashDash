@@ -43,7 +43,7 @@ class MapSliderView: UIView, MKMapViewDelegate {
         
         slider.snp.makeConstraints { (view) in
             view.centerX.centerY.equalTo(sliderContainerView)
-            view.leading.equalToSuperview().offset(16.0)
+            view.leading.equalToSuperview().offset(50.0)
             view.trailing.equalToSuperview().inset(16.0)
         }
     }
@@ -64,6 +64,7 @@ class MapSliderView: UIView, MKMapViewDelegate {
     
     lazy var sliderContainerView: UIView = {
         let view = UIView()
+        view.isUserInteractionEnabled = false
         view.backgroundColor = UIColor.white
         
         return view
