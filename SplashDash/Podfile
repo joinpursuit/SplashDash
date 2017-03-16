@@ -12,5 +12,6 @@ target 'SplashDash' do
   pod 'SnapKit'
   pod 'ISHPullUp'
   pod 'ScrollableSegmentedControl', '~> 1.0'
+  pod 'FoldingCell', '~> 2.0.3'
   
 end

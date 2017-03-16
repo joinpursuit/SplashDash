@@ -15,6 +15,9 @@
 		061074E91E6E5E5B00F665A0 /* SquarespaceRun_3.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074E21E6E5E5B00F665A0 /* SquarespaceRun_3.gpx */; };
 		061074EA1E6E5E5B00F665A0 /* SquarespaceRun_4.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074E31E6E5E5B00F665A0 /* SquarespaceRun_4.gpx */; };
 		061074EC1E71C54000F665A0 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061074EB1E71C54000F665A0 /* UIImage+Extension.swift */; };
+		0685B4711E79BCBC00559885 /* RunHistoryFoldingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0685B46F1E79BCBC00559885 /* RunHistoryFoldingTableViewCell.swift */; };
+		0685B4721E79BCBC00559885 /* RunHistoryFoldingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0685B4701E79BCBC00559885 /* RunHistoryFoldingTableViewCell.xib */; };
+		0685B4761E79FE1B00559885 /* SingleRunMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0685B4751E79FE1B00559885 /* SingleRunMapView.swift */; };
 		06B239AD1E66127B0071E17F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239AC1E66127B0071E17F /* AppDelegate.swift */; };
 		06B239B21E66127B0071E17F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B01E66127B0071E17F /* Main.storyboard */; };
 		06B239B41E66127B0071E17F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B31E66127B0071E17F /* Assets.xcassets */; };
@@ -64,6 +67,9 @@
 		061074E21E6E5E5B00F665A0 /* SquarespaceRun_3.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_3.gpx; sourceTree = "<group>"; };
 		061074E31E6E5E5B00F665A0 /* SquarespaceRun_4.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_4.gpx; sourceTree = "<group>"; };
 		061074EB1E71C54000F665A0 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		0685B46F1E79BCBC00559885 /* RunHistoryFoldingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunHistoryFoldingTableViewCell.swift; sourceTree = "<group>"; };
+		0685B4701E79BCBC00559885 /* RunHistoryFoldingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RunHistoryFoldingTableViewCell.xib; sourceTree = "<group>"; };
+		0685B4751E79FE1B00559885 /* SingleRunMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleRunMapView.swift; sourceTree = "<group>"; };
 		06B239A91E66127B0071E17F /* SplashDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SplashDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06B239AC1E66127B0071E17F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06B239B11E66127B0071E17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -242,6 +248,7 @@
 				06B239D81E68AEA90071E17F /* SplashOverlayView.swift */,
 				474371771E6A29CE00391AF2 /* SplashDashTextField.swift */,
 				06D941B11E77595F009E6B9D /* SplashSKView.swift */,
+				0685B4751E79FE1B00559885 /* SingleRunMapView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -251,6 +258,8 @@
 			children = (
 				4B9BF6C31E6765E700EA0410 /* HistoryTableViewCell.swift */,
 				4B3A907E1E6C9B580028FBC1 /* ContentCollectionViewCell.swift */,
+				0685B46F1E79BCBC00559885 /* RunHistoryFoldingTableViewCell.swift */,
+				0685B4701E79BCBC00559885 /* RunHistoryFoldingTableViewCell.xib */,
 			);
 			name = "Controller Cells";
 			sourceTree = "<group>";
@@ -307,7 +316,6 @@
 				TargetAttributes = {
 					06B239A81E66127B0071E17F = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = R7DWEPXN5Y;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -343,6 +351,7 @@
 				06B239B71E66127B0071E17F /* LaunchScreen.storyboard in Resources */,
 				06B239CB1E675BC20071E17F /* GoogleService-Info.plist in Resources */,
 				061074E71E6E5E5B00F665A0 /* SquarespaceRun_1.gpx in Resources */,
+				0685B4721E79BCBC00559885 /* RunHistoryFoldingTableViewCell.xib in Resources */,
 				06B239B41E66127B0071E17F /* Assets.xcassets in Resources */,
 				061074E61E6E5E5B00F665A0 /* HudsonRiverRun.gpx in Resources */,
 				06B239B21E66127B0071E17F /* Main.storyboard in Resources */,
@@ -415,8 +424,10 @@
 				4B3A907F1E6C9B580028FBC1 /* ContentCollectionViewCell.swift in Sources */,
 				47F56CF21E68857E007375BB /* UIView+Extension.swift in Sources */,
 				471458241E712B2100467881 /* HVC+TeamStackViewDelegate.swift in Sources */,
+				0685B4711E79BCBC00559885 /* RunHistoryFoldingTableViewCell.swift in Sources */,
 				4762B5A51E75FEA4002D6BA9 /* LeaderboardView.swift in Sources */,
 				06B239CF1E6763DF0071E17F /* GE+SnapKit.swift in Sources */,
+				0685B4761E79FE1B00559885 /* SingleRunMapView.swift in Sources */,
 				4B9BF6C41E6765E700EA0410 /* HistoryTableViewCell.swift in Sources */,
 				06B239DB1E68BFBB0071E17F /* GE+Firebase.swift in Sources */,
 				06B239D11E6767B70071E17F /* GE+MKMapDelegate.swift in Sources */,
@@ -565,7 +576,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R7DWEPXN5Y;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SplashDash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -582,7 +593,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R7DWEPXN5Y;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SplashDash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
