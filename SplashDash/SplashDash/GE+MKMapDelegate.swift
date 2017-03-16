@@ -68,16 +68,16 @@ extension GameViewController: MKMapViewDelegate{
         }
     }
     
-    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
-        switch mapView {
-        case invisibleMapView:
-            //init ranking labels at current time
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
-                self.takeScreenshot()
-            })
-        default:
-            return
-        }
-    }
+//    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
+//        switch mapView {
+//        case invisibleMapView:
+//            //init ranking labels at current time
+//            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
+//                self.takeScreenshot()
+//            })
+//        default:
+//            return
+//        }
+//    }
 }

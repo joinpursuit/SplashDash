@@ -24,7 +24,7 @@ extension GameViewController: CLLocationManagerDelegate{
         let center = CLLocationCoordinate2D(latitude: 40.751085, longitude: -73.984946)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08))
         
-        self.invisibleMapView.setRegion(region, animated: false)
+//        self.invisibleMapView.setRegion(region, animated: false)
         self.mapView.setRegion(region, animated: false)
     }
     

@@ -130,7 +130,7 @@ class GameViewController: UIViewController {
     // MARK: - Setup
     func setupViewHierarchy(){
         
-        self.view.addSubview(invisibleMapView)
+//        self.view.addSubview(invisibleMapView)
         self.view.addSubview(mapView)
         self.mapView.addSubview(gameButton)
         self.mapView.addSubview(findMeButton)
@@ -163,9 +163,9 @@ class GameViewController: UIViewController {
     }
     
     func configureConstraints(){
-        invisibleMapView.snp.remakeConstraints { (view) in
-            view.top.bottom.leading.trailing.equalToSuperview()
-        }
+//        invisibleMapView.snp.remakeConstraints { (view) in
+//            view.top.bottom.leading.trailing.equalToSuperview()
+//        }
         
         mapView.snp.remakeConstraints { (view) in
             view.top.bottom.leading.trailing.equalToSuperview()
@@ -245,17 +245,17 @@ class GameViewController: UIViewController {
     }
     
     //MARK: - Lazy inits
-    lazy var invisibleMapView: MKMapView = {
-        let view = MKMapView()
-        view.mapType = .standard
-        view.showsUserLocation = false
-        view.showsScale = false
-        view.showsCompass = false
-        view.showsBuildings = false
-        view.showsPointsOfInterest = false
-        view.delegate = self
-        return view
-    }()
+//    lazy var invisibleMapView: MKMapView = {
+//        let view = MKMapView()
+//        view.mapType = .standard
+//        view.showsUserLocation = false
+//        view.showsScale = false
+//        view.showsCompass = false
+//        view.showsBuildings = false
+//        view.showsPointsOfInterest = false
+//        view.delegate = self
+//        return view
+//    }()
     
     lazy var mapView: MKMapView = {
         let view = MKMapView()
