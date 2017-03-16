@@ -51,10 +51,7 @@ extension GameViewController{
             print(allSplashes.count)
             
             //get current global score
-            self.gameScoreManager(with: .get, score: nil, completion: { (score) in
-                self.currentScore = score
-                self.updateLeaderboard()
-            })
+            self.gameScoreManager(with: .get, score: nil)
             
             //add real-time observe for new splashes
             self.observingNewSplash()
@@ -142,7 +139,7 @@ extension GameViewController{
         
     }
     
-    func gameScoreManager(with type: RequestType, score: [(color: String, score: Double)]?, completion: ((_ score: [(color: String, score: Double)]) -> Void)?){
+    func gameScoreManager(with type: RequestType, score: [(color: String, score: Double)]?){
         let linkRef = databaseReference.child(getRootName()).child("Score")
         
         switch type {
@@ -157,12 +154,14 @@ extension GameViewController{
                             return
                     }
                     
-                    let current: [(color: String, score: Double)] = [("purple", purple),
-                                                               ("teal", teal),
-                                                               ("green", green),
-                                                               ("orange", orange)]
+                    self.currentScore = [("purple", purple),
+                                         ("teal", teal),
+                                         ("green", green),
+                                         ("orange", orange)]
+                    print(self.currentScore)
+                    //updating leaderboard count and handle colors
+                    self.updateLeaderboard()
                     
-                    completion!(current)
                 }else{
                     print("No records found")
                 }
@@ -177,8 +176,13 @@ extension GameViewController{
                 linkRef.setValue(newScore, withCompletionBlock: { (error, ref) in
                     if error != nil{
                         print(error!.localizedDescription)
+                    }else{
+                        //updating leaderboard count and handle colors
+                        self.updateLeaderboard()
                     }
                 })
+            }else{
+                print("No valid score data")
             }
             
         }
