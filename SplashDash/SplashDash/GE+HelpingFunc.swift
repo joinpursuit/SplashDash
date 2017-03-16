@@ -87,9 +87,9 @@ extension GameViewController{
         if let current = self.locationManager.location{
             print(current)
             let center = CLLocationCoordinate2D(latitude: current.coordinate.latitude, longitude: current.coordinate.longitude)
-            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.008, longitudeDelta: 0.008))
             
-            self.mapView.setRegion(region, animated: true)
+            self.mapView.setRegion(region, animated: false)
         } else {
             self.scene.printErrorMessage(str: "We could not find you", fontColor: self.currentUser!.myColor)
             
@@ -195,10 +195,9 @@ extension GameViewController{
         UIGraphicsEndImageContext()
         
 //        UIImageWriteToSavedPhotosAlbum(screenShot, nil, nil, nil)
-        self.currentScore = colorArray(image: screenShot)
-        self.updateLeaderboard()
+        
         //Push score to Firebase
-        gameScoreManager(with: .set, for: self.getRootName(), score: self.currentScore, completion: nil)
+        self.pushNewScore(score: colorArray(image: screenShot))
     }
     
     func colorArray(image: UIImage) -> [(color: String, score: Double)] {
