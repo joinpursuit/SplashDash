@@ -13,6 +13,8 @@ import ISHPullUp
 
 class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
     
+    var singleRunMap = SingleRunMapView()
+    
     var user: User? {
         didSet {
             guard let user = user else { return }
@@ -29,17 +31,9 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    var kCloseCellHeight: CGFloat {
-        get{
-            return self.kOpenCellHeight/3
-        }
-    }
+    var kCloseCellHeight: CGFloat = 135
     
-    var kOpenCellHeight: CGFloat {
-        get{
-            return self.userHistoryTableView.frame.height
-        }
-    }
+    var kOpenCellHeight: CGFloat = 405
     
     var cellHeights = [CGFloat]()
     
@@ -47,6 +41,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         super.init(frame: frame)
         setupViewHierarchy()
         configureConstraints()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -100,18 +95,18 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         return userRuns.count
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard case let cell as RunHistoryFoldingTableViewCell = cell else {
-            return
-        }
-        
-        if cellHeights[(indexPath as NSIndexPath).row] == kCloseCellHeight {
-            cell.selectedAnimation(false, animated: true, completion:nil)
-        } else {
-            cell.selectedAnimation(true, animated: true, completion: nil)
-        }
-        
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        guard case let cell as RunHistoryFoldingTableViewCell = cell else {
+//            return
+//        }
+//        
+//        if cellHeights[(indexPath as NSIndexPath).row] == kCloseCellHeight {
+//            cell.selectedAnimation(false, animated: true, completion:nil)
+//        } else {
+//            cell.selectedAnimation(true, animated: true, completion: nil)
+//        }
+//        
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! RunHistoryFoldingTableViewCell
@@ -125,6 +120,11 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         if cellHeights[indexPath.row] == kCloseCellHeight {
             // open cell
             cellHeights[indexPath.row] = kOpenCellHeight
+            //add map to cell
+            cell.containerView.addSubview(singleRunMap)
+            singleRunMap.snp.makeConstraints({ (view) in
+                view.top.bottom.leading.trailing.equalToSuperview()
+            })
             cell.selectedAnimation(true, animated: true, completion: { (_) in
                 tableView.scrollToRow(at: indexPath, at: .top, animated: true)
                 tableView.isScrollEnabled = false
@@ -132,6 +132,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
             duration = 0.5
         } else {// close cell
             cellHeights[indexPath.row] = kCloseCellHeight
+            singleRunMap.removeFromSuperview()
             cell.selectedAnimation(false, animated: true, completion: { (_) in
                 tableView.isScrollEnabled = true
             })
