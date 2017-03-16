@@ -80,18 +80,18 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         return userRuns.count
     }
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        guard case let cell as RunHistoryFoldingTableViewCell = cell else {
-//            return
-//        }
-//        
-//        if cellHeights[(indexPath as NSIndexPath).row] == kCloseCellHeight {
-//            cell.selectedAnimation(false, animated: true, completion:nil)
-//        } else {
-//            cell.selectedAnimation(true, animated: true, completion: nil)
-//        }
-//        
-//    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard case let cell as RunHistoryFoldingTableViewCell = cell else {
+            return
+        }
+        
+        if cellHeights[(indexPath as NSIndexPath).row] == kCloseCellHeight {
+            cell.selectedAnimation(false, animated: true, completion:nil)
+        } else {
+            cell.selectedAnimation(true, animated: true, completion: nil)
+        }
+        
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! RunHistoryFoldingTableViewCell

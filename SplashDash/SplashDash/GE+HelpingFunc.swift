@@ -39,6 +39,7 @@ extension GameViewController{
             let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08))
             
             self.mapView.setRegion(region, animated: true)
+
             self.scene.isUserInteractionEnabled = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self.takeScreenshot()
