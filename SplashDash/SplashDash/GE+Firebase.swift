@@ -40,20 +40,23 @@ extension GameViewController{
             var allSplashes: [SplashOverlay] = []
             
             let validDict = snapshot.children
-            while let coorSnapshot = validDict.nextObject() as? FIRDataSnapshot,
-                  let value = coorSnapshot.value as? NSDictionary {
-                    
-                    if let coor = SplashCoordinate(value){
-                        allSplashes.append(SplashOverlay(coor: coor))
-                    }
+            while let coorSnapshot = validDict.nextObject() as? FIRDataSnapshot{
+                if let value = coorSnapshot.value as? NSDictionary, let coor = SplashCoordinate(value){
+                    allSplashes.append(SplashOverlay(coor: coor))
+                }
             }
             //draw all splashes parsed from database
             self.mapView.addOverlays(allSplashes)
             //Add observe to GameHall
             print(allSplashes.count)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                self.takeScreenshot()
+            
+            //get current global score
+            self.gameScoreManager(with: .get, score: nil, completion: { (score) in
+                self.currentScore = score
+                self.updateLeaderboard()
             })
+            
+            //add real-time observe for new splashes
             self.observingNewSplash()
         })
     }
@@ -67,7 +70,6 @@ extension GameViewController{
                     
                     //draw all splashes parsed from database
                     let splash = SplashOverlay(coor: coor)
-//                    self.invisibleMapView.addOverlays([splash])
                     self.mapView.addOverlays([splash])
                 }
             }
@@ -140,4 +142,49 @@ extension GameViewController{
         
     }
     
+    func gameScoreManager(with type: RequestType, score: [(color: String, score: Double)]?, completion: ((_ score: [(color: String, score: Double)]) -> Void)?){
+        let linkRef = databaseReference.child(getRootName()).child("Score")
+        
+        switch type {
+        case .get:
+            linkRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                if let value = snapshot.value as? NSDictionary{
+                    guard let purple = value["purple"] as? Double,
+                        let teal = value["teal"] as? Double,
+                        let green = value["green"] as? Double,
+                        let orange = value["orange"] as? Double else{
+                            print("!!!!!Error parsing game score!!!!!")
+                            return
+                    }
+                    
+                    let current: [(color: String, score: Double)] = [("purple", purple),
+                                                               ("teal", teal),
+                                                               ("green", green),
+                                                               ("orange", orange)]
+                    
+                    completion!(current)
+                }else{
+                    print("No records found")
+                }
+            })
+        case .set:
+            if let value = score{
+                var newScore: [String: Double] = [:]
+                for item in value{
+                    newScore[item.color] = item.score
+                }
+                
+                linkRef.setValue(newScore, withCompletionBlock: { (error, ref) in
+                    if error != nil{
+                        print(error!.localizedDescription)
+                    }
+                })
+            }
+            
+        }
+    }
+}
+
+enum RequestType {
+    case get, set
 }
