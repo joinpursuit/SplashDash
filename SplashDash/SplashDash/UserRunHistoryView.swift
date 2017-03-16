@@ -31,9 +31,9 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    var kCloseCellHeight: CGFloat = 135
+    var kCloseCellHeight: CGFloat = 149
     
-    var kOpenCellHeight: CGFloat = 405
+    var kOpenCellHeight: CGFloat = 447
     
     var cellHeights = [CGFloat]()
     
