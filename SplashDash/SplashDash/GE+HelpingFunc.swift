@@ -39,9 +39,10 @@ extension GameViewController{
             let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08))
             
             self.mapView.setRegion(region, animated: true)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+            self.scene.isUserInteractionEnabled = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self.takeScreenshot()
+                self.scene.isUserInteractionEnabled = true
             })
         } else{
             guard self.locationManager.location != nil else {
@@ -91,7 +92,6 @@ extension GameViewController{
             
         }
     }
-    
     
     func animateAllButtons(){
         
@@ -195,9 +195,11 @@ extension GameViewController{
         self.currentScore = colorArray(image: screenShot)
         print(currentScore)
         
+        //Push score to Firebase
+        gameScoreManager(with: .set, score: currentScore, completion: nil)
+        
         //updating leaderboard count and handle colors
         updateLeaderboard()
-//        invisibleMapView.removeFromSuperview()
         
     }
     
@@ -263,7 +265,9 @@ extension GameViewController{
             }
         }
         //return winner
-        print("\(height),  \(width)")
+        if total == 0 {
+            total += 1
+        }
         return [("purple", purpleCoverage/total),
                 ("teal", tealCoverage/total),
                 ("green", greenCoverage/total),
