@@ -51,7 +51,13 @@ extension GameViewController{
             print(allSplashes.count)
             
             //get current global score
-            self.gameScoreManager(with: .get, score: nil)
+            self.gameScoreManager(with: .get, for: self.getRootName(), score: nil, completion: { (newScore) in
+                guard let new = newScore else {return}
+                
+                self.currentScore = new
+                //updating leaderboard count and handle colors
+                self.updateLeaderboard()
+            })
             
             //add real-time observe for new splashes
             self.observingNewSplash()
@@ -139,8 +145,8 @@ extension GameViewController{
         
     }
     
-    func gameScoreManager(with type: RequestType, score: [(color: String, score: Double)]?){
-        let linkRef = databaseReference.child(getRootName()).child("Score")
+    func gameScoreManager(with type: RequestType, for date: String, score: [(color: String, score: Double)]?, completion: (([(color: String, score: Double)]?)->Void)?){
+        let linkRef = databaseReference.child(date).child("Score")
         
         switch type {
         case .get:
@@ -154,14 +160,11 @@ extension GameViewController{
                             return
                     }
                     
-                    self.currentScore = [("purple", purple),
-                                         ("teal", teal),
-                                         ("green", green),
-                                         ("orange", orange)]
-                    print(self.currentScore)
-                    //updating leaderboard count and handle colors
-                    self.updateLeaderboard()
-                    
+                    completion!([("purple", purple),
+                                 ("teal", teal),
+                                 ("green", green),
+                                 ("orange", orange)])
+                    return
                 }else{
                     print("No records found")
                 }
@@ -176,9 +179,6 @@ extension GameViewController{
                 linkRef.setValue(newScore, withCompletionBlock: { (error, ref) in
                     if error != nil{
                         print(error!.localizedDescription)
-                    }else{
-                        //updating leaderboard count and handle colors
-                        self.updateLeaderboard()
                     }
                 })
             }else{

@@ -196,9 +196,9 @@ extension GameViewController{
         
 //        UIImageWriteToSavedPhotosAlbum(screenShot, nil, nil, nil)
         self.currentScore = colorArray(image: screenShot)
-        
+        self.updateLeaderboard()
         //Push score to Firebase
-        gameScoreManager(with: .set, score: currentScore)        
+        gameScoreManager(with: .set, for: self.getRootName(), score: self.currentScore, completion: nil)
     }
     
     func colorArray(image: UIImage) -> [(color: String, score: Double)] {
