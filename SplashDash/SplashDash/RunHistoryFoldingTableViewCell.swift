@@ -43,7 +43,7 @@ class RunHistoryFoldingTableViewCell: FoldingCell {
     
     override func animationDuration(_ itemIndex: NSInteger, type: FoldingCell.AnimationType) -> TimeInterval {
         // durations count equal it itemCount
-        let durations = [0.33, 0.26, 0.19, 0.12] // timing animation for each view
+        let durations = [0.2, 0.15, 0.15, 0.12] // timing animation for each view
         return durations[itemIndex]
     }
     
