@@ -28,6 +28,7 @@ class MapSliderView: UIView, MKMapViewDelegate {
         self.addSubview(mapView)
         self.addSubview(sliderContainerView)
         self.addSubview(slider)
+        self.addSubview(winnerButton)
     }
     
     func configureConstraints() {
@@ -41,10 +42,18 @@ class MapSliderView: UIView, MKMapViewDelegate {
             view.leading.trailing.bottom.equalToSuperview()
         }
         
+        winnerButton.snp.makeConstraints { (view) in
+            view.leading.equalTo(sliderContainerView).offset(10.0)
+            view.centerY.equalTo(sliderContainerView)
+            view.top.equalTo(sliderContainerView).offset(10.0)
+            view.bottom.equalTo(sliderContainerView).inset(10.0)
+            view.width.equalTo(60)
+        }
+        
         slider.snp.makeConstraints { (view) in
-            view.centerX.centerY.equalTo(sliderContainerView)
-            view.leading.equalToSuperview().offset(50.0)
-            view.trailing.equalToSuperview().inset(16.0)
+            view.leading.equalTo(winnerButton.snp.trailing).offset(10.0)
+            view.trailing.equalTo(sliderContainerView).inset(10.0)
+            view.centerY.equalTo(sliderContainerView)
         }
     }
     
@@ -78,5 +87,12 @@ class MapSliderView: UIView, MKMapViewDelegate {
         slider.isContinuous = true
         
         return slider
+    }()
+    
+    lazy var winnerButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "logoOutline"), for: .normal)
+        
+        return button
     }()
 }
