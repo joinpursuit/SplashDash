@@ -58,10 +58,6 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-//    func logoutButtonTapped(){
-//        print("logout button tapped")
-//    }
-    
     // MARK: - TableView Methods
     
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -17,8 +17,7 @@ class ContentCollectionView: UIView, UICollectionViewDelegate, UICollectionViewD
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
     }
-    // didSet
-    //  collectionView.scrollToItem(at: nextIndexPath, at: .centeredHorizontally, animated: true)
+
     var contentViews = [UIView]()
     let sideMargin: CGFloat = 8.0
     
