@@ -74,7 +74,12 @@ class SingleRunMapView: UIView, MKMapViewDelegate {
         let midLong = (maxLong + minLong) / 2
         let center = CLLocationCoordinate2D(latitude: CLLocationDegrees(midLat), longitude: CLLocationDegrees(midLong))
         
-        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let latSpan = maxLat - minLat
+        let longSpan = maxLong - minLong
+        var maxSpan = latSpan > longSpan ? latSpan : longSpan
+        maxSpan += 0.005
+        
+        let span = MKCoordinateSpan(latitudeDelta: CLLocationDegrees(maxSpan), longitudeDelta: CLLocationDegrees(maxSpan))
         
         self.singleRunMap.setRegion(MKCoordinateRegion(center: center, span: span), animated: false)
     }
