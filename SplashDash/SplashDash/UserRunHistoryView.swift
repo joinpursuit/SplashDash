@@ -150,7 +150,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         let timeString = timeFormatter.string(from: date)
         
         let miles = run.totalDistance * 0.000621371
-        let distanceString = String.localizedStringWithFormat("%.2f", miles)
+        let distanceString = String.localizedStringWithFormat("%.1f", miles)
         
         var durationString = ""
         let hours = run.runDuration / 3600
