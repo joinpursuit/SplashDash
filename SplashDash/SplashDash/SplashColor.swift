@@ -30,40 +30,21 @@ extension UIColor {
 
 struct SplashColor {
     static let colorsDict = [
-//        "darkPrimaryColor" : "7190d9",
-//        "primaryColor" : "d97181",
-//        "lightPrimaryColor" : "d9d071",
-        "darkPrimaryColor" : "F45D4C",
-        "primaryColor" : "A1DBB2",
-        "lightPrimaryColor" : "FEE5AD",
-        "primaryTextColor" : "FFFFFF",
-        "secondaryTextColor" : "727272",
-        
         "purple" : "673AB7",
         "teal" : "00BCD4",
         "green" : "4CAF50",
         "orange" : "FF5722"
     ]
     
-    static func darkPrimaryColor(alpha: CGFloat = 1.0) -> UIColor {
-        return UIColor(hex: self.colorsDict["darkPrimaryColor"]!, alpha: alpha)
-    }
     static func primaryColor(alpha: CGFloat = 1.0) -> UIColor {
         let defaults = UserDefaults()
         if let teamColor = defaults.string(forKey: "teamName") {
             return UIColor(hex: self.colorsDict[teamColor]!, alpha: alpha)
         }
-        return UIColor(hex: self.colorsDict["primaryColor"]!, alpha: alpha)
+        return UIColor.black
     }
     static func lightPrimaryColor(alpha: CGFloat = 1.0) -> UIColor {
         return .white
-//        return UIColor(hex: self.colorsDict["lightPrimaryColor"]!, alpha: alpha)
-    }
-    static func primaryTextColor(alpha: CGFloat = 1.0) -> UIColor {
-        return UIColor(hex: self.colorsDict["primaryTextColor"]!, alpha: alpha)
-    }
-    static func secondaryTextColor(alpha: CGFloat = 1.0) -> UIColor {
-        return UIColor(hex: self.colorsDict["secondaryTextColor"]!, alpha: alpha)
     }
     static func teamColor(for team: String, alpha: CGFloat = 1.0) -> UIColor {
         return UIColor(hex: self.colorsDict[team]!, alpha: alpha)
