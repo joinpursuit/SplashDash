@@ -38,12 +38,6 @@ class Run {
         self.allCoordinates.append(coor)
     }
     
-//    func reset(){
-//        self.allCoordinates = []
-//        self.totalDistance = 0
-//        self.runDuration = 0
-//    }
-    
     func toData() -> [String: Any] {
         let allCoordinatesArray = self.allCoordinates.map { $0.toData() }
         
