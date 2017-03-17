@@ -32,7 +32,7 @@ class GameViewController: UIViewController {
             let defaults = UserDefaults()
             if let user = currentUser {
                 defaults.set(user.teamName.rawValue, forKey: "teamName")
-                bottomView.contentCollectionView.userRunHistoryView.user = user
+                bottomView.contentCollectionView.userRunHistoryView.runs = user.runs
             }
         }
     }
