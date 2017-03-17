@@ -22,13 +22,6 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-//    var user: User? {
-//        didSet {
-//            self.createCellHeightsArray()
-//            self.userHistoryTableView.reloadData()
-//        }
-//    }
-    
     var kCloseCellHeight: CGFloat = 149
     
     var kOpenCellHeight: CGFloat = 447
