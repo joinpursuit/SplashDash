@@ -98,7 +98,6 @@ class MapSliderView: UIView, MKMapViewDelegate {
     
     lazy var winnerButton: UIButton = {
         let button = UIButton()
-        button.isHidden = true
 //        var image = UIImage(named: "logoOutline")?.withRenderingMode(.alwaysTemplate)
 //        let newImage = image?.imageWithColor(color1: SplashColor.primaryColor())
 //        
