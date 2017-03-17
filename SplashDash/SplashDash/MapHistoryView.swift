@@ -93,9 +93,8 @@ class MapHistoryView: UIView, MKMapViewDelegate, MapSliderViewDelegate {
     }
     
     func timerAction(){
-        let range =  self.mapSliderView.slider.maximumValue - self.mapSliderView.slider.minimumValue;
-        let increment:Float = 1;
-        let newval = self.mapSliderView.slider.value + increment;
+        let increment:Float = 1
+        let newval = self.mapSliderView.slider.value + increment
         
         self.mapSliderView.slider.setValue(newval, animated: true)
         self.mapSliderView.mapView.addOverlays([self.splashOverlays[Int(self.mapSliderView.slider.value)]])
