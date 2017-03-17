@@ -11,7 +11,7 @@ import MapKit
 import Firebase
 import SnapKit
 
-class MapHistoryView: UIView, MKMapViewDelegate {
+class MapHistoryView: UIView, MKMapViewDelegate, MapSliderViewDelegate {
     //MARK: - Properties
     var regionCalculations: (minLat: CLLocationDegrees, minLong: CLLocationDegrees, maxLat: CLLocationDegrees, maxLong: CLLocationDegrees)!
     var datePickerDate: String!
@@ -22,6 +22,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         }
     }
     var lastSliderValue: Float = 0
+    var myTimer: Timer?
     
     let calendar: Calendar = Calendar.current
     
@@ -40,6 +41,11 @@ class MapHistoryView: UIView, MKMapViewDelegate {
     
     //MARK: - Actions
     func datePickerChanged(_ sender: UIDatePicker) {
+        if myTimer != nil {
+            myTimer!.invalidate()
+            myTimer = nil
+        }
+        
         let selectedDate = self.datePicker.date
         self.datePickerDate = returnFormattedDate(date: selectedDate)
         
@@ -75,9 +81,30 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         }
     }
     
+    //MARK: - MapSliderViewDelegate
+    func winnerButtonTapped(_ sender: UIButton) {
+        print("BUTTON TAPPED")
+        setSliderValue()
+    }
+    
+    func setSliderValue(){
+        myTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        myTimer?.fire()
+    }
+    
+    func timerAction(){
+        let increment:Float = 1
+        let newval = self.mapSliderView.slider.value + increment
+        
+        self.mapSliderView.slider.setValue(newval, animated: true)
+        self.mapSliderView.mapView.addOverlays([self.splashOverlays[Int(self.mapSliderView.slider.value)]])
+    }
+
     //MARK: - Setup Views
     func setupViewHierarchy() {
         self.addSubview(mapSliderView)
+        mapSliderView.delegate = self
+        
         self.addSubview(datePicker)
         self.addSubview(monthUpCaretLabel)
         self.addSubview(monthDownCaretLabel)
@@ -243,6 +270,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         view.mapView.delegate = self
         view.slider.addTarget(self, action: #selector(sliderValueChanged(sender:)), for: UIControlEvents.touchUpInside)
         view.slider.addTarget(self, action: #selector(sliderMoving(sender:)), for: .valueChanged)
+        view.winnerButton.addTarget(self, action: #selector(winnerButtonTapped(_:)), for: .touchUpInside)
         
         return view
     }()
@@ -265,7 +293,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         dp.datePickerMode = .date
         dp.maximumDate = oneDayAgo
         dp.minimumDate = date
-        dp.addTarget(self, action: #selector(datePickerChanged(_:)), for: .touchUpInside)
+        dp.addTarget(self, action: #selector(datePickerChanged(_:)), for: .valueChanged)
         
         return dp
     }()
