@@ -195,6 +195,8 @@ class HomeViewController: UIViewController {
             self.stackview.greenImageView.removeShadows()
             self.stackview.purpleImageView.removeShadows()
             
+            self.teamName = nil
+            
         default:
             segmentedControlWasSwitched(title: "Register")
             self.hiddenLabel.text = ""
@@ -236,6 +238,8 @@ class HomeViewController: UIViewController {
                     view.width.equalToSuperview().multipliedBy(0.6)
                     view.centerX.equalToSuperview()
                 }
+                
+                self.passwordTextField.textField.text = nil
                 
                 self.view.layoutIfNeeded()
             }
@@ -279,7 +283,7 @@ class HomeViewController: UIViewController {
                 
 //                self.emailTextField.textField.text = ""
 //                self.usernameTextField.textField.text = ""
-//                self.passwordTextField.textField.text = ""
+                self.passwordTextField.textField.text = nil
                 
                 self.view.layoutIfNeeded()
             }
@@ -333,7 +337,7 @@ class HomeViewController: UIViewController {
                             let team = self.teamName,
                             email != "",
                             password != "" else {
-                                self.hiddenLabel.text = "Please verify all fields have been entered."
+                                self.hiddenLabel.text = "Please verify all fields have been entered and a team selected."
                                 self.hiddenLabel.isHidden = false
                                 return
                         }
@@ -373,7 +377,7 @@ class HomeViewController: UIViewController {
                             let password = self.passwordTextField.textField.text,
                             email != "",
                             password != "" else {
-                                self.hiddenLabel.text = "Please verify the format of your email and password."
+                                self.hiddenLabel.text = "Please verify all fields have been entered and a team selected."
                                 self.hiddenLabel.isHidden = false
                                 return
                         }
