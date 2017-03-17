@@ -11,7 +11,7 @@ import MapKit
 import Firebase
 import SnapKit
 
-class MapHistoryView: UIView, MKMapViewDelegate {
+class MapHistoryView: UIView, MKMapViewDelegate, MapSliderViewDelegate {
     //MARK: - Properties
     var regionCalculations: (minLat: CLLocationDegrees, minLong: CLLocationDegrees, maxLat: CLLocationDegrees, maxLong: CLLocationDegrees)!
     var datePickerDate: String!
@@ -75,9 +75,21 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         }
     }
     
+    //MARK: - MapSliderViewDelegate
+    func winnerButtonTapped(_ sender: UIButton) {
+        print("BUTTON TAPPED")
+        
+        for num in 0..<self.splashOverlays.count {
+            self.mapSliderView.slider.value = Float(num)
+            self.mapSliderView.mapView.addOverlays([self.splashOverlays[Int(self.mapSliderView.slider.value)]])
+        }
+    }
+    
     //MARK: - Setup Views
     func setupViewHierarchy() {
         self.addSubview(mapSliderView)
+        mapSliderView.delegate = self
+        
         self.addSubview(datePicker)
         self.addSubview(monthUpCaretLabel)
         self.addSubview(monthDownCaretLabel)
@@ -243,6 +255,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         view.mapView.delegate = self
         view.slider.addTarget(self, action: #selector(sliderValueChanged(sender:)), for: UIControlEvents.touchUpInside)
         view.slider.addTarget(self, action: #selector(sliderMoving(sender:)), for: .valueChanged)
+        view.winnerButton.addTarget(self, action: #selector(winnerButtonTapped(_:)), for: .touchUpInside)
         
         return view
     }()
@@ -265,7 +278,7 @@ class MapHistoryView: UIView, MKMapViewDelegate {
         dp.datePickerMode = .date
         dp.maximumDate = oneDayAgo
         dp.minimumDate = date
-        dp.addTarget(self, action: #selector(datePickerChanged(_:)), for: .touchUpInside)
+        dp.addTarget(self, action: #selector(datePickerChanged(_:)), for: .valueChanged)
         
         return dp
     }()

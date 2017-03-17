@@ -10,7 +10,14 @@ import UIKit
 import MapKit
 import SnapKit
 
+@objc protocol MapSliderViewDelegate {
+    func winnerButtonTapped(_ sender: UIButton)
+}
+
 class MapSliderView: UIView, MKMapViewDelegate {
+    //MARK: - Properties
+    var delegate: MapSliderViewDelegate?
+    
     //MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
