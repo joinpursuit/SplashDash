@@ -179,6 +179,24 @@ class HomeViewController: UIViewController {
         case 0:
             segmentedControlWasSwitched(title: "Sign in")
             self.hiddenLabel.text = ""
+            
+            self.emailTextField.textLabel.textColor = .black
+            self.emailTextField.textField.textColor = .black
+            self.usernameTextField.textLabel.textColor = .black
+            self.usernameTextField.textField.textColor = .black
+            self.passwordTextField.textLabel.textColor = .black
+            self.passwordTextField.textField.textColor = .black
+            self.signinRegisterButton.backgroundColor = .lightGray
+            self.signinRegisterButton.layer.borderColor = UIColor.lightGray.cgColor
+            self.hiddenLabel.textColor = .lightGray
+            
+            self.stackview.tealImageView.removeShadows()
+            self.stackview.orangeImageView.removeShadows()
+            self.stackview.greenImageView.removeShadows()
+            self.stackview.purpleImageView.removeShadows()
+            
+            self.teamName = nil
+            
         default:
             segmentedControlWasSwitched(title: "Register")
             self.hiddenLabel.text = ""
@@ -221,6 +239,8 @@ class HomeViewController: UIViewController {
                     view.centerX.equalToSuperview()
                 }
                 
+                self.passwordTextField.textField.text = nil
+                
                 self.view.layoutIfNeeded()
             }
         }
@@ -261,9 +281,9 @@ class HomeViewController: UIViewController {
                     view.centerX.equalToSuperview()
                 })
                 
-                self.emailTextField.textField.text = ""
-                self.usernameTextField.textField.text = ""
-                self.passwordTextField.textField.text = ""
+//                self.emailTextField.textField.text = ""
+//                self.usernameTextField.textField.text = ""
+                self.passwordTextField.textField.text = nil
                 
                 self.view.layoutIfNeeded()
             }
@@ -317,7 +337,7 @@ class HomeViewController: UIViewController {
                             let team = self.teamName,
                             email != "",
                             password != "" else {
-                                self.hiddenLabel.text = "Please verify all fields have been entered."
+                                self.hiddenLabel.text = "Please verify all fields have been entered and a team selected."
                                 self.hiddenLabel.isHidden = false
                                 return
                         }
@@ -357,7 +377,7 @@ class HomeViewController: UIViewController {
                             let password = self.passwordTextField.textField.text,
                             email != "",
                             password != "" else {
-                                self.hiddenLabel.text = "Please verify the format of your email and password."
+                                self.hiddenLabel.text = "Please verify all fields have been entered and a team selected."
                                 self.hiddenLabel.isHidden = false
                                 return
                         }
@@ -442,7 +462,7 @@ class HomeViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 12.0)
-        label.textColor = SplashColor.primaryColor()
+        label.textColor = .lightGray
         
         return label
     }()
