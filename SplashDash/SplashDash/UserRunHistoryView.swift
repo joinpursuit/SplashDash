@@ -17,15 +17,6 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     var user: User? {
         didSet {
-            guard let user = user else { return }
-            userRuns = user.runs.sorted {
-                return $0.timeStamp > $1.timeStamp
-            }
-        }
-    }
-    
-    var userRuns: [Run] = [] {
-        didSet {
             self.createCellHeightsArray()
             self.userHistoryTableView.reloadData()
         }
@@ -62,7 +53,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
 
     func createCellHeightsArray() {
         cellHeights = []
-        for _ in 0...userRuns.count {
+        for _ in 0...user!.runs.count {
             cellHeights.append(kCloseCellHeight)
         }
     }
@@ -77,7 +68,10 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userRuns.count
+        if let current = user{
+            return current.runs.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -96,9 +90,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! RunHistoryFoldingTableViewCell
         
-        if cell.isAnimating() {
-            return
-        }
+        if cell.isAnimating() { return }
         
         //(indexPath as NSIndexPath
         var duration = 0.0
@@ -114,17 +106,19 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
                 self.singleRunMap.snp.makeConstraints({ (view) in
                     view.top.bottom.leading.trailing.equalToSuperview()
                 })
+                
+                self.singleRunMap.zoomingMap(fit: self.user!.runs[indexPath.row].allCoordinates.map{ SplashOverlay(coor: $0) })
             })
             duration = 0.5
         } else {// close cell
             cellHeights[indexPath.row] = kCloseCellHeight
             tableView.isScrollEnabled = true
             cell.selectedAnimation(false, animated: true, completion: { (_) in
+                self.singleRunMap.mapDeconstruction()
                 self.singleRunMap.removeFromSuperview()
             })
-            duration = 0.8
+            duration = 0.5
         }
-        
         
         UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { () -> Void in
             tableView.beginUpdates()
@@ -139,11 +133,9 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.cellIdentifier, for: indexPath) as! RunHistoryFoldingTableViewCell
-//
-        //without folding cell
-//        let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.cellIdentifier, for: indexPath) as! HistoryTableViewCell
-//        
-        let run = userRuns[indexPath.row]
+        
+        
+        let run = user!.runs[indexPath.row]
         
         let date = Date(timeIntervalSince1970: run.timeStamp)
         

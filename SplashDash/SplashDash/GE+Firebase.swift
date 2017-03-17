@@ -94,12 +94,8 @@ extension GameViewController{
         
         // add run
         self.currentUser?.runs.append(thisRun)
-        let sortedRuns = self.currentUser?.runs.sorted {
-            return $0.timeStamp > $1.timeStamp
-        }
-        if let runs = sortedRuns {
-            bottomView.contentCollectionView.userRunHistoryView.userRuns = runs
-        }
+        self.currentUser?.runs = (self.currentUser?.runs.sorted { return $0.timeStamp > $1.timeStamp })!
+        bottomView.contentCollectionView.userRunHistoryView.user = self.currentUser
         
         //upload run
         guard let currentUserID = self.currentUser?.uid else { return }
