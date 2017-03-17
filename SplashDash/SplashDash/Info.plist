@@ -26,6 +26,10 @@
 	<string>GPS Enable</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Screenshot testing</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Painterz.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

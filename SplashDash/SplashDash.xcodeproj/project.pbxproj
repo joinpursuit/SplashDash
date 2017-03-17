@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0607739F1E7C8BA600834B61 /* c4qRun_q.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 060773961E7C8BA600834B61 /* c4qRun_q.gpx */; };
+		060773A01E7C8BA600834B61 /* c4qRun_4.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 060773971E7C8BA600834B61 /* c4qRun_4.gpx */; };
+		060773A11E7C8BA600834B61 /* c4qRun_c.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 060773981E7C8BA600834B61 /* c4qRun_c.gpx */; };
+		060773A21E7C8BA600834B61 /* DemoRun_1.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 060773991E7C8BA600834B61 /* DemoRun_1.gpx */; };
+		060773A31E7C8BA600834B61 /* DemoRun_2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 0607739A1E7C8BA600834B61 /* DemoRun_2.gpx */; };
+		060773A41E7C8BA600834B61 /* DemoRun_3.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 0607739B1E7C8BA600834B61 /* DemoRun_3.gpx */; };
+		060773A51E7C8BA600834B61 /* DemoRun_4.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 0607739C1E7C8BA600834B61 /* DemoRun_4.gpx */; };
+		060773A61E7C8BA600834B61 /* EastRiverRun.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 0607739D1E7C8BA600834B61 /* EastRiverRun.gpx */; };
+		060773A71E7C8BA600834B61 /* HudsonRiverRun.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 0607739E1E7C8BA600834B61 /* HudsonRiverRun.gpx */; };
 		061074E41E6E5E5B00F665A0 /* CentralParkRun.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074DD1E6E5E5B00F665A0 /* CentralParkRun.gpx */; };
-		061074E51E6E5E5B00F665A0 /* EastRiverRun.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074DE1E6E5E5B00F665A0 /* EastRiverRun.gpx */; };
-		061074E61E6E5E5B00F665A0 /* HudsonRiverRun.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074DF1E6E5E5B00F665A0 /* HudsonRiverRun.gpx */; };
-		061074E71E6E5E5B00F665A0 /* SquarespaceRun_1.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074E01E6E5E5B00F665A0 /* SquarespaceRun_1.gpx */; };
-		061074E81E6E5E5B00F665A0 /* SquarespaceRun_2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074E11E6E5E5B00F665A0 /* SquarespaceRun_2.gpx */; };
-		061074E91E6E5E5B00F665A0 /* SquarespaceRun_3.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074E21E6E5E5B00F665A0 /* SquarespaceRun_3.gpx */; };
-		061074EA1E6E5E5B00F665A0 /* SquarespaceRun_4.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 061074E31E6E5E5B00F665A0 /* SquarespaceRun_4.gpx */; };
 		061074EC1E71C54000F665A0 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061074EB1E71C54000F665A0 /* UIImage+Extension.swift */; };
 		0685B4711E79BCBC00559885 /* RunHistoryFoldingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0685B46F1E79BCBC00559885 /* RunHistoryFoldingTableViewCell.swift */; };
 		0685B4721E79BCBC00559885 /* RunHistoryFoldingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0685B4701E79BCBC00559885 /* RunHistoryFoldingTableViewCell.xib */; };
@@ -59,13 +62,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		060773951E7C493300834B61 /* Painterz.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Painterz.ttf; sourceTree = "<group>"; };
+		060773961E7C8BA600834B61 /* c4qRun_q.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = c4qRun_q.gpx; sourceTree = "<group>"; };
+		060773971E7C8BA600834B61 /* c4qRun_4.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = c4qRun_4.gpx; sourceTree = "<group>"; };
+		060773981E7C8BA600834B61 /* c4qRun_c.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = c4qRun_c.gpx; sourceTree = "<group>"; };
+		060773991E7C8BA600834B61 /* DemoRun_1.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DemoRun_1.gpx; sourceTree = "<group>"; };
+		0607739A1E7C8BA600834B61 /* DemoRun_2.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DemoRun_2.gpx; sourceTree = "<group>"; };
+		0607739B1E7C8BA600834B61 /* DemoRun_3.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DemoRun_3.gpx; sourceTree = "<group>"; };
+		0607739C1E7C8BA600834B61 /* DemoRun_4.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DemoRun_4.gpx; sourceTree = "<group>"; };
+		0607739D1E7C8BA600834B61 /* EastRiverRun.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = EastRiverRun.gpx; sourceTree = "<group>"; };
+		0607739E1E7C8BA600834B61 /* HudsonRiverRun.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = HudsonRiverRun.gpx; sourceTree = "<group>"; };
 		061074DD1E6E5E5B00F665A0 /* CentralParkRun.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = CentralParkRun.gpx; sourceTree = "<group>"; };
-		061074DE1E6E5E5B00F665A0 /* EastRiverRun.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = EastRiverRun.gpx; sourceTree = "<group>"; };
-		061074DF1E6E5E5B00F665A0 /* HudsonRiverRun.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = HudsonRiverRun.gpx; sourceTree = "<group>"; };
-		061074E01E6E5E5B00F665A0 /* SquarespaceRun_1.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_1.gpx; sourceTree = "<group>"; };
-		061074E11E6E5E5B00F665A0 /* SquarespaceRun_2.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_2.gpx; sourceTree = "<group>"; };
-		061074E21E6E5E5B00F665A0 /* SquarespaceRun_3.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_3.gpx; sourceTree = "<group>"; };
-		061074E31E6E5E5B00F665A0 /* SquarespaceRun_4.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_4.gpx; sourceTree = "<group>"; };
 		061074EB1E71C54000F665A0 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		0685B46F1E79BCBC00559885 /* RunHistoryFoldingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunHistoryFoldingTableViewCell.swift; sourceTree = "<group>"; };
 		0685B4701E79BCBC00559885 /* RunHistoryFoldingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RunHistoryFoldingTableViewCell.xib; sourceTree = "<group>"; };
@@ -130,12 +137,15 @@
 			isa = PBXGroup;
 			children = (
 				061074DD1E6E5E5B00F665A0 /* CentralParkRun.gpx */,
-				061074DE1E6E5E5B00F665A0 /* EastRiverRun.gpx */,
-				061074DF1E6E5E5B00F665A0 /* HudsonRiverRun.gpx */,
-				061074E01E6E5E5B00F665A0 /* SquarespaceRun_1.gpx */,
-				061074E11E6E5E5B00F665A0 /* SquarespaceRun_2.gpx */,
-				061074E21E6E5E5B00F665A0 /* SquarespaceRun_3.gpx */,
-				061074E31E6E5E5B00F665A0 /* SquarespaceRun_4.gpx */,
+				060773961E7C8BA600834B61 /* c4qRun_q.gpx */,
+				060773971E7C8BA600834B61 /* c4qRun_4.gpx */,
+				060773981E7C8BA600834B61 /* c4qRun_c.gpx */,
+				060773991E7C8BA600834B61 /* DemoRun_1.gpx */,
+				0607739A1E7C8BA600834B61 /* DemoRun_2.gpx */,
+				0607739B1E7C8BA600834B61 /* DemoRun_3.gpx */,
+				0607739C1E7C8BA600834B61 /* DemoRun_4.gpx */,
+				0607739D1E7C8BA600834B61 /* EastRiverRun.gpx */,
+				0607739E1E7C8BA600834B61 /* HudsonRiverRun.gpx */,
 			);
 			name = "GPX files";
 			sourceTree = "<group>";
@@ -226,6 +236,7 @@
 			children = (
 				06B239B01E66127B0071E17F /* Main.storyboard */,
 				06B239B31E66127B0071E17F /* Assets.xcassets */,
+				060773951E7C493300834B61 /* Painterz.ttf */,
 				47FCE6F21E74A8D000F317E5 /* Fresh-Paint.mp4 */,
 				06B239B51E66127B0071E17F /* LaunchScreen.storyboard */,
 				06B239CA1E675BC20071E17F /* GoogleService-Info.plist */,
@@ -316,7 +327,7 @@
 				TargetAttributes = {
 					06B239A81E66127B0071E17F = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = R7DWEPXN5Y;
+						DevelopmentTeam = 7NBTE6SY4Z;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -346,17 +357,20 @@
 			files = (
 				061074E41E6E5E5B00F665A0 /* CentralParkRun.gpx in Resources */,
 				47FCE6F41E74A8D000F317E5 /* Fresh-Paint.mp4 in Resources */,
-				061074E91E6E5E5B00F665A0 /* SquarespaceRun_3.gpx in Resources */,
-				061074EA1E6E5E5B00F665A0 /* SquarespaceRun_4.gpx in Resources */,
-				061074E81E6E5E5B00F665A0 /* SquarespaceRun_2.gpx in Resources */,
+				060773A61E7C8BA600834B61 /* EastRiverRun.gpx in Resources */,
+				060773A11E7C8BA600834B61 /* c4qRun_c.gpx in Resources */,
 				06B239B71E66127B0071E17F /* LaunchScreen.storyboard in Resources */,
+				060773A01E7C8BA600834B61 /* c4qRun_4.gpx in Resources */,
+				060773A41E7C8BA600834B61 /* DemoRun_3.gpx in Resources */,
+				060773A31E7C8BA600834B61 /* DemoRun_2.gpx in Resources */,
 				06B239CB1E675BC20071E17F /* GoogleService-Info.plist in Resources */,
-				061074E71E6E5E5B00F665A0 /* SquarespaceRun_1.gpx in Resources */,
+				060773A21E7C8BA600834B61 /* DemoRun_1.gpx in Resources */,
 				0685B4721E79BCBC00559885 /* RunHistoryFoldingTableViewCell.xib in Resources */,
 				06B239B41E66127B0071E17F /* Assets.xcassets in Resources */,
-				061074E61E6E5E5B00F665A0 /* HudsonRiverRun.gpx in Resources */,
+				0607739F1E7C8BA600834B61 /* c4qRun_q.gpx in Resources */,
+				060773A71E7C8BA600834B61 /* HudsonRiverRun.gpx in Resources */,
 				06B239B21E66127B0071E17F /* Main.storyboard in Resources */,
-				061074E51E6E5E5B00F665A0 /* EastRiverRun.gpx in Resources */,
+				060773A51E7C8BA600834B61 /* DemoRun_4.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,11 +591,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R7DWEPXN5Y;
+				DEVELOPMENT_TEAM = 7NBTE6SY4Z;
 				INFOPLIST_FILE = SplashDash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "tonglin.t91-gmail.com.SplashDash";
+				PRODUCT_BUNDLE_IDENTIFIER = "tonglin.t91-gmail.com.SplashDas";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -594,11 +608,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R7DWEPXN5Y;
+				DEVELOPMENT_TEAM = 7NBTE6SY4Z;
 				INFOPLIST_FILE = SplashDash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "tonglin.t91-gmail.com.SplashDash";
+				PRODUCT_BUNDLE_IDENTIFIER = "tonglin.t91-gmail.com.SplashDas";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
