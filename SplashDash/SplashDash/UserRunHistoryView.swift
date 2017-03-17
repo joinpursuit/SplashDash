@@ -15,12 +15,19 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     var singleRunMap = SingleRunMapView()
     
-    var user: User? {
+    var runs = [Run]() {
         didSet {
             self.createCellHeightsArray()
             self.userHistoryTableView.reloadData()
         }
     }
+    
+//    var user: User? {
+//        didSet {
+//            self.createCellHeightsArray()
+//            self.userHistoryTableView.reloadData()
+//        }
+//    }
     
     var kCloseCellHeight: CGFloat = 149
     
@@ -53,7 +60,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
 
     func createCellHeightsArray() {
         cellHeights = []
-        for _ in 0...user!.runs.count {
+        for _ in 0...runs.count {
             cellHeights.append(kCloseCellHeight)
         }
     }
@@ -68,10 +75,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let current = user{
-            return current.runs.count
-        }
-        return 0
+            return runs.count
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -107,7 +111,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
                     view.top.bottom.leading.trailing.equalToSuperview()
                 })
                 
-                self.singleRunMap.zoomingMap(fit: self.user!.runs[indexPath.row].allCoordinates.map{ SplashOverlay(coor: $0) })
+                self.singleRunMap.zoomingMap(fit: self.runs[indexPath.row].allCoordinates.map{ SplashOverlay(coor: $0) })
             })
             duration = 0.5
         } else {// close cell
@@ -135,7 +139,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.cellIdentifier, for: indexPath) as! RunHistoryFoldingTableViewCell
         
         
-        let run = user!.runs[indexPath.row]
+        let run = runs[indexPath.row]
         
         let date = Date(timeIntervalSince1970: run.timeStamp)
         

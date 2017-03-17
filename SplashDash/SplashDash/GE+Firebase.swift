@@ -93,9 +93,8 @@ extension GameViewController{
         let thisRun = Run(allCoordinates: currentRunCoordinates, totalDistance: self.traveledDistanceInMeters, runDuration: self.duration)
         
         // add run
-        self.currentUser?.runs.append(thisRun)
-        self.currentUser?.runs = (self.currentUser?.runs.sorted { return $0.timeStamp > $1.timeStamp })!
-        bottomView.contentCollectionView.userRunHistoryView.user = self.currentUser
+        self.currentUser?.runs.insert(thisRun, at: 0)
+        bottomView.contentCollectionView.userRunHistoryView.runs = self.currentUser?.runs ?? [Run]()
         
         //upload run
         guard let currentUserID = self.currentUser?.uid else { return }

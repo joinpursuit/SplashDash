@@ -33,7 +33,7 @@ class User {
         self.username = username
         self.uid = uid
         self.teamName = teamName
-        self.runs = runs
+        self.runs = runs.sorted{ $0.timeStamp > $1.timeStamp }
     }
     
     convenience init?(_ validDict: NSDictionary) {
