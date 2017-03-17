@@ -179,6 +179,22 @@ class HomeViewController: UIViewController {
         case 0:
             segmentedControlWasSwitched(title: "Sign in")
             self.hiddenLabel.text = ""
+            
+            self.emailTextField.textLabel.textColor = .black
+            self.emailTextField.textField.textColor = .black
+            self.usernameTextField.textLabel.textColor = .black
+            self.usernameTextField.textField.textColor = .black
+            self.passwordTextField.textLabel.textColor = .black
+            self.passwordTextField.textField.textColor = .black
+            self.signinRegisterButton.backgroundColor = .lightGray
+            self.signinRegisterButton.layer.borderColor = UIColor.lightGray.cgColor
+            self.hiddenLabel.textColor = .lightGray
+            
+            self.stackview.tealImageView.removeShadows()
+            self.stackview.orangeImageView.removeShadows()
+            self.stackview.greenImageView.removeShadows()
+            self.stackview.purpleImageView.removeShadows()
+            
         default:
             segmentedControlWasSwitched(title: "Register")
             self.hiddenLabel.text = ""
@@ -261,9 +277,9 @@ class HomeViewController: UIViewController {
                     view.centerX.equalToSuperview()
                 })
                 
-                self.emailTextField.textField.text = ""
-                self.usernameTextField.textField.text = ""
-                self.passwordTextField.textField.text = ""
+//                self.emailTextField.textField.text = ""
+//                self.usernameTextField.textField.text = ""
+//                self.passwordTextField.textField.text = ""
                 
                 self.view.layoutIfNeeded()
             }
@@ -442,7 +458,7 @@ class HomeViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 12.0)
-        label.textColor = SplashColor.primaryColor()
+        label.textColor = .lightGray
         
         return label
     }()
