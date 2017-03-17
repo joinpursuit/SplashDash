@@ -23,6 +23,12 @@ class MapHistoryView: UIView, MKMapViewDelegate, MapSliderViewDelegate {
     }
     var lastSliderValue: Float = 0
     var myTimer: Timer?
+    var scoreForDate: [(String, Float)] = [] {
+        didSet {
+            self.fillInWinnerButton()
+        }
+    }
+    var winnerImage: UIImage?
     
     let calendar: Calendar = Calendar.current
     
@@ -193,12 +199,58 @@ class MapHistoryView: UIView, MKMapViewDelegate, MapSliderViewDelegate {
                         //draw all splashes parsed from database
                         let splash = SplashOverlay(coor: splashCoor)
                         overlays.append(splash)
-                        
-                        self.splashOverlays = overlays
                     }
+                    self.splashOverlays = overlays
+                    self.calculateWinner()
+                    
+//                    self.setMapPinAndRegion()
                 }
             }
         }
+    }
+    
+    func calculateWinner() {
+        let linkRef = FIRDatabase.database().reference().child("Public/\(self.datePickerDate!)").child("Score")
+        
+        linkRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let value = snapshot.value as? NSDictionary{
+                guard let purple = value["purple"] as? Float,
+                    let teal = value["teal"] as? Float,
+                    let green = value["green"] as? Float,
+                    let orange = value["orange"] as? Float else{
+                        print("!!!!!Error parsing game score!!!!!")
+                        return
+                }
+                
+                self.scoreForDate = [("purple", purple),
+                                     ("teal", teal),
+                                     ("green", green),
+                                     ("orange", orange)]
+            }else{
+                print("No records found")
+            }
+        })
+    }
+    
+    func fillInWinnerButton() {
+        let winner = self.scoreForDate.sorted { $0.1 > $1.1 }[0].0
+        let image = UIImage(named: "logoSplash")
+        
+        switch winner {
+        case "purple":
+            self.winnerImage = image?.imageWithColor(color1: SplashColor.teamColor(for: "purple", alpha: 1.0))
+        case "teal":
+            self.winnerImage = image?.imageWithColor(color1: SplashColor.teamColor(for: "teal", alpha: 1.0))
+        case "green":
+            self.winnerImage = image?.imageWithColor(color1: SplashColor.teamColor(for: "green", alpha: 1.0))
+        case "orange":
+            self.winnerImage = image?.imageWithColor(color1: SplashColor.teamColor(for: "orange", alpha: 1.0))
+        default:
+            return
+            
+        }
+        self.mapSliderView.winnerButton.setImage(self.winnerImage, for: .normal)
+        
     }
     
     //MARK: - MKMap Delegate Methods
@@ -209,60 +261,6 @@ class MapHistoryView: UIView, MKMapViewDelegate, MapSliderViewDelegate {
         }
         return MKOverlayRenderer(overlay: overlay)
     }
-    
-//    func setMapPinAndRegion() {
-//        mapView.removeAnnotations(mapView.annotations)
-//        for (index, request) in requests.enumerated() {
-//            guard let coordinates = request.coordinates else { continue }
-//            
-//            let pinAnnotation = RequestMKPointAnnotation()
-//            pinAnnotation.coordinate = coordinates
-//            
-//            if let address = request.incidentAddress {
-//                pinAnnotation.title = address
-//            } else {
-//                pinAnnotation.title = request.createdDate
-//            }
-//            
-//            pinAnnotation.subtitle = request.descriptor
-//            
-//            pinAnnotation.index = index
-//            mapView.addAnnotation(pinAnnotation)
-//            
-//            if let calc = regionCalculations {
-//                if coordinates.latitude < calc.minLat {
-//                    regionCalculations?.minLat = coordinates.latitude
-//                }
-//                if coordinates.latitude > calc.maxLat {
-//                    regionCalculations?.maxLat = coordinates.latitude
-//                }
-//                if coordinates.longitude < calc.minLong {
-//                    regionCalculations?.minLong = coordinates.longitude
-//                }
-//                if coordinates.longitude > calc.maxLong {
-//                    regionCalculations?.maxLong = coordinates.longitude
-//                }
-//            } else {
-//                regionCalculations = (minLat: coordinates.latitude, minLong: coordinates.longitude, maxLat: coordinates.latitude, maxLong: coordinates.longitude)
-//            }
-//            
-//            guard let calc = regionCalculations else { return }
-//            
-//            let midLat = (calc.maxLat + calc.minLat) / 2
-//            let midLong = (calc.maxLong + calc.minLong) / 2
-//            let center = CLLocationCoordinate2D(latitude: CLLocationDegrees(midLat), longitude: CLLocationDegrees(midLong))
-//            
-//            let latSpan = calc.maxLat - calc.minLat
-//            let longSpan = calc.maxLong - calc.minLong
-//            
-//            let span = MKCoordinateSpan(latitudeDelta: CLLocationDegrees(latSpan), longitudeDelta: CLLocationDegrees(longSpan))
-//            
-//            let mkCoordinateRegion = MKCoordinateRegion(center: center, span: span)
-//            
-//            self.mapView.setRegion(mkCoordinateRegion, animated: true)
-//        }
-//
-//    }
     
     //MARK: - Views
     lazy var mapSliderView: MapSliderView = {
