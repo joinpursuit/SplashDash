@@ -287,16 +287,16 @@ extension GameViewController{
     func updateLeaderboard() {
         let sortedScores = self.currentScore.sorted { $0.score > $1.score }
         
-        self.firstPlaceView.teamNameLabel.text = "\(sortedScores[0].color)"
+        self.firstPlaceView.teamNameLabel.text = convertTeamName(name: "\(sortedScores[0].color)")
         self.firstPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[0].color)")
         
-        self.secondPlaceView.teamNameLabel.text = "\(sortedScores[1].color)"
+        self.secondPlaceView.teamNameLabel.text = convertTeamName(name: "\(sortedScores[1].color)")
         self.secondPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[1].color)")
         
-        self.thirdPlaceView.teamNameLabel.text = "\(sortedScores[2].color)"
+        self.thirdPlaceView.teamNameLabel.text = convertTeamName(name: "\(sortedScores[2].color)")
         self.thirdPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[2].color)")
         
-        self.fourthPlaceView.teamNameLabel.text = "\(sortedScores[3].color)"
+        self.fourthPlaceView.teamNameLabel.text = convertTeamName(name: "\(sortedScores[3].color)")
         self.fourthPlaceView.backgroundColor = SplashColor.teamColor(for: "\(sortedScores[3].color)")
         
         UIView.animate(withDuration: 0.5) {
@@ -307,7 +307,21 @@ extension GameViewController{
         }
         
         print(currentScore)
-        
+    }
+    
+    func convertTeamName(name: String) -> String {
+        switch name {
+        case "purple":
+            return "Purple"
+        case "green":
+            return "Green"
+        case "teal":
+            return "Teal"
+        case "orange":
+            return "Orange"
+        default:
+            return ""
+        }
     }
 
 }
