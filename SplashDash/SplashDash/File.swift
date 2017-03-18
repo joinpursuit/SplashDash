@@ -12,7 +12,7 @@ import UIKit
 extension HomeViewController{
     override func viewDidAppear(_ animated: Bool) {
 
-//        emailTextField.textField.text = "tong@splash.cn"
+//        emailTextField.textField.text = "tong@splash.jp"
 //        passwordTextField.textField.text = "000000"
 //
         emailTextField.textField.text = "hari@hari.com"
