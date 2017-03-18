@@ -201,9 +201,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         let speedString = String.localizedStringWithFormat("%.2f", mph)
  
         cell.runLabel.text = "Date: \(dateString)\nTime: \(timeString)\nTotal Distance: \(distanceString) miles\nDuration: \(durationString)\nAverage Speed: \(speedString)"
-        
-        self.singleRunMap.dateLabel.text = dateString
-        
+                
         return cell
     }
  

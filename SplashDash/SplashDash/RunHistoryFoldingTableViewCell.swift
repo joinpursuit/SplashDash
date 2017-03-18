@@ -53,6 +53,7 @@ class RunHistoryFoldingTableViewCell: FoldingCell {
     lazy var runLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.textColor = SplashColor.primaryColor()
         return label
     }()
 
