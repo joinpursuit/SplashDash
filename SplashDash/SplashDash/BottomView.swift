@@ -131,7 +131,7 @@ class BottomView: UIView {
         view.backgroundColor = UIColor.white.withAlphaComponent(0.30)
         return view
     }()
-    
+        
     lazy var contentSegmentedControl: ScrollableSegmentedControl = {
         let control = ScrollableSegmentedControl()
         control.segmentStyle = .textOnly

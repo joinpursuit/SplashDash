@@ -82,6 +82,39 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! RunHistoryFoldingTableViewCell
+        let run = runs[indexPath.row]
+        
+        let date = Date(timeIntervalSince1970: run.timeStamp)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        let dateString = dateFormatter.string(from: date)
+        
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateStyle = .none
+        timeFormatter.timeStyle = .short
+        let timeString = timeFormatter.string(from: date)
+        
+        let miles = run.totalDistance * 0.000621371
+        let distanceString = String.localizedStringWithFormat("%.1f", miles)
+        
+        var durationString = ""
+        let hours = run.runDuration / 3600
+        let minutes = (run.runDuration % 3600) / 60
+        let seconds = (run.runDuration % 3600) % 60
+        
+        if hours > 0 {
+            durationString += "\(hours)h "
+        }
+        if minutes > 0 {
+            durationString += "\(minutes)m "
+        }
+        durationString += "\(seconds)s"
+        
+        let mph = run.averageSpeed * 2.23694
+        let speedString = String.localizedStringWithFormat("%.2f", mph)
+
         
         if cell.isAnimating() { return }
         
@@ -100,7 +133,13 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
                     view.top.bottom.leading.trailing.equalToSuperview()
                 })
                 
-                self.singleRunMap.zoomingMap(fit: self.runs[indexPath.row].allCoordinates.map{ SplashOverlay(coor: $0) })
+                self.singleRunMap.zoomingMap(fit: run.allCoordinates.map{ SplashOverlay(coor: $0) })
+                self.singleRunMap.dateLabel.text = dateString
+                self.singleRunMap.timeLabel.text = timeString
+                self.singleRunMap.durationNumLabel.text = durationString
+                self.singleRunMap.distanceNumLabel.text = distanceString
+                self.singleRunMap.speedNumLabel.text = speedString
+                
             })
             duration = 0.5
         } else {// close cell
@@ -162,6 +201,9 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         let speedString = String.localizedStringWithFormat("%.2f", mph)
  
         cell.runLabel.text = "Date: \(dateString)\nTime: \(timeString)\nTotal Distance: \(distanceString) miles\nDuration: \(durationString)\nAverage Speed: \(speedString)"
+        
+        self.singleRunMap.dateLabel.text = dateString
+        
         return cell
     }
  
