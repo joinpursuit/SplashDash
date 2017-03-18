@@ -12,6 +12,8 @@ import SnapKit
 
 class RunHistoryFoldingTableViewCell: FoldingCell {
 
+    static let cellIdentifier = "User History Table View Cell"
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

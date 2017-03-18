@@ -125,7 +125,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.cellIdentifier, for: indexPath) as! RunHistoryFoldingTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: RunHistoryFoldingTableViewCell.cellIdentifier, for: indexPath) as! RunHistoryFoldingTableViewCell
         
         
         let run = runs[indexPath.row]
@@ -174,7 +174,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         tView.backgroundColor = SplashColor.primaryColor()
         tView.separatorStyle = .none
         //Register folding cell to user's table view
-        tView.register(UINib(nibName: "RunHistoryFoldingTableViewCell", bundle: nil), forCellReuseIdentifier: HistoryTableViewCell.cellIdentifier)
+        tView.register(UINib(nibName: "RunHistoryFoldingTableViewCell", bundle: nil), forCellReuseIdentifier: RunHistoryFoldingTableViewCell.cellIdentifier)
 //        tView.register(HistoryTableViewCell.self, forCellReuseIdentifier: HistoryTableViewCell.cellIdentifier)
         tView.estimatedRowHeight = 250
         tView.rowHeight = UITableViewAutomaticDimension
