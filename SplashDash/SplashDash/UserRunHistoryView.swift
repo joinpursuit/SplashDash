@@ -22,9 +22,9 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    var kCloseCellHeight: CGFloat = 149
+    var kCloseCellHeight: CGFloat = 90
     
-    var kOpenCellHeight: CGFloat = 447
+    var kOpenCellHeight: CGFloat = 450
     
     var cellHeights = [CGFloat]()
     
@@ -82,52 +82,6 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! RunHistoryFoldingTableViewCell
-        
-        if cell.isAnimating() { return }
-        
-        //(indexPath as NSIndexPath
-        var duration = 0.0
-        if cellHeights[indexPath.row] == kCloseCellHeight {
-            // open cell
-            cellHeights[indexPath.row] = kOpenCellHeight
-            tableView.isScrollEnabled = false
-            
-            cell.selectedAnimation(true, animated: true, completion: { (_) in
-                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-                //add map to cell
-                cell.containerView.addSubview(self.singleRunMap)
-                self.singleRunMap.snp.makeConstraints({ (view) in
-                    view.top.bottom.leading.trailing.equalToSuperview()
-                })
-                
-                self.singleRunMap.zoomingMap(fit: self.runs[indexPath.row].allCoordinates.map{ SplashOverlay(coor: $0) })
-            })
-            duration = 0.5
-        } else {// close cell
-            cellHeights[indexPath.row] = kCloseCellHeight
-            tableView.isScrollEnabled = true
-            cell.selectedAnimation(false, animated: true, completion: { (_) in
-                self.singleRunMap.mapDeconstruction()
-                self.singleRunMap.removeFromSuperview()
-            })
-            duration = 0.5
-        }
-        
-        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { () -> Void in
-            tableView.beginUpdates()
-            tableView.endUpdates()
-        }, completion: nil)
-        
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeights[indexPath.row]
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.cellIdentifier, for: indexPath) as! RunHistoryFoldingTableViewCell
-        
-        
         let run = runs[indexPath.row]
         
         let date = Date(timeIntervalSince1970: run.timeStamp)
@@ -160,8 +114,95 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         
         let mph = run.averageSpeed * 2.23694
         let speedString = String.localizedStringWithFormat("%.2f", mph)
+
+        
+        if cell.isAnimating() { return }
+        
+        //(indexPath as NSIndexPath
+        var duration = 0.0
+        if cellHeights[indexPath.row] == kCloseCellHeight {
+            // open cell
+            cellHeights[indexPath.row] = kOpenCellHeight
+            tableView.isScrollEnabled = false
+            
+            cell.selectedAnimation(true, animated: true, completion: { (_) in
+                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                //add map to cell
+                cell.containerView.addSubview(self.singleRunMap)
+                self.singleRunMap.snp.makeConstraints({ (view) in
+                    view.top.bottom.leading.trailing.equalToSuperview()
+                })
+                
+                self.singleRunMap.zoomingMap(fit: run.allCoordinates.map{ SplashOverlay(coor: $0) })
+                self.singleRunMap.dateLabel.text = dateString
+                self.singleRunMap.timeLabel.text = timeString
+                self.singleRunMap.durationNumLabel.text = durationString
+                self.singleRunMap.distanceNumLabel.text = distanceString
+                self.singleRunMap.speedNumLabel.text = speedString
+                
+            })
+            duration = 0.5
+        } else {// close cell
+            cellHeights[indexPath.row] = kCloseCellHeight
+            tableView.isScrollEnabled = true
+            cell.selectedAnimation(false, animated: true, completion: { (_) in
+                self.singleRunMap.mapDeconstruction()
+                self.singleRunMap.removeFromSuperview()
+            })
+            duration = 0.5
+        }
+        
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { () -> Void in
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }, completion: nil)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cellHeights[indexPath.row]
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: RunHistoryFoldingTableViewCell.cellIdentifier, for: indexPath) as! RunHistoryFoldingTableViewCell
+        
+        
+        let run = runs[indexPath.row]
+        
+        let date = Date(timeIntervalSince1970: run.timeStamp)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        let dateString = dateFormatter.string(from: date)
+        
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateStyle = .none
+        timeFormatter.timeStyle = .short
+        let timeString = timeFormatter.string(from: date)
+        
+        let miles = run.totalDistance * 0.000621371
+        let distanceString = String.localizedStringWithFormat("%.1f", miles)
+        
+//        var durationString = ""
+//        let hours = run.runDuration / 3600
+//        let minutes = (run.runDuration % 3600) / 60
+//        let seconds = (run.runDuration % 3600) % 60
+//        
+//        if hours > 0 {
+//            durationString += "\(hours)h "
+//        }
+//        if minutes > 0 {
+//            durationString += "\(minutes)m "
+//        }
+//        durationString += "\(seconds)s"
+//        
+//        let mph = run.averageSpeed * 2.23694
+//        let speedString = String.localizedStringWithFormat("%.2f", mph)
  
-        cell.runLabel.text = "Date: \(dateString)\nTime: \(timeString)\nTotal Distance: \(distanceString) miles\nDuration: \(durationString)\nAverage Speed: \(speedString)"
+//        cell.runLabel.text = "Date: \(dateString)\nTime: \(timeString)\nTotal Distance: \(distanceString) miles\nDuration: \(durationString)\nAverage Speed: \(speedString)"
+        cell.runLabel.text = "Date: \(dateString)\nTime: \(timeString)\nTotal Distance: \(distanceString) miles"
+
         return cell
     }
  
@@ -174,7 +215,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         tView.backgroundColor = SplashColor.primaryColor()
         tView.separatorStyle = .none
         //Register folding cell to user's table view
-        tView.register(UINib(nibName: "RunHistoryFoldingTableViewCell", bundle: nil), forCellReuseIdentifier: HistoryTableViewCell.cellIdentifier)
+        tView.register(UINib(nibName: "RunHistoryFoldingTableViewCell", bundle: nil), forCellReuseIdentifier: RunHistoryFoldingTableViewCell.cellIdentifier)
 //        tView.register(HistoryTableViewCell.self, forCellReuseIdentifier: HistoryTableViewCell.cellIdentifier)
         tView.estimatedRowHeight = 250
         tView.rowHeight = UITableViewAutomaticDimension

@@ -69,7 +69,7 @@ class BottomView: UIView {
         }
         
         durationLabel.snp.makeConstraints { (view) in
-            view.leading.equalToSuperview().inset(16.0)
+            view.leading.equalToSuperview().inset(24.0)
             view.bottom.equalToSuperview().inset(8.0)
             view.top.equalTo(durationNumLabel.snp.bottom).offset(8.0)
         }
@@ -80,7 +80,7 @@ class BottomView: UIView {
         }
         
         hoursLeftLabel.snp.makeConstraints { (view) in
-            view.trailing.equalToSuperview().inset(16.0)
+            view.trailing.equalToSuperview().inset(24.0)
             view.bottom.equalToSuperview().inset(8.0)
             view.top.equalTo(hoursLeftNumLabel.snp.bottom).offset(8.0)
         }
@@ -146,11 +146,11 @@ class BottomView: UIView {
         return control
     }()
     
-    private lazy var seperatorLine2: UIView = {
-        let view = UIView()
-        view.backgroundColor = SplashColor.lightPrimaryColor()
-        return view
-    }()
+//    private lazy var seperatorLine2: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = SplashColor.lightPrimaryColor()
+//        return view
+//    }()
     
     lazy var currentRunLabelContainer: UIView = {
         let view = UIView()

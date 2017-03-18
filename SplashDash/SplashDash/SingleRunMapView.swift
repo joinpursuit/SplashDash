@@ -17,6 +17,7 @@ class SingleRunMapView: UIView, MKMapViewDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .white
         setupViewHierarchy()
         configureConstraints()
     }
@@ -27,12 +28,69 @@ class SingleRunMapView: UIView, MKMapViewDelegate {
 
     func setupViewHierarchy(){
         self.addSubview(singleRunMap)
+        self.addSubview(distanceLabel)
+        self.addSubview(durationLabel)
+        self.addSubview(speedLabel)
+        self.addSubview(distanceNumLabel)
+        self.addSubview(durationNumLabel)
+        self.addSubview(speedNumLabel)
+        self.addSubview(seperatorLine)
+        self.addSubview(timeLabel)
+        self.addSubview(dateLabel)
     }
     
     func configureConstraints(){
         singleRunMap.snp.makeConstraints { (view) in
-            view.top.bottom.leading.trailing.equalToSuperview()
+            view.top.leading.trailing.equalToSuperview()
+            view.bottom.equalTo(dateLabel.snp.top).offset(-8.0)
         }
+        
+        distanceLabel.snp.makeConstraints { (view) in
+            view.centerX.equalToSuperview()
+            view.bottom.equalToSuperview().inset(8.0)
+        }
+        
+        durationLabel.snp.makeConstraints { (view) in
+            view.leading.equalToSuperview().inset(24.0)
+            view.bottom.equalToSuperview().inset(8.0)
+        }
+        
+        speedLabel.snp.makeConstraints { (view) in
+            view.trailing.equalToSuperview().inset(24.0)
+            view.bottom.equalToSuperview().inset(8.0)
+        }
+        
+        distanceNumLabel.snp.makeConstraints { (view) in
+            view.centerX.equalTo(distanceLabel)
+            view.bottom.equalTo(distanceLabel.snp.top).offset(-8.0)
+        }
+        
+        durationNumLabel.snp.makeConstraints { (view) in
+            view.centerX.equalTo(durationLabel)
+            view.bottom.equalTo(durationLabel.snp.top).offset(-8.0)
+        }
+        
+        speedNumLabel.snp.makeConstraints { (view) in
+            view.centerX.equalTo(speedLabel)
+            view.bottom.equalTo(speedLabel.snp.top).offset(-8.0)
+        }
+        
+        seperatorLine.snp.makeConstraints { (view) in
+            view.leading.trailing.equalToSuperview()
+            view.height.equalTo(1.0)
+            view.bottom.equalTo(distanceNumLabel.snp.top).offset(-8.0)
+        }
+        
+        timeLabel.snp.makeConstraints { (view) in
+            view.centerX.equalToSuperview()
+            view.bottom.equalTo(seperatorLine.snp.top).offset(-8.0)
+        }
+        
+        dateLabel.snp.makeConstraints { (view) in
+            view.centerX.equalToSuperview()
+            view.bottom.equalTo(timeLabel.snp.top).offset(-8.0)
+        }
+
     }
     
     func zoomingMap(fit overlays: [SplashOverlay]){
@@ -112,4 +170,99 @@ class SingleRunMapView: UIView, MKMapViewDelegate {
         view.isUserInteractionEnabled = false
         return view
     }()
+    
+    private lazy var seperatorLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = SplashColor.primaryColor(alpha: 0.3)
+        return view
+    }()
+    
+    private lazy var durationLabel: UILabel = {
+        let label = UILabel()
+        var labelText = "Duration"
+        label.text = labelText
+        label.textColor = SplashColor.primaryColor()
+        label.numberOfLines = 0
+        label.font = label.font.withSize(13)
+        label.textAlignment = NSTextAlignment.center
+        return label
+    }()
+    
+    private lazy var distanceLabel: UILabel = {
+        let label = UILabel()
+        var labelText = "Distance"
+        label.text = labelText
+        label.textColor = SplashColor.primaryColor()
+        label.numberOfLines = 0
+        label.font = label.font.withSize(13)
+        label.textAlignment = NSTextAlignment.center
+        return label
+    }()
+    
+    private lazy var speedLabel: UILabel = {
+        let label = UILabel()
+        var labelText = "Avg. Speed"
+        label.text = labelText
+        label.textColor = SplashColor.primaryColor()
+        label.numberOfLines = 0
+        label.font = label.font.withSize(13)
+        label.textAlignment = NSTextAlignment.center
+        return label
+    }()
+    
+    lazy var durationNumLabel: UILabel = {
+        let label = UILabel()
+        var labelText = "0"
+        label.text = labelText
+        label.textColor = SplashColor.primaryColor()
+        label.numberOfLines = 0
+        label.font = label.font.withSize(24)
+        label.textAlignment = NSTextAlignment.center
+        return label
+    }()
+    
+    lazy var distanceNumLabel: UILabel = {
+        let label = UILabel()
+        var labelText = "0"
+        label.text = labelText
+        label.textColor = SplashColor.primaryColor()
+        label.numberOfLines = 0
+        label.font = label.font.withSize(24)
+        label.textAlignment = NSTextAlignment.center
+        return label
+    }()
+    
+    lazy var speedNumLabel: UILabel = {
+        let label = UILabel()
+        var labelText = "0"
+        label.text = labelText
+        label.textColor = SplashColor.primaryColor()
+        label.numberOfLines = 0
+        label.font = label.font.withSize(24)
+        label.textAlignment = NSTextAlignment.center
+        return label
+    }()
+    
+    lazy var timeLabel: UILabel = {
+        let label = UILabel()
+        var labelText = "0:00 am"
+        label.text = labelText
+        label.textColor = SplashColor.primaryColor()
+        label.numberOfLines = 0
+        label.font = label.font.withSize(13)
+        label.textAlignment = NSTextAlignment.center
+        return label
+    }()
+    
+    lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        var labelText = "MM/DD/YY"
+        label.text = labelText
+        label.textColor = SplashColor.primaryColor()
+        label.numberOfLines = 0
+        label.font = label.font.withSize(24)
+        label.textAlignment = NSTextAlignment.center
+        return label
+    }()
+    
 }

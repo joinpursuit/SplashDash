@@ -52,7 +52,6 @@
 		4B3A907B1E6C92830028FBC1 /* ContentCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3A907A1E6C92830028FBC1 /* ContentCollectionView.swift */; };
 		4B3A907F1E6C9B580028FBC1 /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3A907E1E6C9B580028FBC1 /* ContentCollectionViewCell.swift */; };
 		4B9BF6C11E6763D700EA0410 /* UserRunHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C01E6763D700EA0410 /* UserRunHistoryView.swift */; };
-		4B9BF6C41E6765E700EA0410 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C31E6765E700EA0410 /* HistoryTableViewCell.swift */; };
 		4B9BF6C71E67758900EA0410 /* SplashColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C61E67758900EA0410 /* SplashColor.swift */; };
 		4BC54AC21E6CE3E90014F3B3 /* MapHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC54AC11E6CE3E90014F3B3 /* MapHistoryView.swift */; };
 		BC5BDFD4B4D428ADBA93BB52 /* Pods_SplashDash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA16C7EB475F455AAFFA273 /* Pods_SplashDash.framework */; };
@@ -109,7 +108,6 @@
 		4B3A907A1E6C92830028FBC1 /* ContentCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCollectionView.swift; sourceTree = "<group>"; };
 		4B3A907E1E6C9B580028FBC1 /* ContentCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCell.swift; sourceTree = "<group>"; };
 		4B9BF6C01E6763D700EA0410 /* UserRunHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRunHistoryView.swift; sourceTree = "<group>"; };
-		4B9BF6C31E6765E700EA0410 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		4B9BF6C61E67758900EA0410 /* SplashColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashColor.swift; sourceTree = "<group>"; };
 		4BC54AC11E6CE3E90014F3B3 /* MapHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapHistoryView.swift; sourceTree = "<group>"; };
 		BDA16C7EB475F455AAFFA273 /* Pods_SplashDash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SplashDash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -258,7 +256,6 @@
 		4B9BF6C51E67701100EA0410 /* Controller Cells */ = {
 			isa = PBXGroup;
 			children = (
-				4B9BF6C31E6765E700EA0410 /* HistoryTableViewCell.swift */,
 				4B3A907E1E6C9B580028FBC1 /* ContentCollectionViewCell.swift */,
 				0685B46F1E79BCBC00559885 /* RunHistoryFoldingTableViewCell.swift */,
 				0685B4701E79BCBC00559885 /* RunHistoryFoldingTableViewCell.xib */,
@@ -432,7 +429,6 @@
 				4762B5A51E75FEA4002D6BA9 /* LeaderboardView.swift in Sources */,
 				06B239CF1E6763DF0071E17F /* GE+SnapKit.swift in Sources */,
 				0685B4761E79FE1B00559885 /* SingleRunMapView.swift in Sources */,
-				4B9BF6C41E6765E700EA0410 /* HistoryTableViewCell.swift in Sources */,
 				06B239DB1E68BFBB0071E17F /* GE+Firebase.swift in Sources */,
 				06B239D11E6767B70071E17F /* GE+MKMapDelegate.swift in Sources */,
 				06D941B01E7701CC009E6B9D /* SplashScene.swift in Sources */,
