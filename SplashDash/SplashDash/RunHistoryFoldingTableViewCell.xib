@@ -15,21 +15,21 @@
             <rect key="frame" x="0.0" y="0.0" width="460" height="624"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="460" height="623.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="460" height="623"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ng-LR-lqz" customClass="RotatedView" customModule="FoldingCell">
-                        <rect key="frame" x="0.0" y="0.0" width="460" height="147"/>
+                        <rect key="frame" x="0.0" y="0.0" width="460" height="90"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="147" id="sAV-LV-99i"/>
+                            <constraint firstAttribute="height" constant="90" id="sAV-LV-99i"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRK-LS-h0j">
-                        <rect key="frame" x="0.0" y="170" width="460" height="447"/>
+                        <rect key="frame" x="0.0" y="170" width="460" height="450"/>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="447" id="GR5-SW-7S0"/>
+                            <constraint firstAttribute="height" constant="450" id="GR5-SW-7S0"/>
                         </constraints>
                     </view>
                 </subviews>

@@ -22,7 +22,7 @@ class RunHistoryFoldingTableViewCell: FoldingCell {
             view.leading.trailing.top.bottom.equalToSuperview().inset(10.0)
         }
         
-        self.itemCount = 3
+        self.itemCount = 5
         self.backgroundColor = .clear
         self.layer.borderWidth = 5
         self.layer.borderColor = SplashColor.primaryColor().cgColor
@@ -45,7 +45,7 @@ class RunHistoryFoldingTableViewCell: FoldingCell {
     
     override func animationDuration(_ itemIndex: NSInteger, type: FoldingCell.AnimationType) -> TimeInterval {
         // durations count equal it itemCount
-        let durations = [0.2, 0.15, 0.15, 0.12] // timing animation for each view
+        let durations = [0.2, 0.1, 0.04, 0.035, 0.015] // timing animation for each view
         return durations[itemIndex]
     }
     
