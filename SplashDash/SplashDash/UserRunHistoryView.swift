@@ -180,27 +180,8 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         timeFormatter.dateStyle = .none
         timeFormatter.timeStyle = .short
         let timeString = timeFormatter.string(from: date)
-        
-        let miles = run.totalDistance * 0.000621371
-        let distanceString = String.localizedStringWithFormat("%.1f", miles)
-        
-        var durationString = ""
-        let hours = run.runDuration / 3600
-        let minutes = (run.runDuration % 3600) / 60
-        let seconds = (run.runDuration % 3600) % 60
-        
-        if hours > 0 {
-            durationString += "\(hours)h "
-        }
-        if minutes > 0 {
-            durationString += "\(minutes)m "
-        }
-        durationString += "\(seconds)s"
-        
-        let mph = run.averageSpeed * 2.23694
-        let speedString = String.localizedStringWithFormat("%.2f", mph)
  
-        cell.runLabel.text = "Date: \(dateString)\nTime: \(timeString)\nTotal Distance: \(distanceString) miles\nDuration: \(durationString)\nAverage Speed: \(speedString)"
+        cell.runLabel.text = "Date: \(dateString)\nTime: \(timeString)"
         
         self.singleRunMap.dateLabel.text = dateString
         

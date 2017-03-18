@@ -51,12 +51,12 @@ class SingleRunMapView: UIView, MKMapViewDelegate {
         }
         
         durationLabel.snp.makeConstraints { (view) in
-            view.leading.equalToSuperview().inset(16.0)
+            view.leading.equalToSuperview().inset(24.0)
             view.bottom.equalToSuperview().inset(8.0)
         }
         
         speedLabel.snp.makeConstraints { (view) in
-            view.trailing.equalToSuperview().inset(16.0)
+            view.trailing.equalToSuperview().inset(24.0)
             view.bottom.equalToSuperview().inset(8.0)
         }
         
@@ -177,7 +177,7 @@ class SingleRunMapView: UIView, MKMapViewDelegate {
         return view
     }()
     
-    lazy var durationLabel: UILabel = {
+    private lazy var durationLabel: UILabel = {
         let label = UILabel()
         var labelText = "Duration"
         label.text = labelText
@@ -188,7 +188,7 @@ class SingleRunMapView: UIView, MKMapViewDelegate {
         return label
     }()
     
-    lazy var distanceLabel: UILabel = {
+    private lazy var distanceLabel: UILabel = {
         let label = UILabel()
         var labelText = "Distance"
         label.text = labelText
@@ -199,7 +199,7 @@ class SingleRunMapView: UIView, MKMapViewDelegate {
         return label
     }()
     
-    lazy var speedLabel: UILabel = {
+    private lazy var speedLabel: UILabel = {
         let label = UILabel()
         var labelText = "Avg. Speed"
         label.text = labelText
@@ -245,7 +245,7 @@ class SingleRunMapView: UIView, MKMapViewDelegate {
     
     lazy var timeLabel: UILabel = {
         let label = UILabel()
-        var labelText = "7:05 pm"
+        var labelText = "0:00 am"
         label.text = labelText
         label.textColor = SplashColor.primaryColor()
         label.numberOfLines = 0
@@ -256,7 +256,7 @@ class SingleRunMapView: UIView, MKMapViewDelegate {
     
     lazy var dateLabel: UILabel = {
         let label = UILabel()
-        var labelText = "3/3/17"
+        var labelText = "MM/DD/YY"
         label.text = labelText
         label.textColor = SplashColor.primaryColor()
         label.numberOfLines = 0
