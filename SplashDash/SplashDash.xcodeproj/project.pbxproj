@@ -22,7 +22,6 @@
 		0685B4721E79BCBC00559885 /* RunHistoryFoldingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0685B4701E79BCBC00559885 /* RunHistoryFoldingTableViewCell.xib */; };
 		0685B4761E79FE1B00559885 /* SingleRunMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0685B4751E79FE1B00559885 /* SingleRunMapView.swift */; };
 		06B239AD1E66127B0071E17F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239AC1E66127B0071E17F /* AppDelegate.swift */; };
-		06B239B21E66127B0071E17F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B01E66127B0071E17F /* Main.storyboard */; };
 		06B239B41E66127B0071E17F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B31E66127B0071E17F /* Assets.xcassets */; };
 		06B239B71E66127B0071E17F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06B239B51E66127B0071E17F /* LaunchScreen.storyboard */; };
 		06B239C71E675A640071E17F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239C61E675A640071E17F /* GameViewController.swift */; };
@@ -49,7 +48,6 @@
 		47F56CF21E68857E007375BB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F56CF11E68857E007375BB /* UIView+Extension.swift */; };
 		47F56CF41E69FB70007375BB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F56CF31E69FB70007375BB /* HomeViewController.swift */; };
 		47FCE6F41E74A8D000F317E5 /* Fresh-Paint.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 47FCE6F21E74A8D000F317E5 /* Fresh-Paint.mp4 */; };
-		4B235F041E6DE6900079D2A0 /* CustomDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B235F031E6DE6900079D2A0 /* CustomDelegates.swift */; };
 		4B235F0A1E6E16E30079D2A0 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B235F091E6E16E30079D2A0 /* BottomView.swift */; };
 		4B3A907B1E6C92830028FBC1 /* ContentCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3A907A1E6C92830028FBC1 /* ContentCollectionView.swift */; };
 		4B3A907F1E6C9B580028FBC1 /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3A907E1E6C9B580028FBC1 /* ContentCollectionViewCell.swift */; };
@@ -57,7 +55,6 @@
 		4B9BF6C41E6765E700EA0410 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C31E6765E700EA0410 /* HistoryTableViewCell.swift */; };
 		4B9BF6C71E67758900EA0410 /* SplashColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9BF6C61E67758900EA0410 /* SplashColor.swift */; };
 		4BC54AC21E6CE3E90014F3B3 /* MapHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC54AC11E6CE3E90014F3B3 /* MapHistoryView.swift */; };
-		4BEF7AAE1E68DB2D008A6470 /* BottomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEF7AAD1E68DB2D008A6470 /* BottomViewController.swift */; };
 		BC5BDFD4B4D428ADBA93BB52 /* Pods_SplashDash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA16C7EB475F455AAFFA273 /* Pods_SplashDash.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,7 +76,6 @@
 		0685B4751E79FE1B00559885 /* SingleRunMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleRunMapView.swift; sourceTree = "<group>"; };
 		06B239A91E66127B0071E17F /* SplashDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SplashDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06B239AC1E66127B0071E17F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		06B239B11E66127B0071E17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		06B239B31E66127B0071E17F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		06B239B61E66127B0071E17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		06B239B81E66127B0071E17F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -109,7 +105,6 @@
 		47F56CF11E68857E007375BB /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		47F56CF31E69FB70007375BB /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		47FCE6F21E74A8D000F317E5 /* Fresh-Paint.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Fresh-Paint.mp4"; path = "../Fresh-Paint.mp4"; sourceTree = "<group>"; };
-		4B235F031E6DE6900079D2A0 /* CustomDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDelegates.swift; sourceTree = "<group>"; };
 		4B235F091E6E16E30079D2A0 /* BottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		4B3A907A1E6C92830028FBC1 /* ContentCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCollectionView.swift; sourceTree = "<group>"; };
 		4B3A907E1E6C9B580028FBC1 /* ContentCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -117,7 +112,6 @@
 		4B9BF6C31E6765E700EA0410 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		4B9BF6C61E67758900EA0410 /* SplashColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashColor.swift; sourceTree = "<group>"; };
 		4BC54AC11E6CE3E90014F3B3 /* MapHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapHistoryView.swift; sourceTree = "<group>"; };
-		4BEF7AAD1E68DB2D008A6470 /* BottomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomViewController.swift; sourceTree = "<group>"; };
 		BDA16C7EB475F455AAFFA273 /* Pods_SplashDash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SplashDash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -188,7 +182,6 @@
 			isa = PBXGroup;
 			children = (
 				47F56CF31E69FB70007375BB /* HomeViewController.swift */,
-				4BEF7AAD1E68DB2D008A6470 /* BottomViewController.swift */,
 				06B239C61E675A640071E17F /* GameViewController.swift */,
 			);
 			name = "View Controllers";
@@ -200,7 +193,6 @@
 				06B239D61E6888840071E17F /* SplashCoordinate.swift */,
 				4714581D1E6DF74F00467881 /* User.swift */,
 				4714581F1E6DF98A00467881 /* Run.swift */,
-				4B235F031E6DE6900079D2A0 /* CustomDelegates.swift */,
 				06D941AF1E7701CC009E6B9D /* SplashScene.swift */,
 			);
 			name = Models;
@@ -234,7 +226,6 @@
 		06B239C31E675A1C0071E17F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				06B239B01E66127B0071E17F /* Main.storyboard */,
 				06B239B31E66127B0071E17F /* Assets.xcassets */,
 				060773951E7C493300834B61 /* Painterz.ttf */,
 				47FCE6F21E74A8D000F317E5 /* Fresh-Paint.mp4 */,
@@ -327,7 +318,7 @@
 				TargetAttributes = {
 					06B239A81E66127B0071E17F = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 7NBTE6SY4Z;
+						DevelopmentTeam = R7DWEPXN5Y;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -369,7 +360,6 @@
 				06B239B41E66127B0071E17F /* Assets.xcassets in Resources */,
 				0607739F1E7C8BA600834B61 /* c4qRun_q.gpx in Resources */,
 				060773A71E7C8BA600834B61 /* HudsonRiverRun.gpx in Resources */,
-				06B239B21E66127B0071E17F /* Main.storyboard in Resources */,
 				060773A51E7C8BA600834B61 /* DemoRun_4.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,7 +424,6 @@
 				06B239CD1E6762140071E17F /* File.swift in Sources */,
 				47F56CF41E69FB70007375BB /* HomeViewController.swift in Sources */,
 				4B235F0A1E6E16E30079D2A0 /* BottomView.swift in Sources */,
-				4BEF7AAE1E68DB2D008A6470 /* BottomViewController.swift in Sources */,
 				4BC54AC21E6CE3E90014F3B3 /* MapHistoryView.swift in Sources */,
 				4B3A907F1E6C9B580028FBC1 /* ContentCollectionViewCell.swift in Sources */,
 				47F56CF21E68857E007375BB /* UIView+Extension.swift in Sources */,
@@ -446,7 +435,6 @@
 				4B9BF6C41E6765E700EA0410 /* HistoryTableViewCell.swift in Sources */,
 				06B239DB1E68BFBB0071E17F /* GE+Firebase.swift in Sources */,
 				06B239D11E6767B70071E17F /* GE+MKMapDelegate.swift in Sources */,
-				4B235F041E6DE6900079D2A0 /* CustomDelegates.swift in Sources */,
 				06D941B01E7701CC009E6B9D /* SplashScene.swift in Sources */,
 				06D941B21E77595F009E6B9D /* SplashSKView.swift in Sources */,
 				061074EC1E71C54000F665A0 /* UIImage+Extension.swift in Sources */,
@@ -470,14 +458,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		06B239B01E66127B0071E17F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				06B239B11E66127B0071E17F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		06B239B51E66127B0071E17F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -591,7 +571,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7NBTE6SY4Z;
+				DEVELOPMENT_TEAM = R7DWEPXN5Y;
 				INFOPLIST_FILE = SplashDash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -608,7 +588,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7NBTE6SY4Z;
+				DEVELOPMENT_TEAM = R7DWEPXN5Y;
 				INFOPLIST_FILE = SplashDash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

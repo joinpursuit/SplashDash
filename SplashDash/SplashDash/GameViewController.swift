@@ -129,14 +129,11 @@ class GameViewController: UIViewController {
 //        self.view.addSubview(invisibleMapView)
         self.view.addSubview(mapView)
         self.mapView.addSubview(gameButton)
-        self.mapView.addSubview(findMeButton)
+//        self.mapView.addSubview(findMeButton)
         
         let skView = SplashSKView(frame: self.view.frame)
         skView.allowsTransparency = true
         
-        
-        skView.showsFPS = true
-        skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         
         self.view.addSubview(displayView)
@@ -170,17 +167,17 @@ class GameViewController: UIViewController {
         configureBottomView()
         
         // TO DELETE - BUTTON HERE FOR DEBUGGING
-        findMeButton.snp.remakeConstraints { (view) in
-            view.centerX.equalTo(gameButton.snp.centerX)
-            view.bottom.equalTo(gameButton.snp.top).offset(-40)
-            view.size.equalTo(CGSize(width: 44, height: 44))
-        }
+//        findMeButton.snp.remakeConstraints { (view) in
+//            view.centerX.equalTo(gameButton.snp.centerX)
+//            view.bottom.equalTo(gameButton.snp.top).offset(-40)
+//            view.size.equalTo(CGSize(width: 44, height: 44))
+//        }
         
         gameButton.snp.remakeConstraints { (view) in
             view.trailing.equalToSuperview().offset(-30)
 //            view.bottom.equalToSuperview().offset(-bottomView.topView.frame.height - 30)
             view.bottom.equalToSuperview().offset(-130)
-            view.size.equalTo(CGSize(width: 60, height: 60))
+            view.size.equalTo(CGSize(width: 70, height: 70))
         }
         
         firstPlaceView.snp.remakeConstraints { (view) in

@@ -180,12 +180,12 @@ class HomeViewController: UIViewController {
             segmentedControlWasSwitched(title: "Sign in")
             self.hiddenLabel.text = ""
             
-            self.emailTextField.textLabel.textColor = .black
-            self.emailTextField.textField.textColor = .black
-            self.usernameTextField.textLabel.textColor = .black
-            self.usernameTextField.textField.textColor = .black
-            self.passwordTextField.textLabel.textColor = .black
-            self.passwordTextField.textField.textColor = .black
+            self.emailTextField.textLabel.textColor = .white
+            self.emailTextField.textField.textColor = .white
+            self.usernameTextField.textLabel.textColor = .white
+            self.usernameTextField.textField.textColor = .white
+            self.passwordTextField.textLabel.textColor = .white
+            self.passwordTextField.textField.textColor = .white
             self.signinRegisterButton.backgroundColor = .lightGray
             self.signinRegisterButton.layer.borderColor = UIColor.lightGray.cgColor
             self.hiddenLabel.textColor = .lightGray

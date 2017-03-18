@@ -39,6 +39,4 @@ class HistoryTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         return label
     }()
-    
-    // TO DO: Decide whether we want to add a mapView
 }
