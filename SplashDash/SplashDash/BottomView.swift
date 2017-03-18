@@ -146,11 +146,11 @@ class BottomView: UIView {
         return control
     }()
     
-    private lazy var seperatorLine2: UIView = {
-        let view = UIView()
-        view.backgroundColor = SplashColor.lightPrimaryColor()
-        return view
-    }()
+//    private lazy var seperatorLine2: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = SplashColor.lightPrimaryColor()
+//        return view
+//    }()
     
     lazy var currentRunLabelContainer: UIView = {
         let view = UIView()
