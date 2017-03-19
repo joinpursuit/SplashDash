@@ -50,7 +50,7 @@ extension GameViewController: CLLocationManagerDelegate{
         previousLocation = locations.last
         
         
-        if self.coreLocationIntervalCounter == 0 {
+        if self.coreLocationIntervalCounter == 1 {
             
             //the average human can run at the speed of 15 miles per hour (or 6.7056 meters per second) for short periods of time.
             
@@ -59,8 +59,8 @@ extension GameViewController: CLLocationManagerDelegate{
             
             // range speed for gpx files
             if currentSpeed == -1 {
-                // setting speed to range between 2.5 m/s to 6 m/s (5.59234 mph to 13.4216mph)
-                currentSpeed = Double(arc4random_uniform(500) + 250)/100
+                // setting speed to range between 0.5 m/s to 6 m/s (1.1 mph to 13.4216mph)
+                currentSpeed = Double(arc4random_uniform(550) + 50)/100
             }
             
             //            print(location.coordinate.latitude)
@@ -78,7 +78,7 @@ extension GameViewController: CLLocationManagerDelegate{
         }
         
         self.coreLocationIntervalCounter += 1
-        if self.coreLocationIntervalCounter == 4 {
+        if self.coreLocationIntervalCounter >= 4 {
             self.coreLocationIntervalCounter = 0
         }
     }
