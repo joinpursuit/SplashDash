@@ -201,7 +201,7 @@ class SingleRunMapView: UIView, MKMapViewDelegate {
     
     private lazy var speedLabel: UILabel = {
         let label = UILabel()
-        var labelText = "Avg. Speed"
+        var labelText = "Avg. Speed (mph)"
         label.text = labelText
         label.textColor = SplashColor.primaryColor()
         label.numberOfLines = 0

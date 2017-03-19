@@ -70,7 +70,7 @@ class GameViewController: UIViewController {
                 return }
             // convert to miles
             let traveledDistanceInMiles = traveledDistanceInMeters * 0.000621371
-            let distance = String.localizedStringWithFormat("%.1f", traveledDistanceInMiles)
+            let distance = String.localizedStringWithFormat("%.2f", traveledDistanceInMiles)
             self.bottomView.distanceNumLabel.text = "\(distance) miles"
         }
     }
