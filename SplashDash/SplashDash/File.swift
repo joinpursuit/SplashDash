@@ -18,8 +18,8 @@ extension HomeViewController{
 //        emailTextField.textField.text = "hari@hari.com"
 //        passwordTextField.textField.text = "123123"
 //        
-        emailTextField.textField.text = "sabrina@gmail.com"
-        passwordTextField.textField.text = "123123"
+//        emailTextField.textField.text = "sabrina@gmail.com"
+//        passwordTextField.textField.text = "123123"
         
     }
 }
