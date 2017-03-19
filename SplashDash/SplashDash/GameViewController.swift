@@ -70,7 +70,7 @@ class GameViewController: UIViewController {
                 return }
             // convert to miles
             let traveledDistanceInMiles = traveledDistanceInMeters * 0.000621371
-            let distance = String.localizedStringWithFormat("%.2f", traveledDistanceInMiles)
+            let distance = String.localizedStringWithFormat("%.1f", traveledDistanceInMiles)
             self.bottomView.distanceNumLabel.text = "\(distance) miles"
         }
     }
@@ -100,8 +100,6 @@ class GameViewController: UIViewController {
     
     //Color count
     var currentScore: [(color: String, score: Double)]!
-    
-    var coreLocationIntervalCounter = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
