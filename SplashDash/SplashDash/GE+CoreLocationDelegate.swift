@@ -55,8 +55,8 @@ extension GameViewController: CLLocationManagerDelegate{
                 
                 // range speed for gpx files
                 if currentSpeed == -1 {
-                    // setting speed to range between 2.5 m/s to 6 m/s (5.59234 mph to 13.4216mph)
-                    currentSpeed = Double(arc4random_uniform(500) + 250)/100
+                    // setting speed to range between 1 m/s to 6 m/s (2.23694 mph to 13.4216mph)
+                    currentSpeed = Double(arc4random_uniform(500) + 100)/100
                 }
                 
                 //            print(location.coordinate.latitude)
