@@ -113,7 +113,7 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
         durationString += "\(seconds)s"
         
         let mph = run.averageSpeed * 2.23694
-        let speedString = String.localizedStringWithFormat("%.2f", mph)
+        let speedString = String.localizedStringWithFormat("%.0f", mph)
 
         
         if cell.isAnimating() { return }
@@ -137,8 +137,8 @@ class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
                 self.singleRunMap.dateLabel.text = dateString
                 self.singleRunMap.timeLabel.text = timeString
                 self.singleRunMap.durationNumLabel.text = durationString
-                self.singleRunMap.distanceNumLabel.text = distanceString
-                self.singleRunMap.speedNumLabel.text = speedString
+                self.singleRunMap.distanceNumLabel.text = distanceString + " mi"
+                self.singleRunMap.speedNumLabel.text = speedString + " mph"
                 
             })
             duration = 0.5
