@@ -37,6 +37,10 @@
 		06B239DD1E68CD670071E17F /* GE+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B239DC1E68CD670071E17F /* GE+Gesture.swift */; };
 		06D941B01E7701CC009E6B9D /* SplashScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D941AF1E7701CC009E6B9D /* SplashScene.swift */; };
 		06D941B21E77595F009E6B9D /* SplashSKView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D941B11E77595F009E6B9D /* SplashSKView.swift */; };
+		06EE3F681E802A47000E6DC8 /* SquarespaceRun_4.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 06EE3F641E802A47000E6DC8 /* SquarespaceRun_4.gpx */; };
+		06EE3F691E802A47000E6DC8 /* SquarespaceRun_2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 06EE3F651E802A47000E6DC8 /* SquarespaceRun_2.gpx */; };
+		06EE3F6A1E802A47000E6DC8 /* SquarespaceRun_1.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 06EE3F661E802A47000E6DC8 /* SquarespaceRun_1.gpx */; };
+		06EE3F6B1E802A47000E6DC8 /* SquarespaceRun_3.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 06EE3F671E802A47000E6DC8 /* SquarespaceRun_3.gpx */; };
 		4714581E1E6DF74F00467881 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4714581D1E6DF74F00467881 /* User.swift */; };
 		471458201E6DF98A00467881 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4714581F1E6DF98A00467881 /* Run.swift */; };
 		471458241E712B2100467881 /* HVC+TeamStackViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471458231E712B2100467881 /* HVC+TeamStackViewDelegate.swift */; };
@@ -91,6 +95,10 @@
 		06B239DC1E68CD670071E17F /* GE+Gesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GE+Gesture.swift"; sourceTree = "<group>"; };
 		06D941AF1E7701CC009E6B9D /* SplashScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScene.swift; sourceTree = "<group>"; };
 		06D941B11E77595F009E6B9D /* SplashSKView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashSKView.swift; sourceTree = "<group>"; };
+		06EE3F641E802A47000E6DC8 /* SquarespaceRun_4.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_4.gpx; sourceTree = "<group>"; };
+		06EE3F651E802A47000E6DC8 /* SquarespaceRun_2.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_2.gpx; sourceTree = "<group>"; };
+		06EE3F661E802A47000E6DC8 /* SquarespaceRun_1.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_1.gpx; sourceTree = "<group>"; };
+		06EE3F671E802A47000E6DC8 /* SquarespaceRun_3.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_3.gpx; sourceTree = "<group>"; };
 		0C80B4BD563B9DC1864891EC /* Pods-SplashDash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplashDash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash.debug.xcconfig"; sourceTree = "<group>"; };
 		3F78CA657B60F10014BFB3DE /* Pods-SplashDash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplashDash.release.xcconfig"; path = "Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash.release.xcconfig"; sourceTree = "<group>"; };
 		4714581D1E6DF74F00467881 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -136,6 +144,10 @@
 				0607739A1E7C8BA600834B61 /* DemoRun_2.gpx */,
 				0607739B1E7C8BA600834B61 /* DemoRun_3.gpx */,
 				0607739C1E7C8BA600834B61 /* DemoRun_4.gpx */,
+				06EE3F641E802A47000E6DC8 /* SquarespaceRun_4.gpx */,
+				06EE3F651E802A47000E6DC8 /* SquarespaceRun_2.gpx */,
+				06EE3F661E802A47000E6DC8 /* SquarespaceRun_1.gpx */,
+				06EE3F671E802A47000E6DC8 /* SquarespaceRun_3.gpx */,
 				0607739D1E7C8BA600834B61 /* EastRiverRun.gpx */,
 				0607739E1E7C8BA600834B61 /* HudsonRiverRun.gpx */,
 			);
@@ -315,7 +327,7 @@
 				TargetAttributes = {
 					06B239A81E66127B0071E17F = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = R7DWEPXN5Y;
+						DevelopmentTeam = 7NBTE6SY4Z;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -344,18 +356,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				061074E41E6E5E5B00F665A0 /* CentralParkRun.gpx in Resources */,
+				06EE3F6A1E802A47000E6DC8 /* SquarespaceRun_1.gpx in Resources */,
 				47FCE6F41E74A8D000F317E5 /* Fresh-Paint.mp4 in Resources */,
 				060773A61E7C8BA600834B61 /* EastRiverRun.gpx in Resources */,
 				060773A11E7C8BA600834B61 /* c4qRun_c.gpx in Resources */,
 				06B239B71E66127B0071E17F /* LaunchScreen.storyboard in Resources */,
 				060773A01E7C8BA600834B61 /* c4qRun_4.gpx in Resources */,
+				06EE3F681E802A47000E6DC8 /* SquarespaceRun_4.gpx in Resources */,
 				060773A41E7C8BA600834B61 /* DemoRun_3.gpx in Resources */,
 				060773A31E7C8BA600834B61 /* DemoRun_2.gpx in Resources */,
 				06B239CB1E675BC20071E17F /* GoogleService-Info.plist in Resources */,
+				06EE3F6B1E802A47000E6DC8 /* SquarespaceRun_3.gpx in Resources */,
 				060773A21E7C8BA600834B61 /* DemoRun_1.gpx in Resources */,
 				0685B4721E79BCBC00559885 /* RunHistoryFoldingTableViewCell.xib in Resources */,
 				06B239B41E66127B0071E17F /* Assets.xcassets in Resources */,
 				0607739F1E7C8BA600834B61 /* c4qRun_q.gpx in Resources */,
+				06EE3F691E802A47000E6DC8 /* SquarespaceRun_2.gpx in Resources */,
 				060773A71E7C8BA600834B61 /* HudsonRiverRun.gpx in Resources */,
 				060773A51E7C8BA600834B61 /* DemoRun_4.gpx in Resources */,
 			);
@@ -567,11 +583,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R7DWEPXN5Y;
+				DEVELOPMENT_TEAM = 7NBTE6SY4Z;
 				INFOPLIST_FILE = SplashDash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "tonglin.t91-gmail.com.SplashDash";
+				PRODUCT_BUNDLE_IDENTIFIER = "tonglin.t91-gmail.com.SplashDas";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -584,11 +600,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = R7DWEPXN5Y;
+				DEVELOPMENT_TEAM = 7NBTE6SY4Z;
 				INFOPLIST_FILE = SplashDash/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "tonglin.t91-gmail.com.SplashDash";
+				PRODUCT_BUNDLE_IDENTIFIER = "tonglin.t91-gmail.com.SplashDas";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
