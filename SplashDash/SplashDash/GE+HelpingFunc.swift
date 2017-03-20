@@ -49,7 +49,7 @@ extension GameViewController{
             guard self.locationManager.location != nil else {
                 self.scene.printErrorMessage(str: "We could not find you", fontColor: self.currentUser!.myColor)
                 return }
-            
+            mapView.isUserInteractionEnabled = false
             toCurrentLocation()
             
             // start the game
@@ -62,6 +62,7 @@ extension GameViewController{
             
             self.scene.beforeStartGame {
                 //this completion handle after count down animation
+                self.mapView.isUserInteractionEnabled = true
                 self.updateCounter()
                 self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateCounter), userInfo: nil, repeats: true)
                 self.displayView.isHidden = true

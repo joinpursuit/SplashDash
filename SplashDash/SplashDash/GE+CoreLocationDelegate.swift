@@ -44,8 +44,8 @@ extension GameViewController: CLLocationManagerDelegate{
             
             // range speed for gpx files
             if currentSpeed == -1 {
-                // setting speed to range between .75 m/s to 6 m/s (walking speed)
-                currentSpeed = Double(arc4random_uniform(525) + 75)/100
+                // setting speed to range between 1.25 m/s to 6.25 m/s (walking speed)
+                currentSpeed = Double(arc4random_uniform(525) + 125)/100
             }
             
             let currentUserId = currentUser.uid
