@@ -42,8 +42,8 @@ extension GameViewController: CLLocationManagerDelegate{
         
         // range speed for gpx files
         if currentSpeed == -1 {
-            // setting speed to range between .5 m/s to 6 m/s (walking speed)
-            currentSpeed = Double(arc4random_uniform(550) + 50)/100
+            // setting speed to range between .75 m/s to 6 m/s (walking speed)
+            currentSpeed = Double(arc4random_uniform(525) + 75)/100
         }
         
         let currentUserId = currentUser.uid
@@ -66,6 +66,6 @@ extension GameViewController: CLLocationManagerDelegate{
                 traveledDistanceInMeters += distanceInMeters
         }
 //        // current location becomes the start location
-//        previousLocation = locations.last
+        previousLocation = locations.last
     }
 }
