@@ -101,6 +101,9 @@ class GameViewController: UIViewController {
     //Color count
     var currentScore: [(color: String, score: Double)]!
     
+    // Splash every 60 meters
+    var distanceFilterIncrement = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

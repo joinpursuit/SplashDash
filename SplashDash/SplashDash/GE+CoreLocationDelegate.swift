@@ -17,7 +17,7 @@ extension GameViewController: CLLocationManagerDelegate{
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        locationManager.distanceFilter = 60
+        locationManager.distanceFilter = 15
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
@@ -35,24 +35,26 @@ extension GameViewController: CLLocationManagerDelegate{
                 previousLocation = locations.last
                 return }
         
-        //the average human can run at the speed of 15 miles per hour (or 6.7056 meters per second) for short periods of time.
-        
-        // currentSpeed is in meters per second
-        var currentSpeed = currentLocation.speed as Double
-        
-        // range speed for gpx files
-        if currentSpeed == -1 {
-            // setting speed to range between .75 m/s to 6 m/s (walking speed)
-            currentSpeed = Double(arc4random_uniform(525) + 75)/100
+        // Only splash when every 60 meters, starting at the 15 meters mark
+        if distanceFilterIncrement == 1 {
+            //the average human can run at the speed of 15 miles per hour (or 6.7056 meters per second) for short periods of time.
+            
+            // currentSpeed is in meters per second
+            var currentSpeed = currentLocation.speed as Double
+            
+            // range speed for gpx files
+            if currentSpeed == -1 {
+                // setting speed to range between .75 m/s to 6 m/s (walking speed)
+                currentSpeed = Double(arc4random_uniform(525) + 75)/100
+            }
+            
+            let currentUserId = currentUser.uid
+            let coordinate = SplashCoordinate(userID: currentUserId, midCoordinate: currentLocation.coordinate, speed: currentSpeed, teamName: currentUser.teamName, splashImageTag: 1, timestamp: currentLocation.timestamp.timeIntervalSince1970)
+            
+            //push coordinate to firebase
+            self.currentRunCoordinates.append(coordinate)
+            pushSplashToDatabase(coor: coordinate)
         }
-        
-        let currentUserId = currentUser.uid
-        let coordinate = SplashCoordinate(userID: currentUserId, midCoordinate: currentLocation.coordinate, speed: currentSpeed, teamName: currentUser.teamName, splashImageTag: 1, timestamp: currentLocation.timestamp.timeIntervalSince1970)
-        
-        //push coordinate to firebase
-        self.currentRunCoordinates.append(coordinate)
-        pushSplashToDatabase(coor: coordinate)
-
         
         if previousLocation != nil {
                 // distance (in meters)
@@ -65,7 +67,11 @@ extension GameViewController: CLLocationManagerDelegate{
                 
                 traveledDistanceInMeters += distanceInMeters
         }
-//        // current location becomes the start location
+        // current location becomes the start location
         previousLocation = locations.last
+        distanceFilterIncrement += 1
+        if distanceFilterIncrement >= 4 {
+            distanceFilterIncrement = 0
+        }
     }
 }
