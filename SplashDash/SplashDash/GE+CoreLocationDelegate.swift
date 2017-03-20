@@ -32,7 +32,7 @@ extension GameViewController: CLLocationManagerDelegate{
         
         guard let currentUser = currentUser, self.gameStatus, let currentLocation = locations.last
             else {
-                previousLocation = locations.last
+               // previousLocation = locations.last
                 return }
         
         // Only splash when every 60 meters, starting at the 15 meters mark
