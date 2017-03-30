@@ -9,7 +9,6 @@
 import UIKit
 import SnapKit
 import Firebase
-import ISHPullUp
 
 class UserRunHistoryView: UIView, UITableViewDelegate, UITableViewDataSource {
     

@@ -10,7 +10,6 @@ target 'SplashDash' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'SnapKit'
-  pod 'ISHPullUp'
   pod 'ScrollableSegmentedControl', '~> 1.0'
   pod 'FoldingCell', '~> 2.0.3'
   
