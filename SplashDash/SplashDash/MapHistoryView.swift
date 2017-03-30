@@ -103,7 +103,10 @@ class MapHistoryView: UIView, MKMapViewDelegate, MapSliderViewDelegate {
         let newval = self.mapSliderView.slider.value + increment
         
         self.mapSliderView.slider.setValue(newval, animated: true)
+        
+        if splashOverlays.count > 0 {
         self.mapSliderView.mapView.addOverlays([self.splashOverlays[Int(self.mapSliderView.slider.value)]])
+        }
     }
 
     //MARK: - Setup Views

@@ -40,6 +40,7 @@
 		06EE3F691E802A47000E6DC8 /* SquarespaceRun_2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 06EE3F651E802A47000E6DC8 /* SquarespaceRun_2.gpx */; };
 		06EE3F6A1E802A47000E6DC8 /* SquarespaceRun_1.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 06EE3F661E802A47000E6DC8 /* SquarespaceRun_1.gpx */; };
 		06EE3F6B1E802A47000E6DC8 /* SquarespaceRun_3.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 06EE3F671E802A47000E6DC8 /* SquarespaceRun_3.gpx */; };
+		16958DD70892D22075274411 /* Pods_SplashDash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE86FCB83F523BE374FDCC4 /* Pods_SplashDash.framework */; };
 		4714581E1E6DF74F00467881 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4714581D1E6DF74F00467881 /* User.swift */; };
 		471458201E6DF98A00467881 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4714581F1E6DF98A00467881 /* Run.swift */; };
 		471458241E712B2100467881 /* HVC+TeamStackViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471458231E712B2100467881 /* HVC+TeamStackViewDelegate.swift */; };
@@ -97,6 +98,8 @@
 		06EE3F651E802A47000E6DC8 /* SquarespaceRun_2.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_2.gpx; sourceTree = "<group>"; };
 		06EE3F661E802A47000E6DC8 /* SquarespaceRun_1.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_1.gpx; sourceTree = "<group>"; };
 		06EE3F671E802A47000E6DC8 /* SquarespaceRun_3.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SquarespaceRun_3.gpx; sourceTree = "<group>"; };
+		0EE86FCB83F523BE374FDCC4 /* Pods_SplashDash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SplashDash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		18B267747E343BEFBDF743CD /* Pods-SplashDash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplashDash.release.xcconfig"; path = "Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash.release.xcconfig"; sourceTree = "<group>"; };
 		4714581D1E6DF74F00467881 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4714581F1E6DF98A00467881 /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		471458231E712B2100467881 /* HVC+TeamStackViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HVC+TeamStackViewDelegate.swift"; sourceTree = "<group>"; };
@@ -115,6 +118,7 @@
 		4B9BF6C01E6763D700EA0410 /* UserRunHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRunHistoryView.swift; sourceTree = "<group>"; };
 		4B9BF6C61E67758900EA0410 /* SplashColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashColor.swift; sourceTree = "<group>"; };
 		4BC54AC11E6CE3E90014F3B3 /* MapHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapHistoryView.swift; sourceTree = "<group>"; };
+		5890E76A30FD8F6165BFA677 /* Pods-SplashDash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SplashDash.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16958DD70892D22075274411 /* Pods_SplashDash.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +159,8 @@
 			children = (
 				06B239AB1E66127B0071E17F /* SplashDash */,
 				06B239AA1E66127B0071E17F /* Products */,
+				E28BC266F762CDE55A2D96FE /* Pods */,
+				7D48A95C0510FFE76EA6010B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -268,6 +275,23 @@
 			name = "Controller Cells";
 			sourceTree = "<group>";
 		};
+		7D48A95C0510FFE76EA6010B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0EE86FCB83F523BE374FDCC4 /* Pods_SplashDash.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E28BC266F762CDE55A2D96FE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5890E76A30FD8F6165BFA677 /* Pods-SplashDash.debug.xcconfig */,
+				18B267747E343BEFBDF743CD /* Pods-SplashDash.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -275,9 +299,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 06B239BB1E66127B0071E17F /* Build configuration list for PBXNativeTarget "SplashDash" */;
 			buildPhases = (
+				1D9E3695B7079F1A7FE0B361 /* [CP] Check Pods Manifest.lock */,
 				06B239A51E66127B0071E17F /* Sources */,
 				06B239A61E66127B0071E17F /* Frameworks */,
 				06B239A71E66127B0071E17F /* Resources */,
+				FB04DC93AB41CC25202E3F17 /* [CP] Embed Pods Frameworks */,
+				99537509C80F30A57EDE5E42 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -351,6 +378,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1D9E3695B7079F1A7FE0B361 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		99537509C80F30A57EDE5E42 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB04DC93AB41CC25202E3F17 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SplashDash/Pods-SplashDash-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		06B239A51E66127B0071E17F /* Sources */ = {
@@ -503,6 +578,7 @@
 		};
 		06B239BC1E66127B0071E17F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5890E76A30FD8F6165BFA677 /* Pods-SplashDash.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -519,6 +595,7 @@
 		};
 		06B239BD1E66127B0071E17F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18B267747E343BEFBDF743CD /* Pods-SplashDash.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
