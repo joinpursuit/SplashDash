@@ -2,9 +2,9 @@
 
 SplashDash is an interactive movement-based strategy game. It is written in Swift 3.
 
-![](https://github.com/C4Q/SplashDash/blob/readme/gif/chooseTeam.gif "Choose Team") ![](https://github.com/C4Q/SplashDash/blob/readme/gif/playGame.gif "Play Game")
+![](https://github.com/C4Q/SplashDash/blob/master/gif/chooseTeam.gif "Choose Team") ![](https://github.com/C4Q/SplashDash/blob/master/gif/playGame.gif "Play Game")
 
-![](https://github.com/C4Q/SplashDash/blob/readme/gif/showMyRuns.gif "Show My Runs") ![](https://github.com/C4Q/SplashDash/blob/readme/gif/renderAllRuns.gif "Show Previous Runs")
+![](https://github.com/C4Q/SplashDash/blob/master/gif/showMyRuns.gif "Show My Runs") ![](https://github.com/C4Q/SplashDash/blob/master/gif/renderAllRuns.gif "Show Previous Runs")
 
 The goal of this game is to cover the most territory with your team’s paint color.
 
