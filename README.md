@@ -31,5 +31,7 @@ Then, open SplashDash.xcworkspace in XCode to run it.
 ### Creators
 
 Hari Singh: https://github.com/singhhari, https://www.linkedin.com/in/singhhari/
+
 Tong Lin: https://github.com/tonglin91, https://www.linkedin.com/in/tonglin91/
+
 Sabrina Ip: https://github.com/sabrinaip, https://www.linkedin.com/in/sabrinaip/
