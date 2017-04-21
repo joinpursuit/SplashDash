@@ -1,4 +1,4 @@
-# AC3.2-SplashDash
+# SplashDash
 
 SplashDash is an interactive movement-based strategy game. It is written in Swift 3.
 
