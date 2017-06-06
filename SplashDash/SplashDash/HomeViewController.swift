@@ -387,9 +387,9 @@ class HomeViewController: UIViewController {
                                 self.hiddenLabel.isHidden = false
                                 return
                             }
-                            print("User ID: \(user?.uid)")
                             
                             guard let uid = user?.uid else { return }
+                            print("User ID: \(uid)")
                             self.databaseReference = FIRDatabase.database().reference().child("Users").child(uid)
                             
                             self.databaseReference.observeSingleEvent(of: .value, with: { (snapshot) in
